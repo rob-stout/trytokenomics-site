@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tokenomics — AI Usage for Your Menu Bar</title>
+  <meta name="description" content="Track Claude, Copilot, Cursor, OpenAI, and Gemini from your macOS menu bar. One glance tells you if you're about to hit a wall. Free download." />
+  <meta property="og:title" content="Tokenomics — Know where you stand before you hit a limit" />
+  <meta property="og:description" content="A macOS menu bar app that shows AI usage as concentric rings. Eight providers. Zero-friction auth. The pace dot tells you if you're burning fast before the API tells you to stop." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tokenomics — AI usage for your menu bar" />
+  <meta name="twitter:description" content="Eight providers. One glance. The pace dot shows if you're burning fast — before the API stops you. Free for macOS." />
+  <meta property="og:image" content="assets/brand/Tokenomics-logo.png" />
+  <meta name="theme-color" content="#F3EFE5" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0E334D" media="(prefers-color-scheme: dark)" />
+
+  <!-- Fonts: verbatim from design-system.html -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <!-- app.js loaded before closing body so DOM is ready -->
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAV
+     ══════════════════════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="brand" aria-label="Tokenomics home">
+      <span class="brand-mark">
+        <img src="assets/Tokenomics-logo.svg" alt="" width="24" height="24" />
+      </span>
+      Tokenomics
+    </a>
+
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#widgets">Widgets</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <div style="display:flex; gap: 10px; align-items:center; flex-shrink:0;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Dark</button>
+      <a href="https://github.com/rob-stout/Tokenomics/releases/download/v2.8.0/Tokenomics-2.8.0.dmg" class="btn btn-primary btn-sm js-download" rel="noopener">Download</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════════════════ -->
+<main id="main-content">
+<header class="hero" id="hero">
+
+  <div class="hero-eyebrow-row">
+    <span class="pill dot js-version">v2.8.0 · macOS 14+</span>
+  </div>
+
+  <h1 class="display display-hero">
+    <span class="hero-line">Never run out of tokens again.</span>
+    <span class="hero-line">Built for <span class="flip-word" id="flipWord" aria-live="polite">Claude.</span></span>
+  </h1>
+
+  <p class="lede">
+    Tokenomics sits in your menu bar and watches every AI tool you pay for — so you know if you have room for one more run.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="https://github.com/rob-stout/Tokenomics/releases/download/v2.8.0/Tokenomics-2.8.0.dmg"
+       class="btn btn-primary btn-lg js-download"
+       rel="noopener">
+      <!-- Download arrow icon -->
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M8 11L3 6h2.5V2h5v4H13L8 11zm-5 3v-2h10v2H3z"/>
+      </svg>
+      Download for macOS
+    </a>
+    <a href="https://github.com/rob-stout/Tokenomics"
+       class="btn btn-secondary btn-lg"
+       target="_blank" rel="noopener">
+      View on GitHub
+    </a>
+  </div>
+
+  <p class="hero-support">
+    Signed. Notarized. Auto-updating through Sparkle.
+  </p>
+
+  <!-- Product shot: two medium widgets side-by-side -->
+  <div class="hero-visual reveal" data-delay="100">
+
+    <!-- Medium dark: single provider, high usage (Claude about to hit limit) -->
+    <div class="widget w-medium dark" style="width: min(360px, 100%);">
+      <div class="w-body">
+        <div class="w-head gap-spacious">
+          <span class="title">Tokenomics</span>
+          <span class="time">just now</span>
+        </div>
+        <div class="spacious-center">
+          <div class="row-large">
+            <div class="r-head">
+              <span class="pico"><img src="assets/icons/Claude-white.svg" alt="" /></span>
+              <span class="name">Claude</span>
+              <span class="plan">Pro</span>
+            </div>
+            <div class="metrics">
+              <div class="bar-row">
+                <span class="lbl">5-Hour</span>
+                <div class="pbar">
+                  <div class="track"></div>
+                  <div class="fill" style="width:90%"></div>
+                  <div class="pace" style="left:74%"></div>
+                </div>
+                <span class="pct">90%</span>
+              </div>
+              <div class="bar-row">
+                <span class="lbl">7-Day</span>
+                <div class="pbar">
+                  <div class="track"></div>
+                  <div class="fill long" style="width:42%"></div>
+                  <div class="pace" style="left:50%"></div>
+                </div>
+                <span class="pct long">42%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-foot">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 2l-3 3h2v5h2V5h2L8 2zm-5 9v3h10v-3h-2v1H5v-1H3z"/></svg>
+          <span>Tokenomics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medium light: 3 providers, balanced usage -->
+    <div class="widget w-medium light" style="width: min(360px, 100%);">
+      <div class="w-body">
+        <div class="w-head gap-compact">
+          <span class="title">Tokenomics</span>
+          <span class="time">45 sec ago</span>
+        </div>
+        <div class="w-rows">
+          <div class="row-compact">
+            <span class="pico"><img src="assets/icons/Claude-d.blue.svg" alt="" /></span>
+            <div class="col">
+              <div class="head"><span class="lbl">5-Hour</span><span class="pct">48%</span></div>
+              <div class="pbar"><div class="track"></div><div class="fill" style="width:48%"></div><div class="pace" style="left:52%"></div></div>
+            </div>
+            <div class="col">
+              <div class="head"><span class="lbl">7-Day</span><span class="pct long">31%</span></div>
+              <div class="pbar"><div class="track"></div><div class="fill long" style="width:31%"></div><div class="pace" style="left:40%"></div></div>
+            </div>
+          </div>
+          <div class="row-compact">
+            <span class="pico"><img src="assets/icons/Copilot-d.blue.svg" alt="" /></span>
+            <div class="col">
+              <div class="head"><span class="lbl">Premium</span><span class="pct">22%</span></div>
+              <div class="pbar"><div class="track"></div><div class="fill" style="width:22%"></div><div class="pace" style="left:34%"></div></div>
+            </div>
+            <div class="col">
+              <div class="head"><span class="lbl">Requests</span><span class="pct long">15%</span></div>
+              <div class="pbar"><div class="track"></div><div class="fill long" style="width:15%"></div></div>
+            </div>
+          </div>
+          <div class="row-compact">
+            <span class="pico"><img src="assets/icons/Cursor-d.blue.svg" alt="" /></span>
+            <div class="col">
+              <div class="head"><span class="lbl">Premium</span><span class="pct">10%</span></div>
+              <div class="pbar"><div class="track"></div><div class="fill" style="width:10%"></div></div>
+            </div>
+            <div class="col">
+              <div class="head"><span class="lbl">Requests</span><span class="pct long">8%</span></div>
+              <div class="pbar"><div class="track"></div><div class="fill long" style="width:8%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="w-foot">+1 in app</div>
+      </div>
+    </div>
+
+  </div><!-- /hero-visual -->
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PROVIDER STRIP
+     ══════════════════════════════════════════════════════════ -->
+<section class="provider-section" id="providers" aria-labelledby="provider-heading">
+  <div class="section-wrap">
+    <h2 id="provider-heading" style="font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-body-lg); color: var(--text-subtle); letter-spacing: 0.02em; text-transform: none; margin-bottom: var(--s-6);">Works with the tools you already use</h2>
+
+    <div class="provider-strip">
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Claude-d.blue.svg" alt="Claude" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Claude-white.svg"  alt="Claude" width="28" height="28" />
+        </div>
+        <span class="pname">Claude</span>
+        <span class="psub">5h &amp; 7d windows</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Copilot-d.blue.svg" alt="GitHub Copilot" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Copilot-white.svg"  alt="GitHub Copilot" width="28" height="28" />
+        </div>
+        <span class="pname">GitHub Copilot</span>
+        <span class="psub">Premium requests</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Cursor-d.blue.svg" alt="Cursor" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Cursor-white.svg"  alt="Cursor" width="28" height="28" />
+        </div>
+        <span class="pname">Cursor</span>
+        <span class="psub">Premium &amp; requests</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Codex-d.blue.svg" alt="OpenAI" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Codex-white.svg"  alt="OpenAI" width="28" height="28" />
+        </div>
+        <span class="pname">OpenAI</span>
+        <span class="psub">5h &amp; context</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Gemini-d.blue.svg" alt="Gemini" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Gemini-white.svg"  alt="Gemini" width="28" height="28" />
+        </div>
+        <span class="pname">Gemini</span>
+        <span class="psub">Tokens &amp; requests</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/stability-d.blue.svg" alt="Stability AI" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/stability-white.svg"  alt="Stability AI" width="28" height="28" />
+        </div>
+        <span class="pname">Stability AI</span>
+        <span class="psub">Credit balance</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/runway-d.blue.svg" alt="Runway" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/runway-white.svg"  alt="Runway" width="28" height="28" />
+        </div>
+        <span class="pname">Runway</span>
+        <span class="psub">Credits</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/elevenlabs-d.blue.svg" alt="ElevenLabs" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/elevenlabs-white.svg"  alt="ElevenLabs" width="28" height="28" />
+        </div>
+        <span class="pname">ElevenLabs</span>
+        <span class="psub">Monthly characters</span>
+      </div>
+    </div>
+
+    <p class="provider-coming">Coming soon — Midjourney, Suno, and Udio, once their public APIs ship.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PACE DOT SPOTLIGHT
+     ══════════════════════════════════════════════════════════ -->
+<section class="pace-section" id="features" aria-labelledby="pace-heading">
+  <div class="pace-layout">
+
+    <!-- Annotated diagram -->
+    <div class="pace-diagram-wrap">
+      <div class="pace-diagram" role="img"
+           aria-label="Ring diagram: outer ring shows 60% of the 5-hour window used; inner ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption.">
+
+        <svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+             font-family="'DM Sans', system-ui, sans-serif">
+
+          <!-- ── Key / legend ─────────────────────────────── -->
+          <g transform="translate(30 22)">
+            <circle cx="8" cy="10" r="7" fill="var(--ring-outer)"/>
+            <text x="24" y="15" font-size="16" fill="currentColor" opacity="0.82">5-Hour Window</text>
+          </g>
+          <g transform="translate(240 22)">
+            <circle cx="8" cy="10" r="7" fill="var(--ring-inner)"/>
+            <text x="24" y="15" font-size="16" fill="currentColor" opacity="0.82">7-Day Window</text>
+          </g>
+
+          <!-- ── Rings (centered at 200, 230) ───────────────
+               Outer r=100, inner r=75 — mirrors widget ratio (0.305 / 0.23).
+               Stroke=20, round caps, widget palette via CSS vars.
+               Visible outer edge of outer ring = r=110; inner ring edge = r=85. -->
+          <!-- Outer track -->
+          <circle cx="200" cy="230" r="100" fill="none"
+                  stroke="var(--ring-track)" stroke-width="20"/>
+          <!-- Outer fill 60% (circumference 628.32, offset 251.33) -->
+          <circle cx="200" cy="230" r="100" fill="none"
+                  stroke="var(--ring-outer)" stroke-width="20" stroke-linecap="round"
+                  stroke-dasharray="628.32" stroke-dashoffset="251.33"
+                  transform="rotate(-90 200 230)"/>
+          <!-- Inner track -->
+          <circle cx="200" cy="230" r="75" fill="none"
+                  stroke="var(--ring-track)" stroke-width="20"/>
+          <!-- Inner fill 38% (circumference 471.24, offset 292.17) -->
+          <circle cx="200" cy="230" r="75" fill="none"
+                  stroke="var(--ring-inner)" stroke-width="20" stroke-linecap="round"
+                  stroke-dasharray="471.24" stroke-dashoffset="292.17"
+                  transform="rotate(-90 200 230)"/>
+
+          <!-- ── Pace dots at 45% of circumference ──────────
+               θ=162° from top, clockwise.
+               Outer: (200+100·sin162°, 230−100·cos162°) = (230.9, 325.1)
+               Inner: (200+75·sin162°,  230−75·cos162°)  = (223.2, 301.3)
+               Solid fill, sized to match the thicker stroke. -->
+          <circle cx="230.9" cy="325.1" r="9" fill="var(--pace-dot)"/>
+          <circle cx="223.2" cy="301.3" r="8" fill="var(--pace-dot)"/>
+
+          <!-- ── Center label ──────────────────────────────
+               Percentage uses the inner ring color per brand direction. -->
+          <text x="200" y="244" text-anchor="middle"
+                font-family="-apple-system,'SF Pro Text',system-ui,sans-serif"
+                font-size="46" font-weight="700"
+                fill="var(--ring-inner)"
+                style="font-variant-numeric: tabular-nums;">60%</text>
+
+          <!-- ── Connector lines + labels ──────────────────
+               Each line starts on the visible outer edge of the target (r=110 for outer ring). -->
+
+          <!-- "Usage so far" — touches outer fill arc outer edge at θ=61°.
+               (200+110·sin61°, 230−110·cos61°) = (296.2, 176.7) -->
+          <line x1="296.2" y1="176.7" x2="340" y2="150"
+                stroke="currentColor" stroke-width="1" opacity="0.45"/>
+          <line x1="340" y1="150" x2="372" y2="150"
+                stroke="currentColor" stroke-width="1" opacity="0.45"/>
+
+          <!-- "Even-pace mark" — touches outer pace dot (r=9), so start at x=240 -->
+          <line x1="240" y1="325.1" x2="340" y2="325"
+                stroke="currentColor" stroke-width="1" opacity="0.45"/>
+          <line x1="340" y1="325" x2="372" y2="325"
+                stroke="currentColor" stroke-width="1" opacity="0.45"/>
+
+          <!-- "Burning ahead of pace" — touches outer edge of outer arc at θ=189° (52.5% of circumference).
+               (200+110·sin189°, 230−110·cos189°) = (182.8, 338.6) -->
+          <line x1="182.8" y1="338.6" x2="182.8" y2="395"
+                stroke="currentColor" stroke-width="1" opacity="0.45"/>
+          <text x="182.8" y="416" text-anchor="middle" font-size="16" font-weight="600"
+                fill="currentColor">Burning <tspan fill="var(--accent)">ahead</tspan> of pace</text>
+        </svg>
+
+        <div class="pace-label pace-label--top">
+          <div class="pace-label__title">Usage so far</div>
+          <div class="pace-label__sub">What you've used this window</div>
+        </div>
+        <div class="pace-label pace-label--bottom">
+          <div class="pace-label__title">Even-pace mark</div>
+          <div class="pace-label__sub">Where even consumption sits</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Copy -->
+    <div class="pace-text reveal">
+      <p class="feature-kicker">SIGNAL</p>
+      <h2 id="pace-heading">The <em>dot</em> that tells you if you're on track.</h2>
+      <div class="feature-body">
+        <p>A ring at 60% means nothing on its own. Is that good or bad? It depends where you are in the window.</p>
+        <p>The pace dot shows where your fill would sit if you'd used the quota evenly since the window opened. If your ring is <strong>ahead of the dot</strong>, you'll run out of tokens. If it's behind, you have room.</p>
+        <p>That's the difference between data and signal. Tokenomics shows you both.</p>
+        <p class="diagram-caption">Understanding this signal helps you learn how prompts and models use tokens differently, so you can tune your session to fit your budget.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FIVE PROVIDERS
+     ══════════════════════════════════════════════════════════ -->
+<section class="feature-section" id="providers-detail" aria-labelledby="providers-heading">
+  <div class="section-wrap">
+    <div class="feature-layout">
+      <div class="reveal">
+        <p class="feature-kicker">BREADTH</p>
+        <h2 id="providers-heading">Every tool you run, in <em>one</em> place.</h2>
+        <div class="feature-body">
+          <p>Most of us don't use just one AI tool. Tokenomics detects which ones you have installed and shows them all — usage rings in the menu bar, full detail in the popover, a dashboard on your desktop.</p>
+          <p>Drag to reorder. Hide the ones you're not using today. The menu bar shows the one you're closest to hitting.</p>
+        </div>
+      </div>
+      <div class="reveal menubar-scene" data-delay="80" aria-label="Tokenomics menu bar with popover open">
+        <!-- Desktop scene: menu bar anchored to the right (rest of screen is empty). -->
+        <div class="menubar-bar" aria-hidden="true">
+          <img src="assets/menu-bar-items.svg" alt="" class="menubar-svg-img"/>
+        </div>
+
+        <!-- Popover dropping down under the Tokenomics icon on the right -->
+        <div class="menubar-popover" aria-hidden="true">
+          <!-- Header: app name + plan pill + share -->
+          <div class="pop-head">
+            <div class="pop-head-title">Tokenomics</div>
+            <div class="pop-head-actions">
+              <span class="pop-plan-pill">Max</span>
+              <!-- SF Symbol: square.and.arrow.up (Regular-S) -->
+              <button class="pop-iconbtn" type="button" aria-label="Share">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <g transform="translate(5, 90)" fill="currentColor">
+                    <!-- Box (hollow via evenodd on outer+inner rect subpaths) -->
+                    <path fill-rule="evenodd" d="M25.9766 4.44336L62.2559 4.44336C72.6562 4.44336 78.4668-1.36719 78.4668-11.7676L78.4668-41.4062C78.4668-51.8066 72.6562-57.5684 62.2559-57.5684L25.9766-57.5684C15.5762-57.5684 9.76562-51.8066 9.76562-41.4062L9.76562-11.7676C9.76562-1.36719 15.5762 4.44336 25.9766 4.44336ZM25.9766-2.58789C20.1172-2.58789 16.7969-5.9082 16.7969-11.7676L16.7969-41.4062C16.7969-47.2168 20.1172-50.5371 25.9766-50.5371L62.2559-50.5371C68.1152-50.5371 71.4355-47.2168 71.4355-41.4062L71.4355-11.7676C71.4355-5.9082 68.1152-2.58789 62.2559-2.58789Z"/>
+                    <!-- Thin arrow = arrowhead ∪ shaft via nonzero on path 3 only -->
+                    <path d="M31.1523-64.1113C31.9824-64.1113 32.959-64.4531 33.5449-65.1367L38.9648-70.9961L44.0918-76.5137L49.2676-70.9961L54.6387-65.1367C55.2734-64.4531 56.1523-64.1113 57.0312-64.1113C58.8379-64.1113 60.2051-65.3809 60.2051-67.1387C60.2051-68.1152 59.8145-68.7988 59.1797-69.4824L46.6309-81.4453C45.752-82.3242 45.0195-82.6172 44.0918-82.6172C43.2129-82.6172 42.4805-82.3242 41.5527-81.4453L29.0527-69.4824C28.3691-68.7988 28.0273-68.1152 28.0273-67.1387C28.0273-65.3809 29.3457-64.1113 31.1523-64.1113ZM44.0918-25.8301C45.9961-25.8301 47.6074-27.3926 47.6074-29.1992L47.6074-67.2852L47.0215-78.3691C46.9238-79.9805 45.7031-81.2988 44.0918-81.2988C42.5293-81.2988 41.3086-79.9805 41.2109-78.3691L40.625-67.2852L40.625-29.1992C40.625-27.3926 42.2363-25.8301 44.0918-25.8301Z"/>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab bar: active tab is a pill with icon + name; others icon-only -->
+          <div class="pop-tabs">
+            <button class="pop-tab active" type="button">
+              <img src="assets/icons/Claude-white.svg" alt="" width="16" height="16"/>
+              <span>Claude</span>
+            </button>
+            <button class="pop-tab" type="button" aria-label="OpenAI">
+              <img src="assets/icons/Codex-white.svg" alt="" width="16" height="16"/>
+            </button>
+            <button class="pop-tab" type="button" aria-label="Gemini">
+              <img src="assets/icons/Gemini-white.svg" alt="" width="16" height="16"/>
+            </button>
+            <button class="pop-tab" type="button" aria-label="GitHub Copilot">
+              <img src="assets/icons/Copilot-white.svg" alt="" width="16" height="16"/>
+            </button>
+            <button class="pop-tab" type="button" aria-label="Cursor">
+              <img src="assets/icons/Cursor-white.svg" alt="" width="16" height="16"/>
+            </button>
+          </div>
+
+          <!-- 5-Hour Window -->
+          <div class="pop-section">
+            <div class="pop-section-head">
+              <div class="pop-section-title">5-Hour Window</div>
+              <div class="pop-section-pct">46%</div>
+            </div>
+            <div class="pop-bar">
+              <div class="pop-bar-fill" style="width: 46%;"></div>
+              <div class="pop-bar-pace" style="left: 60%;"></div>
+            </div>
+            <div class="pop-section-resets">Resets in 1h 36m</div>
+          </div>
+
+          <div class="pop-divider"></div>
+
+          <!-- 7-Day Window -->
+          <div class="pop-section">
+            <div class="pop-section-head">
+              <div class="pop-section-title">7-Day Window</div>
+              <div class="pop-section-pct">32%</div>
+            </div>
+            <div class="pop-bar">
+              <div class="pop-bar-fill" style="width: 32%;"></div>
+              <div class="pop-bar-pace" style="left: 78%;"></div>
+            </div>
+            <div class="pop-section-resets">Resets tomorrow</div>
+          </div>
+
+          <div class="pop-divider"></div>
+
+          <!-- Footer -->
+          <div class="pop-foot">
+            <div class="pop-foot-left">Updated just now</div>
+            <div class="pop-foot-right">
+              <!-- SF Symbol: arrow.clockwise (Regular-S) -->
+              <button class="pop-iconbtn" type="button" aria-label="Refresh">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <g transform="translate(5, 90)" fill="currentColor">
+                    <path d="M40.918 1.75781C59.7656 1.75781 75-13.5254 75-32.373C75-34.3262 73.3887-35.8887 71.4844-35.8887C69.5801-35.8887 67.9688-34.3262 67.9688-32.373C67.9688-17.4316 55.8594-5.37109 40.918-5.37109C25.9766-5.37109 13.8672-17.4316 13.8672-32.373C13.8672-47.3145 25.9766-59.4238 40.918-59.4238C44.0918-59.4238 47.1191-58.9355 49.9512-57.9102C52.1973-57.0312 54.8828-58.3008 54.8828-61.084C54.8828-63.3789 53.1738-64.1113 52.0508-64.502C48.584-65.7715 44.8242-66.4062 40.918-66.4062C22.0703-66.4062 6.83594-51.1719 6.83594-32.3242C6.83594-13.5254 22.0703 1.75781 40.918 1.75781ZM50.6836-61.6699L37.4512-48.6816C36.7676-48.0469 36.4746-47.1191 36.4746-46.2402C36.4746-44.2383 37.9883-42.7246 39.8926-42.7246C41.0156-42.7246 41.7969-43.1152 42.4316-43.7012L57.8613-59.1309C58.5449-59.8145 58.8867-60.6445 58.8867-61.6699C58.8867-62.5977 58.4961-63.5254 57.8613-64.1602L42.4316-79.7852C41.7969-80.4199 40.9668-80.8594 39.8926-80.8594C37.9883-80.8594 36.4746-79.248 36.4746-77.2461C36.4746-76.3184 36.7676-75.3906 37.4023-74.7559Z"/>
+                  </g>
+                </svg>
+              </button>
+              <span class="pop-foot-sep"></span>
+              <!-- SF Symbols: circle.circle + chevron.down (Regular-S, composed in one viewBox) -->
+              <button class="pop-iconbtn pop-iconbtn-wide" type="button" aria-label="Switch provider">
+                <svg viewBox="0 0 140 100" aria-hidden="true">
+                  <g transform="translate(5, 90)" fill="currentColor" fill-rule="evenodd">
+                    <!-- circle.circle — outer ring -->
+                    <path d="M46.2402 4.15039C68.0176 4.15039 85.6934-13.4766 85.6934-35.2539C85.6934-57.0312 68.0176-74.6582 46.2402-74.6582C24.5117-74.6582 6.83594-57.0312 6.83594-35.2539C6.83594-13.4766 24.5117 4.15039 46.2402 4.15039ZM46.2402-3.27148C28.5645-3.27148 14.3066-17.5781 14.3066-35.2539C14.3066-52.9297 28.5645-67.2363 46.2402-67.2363C63.916-67.2363 78.2227-52.9297 78.2227-35.2539C78.2227-17.5781 63.916-3.27148 46.2402-3.27148Z"/>
+                    <!-- circle.circle — inner disc -->
+                    <path d="M46.1914-14.6973C57.5684-14.6973 66.748-23.877 66.748-35.2539C66.748-46.6309 57.5684-55.8105 46.1914-55.8105C34.8633-55.8105 25.6836-46.6309 25.6836-35.2539C25.6836-23.877 34.8633-14.6973 46.1914-14.6973ZM46.1914-21.4844C38.623-21.4844 32.4219-27.6367 32.4219-35.2539C32.4219-42.8711 38.623-49.0234 46.1914-49.0234C53.8086-49.0234 59.9609-42.8711 59.9609-35.2539C59.9609-27.6367 53.8086-21.4844 46.1914-21.4844Z"/>
+                    <!-- chevron.down, scaled to ~SF small-scale, vertically centered with circle, padded right -->
+                    <g transform="translate(90, -18.5) scale(0.5)">
+                      <path d="M43.8477-14.1602C44.9219-14.1602 45.9961-14.5508 46.7285-15.3809L76.709-45.5566C77.4414-46.2891 77.8809-47.2656 77.8809-48.3887C77.8809-50.6836 76.1719-52.4414 73.877-52.4414C72.8027-52.4414 71.7285-51.9531 70.9961-51.2695L41.5527-21.7285L46.0938-21.7285L16.6504-51.2695C15.918-51.9531 14.9414-52.4414 13.8184-52.4414C11.5234-52.4414 9.76562-50.6836 9.76562-48.3887C9.76562-47.2656 10.2051-46.2891 10.9375-45.5566L40.9668-15.3809C41.748-14.5508 42.7246-14.1602 43.8477-14.1602Z"/>
+                    </g>
+                  </g>
+                </svg>
+              </button>
+              <span class="pop-foot-sep"></span>
+              <!-- SF Symbol: gearshape (Regular-S) -->
+              <button class="pop-iconbtn" type="button" aria-label="Settings">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <g transform="translate(5, 90)" fill="currentColor" fill-rule="evenodd">
+                    <path d="M44.2871 6.00586L52.002 6.00586C55.127 6.00586 57.6172 4.10156 58.3008 1.17188L59.9121-5.85938L60.791-6.15234L66.8457-2.39258C69.4824-0.830078 72.5586-1.17188 74.7559-3.41797L80.127-8.74023C82.3242-10.9375 82.7148-14.0625 81.1035-16.6016L77.2949-22.7051L77.5879-23.4375L84.6191-25.0488C87.5488-25.7324 89.502-28.2715 89.502-31.3477L89.502-38.8672C89.502-41.9434 87.5977-44.4336 84.6191-45.166L77.6855-46.875L77.3438-47.6562L81.1523-53.7598C82.7637-56.3477 82.4219-59.4238 80.1758-61.6699L74.8047-66.9922C72.6562-69.1895 69.5801-69.5801 66.9434-68.0176L60.8398-64.3066L59.9121-64.6484L58.3008-71.6797C57.6172-74.6094 55.127-76.5137 52.002-76.5137L44.2871-76.5137C41.1621-76.5137 38.7207-74.6094 38.0371-71.6797L36.4258-64.6484L35.4492-64.3066L29.3457-68.0176C26.7578-69.5801 23.6816-69.1895 21.4844-66.9922L16.1621-61.6699C13.916-59.4238 13.5742-56.3477 15.1855-53.7598L18.9453-47.6562L18.6035-46.875L11.6699-45.166C8.74023-44.4336 6.83594-41.9434 6.83594-38.8672L6.83594-31.3477C6.83594-28.2715 8.78906-25.7324 11.6699-25.0488L18.7012-23.4375L18.9941-22.7051L15.2344-16.6016C13.623-14.0625 14.0137-10.9375 16.2109-8.74023L21.5332-3.41797C23.7305-1.17188 26.8555-0.830078 29.4434-2.39258L35.5469-6.15234L36.4258-5.85938L38.0371 1.17188C38.7207 4.10156 41.1621 6.00586 44.2871 6.00586ZM44.9707-0.78125C44.4824-0.78125 44.2383-0.976562 44.1895-1.41602L41.7969-10.9863C39.3066-11.6211 37.0605-12.5488 35.3516-13.7207L26.9043-8.49609C26.5625-8.30078 26.1719-8.30078 25.8789-8.64258L21.4844-13.0859C21.1426-13.3789 21.1426-13.7207 21.3867-14.1113L26.5137-22.5098C25.5859-24.1699 24.5117-26.416 23.877-28.9062L14.2578-31.25C13.8184-31.2988 13.623-31.543 13.623-32.0312L13.623-38.2812C13.623-38.8184 13.7695-38.9648 14.2578-39.1113L23.8281-41.4062C24.4629-44.0918 25.7324-46.4355 26.416-47.9004L21.3379-56.25C21.0449-56.6895 21.0449-57.0312 21.3867-57.373L25.8301-61.7188C26.1719-62.0117 26.416-62.0605 26.9043-61.8652L35.2539-56.7871C36.9629-57.8125 39.4043-58.8379 41.8457-59.5215L44.1895-69.0918C44.2383-69.5312 44.4824-69.7266 44.9707-69.7266L51.3672-69.7266C51.8555-69.7266 52.0996-69.5312 52.1484-69.0918L54.4922-59.4238C57.0312-58.7891 59.2285-57.7637 60.9863-56.7383L69.4336-61.8652C69.873-62.0605 70.1172-62.0117 70.5078-61.7188L74.9512-57.373C75.2441-57.0312 75.293-56.6895 75-56.25L69.873-47.9004C70.6055-46.4355 71.8262-44.0918 72.4609-41.4062L82.0801-39.1113C82.5684-38.9648 82.666-38.8184 82.666-38.2812L82.666-32.0312C82.666-31.543 82.5195-31.2988 82.0801-31.25L72.4121-28.9062C71.8262-26.416 70.752-24.1699 69.7754-22.5098L74.9512-14.1113C75.1953-13.7207 75.1953-13.3789 74.8535-13.0859L70.459-8.64258C70.1172-8.30078 69.7266-8.30078 69.4336-8.49609L60.9375-13.7207C59.2773-12.5488 56.9824-11.6211 54.4922-10.9863L52.1484-1.41602C52.0996-0.976562 51.8555-0.78125 51.3672-0.78125ZM48.1445-20.7031C56.2012-20.7031 62.6953-27.1973 62.6953-35.2539C62.6953-43.3105 56.2012-49.8047 48.1445-49.8047C40.0879-49.8047 33.5938-43.3105 33.5938-35.2539C33.5938-27.1973 40.0879-20.7031 48.1445-20.7031ZM48.1445-27.4414C43.8477-27.4414 40.3809-30.957 40.3809-35.2539C40.3809-39.5508 43.8477-43.0664 48.1445-43.0664C52.4414-43.0664 55.957-39.5508 55.957-35.2539C55.957-30.957 52.4414-27.4414 48.1445-27.4414Z"/>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ZERO-FRICTION AUTH
+     ══════════════════════════════════════════════════════════ -->
+<section class="feature-section" aria-labelledby="auth-heading">
+  <div class="section-wrap">
+    <div class="feature-layout reverse">
+      <div class="reveal">
+        <p class="feature-kicker">Zero-friction authentication</p>
+        <h2 id="auth-heading">No token pasting. No <em>cookie</em> hunting.</h2>
+        <div class="feature-body">
+          <p>Everyday AI tools store their credentials in different places. Tokenomics reads each one automatically: macOS Keychain for Claude, the <code>gh</code> CLI for Copilot, local configuration files for Cursor, OpenAI, and Gemini.</p>
+          <p>For providers that only give out API keys (Stability, Runway, ElevenLabs), paste once in Settings — that's the most friction you'll hit.</p>
+          <p>If Claude rotates your authentication token during a sleep/wake cycle — which it does — Tokenomics notices and re-reads Keychain silently. You won't see a logout screen.</p>
+        </div>
+      </div>
+      <div class="reveal" data-delay="80" style="display:flex; flex-direction:column; gap: var(--s-4);">
+        <!-- Auth credential path cards -->
+        <p class="feature-kicker" style="margin: 0;">Everyday AI</p>
+        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
+          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+            <img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+            <img src="assets/icons/Claude-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          </div>
+          <div>
+            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Claude</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">macOS Keychain · authentication token</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
+          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+            <img src="assets/icons/Copilot-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+            <img src="assets/icons/Copilot-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          </div>
+          <div>
+            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">GitHub Copilot</div>
+            <div style="font-size: 12px; color: var(--text-subtle);"><code>gh</code> CLI · zero-friction</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
+          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+            <img src="assets/icons/Cursor-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+            <img src="assets/icons/Cursor-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          </div>
+          <div>
+            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Cursor</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
+          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+            <img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+            <img src="assets/icons/Codex-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          </div>
+          <div>
+            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">OpenAI</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
+          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+            <img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+            <img src="assets/icons/Gemini-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          </div>
+          <div>
+            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Gemini</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
+          </div>
+        </div>
+        <p class="feature-kicker" style="margin: var(--s-3) 0 0 0;">Creative AI</p>
+        <div class="card" style="display:flex; flex-direction:column; gap: var(--s-3);">
+          <ul role="list" style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap: var(--s-3);">
+            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+                <img src="assets/icons/stability-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+                <img src="assets/icons/stability-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+              </div>
+              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Stability AI</span>
+            </li>
+            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+                <img src="assets/icons/runway-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+                <img src="assets/icons/runway-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+              </div>
+              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Runway</span>
+            </li>
+            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+                <img src="assets/icons/elevenlabs-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+                <img src="assets/icons/elevenlabs-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+              </div>
+              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">ElevenLabs</span>
+            </li>
+          </ul>
+          <div style="font-size: 12px; color: var(--text-subtle); padding-top: 4px; margin-left: calc(36px + var(--s-4));">API key · paste once in Settings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DESKTOP WIDGETS SHOWCASE
+     ══════════════════════════════════════════════════════════ -->
+<section class="widgets-section" id="widgets" aria-labelledby="widgets-heading">
+  <div class="widgets-section-inner">
+    <p class="feature-kicker">Widgets</p>
+    <h2 id="widgets-heading">More ways to <em>view</em>.</h2>
+    <p style="max-width: 52ch; color: var(--text-muted); margin-top: var(--s-3);">
+      Three sizes, same data. Mount them on your desktop and never click the menu bar again.
+    </p>
+
+    <!-- Desktop frame mockup -->
+    <div class="desktop-frame reveal">
+      <div class="desktop-widgets">
+
+        <!-- Small dark: Claude -->
+        <div class="widget w-small dark">
+          <div class="ring-stage">
+            <svg class="ring-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <image href="assets/icons/Claude-white.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
+              <g transform="translate(50 47.4)">
+                <circle r="30.5" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
+                <circle r="30.5" fill="none" stroke="#75CBF5" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                  transform="rotate(-90)"/>
+                <circle r="23" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
+                <circle r="23" fill="none" stroke="#3389C7" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                  transform="rotate(-90)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(198) translate(0 -30.5)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(54)  translate(0 -23)"/>
+                <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
+                  font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
+                  font-size="12.5" font-weight="700" letter-spacing="-0.3"
+                  style="font-variant-numeric: tabular-nums;"
+                  fill="#75CBF5">55%</text>
+              </g>
+            </svg>
+          </div>
+          <div class="resets">Resets 2h 45m</div>
+        </div>
+
+        <!-- Small light: Claude -->
+        <div class="widget w-small light">
+          <div class="ring-stage">
+            <svg class="ring-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <image href="assets/icons/Claude-d.blue.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
+              <g transform="translate(50 47.4)">
+                <circle r="30.5" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
+                <circle r="30.5" fill="none" stroke="#2F84BF" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                  transform="rotate(-90)"/>
+                <circle r="23" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
+                <circle r="23" fill="none" stroke="#56A2D6" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                  transform="rotate(-90)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(198) translate(0 -30.5)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(54)  translate(0 -23)"/>
+                <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
+                  font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
+                  font-size="12.5" font-weight="700" letter-spacing="-0.3"
+                  style="font-variant-numeric: tabular-nums;"
+                  fill="#2F84BF">55%</text>
+              </g>
+            </svg>
+          </div>
+          <div class="resets">Resets 2h 45m</div>
+        </div>
+
+        <!-- Medium dark: single provider -->
+        <div class="widget w-medium dark">
+          <div class="w-body">
+            <div class="w-head gap-spacious">
+              <span class="title">Tokenomics</span>
+              <span class="time">30 sec ago</span>
+            </div>
+            <div class="spacious-center">
+              <div class="row-large">
+                <div class="r-head">
+                  <span class="pico"><img src="assets/icons/Copilot-white.svg" alt="" /></span>
+                  <span class="name">GitHub Copilot</span>
+                  <span class="plan">Business</span>
+                </div>
+                <div class="metrics">
+                  <div class="bar-row">
+                    <span class="lbl">Premium</span>
+                    <div class="pbar">
+                      <div class="track"></div>
+                      <div class="fill" style="width:42%"></div>
+                      <div class="pace" style="left:50%"></div>
+                    </div>
+                    <span class="pct">42%</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="lbl">Requests</span>
+                    <div class="pbar">
+                      <div class="track"></div>
+                      <div class="fill long" style="width:18%"></div>
+                      <div class="pace" style="left:28%"></div>
+                    </div>
+                    <span class="pct long">18%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-foot">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 2l-3 3h2v5h2V5h2L8 2zm-5 9v3h10v-3h-2v1H5v-1H3z"/></svg>
+              <span>Tokenomics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Medium light: 3 providers -->
+        <div class="widget w-medium light">
+          <div class="w-body">
+            <div class="w-head gap-compact">
+              <span class="title">Tokenomics</span>
+              <span class="time">30 sec ago</span>
+            </div>
+            <div class="w-rows">
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Claude-d.blue.svg" alt="" /></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">5-Hour</span><span class="pct">50%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:50%"></div><div class="pace" style="left:55%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">7-Day</span><span class="pct long">33%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:33%"></div><div class="pace" style="left:40%"></div></div>
+                </div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Codex-d.blue.svg" alt="" /></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">5-Hour</span><span class="pct">25%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:30%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div>
+                </div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Gemini-d.blue.svg" alt="" /></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">Tokens</span><span class="pct">13%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:13%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">Requests</span><span class="pct long">0%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-foot">+1 in app</div>
+          </div>
+        </div>
+
+        <!-- Large dark: 7 providers -->
+        <div class="widget w-large dark">
+          <div class="w-body">
+            <div class="w-head gap-overflow">
+              <span class="title">Tokenomics</span>
+              <span class="time">21 sec ago</span>
+            </div>
+            <div class="w-rows">
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Claude-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">5-Hour</span><span class="pct">0%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:0%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">7-Day</span><span class="pct long">33%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:33%"></div><div class="pace" style="left:40%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Copilot-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">42%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:42%"></div><div class="pace" style="left:46%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Codex-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">5-Hour</span><span class="pct">1%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:1%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Gemini-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">Tokens</span><span class="pct">0%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:0%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">0%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:0%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Cursor-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">8%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:8%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">12%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:12%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/stability-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">Credits</span><span class="pct">25%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:35%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Monthly</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/elevenlabs-white.svg" alt="" /></span>
+                <div class="col"><div class="head"><span class="lbl">Chars</span><span class="pct">62%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:62%"></div><div class="pace" style="left:48%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Monthly</span><span class="pct long">41%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:41%"></div></div></div>
+              </div>
+            </div>
+            <div class="w-foot">Tokenomics · 7 providers</div>
+          </div>
+        </div>
+
+      </div><!-- /desktop-widgets -->
+    </div><!-- /desktop-frame -->
+
+    <div class="craft-grid" style="margin-top: var(--s-6);">
+      <div class="craft-card">
+        <div class="card-kicker">Small</div>
+        <h4>Room for <em>One</em></h4>
+        <p>One provider, same rotation and pinning rules as the menu bar.</p>
+      </div>
+      <div class="craft-card">
+        <div class="card-kicker">Medium</div>
+        <h4>Room for <em>Three</em></h4>
+        <p>Up to three providers. Order matches the app — drag to rearrange.</p>
+      </div>
+      <div class="craft-card">
+        <div class="card-kicker">Large</div>
+        <h4>Room for <em>Seven</em></h4>
+        <p>Every provider you track, on one tile. Overkill for most. Glorious for the rest.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CRAFT GRID
+     ══════════════════════════════════════════════════════════ -->
+<section class="craft-section" aria-labelledby="craft-heading">
+  <div class="section-wrap">
+    <p class="feature-kicker">CRAFT</p>
+    <h2 id="craft-heading">Built the way a <em>good</em> Mac app should be.</h2>
+
+    <div class="craft-grid">
+
+      <div class="craft-card">
+        <div class="card-kicker">Glanceable</div>
+        <h4>Active <em>insights</em> in your menu bar</h4>
+        <p>A fill for each provider ticks up as you burn through your budget. One look tells you where you stand.</p>
+      </div>
+
+      <div class="craft-card">
+        <div class="card-kicker">Adaptive</div>
+        <h4><em>Intelligently</em> surfaced constraint</h4>
+        <p>Surfaces whichever provider is closest to its ceiling — the one that'll bite you first.</p>
+      </div>
+
+      <div class="craft-card">
+        <div class="card-kicker">Intentional</div>
+        <h4>Pin the <em>one</em> you watch</h4>
+        <p>Skip the rotation. Lock the icon to the provider you actually care about.</p>
+      </div>
+
+      <div class="craft-card">
+        <div class="card-kicker">Forecast</div>
+        <h4>Clear <em>pacing</em> signal</h4>
+        <p>Tells you whether to conserve — switch models, take a break — or whether you've got room to run.</p>
+      </div>
+
+      <div class="craft-card">
+        <div class="card-kicker">Alerts</div>
+        <h4>Tailored macOS <em>Notifications</em></h4>
+        <p>Set a threshold per provider. Tokenomics pings you before the ceiling.</p>
+      </div>
+
+      <div class="craft-card">
+        <div class="card-kicker">Privacy</div>
+        <h4>Not for <em>sale</em></h4>
+        <p>No data collected. No analytics. Nothing leaves your machine — ever.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     INSTALL
+     ══════════════════════════════════════════════════════════ -->
+<section class="install-section" id="install" aria-labelledby="install-heading">
+  <div class="section-wrap">
+    <div class="install-layout">
+      <div class="install-block">
+        <p class="feature-kicker">Install</p>
+        <h2 id="install-heading">Install once. Stay <em>current</em>.</h2>
+        <p style="color: var(--text-muted); margin-bottom: var(--s-6); max-width: 48ch;">
+          Sparkle handles silent background updates. No re-downloading from GitHub every time there's a new version.
+        </p>
+
+        <div class="install-tabs" role="tablist">
+          <button class="install-tab active" data-tab="download" role="tab" aria-selected="true" aria-controls="panel-download">Download</button>
+          <button class="install-tab" data-tab="homebrew" role="tab" aria-selected="false" aria-controls="panel-homebrew">Homebrew</button>
+        </div>
+
+        <p class="install-support" id="install-support-line">macOS 14 Sonoma or later · Developer ID signed &amp; notarized</p>
+      </div>
+
+      <!-- Right column: swaps between download flow and brew command -->
+      <div class="install-right">
+        <div id="panel-download" class="install-panel active" role="tabpanel">
+          <a href="https://github.com/rob-stout/Tokenomics/releases/download/v2.8.0/Tokenomics-2.8.0.dmg"
+             class="install-flow js-download"
+             rel="noopener"
+             aria-label="Download Tokenomics.dmg">
+            <div class="install-flow-icon">
+              <div class="install-flow-icon-mask">
+                <img src="assets/brand/Tokenomics-appicon.svg" alt="Tokenomics" />
+              </div>
+              <span class="install-flow-icon-label">Tokenomics</span>
+            </div>
+            <img class="install-flow-arrow" src="assets/brand/install-arrow.svg" alt="" aria-hidden="true" />
+            <div class="install-flow-folder">
+              <img src="assets/brand/app-folder-icon.svg" alt="" aria-hidden="true" />
+              <span class="install-flow-icon-label">Applications</span>
+            </div>
+          </a>
+          <p class="install-flow-caption">Drag to Install…</p>
+        </div>
+
+        <div id="panel-homebrew" class="install-panel" role="tabpanel">
+          <div class="brew-row">
+            <span class="brew-prompt">$</span>
+            <span class="brew-cmd">brew install rob-stout/tap/tokenomics</span>
+            <button class="copy-btn"
+              data-copy="brew install rob-stout/tap/tokenomics"
+              aria-label="Copy Homebrew install command">
+              <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/>
+              </svg>
+              <svg class="copy-check" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="display:none;">
+                <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+              </svg>
+              Copy
+            </button>
+          </div>
+          <p class="install-support">Install <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a> first, then run this command.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SUPPORT / PRICING
+     ══════════════════════════════════════════════════════════ -->
+<section class="support-section" aria-labelledby="support-heading">
+  <div class="section-wrap">
+    <h2 id="support-heading" class="sr-only">Pricing and support</h2>
+
+    <div class="support-grid">
+
+      <!-- Free forever -->
+      <article class="support-card">
+        <p class="feature-kicker">FREE FOREVER</p>
+        <div class="support-price">$0</div>
+        <p class="support-price-note">Now and always, for anyone who installs today.</p>
+        <p class="support-body">
+          Tokenomics is free. If paid capabilities ever ship — a team or enterprise version is one possibility — the current app stays free forever for everyone who already has it.
+        </p>
+        <a href="#install" class="btn btn-primary">Download for macOS</a>
+      </article>
+
+      <!-- Buy me a coffee -->
+      <article class="support-card">
+        <p class="feature-kicker">BUY ME A COFFEE</p>
+        <div class="support-price">$19</div>
+        <p class="support-price-note">Suggested Starbucks latte price.</p>
+        <ul class="support-perks">
+          <li>Buy groceries</li>
+          <li>Pay rent</li>
+          <li>Move out of mom's basement</li>
+          <li>Fund more great apps</li>
+        </ul>
+        <a href="https://buymeacoffee.com/robstout" class="btn btn-secondary" target="_blank" rel="noopener">Buy me a coffee</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FAQ
+     ══════════════════════════════════════════════════════════ -->
+<section class="faq-section" id="faq" aria-labelledby="faq-heading">
+  <div class="section-wrap">
+    <p class="feature-kicker">FAQ</p>
+    <h2 id="faq-heading">Common questions.</h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary>
+          Is it free?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes. Tokenomics is free to download and use. There's no subscription, no paid tier, and no feature gating. GitHub Sponsors link is in the app if you find it useful.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          How does it authenticate? Do I need to paste any tokens?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No manual setup required for most providers. Tokenomics reads credentials from where your AI tools already store them — macOS Keychain for Claude, the <code>gh</code> CLI for GitHub Copilot, and local configuration files for Cursor, OpenAI, and Gemini. Sign in to each tool once (as you normally would), and Tokenomics detects them automatically.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-privacy">
+        <summary>
+          Does it send my API keys or credentials anywhere?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>No. Your credentials are read from local sources into memory. They're never written to disk by Tokenomics, never logged, and never transmitted to any server other than the provider you're fetching usage from.</p>
+          <p>The only outbound calls Tokenomics makes are to Anthropic's API (for Claude usage) and to GitHub's appcast URL to check for app updates. OpenAI, Gemini, Copilot, and Cursor usage is read entirely from local files — no network calls.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          Is it open source?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>You can read every line on GitHub. The license is source-available rather than MIT — it keeps commercial rights reserved so I have room to build paid capabilities later (a team or enterprise version is one possibility). The current app is free forever for anyone who installs it. This isn't a SaaS in disguise.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          macOS only? What about Windows and Linux?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, <code>gh</code> CLI, local config files) are Mac-specific. A Windows/Linux version built on Tauri is on the roadmap, but it's behind Phase 2 work. Cursor and Copilot users on Windows are a real audience — it's not forgotten, just sequenced correctly.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          What about Midjourney, Suno, or Udio?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>They're coming once those providers ship a public API with credit/usage endpoints. Tokenomics won't integrate against unofficial endpoints or scraping — that breaks with any platform update and it's against ToS. ElevenLabs, Runway, and Stability AI are next, because they have real APIs with documented quota endpoints.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          Why not just open a browser tab and check the dashboard?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>You could. The problem is that you don't know you need to check until you're mid-task and something breaks. The pace dot is specifically useful here: it shows whether you're on track to hit a limit before you actually do, so you can make a call about whether to start a long agentic run.</p>
+          <p>A dashboard answers "how much have I used?" — Tokenomics answers "am I about to run out?"</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          How is it different from other Claude/AI usage trackers?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Two things: breadth and signal quality. Breadth: eight providers in one place — five everyday AI providers (Claude, GitHub Copilot, Cursor, OpenAI, Gemini) plus three creative AI providers (Stability AI, Runway, ElevenLabs). Signal quality: the pace dot. Most usage meters show a percentage. Tokenomics shows whether that percentage is ahead of or behind where you'd expect given how much of the window has elapsed. That turns a number into an answer.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-tagline">Know where you <em>stand</em>.</p>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/rob-stout/Tokenomics/releases" target="_blank" rel="noopener">Changelog</a>
+      <a href="https://github.com/rob-stout/Tokenomics/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+      <a href="#faq-privacy">Privacy</a>
+    </nav>
+
+    <div class="footer-meta">
+      <span class="pill dot js-version" style="font-size: 11px; padding: 2px 8px;">v2.8.0 · macOS 14+</span>
+      <span class="sep">·</span>
+      <span>&copy; 2026 Rob Stout</span>
+      <span class="sep">·</span>
+      <span>Not affiliated with Anthropic, OpenAI, Google, GitHub, or Cursor.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="app.js"></script>
+</body>
+</html>

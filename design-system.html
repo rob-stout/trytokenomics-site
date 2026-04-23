@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tokenomics — Website Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  /* ---------- TOKENS ---------- */
+  :root {
+    /* Brand / palette (from Figma) */
+    --ink-900: #051928;    /* BG Grad End (deep) */
+    --ink-800: #0E334D;    /* BG Grad Start (navy) */
+    --ink-700: #286195;    /* Bar Track base (dark ink) */
+    --brand-600: #2F84BF;  /* Label / Short Bar (light) */
+    --brand-500: #3389C7;  /* Long Bar (dark) */
+    --brand-400: #4BA6D2;  /* Bar Track base (dark) */
+    --brand-300: #56A2D6;  /* Long Bar (light) */
+    --brand-200: #75CBF5;  /* Label / Short Bar (dark) */
+
+    --cream-50:  #F3EFE5;  /* BG Grad Start (light) */
+    --cream-100: #E6E0D4;  /* BG Grad End (light) */
+    --cream-200: #D9D1C0;  /* derived surface-2 */
+
+    --white: #FFFFFF;
+
+    /* Website semantic tokens — default (light) */
+    --bg:        var(--cream-50);
+    --bg-2:      var(--cream-100);
+    --surface:   #FFFFFF;
+    --surface-2: #FBF8F1;
+    --border:    rgba(14,51,77,0.12);
+    --border-strong: rgba(14,51,77,0.22);
+    --text:      #0E334D;
+    --text-muted: rgba(14,51,77,0.64);
+    --text-subtle: rgba(14,51,77,0.44);
+    --accent:    #2F84BF;
+    --accent-ink:#0E334D;
+
+    /* Type */
+    --font-serif: 'Hedvig Letters Serif', 'Iowan Old Style', Georgia, serif;
+    --font-sans:  'DM Sans', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+
+    /* Scale (clamped for responsive) */
+    --fs-display: clamp(48px, 6.4vw, 88px);
+    --fs-h1: clamp(36px, 4.4vw, 56px);
+    --fs-h2: clamp(28px, 3.2vw, 40px);
+    --fs-h3: clamp(22px, 2.2vw, 28px);
+    --fs-h4: 20px;
+    --fs-body-lg: 18px;
+    --fs-body: 16px;
+    --fs-small: 14px;
+    --fs-micro: 12px;
+
+    /* Spacing (8pt) */
+    --s-1: 4px;
+    --s-2: 8px;
+    --s-3: 12px;
+    --s-4: 16px;
+    --s-5: 24px;
+    --s-6: 32px;
+    --s-7: 48px;
+    --s-8: 64px;
+    --s-9: 96px;
+
+    /* Radius */
+    --r-xs: 6px;
+    --r-sm: 10px;
+    --r-md: 14px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+    --r-pill: 999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(14,51,77,0.06), 0 1px 1px rgba(14,51,77,0.04);
+    --shadow-md: 0 8px 24px rgba(14,51,77,0.10), 0 2px 6px rgba(14,51,77,0.06);
+    --shadow-lg: 0 28px 60px rgba(14,51,77,0.18), 0 8px 18px rgba(14,51,77,0.10);
+    --shadow-ring: 0 0 0 4px rgba(47,132,191,0.18);
+
+    /* Motion */
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --dur-fast: 120ms;
+    --dur: 220ms;
+    --dur-slow: 420ms;
+
+    /* Widget gradients (from Figma) */
+    --widget-light: linear-gradient(135deg, #F3EFE5 0%, #E6E0D4 100%);
+    --widget-dark:  linear-gradient(135deg, #0E334D 0%, #051928 100%);
+  }
+
+  [data-theme="dark"] {
+    --bg:        #07101a;
+    --bg-2:      #0b1a29;
+    --surface:   #0E334D;
+    --surface-2: #0a2439;
+    --border:    rgba(255,255,255,0.10);
+    --border-strong: rgba(255,255,255,0.22);
+    --text:      #E6EEF6;
+    --text-muted: rgba(230,238,246,0.68);
+    --text-subtle: rgba(230,238,246,0.44);
+    --accent:    #75CBF5;
+    --accent-ink:#E6EEF6;
+  }
+
+  /* ---------- BASE ---------- */
+  *,*::before,*::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    color: var(--text);
+    background: var(--bg);
+    font-feature-settings: "ss01","cv11";
+  }
+  h1,h2,h3,h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    margin: 0 0 var(--s-3);
+    color: var(--text);
+  }
+  h1 { font-size: var(--fs-h1); }
+  h2 { font-size: var(--fs-h2); }
+  h3 { font-size: var(--fs-h3); }
+  h4 { font-size: var(--fs-h4); }
+  p  { margin: 0 0 var(--s-4); color: var(--text-muted); max-width: 64ch; }
+  a  { color: var(--accent); text-underline-offset: 3px; }
+  code, kbd {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--text);
+    padding: 2px 6px;
+    border-radius: var(--r-xs);
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: var(--s-8) 0; }
+
+  /* ---------- LAYOUT ---------- */
+  .page { max-width: 1200px; margin: 0 auto; padding: var(--s-8) var(--s-5) var(--s-9); }
+
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: var(--s-4) var(--s-5);
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; max-width: 1200px; margin: 0 auto; width:100%;}
+  .brand { display:flex; align-items:center; gap: var(--s-3); font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em;}
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--widget-dark);
+    display:grid; place-items:center; color:#fff;
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  }
+  .nav-links { display:flex; gap: var(--s-5); font-size: var(--fs-small); color: var(--text-muted); }
+  .nav-links a { color: inherit; text-decoration: none; }
+  .nav-links a:hover { color: var(--text); }
+  .theme-toggle {
+    font-family: var(--font-sans);
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: var(--r-pill);
+    font-size: var(--fs-small);
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+  }
+  .theme-toggle:hover { background: var(--surface-2); }
+
+  .hero { padding: var(--s-9) 0 var(--s-7); text-align:left; }
+  .eyebrow {
+    display:inline-block;
+    font-family: var(--font-sans);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    margin-bottom: var(--s-4);
+  }
+  .display {
+    font-family: var(--font-serif);
+    font-size: var(--fs-display);
+    line-height: 0.98;
+    letter-spacing: -0.022em;
+    margin: 0 0 var(--s-5);
+    max-width: 14ch;
+  }
+  .display em { font-style: italic; color: var(--accent); }
+  .lede { font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 56ch; }
+
+  section { margin: var(--s-8) 0; scroll-margin-top: 80px; }
+  .section-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom: var(--s-5); gap: var(--s-4); flex-wrap: wrap;}
+  .section-header .kicker { font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); }
+
+  .grid { display:grid; gap: var(--s-4); }
+  .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .grid.cols-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  @media (max-width: 800px) {
+    .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid.cols-2 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: var(--s-5);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ---------- COLOR SWATCHES ---------- */
+  .swatch {
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .swatch .chip {
+    height: 96px;
+    border-bottom: 1px solid var(--border);
+  }
+  .swatch .meta {
+    padding: var(--s-3) var(--s-4);
+    display:flex; flex-direction:column; gap: 2px;
+  }
+  .swatch .name { font-weight: 500; font-size: var(--fs-small); }
+  .swatch .hex { font-family: ui-monospace, Menlo, monospace; font-size: var(--fs-micro); color: var(--text-muted); text-transform: uppercase; }
+
+  /* ---------- TYPOGRAPHY SPECIMEN ---------- */
+  .type-row {
+    display:grid; grid-template-columns: 180px 1fr; gap: var(--s-5);
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--border);
+    align-items:baseline;
+  }
+  .type-row:last-child { border-bottom: 1px solid var(--border); }
+  .type-label { font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing:0.08em; text-transform:uppercase; color: var(--text-subtle); }
+  .type-label small { display:block; font-size: 11px; color: var(--text-subtle); text-transform: none; letter-spacing:0; margin-top:2px;}
+
+  .serif { font-family: var(--font-serif); }
+  .sans  { font-family: var(--font-sans); }
+
+  /* ---------- BUTTONS ---------- */
+  .btn-row { display:flex; flex-wrap:wrap; gap: var(--s-3); align-items:center; }
+  .btn {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: var(--r-pill);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+    display: inline-flex; align-items:center; gap: var(--s-2);
+    line-height: 1;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--accent-ink); color: #fff; }
+  .btn-primary:hover { background: #14456b; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  [data-theme="dark"] .btn-primary { background: var(--brand-200); color: var(--ink-900); }
+  [data-theme="dark"] .btn-primary:hover { background: #9cdcfa; }
+
+  .btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+  .btn-secondary:hover { background: var(--surface-2); }
+
+  .btn-ghost { background: transparent; color: var(--text-muted); padding: 10px 14px;}
+  .btn-ghost:hover { color: var(--text); background: var(--surface-2); }
+
+  .btn-sm { padding: 8px 14px; font-size: var(--fs-small);}
+  .btn-lg { padding: 16px 26px; font-size: var(--fs-body-lg);}
+
+  /* ---------- PILL / BADGE ---------- */
+  .pill {
+    display:inline-flex; align-items:center; gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    font-size: var(--fs-micro);
+    font-weight: 500;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .pill.dot::before { content:""; width:6px; height:6px; border-radius:50%; background: currentColor; }
+
+  /* ---------- INPUT ---------- */
+  .field {
+    display:flex; flex-direction:column; gap: 6px;
+  }
+  .field label { font-size: var(--fs-small); color: var(--text-muted); font-weight:500;}
+  .input {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .input:focus { outline: none; border-color: var(--accent); box-shadow: var(--shadow-ring); }
+
+  /* ---------- WIDGET MOCKUPS (mirrors TokenomicsWidgetEntryView.swift) ---------- */
+  .widget-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--s-5);
+  }
+
+  /* Widget container — matches WidgetKit sizes (systemSmall 170, systemMedium 360x170, systemLarge 360x360 roughly) */
+  .widget {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    box-shadow: var(--shadow-lg);
+    /* Swift gradient: stops [.103 → .881], start (0.35,0) → end (0.65,1.0) */
+  }
+  .widget.light {
+    background: linear-gradient(
+      to bottom right /* approximates start(0.35,0) → end(0.65,1) */,
+      #F3EFE5 1.6%,
+      #E6E0D4 84.5%
+    );
+    /* Use the actual angle computed from (0.35,0)→(0.65,1): dx=0.3 dy=1, angle ≈ 163deg from vertical ≈ 197deg in CSS convention */
+    background: linear-gradient(197deg, #F3EFE5 1.6%, #E6E0D4 84.5%);
+    color: #2F84BF;
+  }
+  .widget.dark {
+    background: linear-gradient(197deg, #0E334D 10.3%, #051928 88.1%);
+    color: #75CBF5;
+  }
+
+  /* Widget sizes — preserve aspect, scale with column */
+  .w-small  { aspect-ratio: 1/1;       max-width: 220px; }
+  .w-medium { aspect-ratio: 360/170;   max-width: 460px; }
+  .w-large  { aspect-ratio: 360/360;   max-width: 460px; grid-column: span 2; }
+  @media (max-width: 700px) { .w-large { grid-column: span 1; } }
+
+  /* Content padding: .padding(.top, 14), .bottom, 16 (medium) or 14 (large), horizontal 16 */
+  .w-body {
+    position: absolute; inset: 0;
+    padding: 14px 16px 16px 16px;
+    display: flex; flex-direction: column;
+    font-feature-settings: "tnum";
+  }
+  .w-large .w-body { padding-bottom: 14px; }
+
+  /* Header row: "Tokenomics" caption.semibold + relative time caption2 */
+  .w-head {
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size: 12px; /* .caption */
+  }
+  .w-head .title { font-weight: 600; }
+  .w-head .time  { font-size: 11px; /* .caption2 */ }
+  .widget.dark  .w-head { color: rgba(117,203,245,0.5); }
+  .widget.light .w-head { color: rgba(47,132,191,0.67); }
+
+  /* Spacing under header: 20pt (spacious) or 8pt (compact) or 14pt (large w/ overflow) */
+  .w-head.gap-spacious { margin-bottom: 20px; }
+  .w-head.gap-compact  { margin-bottom: 8px;  }
+  .w-head.gap-overflow { margin-bottom: 14px; }
+
+  /* Rows container */
+  .w-rows { display:flex; flex-direction:column; flex: 1 1 auto; min-height: 0; }
+
+  /* ---- CompactProviderRow (Medium 2+, Large 4+) ---- */
+  .row-compact {
+    display: grid;
+    grid-template-columns: 17px 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+  .row-compact .pico {
+    width: 17px; height: 17px;
+    display:grid; place-items:center;
+  }
+  .row-compact .pico img { width: 17px; height: 17px; display:block; object-fit: contain; }
+  .row-compact .col { display:flex; flex-direction:column; gap: 2px; min-width: 0; }
+  .row-compact .col .head {
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .row-compact .col .lbl { font-size: 9px; }
+  .row-compact .col .pct { font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  .widget.dark  .lbl { color: rgba(117,203,245,0.5); }
+  .widget.light .lbl { color: rgba(47,132,191,0.67); }
+
+  /* Compact rows — spacing between rows clamped between 8 and 24 (Medium) / 12 and 28 (Large) */
+  .w-medium .row-compact + .row-compact { margin-top: 16px; }
+  .w-large  .row-compact + .row-compact { margin-top: 20px; }
+
+  /* ---- LargeProviderRow (Medium 1, Large 1-3) ---- */
+  .row-large {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .row-large .r-head {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .row-large .r-head .pico img { width: 17px; height: 17px; display:block; }
+  .row-large .r-head .name { font-size: 12px; font-weight: 500; }
+  .row-large .r-head .plan { font-size: 11px; margin-left: auto; }
+  .widget.dark  .r-head .name { color: rgba(117,203,245,0.85); }
+  .widget.light .r-head .name { color: rgba(47,132,191,0.85); }
+  .widget.dark  .r-head .plan { color: rgba(117,203,245,0.5); }
+  .widget.light .r-head .plan { color: rgba(47,132,191,0.67); }
+
+  .row-large .metrics { display:flex; flex-direction:column; gap: 8px; }
+  .row-large .bar-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 30px;
+    gap: 8px;
+    align-items: center;
+  }
+  .row-large .bar-row .lbl { font-size: 9px; }
+  .row-large .bar-row .pct { font-size: 11px; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Centered spacious layout for 1-provider medium */
+  .w-medium .spacious-center { flex: 1 1 auto; display:flex; flex-direction:column; justify-content:center; }
+  .w-large  .row-large + .row-large { margin-top: 20px; }
+
+  /* ---- Progress bar (4pt capsule, track + fill + pace dot) ---- */
+  .pbar {
+    position: relative;
+    height: 4px;
+    border-radius: 999px;
+    overflow: visible;
+  }
+  .pbar .track {
+    position:absolute; inset:0;
+    border-radius: 999px;
+  }
+  .pbar .fill {
+    position:absolute; left:0; top:0; bottom:0;
+    border-radius: 999px;
+  }
+  .pbar .pace {
+    position:absolute; top:50%;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .widget.dark  .pbar .track { background: rgba(75,166,210,0.25); }
+  .widget.light .pbar .track { background: rgba(40,97,149,0.12); }
+  .widget.dark  .pbar .fill       { background: #75CBF5; }
+  .widget.light .pbar .fill       { background: #2F84BF; }
+  .widget.dark  .pbar .fill.long  { background: #3389C7; }
+  .widget.light .pbar .fill.long  { background: #56A2D6; }
+  .widget.dark  .pbar .pace { background: #FFFFFF; }
+  .widget.light .pbar .pace { background: #0E334D; }
+
+  /* Short/long pct color in compact rows — matches fillColor */
+  .widget.dark  .row-compact .pct       { color: #75CBF5; }
+  .widget.dark  .row-compact .pct.long  { color: #3389C7; }
+  .widget.light .row-compact .pct       { color: #2F84BF; }
+  .widget.light .row-compact .pct.long  { color: #56A2D6; }
+  .widget.dark  .row-large .bar-row .pct       { color: #75CBF5; }
+  .widget.dark  .row-large .bar-row .pct.long  { color: #3389C7; }
+  .widget.light .row-large .bar-row .pct       { color: #2F84BF; }
+  .widget.light .row-large .bar-row .pct.long  { color: #56A2D6; }
+
+  /* Footer: "+N in app" or share CTA */
+  .w-foot {
+    display: flex; justify-content: center; align-items: center; gap: 4px;
+    font-size: 11px;
+    padding-top: 10px;
+  }
+  .widget.dark  .w-foot { color: rgba(117,203,245,0.5); }
+  .widget.light .w-foot { color: rgba(47,132,191,0.67); }
+  .w-large .w-foot { padding-top: 12px; }
+  .w-foot svg { width: 9px; height: 9px; }
+
+  /* ---- Small widget (dual ring) — the full SVG fills the widget so text/icon scale with the rings ---- */
+  .w-small { container-type: inline-size; container-name: wsmall; }
+  .w-small .ring-stage {
+    position: absolute; inset: 0;
+  }
+  .w-small .ring-svg { width: 100%; height: 100%; display:block; }
+  .w-small .resets {
+    position: absolute; left:0; right:0;
+    bottom: 0;
+    text-align: center;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 5.2cqw;
+    padding-bottom: 6cqw;
+  }
+  .widget.dark  .w-small .resets { color: rgba(117,203,245,0.5); }
+  .widget.light .w-small .resets { color: rgba(47,132,191,0.67); }
+
+  /* ---------- TOKEN TABLE ---------- */
+  table.tokens {
+    width:100%; border-collapse: collapse; font-size: var(--fs-small);
+    border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden;
+  }
+  .tokens th, .tokens td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  .tokens th { background: var(--surface-2); font-weight: 600; font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);}
+  .tokens tr:last-child td { border-bottom: 0; }
+  .tokens .chip-inline { display:inline-block; width:14px; height:14px; border-radius: 4px; vertical-align: -2px; margin-right: 8px; border: 1px solid var(--border);}
+  .tokens code { background: transparent; padding: 0; }
+
+  /* ---------- SPACING / RADIUS VISUAL ---------- */
+  .ruler { display:flex; align-items:flex-end; gap: var(--s-3); }
+  .ruler .tick {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: var(--r-xs);
+    display:flex; align-items:flex-end; justify-content:center;
+    font-size: 10px; color: var(--text-muted);
+    padding: 4px;
+  }
+
+  .radius-demo { display:flex; gap: var(--s-4); align-items:center; flex-wrap:wrap; }
+  .radius-demo div {
+    width: 72px; height: 72px;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    display:grid; place-items:center;
+    font-size: 11px; color: var(--text-muted);
+  }
+
+  /* ---------- SHADOW DEMO ---------- */
+  .shadow-card {
+    background: var(--surface);
+    border-radius: var(--r-md);
+    padding: var(--s-5);
+    border: 1px solid var(--border);
+    text-align: center;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+
+  /* ---------- ICON DEMO ---------- */
+  .icon-strip { display:flex; gap: var(--s-4); flex-wrap: wrap; align-items:center; }
+  .icon-strip .i {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    display:grid; place-items:center;
+    color: var(--accent);
+  }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    position: sticky; top: 80px;
+    font-size: var(--fs-small);
+  }
+  .toc ol { list-style: none; padding: 0; margin: 0; display:flex; flex-direction: column; gap: 6px;}
+  .toc a { color: var(--text-muted); text-decoration: none; }
+  .toc a:hover { color: var(--text); }
+
+  .layout-2col {
+    display: grid; grid-template-columns: 200px 1fr; gap: var(--s-8);
+  }
+  @media (max-width: 900px) { .layout-2col { grid-template-columns: 1fr; } .toc {position:static;} }
+
+  /* Pull-quote / principle card */
+  .principle {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 1.25;
+    padding: var(--s-6);
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    color: var(--text);
+    max-width: 52ch;
+  }
+  .principle small { display:block; font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-top: var(--s-3);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <img src="assets/Tokenomics-logo.svg" alt="Tokenomics" style="width:32px; height:32px; display:block;">
+      Tokenomics <span style="color:var(--text-subtle); font-size:14px; font-family:var(--font-sans); margin-left:6px;">/ Web Design System</span>
+    </div>
+    <div style="display:flex; gap: var(--s-4); align-items:center;">
+      <div class="nav-links">
+        <a href="#foundations">Foundations</a>
+        <a href="#color">Color</a>
+        <a href="#type">Type</a>
+        <a href="#components">Components</a>
+        <a href="#widgets">Widgets</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="eyebrow">Design System · Website</span>
+    <h1 class="display">A quiet, <em>editorial</em> system for a menu-bar utility.</h1>
+    <p class="lede">
+      The Tokenomics site pairs a warm cream palette with navy ink, a serif voice for headlines (Hedvig Letters Serif), and a steady sans for everything else (DM Sans). The color palette is lifted directly from the in-app widget mockups so the marketing and the product feel like the same object.
+    </p>
+    <div class="btn-row" style="margin-top: var(--s-5);">
+      <a class="btn btn-primary" href="#widgets">See widgets</a>
+      <a class="btn btn-secondary" href="#color">Color tokens</a>
+      <a class="btn btn-ghost" href="#type">Typography</a>
+    </div>
+  </header>
+
+  <div class="layout-2col">
+    <aside class="toc">
+      <div class="eyebrow">Contents</div>
+      <ol>
+        <li><a href="#foundations">01 · Foundations</a></li>
+        <li><a href="#color">02 · Color</a></li>
+        <li><a href="#type">03 · Typography</a></li>
+        <li><a href="#space">04 · Space &amp; Radius</a></li>
+        <li><a href="#shadow">05 · Shadow &amp; Motion</a></li>
+        <li><a href="#components">06 · Components</a></li>
+        <li><a href="#widgets">07 · Widget mockups</a></li>
+        <li><a href="#tokens">08 · Token reference</a></li>
+      </ol>
+    </aside>
+
+    <div>
+
+    <!-- FOUNDATIONS -->
+    <section id="foundations">
+      <div class="section-header">
+        <div>
+          <span class="kicker">01 · Foundations</span>
+          <h2>Three principles</h2>
+        </div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="principle">
+          Calm, not clever.
+          <small>01 · Voice</small>
+        </div>
+        <div class="principle">
+          The product is the proof. Screenshots before slogans.
+          <small>02 · Content</small>
+        </div>
+        <div class="principle">
+          Serif for soul, sans for signal.
+          <small>03 · Type</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section id="color">
+      <div class="section-header">
+        <div>
+          <span class="kicker">02 · Color</span>
+          <h2>Palette</h2>
+          <p>Ink navy + paper cream, with a cool blue accent lifted from the widget bars. Every swatch below comes from the Figma frame.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--s-6);">Ink &amp; Accent</h3>
+      <div class="grid cols-4">
+        <div class="swatch"><div class="chip" style="background:#051928;"></div><div class="meta"><span class="name">Ink 900 / BG Grad End</span><span class="hex">#051928</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#0E334D;"></div><div class="meta"><span class="name">Ink 800 / BG Grad Start</span><span class="hex">#0E334D</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#286195;"></div><div class="meta"><span class="name">Ink 700 / Bar Track (L)</span><span class="hex">#286195</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#2F84BF;"></div><div class="meta"><span class="name">Brand 600 / Short Bar (L)</span><span class="hex">#2F84BF</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#3389C7;"></div><div class="meta"><span class="name">Brand 500 / Long Bar (D)</span><span class="hex">#3389C7</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#4BA6D2;"></div><div class="meta"><span class="name">Brand 400 / Bar Track (D)</span><span class="hex">#4BA6D2</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#56A2D6;"></div><div class="meta"><span class="name">Brand 300 / Long Bar (L)</span><span class="hex">#56A2D6</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#75CBF5;"></div><div class="meta"><span class="name">Brand 200 / Short Bar (D)</span><span class="hex">#75CBF5</span></div></div>
+      </div>
+
+      <h3 style="margin-top: var(--s-7);">Paper &amp; Cream</h3>
+      <div class="grid cols-4">
+        <div class="swatch"><div class="chip" style="background:#F3EFE5;"></div><div class="meta"><span class="name">Cream 50 / BG Grad Start</span><span class="hex">#F3EFE5</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#E6E0D4;"></div><div class="meta"><span class="name">Cream 100 / BG Grad End</span><span class="hex">#E6E0D4</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#D9D1C0;"></div><div class="meta"><span class="name">Cream 200 / Surface 2</span><span class="hex">#D9D1C0</span></div></div>
+        <div class="swatch"><div class="chip" style="background:#FFFFFF; box-shadow: inset 0 0 0 1px var(--border);"></div><div class="meta"><span class="name">White / Icon (D)</span><span class="hex">#FFFFFF</span></div></div>
+      </div>
+
+      <h3 style="margin-top: var(--s-7);">Widget gradients</h3>
+      <div class="grid cols-2">
+        <div class="swatch"><div class="chip" style="background: linear-gradient(135deg,#F3EFE5,#E6E0D4); height: 140px;"></div>
+          <div class="meta"><span class="name">Widget · Light</span><span class="hex">#F3EFE5 → #E6E0D4</span></div>
+        </div>
+        <div class="swatch"><div class="chip" style="background: linear-gradient(135deg,#0E334D,#051928); height: 140px;"></div>
+          <div class="meta"><span class="name">Widget · Dark</span><span class="hex">#0E334D → #051928</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section id="type">
+      <div class="section-header">
+        <div>
+          <span class="kicker">03 · Typography</span>
+          <h2>Type system</h2>
+          <p>Hedvig Letters Serif sets headlines and pull-quotes with a gentle humanist warmth. DM Sans handles UI, body, and numerics with a grotesque clarity. Everything else — the macOS app and widgets — uses SF.</p>
+        </div>
+      </div>
+
+      <div class="card" style="padding: var(--s-6);">
+        <div class="type-row">
+          <div class="type-label">Display<small>Hedvig · 88 / 0.98</small></div>
+          <div class="serif" style="font-size: 72px; line-height: 0.98; letter-spacing: -0.022em;">See it <em>before</em> you pay for it.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">H1<small>Hedvig · 56 / 1.08</small></div>
+          <div class="serif" style="font-size: 52px; line-height: 1.08; letter-spacing: -0.018em;">A menu-bar view of every AI tool you pay for.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">H2<small>Hedvig · 40 / 1.1</small></div>
+          <div class="serif" style="font-size: 36px; line-height: 1.1;">Five providers, one ring.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">H3<small>Hedvig · 28 / 1.2</small></div>
+          <div class="serif" style="font-size: 26px; line-height: 1.2;">Quiet polling, loud clarity.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Eyebrow<small>DM Sans · 12 / 0.14em</small></div>
+          <div class="sans" style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle);">Now in public beta</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Lede<small>DM Sans · 18 / 1.55</small></div>
+          <div class="sans" style="font-size: 18px; line-height: 1.55; color: var(--text-muted);">Tokenomics quietly watches your Claude, Codex, Gemini, Copilot, and Cursor usage — so you stop refreshing dashboards and start shipping.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Body<small>DM Sans · 16 / 1.55</small></div>
+          <div class="sans" style="font-size: 16px; line-height: 1.55;">The idea is simple. Five providers, one ring. Tokenomics sits in your menu bar, talks to each API directly, and shows you what's left — without another tab, another login, or another Slack ping from finance.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Small<small>DM Sans · 14 / 1.5</small></div>
+          <div class="sans" style="font-size: 14px; line-height: 1.5; color: var(--text-muted);">Built for macOS 13+ · Developer ID signed · Sparkle auto-updates</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Micro<small>DM Sans · 12 / 1.4</small></div>
+          <div class="sans" style="font-size: 12px; line-height: 1.4; color: var(--text-subtle);">v2.7.7 · macOS · © 2026</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Numerics<small>DM Sans · tabular</small></div>
+          <div class="sans" style="font-size: 28px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em;">42% · 7-Day · 12,480 tokens</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPACE & RADIUS -->
+    <section id="space">
+      <div class="section-header">
+        <div>
+          <span class="kicker">04 · Space &amp; Radius</span>
+          <h2>Rhythm</h2>
+          <p>An 8pt base scale. Widgets use 16px outer padding and 14px vertical gaps — the system keeps the rest of the site on the same grid.</p>
+        </div>
+      </div>
+
+      <h3>Spacing scale</h3>
+      <div class="card">
+        <div class="ruler">
+          <div class="tick" style="width:4px; height:4px;"></div>
+          <div class="tick" style="width:8px; height:8px;"></div>
+          <div class="tick" style="width:12px; height:12px;"></div>
+          <div class="tick" style="width:16px; height:16px;"></div>
+          <div class="tick" style="width:24px; height:24px;"></div>
+          <div class="tick" style="width:32px; height:32px;"></div>
+          <div class="tick" style="width:48px; height:48px;"></div>
+          <div class="tick" style="width:64px; height:64px;"></div>
+          <div class="tick" style="width:96px; height:96px;"></div>
+        </div>
+        <div style="display:flex; gap: var(--s-3); margin-top: var(--s-4); font-family: var(--font-sans); color: var(--text-subtle); font-size:11px;">
+          <span style="width:4px;">4</span><span style="width:8px;">8</span><span style="width:12px;">12</span><span style="width:16px;">16</span><span style="width:24px;">24</span><span style="width:32px;">32</span><span style="width:48px;">48</span><span style="width:64px;">64</span><span>96</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--s-6);">Corner radius</h3>
+      <div class="card">
+        <div class="radius-demo">
+          <div style="border-radius: 6px;">6 · xs</div>
+          <div style="border-radius: 10px;">10 · sm</div>
+          <div style="border-radius: 14px;">14 · md</div>
+          <div style="border-radius: 20px;">20 · lg</div>
+          <div style="border-radius: 28px;">28 · xl</div>
+          <div style="border-radius: 999px;">pill</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHADOW & MOTION -->
+    <section id="shadow">
+      <div class="section-header">
+        <div>
+          <span class="kicker">05 · Shadow &amp; Motion</span>
+          <h2>Soft physics</h2>
+          <p>Three elevation tiers. Default animation is 220ms with a gentle ease-out. Widgets lift slightly on hover to hint interactivity.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <div class="shadow-card" style="box-shadow: var(--shadow-sm);">sm · cards at rest</div>
+        <div class="shadow-card" style="box-shadow: var(--shadow-md);">md · hover / popover</div>
+        <div class="shadow-card" style="box-shadow: var(--shadow-lg);">lg · hero widgets</div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section id="components">
+      <div class="section-header">
+        <div>
+          <span class="kicker">06 · Components</span>
+          <h2>Building blocks</h2>
+        </div>
+      </div>
+
+      <h3>Buttons</h3>
+      <div class="card">
+        <div class="btn-row">
+          <button class="btn btn-primary">Download for macOS</button>
+          <button class="btn btn-secondary">View on GitHub</button>
+          <button class="btn btn-ghost">Read the changelog →</button>
+        </div>
+        <div class="btn-row" style="margin-top: var(--s-4);">
+          <button class="btn btn-primary btn-sm">Small primary</button>
+          <button class="btn btn-primary btn-lg">Large primary</button>
+          <button class="btn btn-secondary btn-sm">Small secondary</button>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--s-6);">Pills &amp; badges</h3>
+      <div class="card" style="display:flex; gap: var(--s-3); flex-wrap:wrap;">
+        <span class="pill dot">v2.7.7 live</span>
+        <span class="pill">Notarized</span>
+        <span class="pill">Homebrew</span>
+        <span class="pill" style="background: color-mix(in srgb, #0E334D 14%, transparent); color: #0E334D; border-color: color-mix(in srgb,#0E334D 26%, transparent);">Pro plan</span>
+      </div>
+
+      <h3 style="margin-top: var(--s-6);">Form field</h3>
+      <div class="card" style="max-width: 480px;">
+        <div class="field">
+          <label for="email">Get launch updates</label>
+          <input class="input" id="email" type="email" placeholder="you@yourdomain.com" />
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--s-6);">Cards</h3>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="eyebrow">Feature</div>
+          <h4 class="serif" style="font-family: var(--font-serif); font-size: 22px; margin-top: 4px;">One ring to rule them</h4>
+          <p style="font-size: 14px; margin: 0;">Menu-bar rings aggregate every provider into one glance.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Feature</div>
+          <h4 class="serif" style="font-family: var(--font-serif); font-size: 22px; margin-top: 4px;">Quiet polling</h4>
+          <p style="font-size: 14px; margin: 0;">Exponential backoff on 429s keeps the APIs happy.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Feature</div>
+          <h4 class="serif" style="font-family: var(--font-serif); font-size: 22px; margin-top: 4px;">Zero-friction auth</h4>
+          <p style="font-size: 14px; margin: 0;">Reads existing CLI credentials. Nothing to sign in twice.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIDGETS -->
+    <section id="widgets">
+      <div class="section-header">
+        <div>
+          <span class="kicker">07 · Widget mockups</span>
+          <h2>The product, on the page</h2>
+          <p>These are HTML/CSS reproductions of the Figma widgets (node 421:440) — used on marketing pages so the app and site feel continuous. Colors come straight from the palette above.</p>
+        </div>
+      </div>
+
+      <div class="widget-grid">
+
+        <!-- ============ SMALL · DUAL RING · LIGHT ============
+             Mirrors SmallWidgetView.swift:
+             outerDia=size*0.61 (r=30.5), innerDia=size*0.46 (r=23), lineW=size*0.07 (=7)
+             fontSize=size*0.125 (=12.5), corner icon 11.2×11.2 at (8.2, 8.2),
+             rings offset y = size*0.024 so they sit slightly below center leaving room for resets text.
+        -->
+        <div class="widget w-small light">
+          <div class="ring-stage">
+            <svg class="ring-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <!-- Corner provider icon -->
+              <image href="assets/icons/Claude-d.blue.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
+
+              <g transform="translate(50 47.4)">
+                <!-- Outer track (short window) -->
+                <circle r="30.5" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
+                <!-- Outer fill (75%) — C = 2π·30.5 ≈ 191.64 -->
+                <circle r="30.5" fill="none" stroke="#2F84BF" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="47.91"
+                  transform="rotate(-90)"/>
+                <!-- Inner track (long window) -->
+                <circle r="23" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
+                <!-- Inner fill (33%) — C = 2π·23 ≈ 144.51 -->
+                <circle r="23" fill="none" stroke="#56A2D6" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                  transform="rotate(-90)"/>
+                <!-- Pace dots (dark navy on light) -->
+                <circle r="3.5" fill="#0E334D" transform="rotate(198) translate(0 -30.5)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(54)  translate(0 -23)"/>
+                <!-- Percentage (shortColor), bold monospaced -->
+                <text x="0" y="0"
+                  text-anchor="middle" dominant-baseline="central"
+                  font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
+                  font-size="12.5" font-weight="700" letter-spacing="-0.3"
+                  style="font-variant-numeric: tabular-nums;"
+                  fill="#2F84BF">75%</text>
+              </g>
+            </svg>
+          </div>
+          <div class="resets">Resets in 2h 45m</div>
+        </div>
+
+        <!-- ============ SMALL · DUAL RING · DARK ============ -->
+        <div class="widget w-small dark">
+          <div class="ring-stage">
+            <svg class="ring-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <image href="assets/icons/Claude-white.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
+
+              <g transform="translate(50 47.4)">
+                <circle r="30.5" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
+                <!-- Outer fill 55% -->
+                <circle r="30.5" fill="none" stroke="#75CBF5" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                  transform="rotate(-90)"/>
+                <circle r="23" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
+                <!-- Inner fill 33% -->
+                <circle r="23" fill="none" stroke="#3389C7" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                  transform="rotate(-90)"/>
+                <!-- Pace dots white -->
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(198) translate(0 -30.5)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(54)  translate(0 -23)"/>
+                <text x="0" y="0"
+                  text-anchor="middle" dominant-baseline="central"
+                  font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
+                  font-size="12.5" font-weight="700" letter-spacing="-0.3"
+                  style="font-variant-numeric: tabular-nums;"
+                  fill="#75CBF5">55%</text>
+              </g>
+            </svg>
+          </div>
+          <div class="resets">Resets in 2h 45m</div>
+        </div>
+
+        <!-- ============ MEDIUM · 1 PROVIDER · LIGHT (LargeProviderRow) ============ -->
+        <div class="widget w-medium light">
+          <div class="w-body">
+            <div class="w-head gap-spacious">
+              <span class="title">Tokenomics</span>
+              <span class="time">30 sec ago</span>
+            </div>
+            <div class="spacious-center">
+              <div class="row-large">
+                <div class="r-head">
+                  <span class="pico"><img src="assets/icons/Claude-d.blue.svg" alt=""></span>
+                  <span class="name">Claude Code</span>
+                  <span class="plan">Pro</span>
+                </div>
+                <div class="metrics">
+                  <div class="bar-row">
+                    <span class="lbl">5-Hour</span>
+                    <div class="pbar">
+                      <div class="track"></div>
+                      <div class="fill" style="width:75%"></div>
+                      <div class="pace" style="left:80%"></div>
+                    </div>
+                    <span class="pct">75%</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="lbl">7-Day</span>
+                    <div class="pbar">
+                      <div class="track"></div>
+                      <div class="fill long" style="width:33%"></div>
+                      <div class="pace" style="left:40%"></div>
+                    </div>
+                    <span class="pct long">33%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-foot">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 2l-3 3h2v5h2V5h2L8 2zm-5 9v3h10v-3h-2v1H5v-1H3z"/></svg>
+              <span>Tokenomics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ MEDIUM · 1 PROVIDER · DARK ============ -->
+        <div class="widget w-medium dark">
+          <div class="w-body">
+            <div class="w-head gap-spacious">
+              <span class="title">Tokenomics</span>
+              <span class="time">30 sec ago</span>
+            </div>
+            <div class="spacious-center">
+              <div class="row-large">
+                <div class="r-head">
+                  <span class="pico"><img src="assets/icons/Claude-white.svg" alt=""></span>
+                  <span class="name">Claude Code</span>
+                  <span class="plan">Pro</span>
+                </div>
+                <div class="metrics">
+                  <div class="bar-row">
+                    <span class="lbl">5-Hour</span>
+                    <div class="pbar">
+                      <div class="track"></div>
+                      <div class="fill" style="width:90%"></div>
+                      <div class="pace" style="left:82%"></div>
+                    </div>
+                    <span class="pct">90%</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="lbl">7-Day</span>
+                    <div class="pbar">
+                      <div class="track"></div>
+                      <div class="fill long" style="width:33%"></div>
+                      <div class="pace" style="left:40%"></div>
+                    </div>
+                    <span class="pct long">33%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-foot">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 2l-3 3h2v5h2V5h2L8 2zm-5 9v3h10v-3h-2v1H5v-1H3z"/></svg>
+              <span>Tokenomics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ MEDIUM · 3 PROVIDERS · LIGHT (CompactProviderRow) ============ -->
+        <div class="widget w-medium light">
+          <div class="w-body">
+            <div class="w-head gap-compact">
+              <span class="title">Tokenomics</span>
+              <span class="time">30 sec ago</span>
+            </div>
+            <div class="w-rows">
+              <!-- Row 1: Claude (short + long) -->
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Claude-d.blue.svg" alt=""></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">5-Hour</span><span class="pct">50%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:50%"></div><div class="pace" style="left:55%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">7-Day</span><span class="pct long">33%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:33%"></div><div class="pace" style="left:40%"></div></div>
+                </div>
+              </div>
+              <!-- Row 2: Codex (short + long) -->
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Codex-d.blue.svg" alt=""></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">5-Hour</span><span class="pct">25%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:30%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div>
+                </div>
+              </div>
+              <!-- Row 3: Gemini -->
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Gemini-d.blue.svg" alt=""></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">Tokens</span><span class="pct">13%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:13%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">Requests</span><span class="pct long">0%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-foot">+1 in app</div>
+          </div>
+        </div>
+
+        <!-- ============ MEDIUM · 3 PROVIDERS · DARK ============ -->
+        <div class="widget w-medium dark">
+          <div class="w-body">
+            <div class="w-head gap-compact">
+              <span class="title">Tokenomics</span>
+              <span class="time">30 sec ago</span>
+            </div>
+            <div class="w-rows">
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Claude-white.svg" alt=""></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">5-Hour</span><span class="pct">50%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:50%"></div><div class="pace" style="left:55%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">7-Day</span><span class="pct long">33%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:33%"></div><div class="pace" style="left:40%"></div></div>
+                </div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Codex-white.svg" alt=""></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">5-Hour</span><span class="pct">25%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div>
+                </div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Gemini-white.svg" alt=""></span>
+                <div class="col">
+                  <div class="head"><span class="lbl">Tokens</span><span class="pct">13%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill" style="width:13%"></div></div>
+                </div>
+                <div class="col">
+                  <div class="head"><span class="lbl">Requests</span><span class="pct long">0%</span></div>
+                  <div class="pbar"><div class="track"></div><div class="fill long" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-foot">+1 in app</div>
+          </div>
+        </div>
+
+        <!-- ============ LARGE · 7 PROVIDERS · LIGHT (compact rows + overflow) ============ -->
+        <div class="widget w-large light">
+          <div class="w-body">
+            <div class="w-head gap-overflow">
+              <span class="title">Tokenomics</span>
+              <span class="time">21 sec ago</span>
+            </div>
+            <div class="w-rows">
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Claude-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">5-Hour</span><span class="pct">0%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:0%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">7-Day</span><span class="pct long">33%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:33%"></div><div class="pace" style="left:40%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Copilot-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">42%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:42%"></div><div class="pace" style="left:46%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Codex-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">5-Hour</span><span class="pct">1%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:1%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Gemini-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">Tokens</span><span class="pct">0%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:0%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">0%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:0%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/Cursor-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">8%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:8%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">12%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:12%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/elevenlabs-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">Credits</span><span class="pct">25%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:30%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">15%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:15%"></div></div></div>
+              </div>
+              <div class="row-compact">
+                <span class="pico"><img src="assets/icons/runway-d.blue.svg" alt=""></span>
+                <div class="col"><div class="head"><span class="lbl">Tokens</span><span class="pct">5%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:5%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Cost</span><span class="pct long">3%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:3%"></div></div></div>
+              </div>
+            </div>
+            <div class="w-foot">+1 in app</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TOKENS -->
+    <section id="tokens">
+      <div class="section-header">
+        <div>
+          <span class="kicker">08 · Token reference</span>
+          <h2>CSS custom properties</h2>
+          <p>Copy-paste this table into <code>styles.css</code> — it's already wired into the page above.</p>
+        </div>
+      </div>
+
+      <table class="tokens">
+        <thead>
+          <tr><th>Token</th><th>Value</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--ink-900</code></td><td><span class="chip-inline" style="background:#051928;"></span>#051928</td><td>Deepest navy · gradient end</td></tr>
+          <tr><td><code>--ink-800</code></td><td><span class="chip-inline" style="background:#0E334D;"></span>#0E334D</td><td>Primary ink · gradient start</td></tr>
+          <tr><td><code>--ink-700</code></td><td><span class="chip-inline" style="background:#286195;"></span>#286195</td><td>Bar track base (light)</td></tr>
+          <tr><td><code>--brand-600</code></td><td><span class="chip-inline" style="background:#2F84BF;"></span>#2F84BF</td><td>Short bar / labels (light)</td></tr>
+          <tr><td><code>--brand-500</code></td><td><span class="chip-inline" style="background:#3389C7;"></span>#3389C7</td><td>Long bar (dark mode)</td></tr>
+          <tr><td><code>--brand-400</code></td><td><span class="chip-inline" style="background:#4BA6D2;"></span>#4BA6D2</td><td>Bar track base (dark)</td></tr>
+          <tr><td><code>--brand-300</code></td><td><span class="chip-inline" style="background:#56A2D6;"></span>#56A2D6</td><td>Long bar (light mode)</td></tr>
+          <tr><td><code>--brand-200</code></td><td><span class="chip-inline" style="background:#75CBF5;"></span>#75CBF5</td><td>Short bar / labels (dark)</td></tr>
+          <tr><td><code>--cream-50</code></td><td><span class="chip-inline" style="background:#F3EFE5;"></span>#F3EFE5</td><td>Page background</td></tr>
+          <tr><td><code>--cream-100</code></td><td><span class="chip-inline" style="background:#E6E0D4;"></span>#E6E0D4</td><td>Secondary surface · gradient end</td></tr>
+          <tr><td><code>--font-serif</code></td><td><code>'Hedvig Letters Serif'</code></td><td>Display, H1–H4, pull-quotes</td></tr>
+          <tr><td><code>--font-sans</code></td><td><code>'DM Sans'</code></td><td>Body, UI, numerics, eyebrow</td></tr>
+          <tr><td><code>--r-md</code></td><td>14px</td><td>Cards, inputs</td></tr>
+          <tr><td><code>--r-lg</code></td><td>20px</td><td>Section cards</td></tr>
+          <tr><td><code>--r-xl</code></td><td>28px</td><td>Hero widgets (app uses 22px)</td></tr>
+          <tr><td><code>--shadow-lg</code></td><td>28/60 navy @ 18%</td><td>Hero widgets, featured art</td></tr>
+          <tr><td><code>--dur</code> / <code>--ease</code></td><td>220ms / cubic-bezier(.2,.7,.2,1)</td><td>Default transition</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: var(--s-7);">
+        <h3>Usage notes</h3>
+        <ul style="color: var(--text-muted); line-height: 1.7; font-size: var(--fs-small);">
+          <li><strong>App vs site:</strong> The macOS app uses SF (system). The website uses Hedvig Letters Serif + DM Sans. Widget mockups shown here intentionally keep SF stack to read as <em>product</em>, not marketing.</li>
+          <li><strong>Serif discipline:</strong> Hedvig only for H1–H4 and pull-quotes. Never for CTAs, labels, or numerics.</li>
+          <li><strong>Numerics:</strong> Always <code>font-variant-numeric: tabular-nums;</code> for percentages and counters so rows don't shift.</li>
+          <li><strong>Widget parity:</strong> The light/dark widget gradients on the site must match the app's widget extension exactly — they're the same <code>#0E334D → #051928</code> / <code>#F3EFE5 → #E6E0D4</code> stops.</li>
+          <li><strong>Contrast:</strong> Label color at 50% opacity (dark) / 67% (light) mirrors the Figma spec; preserve this or text loses its editorial calm.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer style="margin-top: var(--s-9); padding-top: var(--s-6); border-top: 1px solid var(--border); color: var(--text-subtle); font-size: var(--fs-micro);">
+      Tokenomics · Website Design System · v1.0 · Source: Figma node 421:440
+    </footer>
+
+    </div>
+  </div>
+</main>
+
+<script>
+  const t = document.getElementById('themeToggle');
+  t.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next === 'light' ? '' : 'dark');
+    t.textContent = next === 'dark' ? 'Light' : 'Dark';
+  });
+</script>
+</body>
+</html>
