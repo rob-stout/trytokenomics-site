@@ -1078,9 +1078,8 @@ section { scroll-margin-top: 72px; }
   width: auto;
   height: 84px;
   display: block;
-  filter: drop-shadow(-6px 6px 9px rgba(0, 0, 0, 0.25));
-  transform: translateZ(0);
-  will-change: filter;
+  border-radius: 10px;
+  box-shadow: -6px 6px 9px rgba(0, 0, 0, 0.25);
 }
 .install-flow-icon-label {
   font-size: 11px;
