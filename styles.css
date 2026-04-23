@@ -1403,10 +1403,7 @@ svg tspan[font-style="italic"] { font-style: normal; }
    wallpaper/glass in one place. Default = light mode; [data-theme="dark"]
    overrides below. */
 .menubar-scene {
-  --mb-wall:
-    radial-gradient(120% 80% at 80% 0%, #f6efe1 0%, transparent 55%),
-    radial-gradient(100% 100% at 20% 100%, #e8dec7 0%, transparent 60%),
-    linear-gradient(180deg, #efe6d3 0%, #d9cdb1 100%);
+  --mb-wall: linear-gradient(to bottom right, rgba(47,132,191,0.15), rgba(47,132,191,0.40));
   --mb-wall-ring: rgba(0,0,0,0.06);
   --mb-bar-bg: rgba(255,255,255,0.35);
   --mb-bar-edge: rgba(0,0,0,0.06);
