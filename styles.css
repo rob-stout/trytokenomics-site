@@ -184,7 +184,7 @@ code, kbd {
 hr { border: 0; border-top: 1px solid var(--border); margin: var(--s-8) 0; }
 
 /* ---------- LAYOUT ---------- */
-.page-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--s-5); }
+.page-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--s-7); }
 
 /* ---------- NAV ---------- */
 .nav {
@@ -542,12 +542,12 @@ hr { border: 0; border-top: 1px solid var(--border); margin: var(--s-8) 0; }
 
 /* ---------- PAGE SECTIONS ---------- */
 section { scroll-margin-top: 72px; }
-.section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--s-5); }
+.section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--s-7); }
 
 /* ---------- HERO ---------- */
 .hero {
   padding: var(--s-9) 0 var(--s-8);
-  max-width: 1200px; margin: 0 auto; padding-left: var(--s-5); padding-right: var(--s-5);
+  max-width: 1200px; margin: 0 auto; padding-left: var(--s-7); padding-right: var(--s-7);
 }
 .hero-eyebrow-row {
   margin-bottom: var(--s-5);
@@ -561,22 +561,40 @@ section { scroll-margin-top: 72px; }
   margin-top: var(--s-5);
   display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center;
 }
-.hero-support {
-  margin-top: var(--s-4);
-  font-size: var(--fs-small);
-  color: var(--text-subtle);
-}
-
 /* Hero product visual */
 .hero-visual {
-  margin-top: var(--s-8);
+  margin-top: var(--s-9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-5);
+}
+.hero-menubar {
+  display: block;
+  width: min(100%, 744px);
+  margin-inline: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.hero-menubar img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero-widgets {
   display: flex;
   gap: var(--s-5);
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 .hero-visual .widget { flex-shrink: 0; }
+.hero-visual .widget {
+  box-shadow:
+    0 24px 48px -18px rgba(0,0,0,0.35),
+    0 4px 12px rgba(0,0,0,0.18);
+}
 
 /* ---------- PROVIDER STRIP ---------- */
 .provider-section {
@@ -785,7 +803,7 @@ section { scroll-margin-top: 72px; }
   overflow: hidden;
 }
 .widgets-section-inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 var(--s-5);
+  max-width: 1200px; margin: 0 auto; padding: 0 var(--s-7);
 }
 .desktop-frame {
   container-type: inline-size;
@@ -1024,9 +1042,7 @@ section { scroll-margin-top: 72px; }
   color: #D97757;
   padding: var(--s-5) var(--s-3);
   border-radius: var(--r-lg);
-  transition: transform var(--dur-fast) var(--ease);
 }
-.install-flow:hover { transform: translateY(-2px); }
 .install-flow-icon {
   display: flex;
   flex-direction: column;
@@ -1039,7 +1055,7 @@ section { scroll-margin-top: 72px; }
   height: 84px;
   border-radius: 22.37%; /* macOS squircle approximation */
   overflow: hidden;
-  filter: drop-shadow(-4px 8px 12px rgba(0, 0, 0, 0.25));
+  box-shadow: -4px 8px 12px rgba(0, 0, 0, 0.25);
 }
 .install-flow-icon-mask img {
   display: block;
@@ -1063,6 +1079,8 @@ section { scroll-margin-top: 72px; }
   height: 84px;
   display: block;
   filter: drop-shadow(-6px 6px 9px rgba(0, 0, 0, 0.25));
+  transform: translateZ(0);
+  will-change: filter;
 }
 .install-flow-icon-label {
   font-size: 11px;
@@ -1225,6 +1243,16 @@ details.faq-item[open] .faq-chevron {
 .support-section {
   padding: var(--s-9) 0;
   border-top: 1px solid var(--border);
+}
+.support-intro {
+  max-width: 640px;
+  margin: 0 auto var(--s-7);
+  padding: 0 var(--s-5);
+  text-align: center;
+}
+.support-lede {
+  color: var(--text-muted);
+  margin-top: var(--s-4);
 }
 .support-grid {
   display: grid;
