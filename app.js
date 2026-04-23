@@ -226,7 +226,23 @@
     initScrollAnimations();
     initNavHighlight();
     initProviderFlip();
+    initHashDetails();
   });
+
+  // ── Auto-open <details> when linked by URL hash ──────────
+  function initHashDetails() {
+    function openFromHash() {
+      var hash = window.location.hash;
+      if (!hash) return;
+      var target = document.querySelector(hash);
+      if (target && target.tagName === 'DETAILS') {
+        target.open = true;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  }
 
   // ---------- Rotating provider in hero — box rolling backwards ----------
   function initProviderFlip() {

@@ -89,12 +89,22 @@
     </a>
   </div>
 
-  <p class="hero-support">
-    Signed. Notarized. Auto-updating through Sparkle.
-  </p>
-
-  <!-- Product shot: two medium widgets side-by-side -->
+  <!-- Product shot: menu bar above two medium widgets -->
   <div class="hero-visual reveal" data-delay="100">
+
+    <!-- Menu bar: light/dark theme variants, each with a shorter mobile asset -->
+    <div class="hero-menubar" aria-hidden="true">
+      <picture class="icon-light-only">
+        <source media="(max-width: 820px)" srcset="assets/Menu%20Bar%20Cropped-lightmode.svg" />
+        <img src="assets/Menu%20Bar-lightmode.svg" alt="" />
+      </picture>
+      <picture class="icon-dark-only">
+        <source media="(max-width: 820px)" srcset="assets/Menu%20Bar%20Cropped-darkmode.svg" />
+        <img src="assets/Menu%20Bar-darkmode.svg" alt="" />
+      </picture>
+    </div>
+
+    <div class="hero-widgets">
 
     <!-- Medium dark: single provider, high usage (Claude about to hit limit) -->
     <div class="widget w-medium dark" style="width: min(360px, 100%);">
@@ -185,6 +195,7 @@
       </div>
     </div>
 
+    </div><!-- /hero-widgets -->
   </div><!-- /hero-visual -->
 </header>
 
@@ -903,6 +914,49 @@
 
 
 <!-- ══════════════════════════════════════════════════════════
+     SUPPORT / PRICING
+     ══════════════════════════════════════════════════════════ -->
+<section class="support-section" id="pricing" aria-labelledby="support-heading">
+  <div class="section-wrap">
+    <div class="support-intro">
+      <p class="feature-kicker">Pricing</p>
+      <h2 id="support-heading">Priced to <em>download</em>.</h2>
+      <p class="support-lede">Enjoy Tokenomics on us — it's free forever.<br />That said, I'd love a coffee on you if you're up for it.</p>
+    </div>
+
+    <div class="support-grid">
+
+      <!-- Free forever -->
+      <article class="support-card">
+        <p class="feature-kicker">FREE FOREVER</p>
+        <div class="support-price">$0</div>
+        <p class="support-price-note">Now and always, for anyone who installs today.</p>
+        <p class="support-body">
+          Tokenomics is free. If paid capabilities ever ship — a team or enterprise version is one possibility — the current app stays free forever for everyone who already has it.
+        </p>
+        <a href="#install" class="btn btn-primary">Download for macOS</a>
+      </article>
+
+      <!-- Buy me a coffee -->
+      <article class="support-card">
+        <p class="feature-kicker">BUY ME A COFFEE</p>
+        <div class="support-price">$19</div>
+        <p class="support-price-note">Suggested Starbucks latte price.</p>
+        <ul class="support-perks">
+          <li>Buy groceries</li>
+          <li>Pay rent</li>
+          <li>Move out of mom's basement</li>
+          <li>Fund more great apps</li>
+        </ul>
+        <a href="https://buymeacoffee.com/robstout" class="btn btn-secondary" target="_blank" rel="noopener">Buy me a coffee</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
      INSTALL
      ══════════════════════════════════════════════════════════ -->
 <section class="install-section" id="install" aria-labelledby="install-heading">
@@ -964,45 +1018,6 @@
           <p class="install-support">Install <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a> first, then run this command.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════════════════
-     SUPPORT / PRICING
-     ══════════════════════════════════════════════════════════ -->
-<section class="support-section" aria-labelledby="support-heading">
-  <div class="section-wrap">
-    <h2 id="support-heading" class="sr-only">Pricing and support</h2>
-
-    <div class="support-grid">
-
-      <!-- Free forever -->
-      <article class="support-card">
-        <p class="feature-kicker">FREE FOREVER</p>
-        <div class="support-price">$0</div>
-        <p class="support-price-note">Now and always, for anyone who installs today.</p>
-        <p class="support-body">
-          Tokenomics is free. If paid capabilities ever ship — a team or enterprise version is one possibility — the current app stays free forever for everyone who already has it.
-        </p>
-        <a href="#install" class="btn btn-primary">Download for macOS</a>
-      </article>
-
-      <!-- Buy me a coffee -->
-      <article class="support-card">
-        <p class="feature-kicker">BUY ME A COFFEE</p>
-        <div class="support-price">$19</div>
-        <p class="support-price-note">Suggested Starbucks latte price.</p>
-        <ul class="support-perks">
-          <li>Buy groceries</li>
-          <li>Pay rent</li>
-          <li>Move out of mom's basement</li>
-          <li>Fund more great apps</li>
-        </ul>
-        <a href="https://buymeacoffee.com/robstout" class="btn btn-secondary" target="_blank" rel="noopener">Buy me a coffee</a>
-      </article>
-
     </div>
   </div>
 </section>
@@ -1075,7 +1090,7 @@
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, <code>gh</code> CLI, local config files) are Mac-specific. A Windows/Linux version built on Tauri is on the roadmap, but it's behind Phase 2 work. Cursor and Copilot users on Windows are a real audience — it's not forgotten, just sequenced correctly.</p>
+          <p>macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, <code>gh</code> CLI, local config files) are Mac-specific. A Windows/Linux version is on the roadmap. We love our Windows users too — we won't forget about you.</p>
         </div>
       </details>
 
