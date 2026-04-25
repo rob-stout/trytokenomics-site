@@ -1,0 +1,73 @@
+name: Sync version fallbacks
+
+# Keeps the static "vX.Y.Z" fallbacks in index.html / setup.html /
+# license.html / privacy.html in sync with the latest release of
+# rob-stout/Tokenomics. The runtime auto-update via app.js handles users
+# with JS enabled; this workflow keeps the static HTML correct for SEO,
+# JS-disabled users, and avoids stale text in the initial paint.
+
+on:
+  # Triggered manually from publish.sh after a new release ships
+  workflow_dispatch:
+  # Daily safety net in case the manual trigger fails
+  schedule:
+    - cron: '0 12 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get latest release tag from rob-stout/Tokenomics
+        id: latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG=$(gh release view --repo rob-stout/Tokenomics --json tagName -q .tagName)
+          VERSION="${TAG#v}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Latest release: $TAG"
+
+      - name: Detect current fallback version in HTML
+        id: current
+        run: |
+          # Pull the version out of the version pill in index.html.
+          # Pattern: >v2.8.6 · macOS 14+<
+          CURRENT=$(grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+ · macOS' index.html | head -1 | sed -E 's/^v//; s/ · macOS$//')
+          echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "Current fallback version: $CURRENT"
+
+      - name: Skip if already in sync
+        if: steps.latest.outputs.version == steps.current.outputs.version
+        run: |
+          echo "Already at ${{ steps.latest.outputs.version }}. Nothing to do."
+
+      - name: Update fallbacks
+        if: steps.latest.outputs.version != steps.current.outputs.version
+        run: |
+          OLD="${{ steps.current.outputs.version }}"
+          NEW="${{ steps.latest.outputs.version }}"
+          echo "Updating $OLD → $NEW"
+          for f in index.html setup.html license.html privacy.html; do
+            [[ -f "$f" ]] || continue
+            sed -i "s|v${OLD}/Tokenomics-${OLD}.dmg|v${NEW}/Tokenomics-${NEW}.dmg|g" "$f"
+            sed -i "s|>v${OLD} · macOS|>v${NEW} · macOS|g" "$f"
+          done
+
+      - name: Commit and push
+        if: steps.latest.outputs.version != steps.current.outputs.version
+        run: |
+          if git diff --quiet; then
+            echo "sed produced no changes — bailing out without commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: sync version fallbacks to ${{ steps.latest.outputs.tag }}"
+          git push
