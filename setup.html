@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Setup Guide — Tokenomics</title>
+  <meta name="description" content="Step-by-step setup for every Tokenomics platform — Anthropic, OpenAI, Google, GitHub, and Cursor. One sign-in covers each platform's full product pool. Plain English. No assumptions." />
+  <meta property="og:title" content="Setup Guide — Tokenomics" />
+  <meta property="og:description" content="Plain-English setup steps for every provider Tokenomics supports. Built for people who don't live in the Terminal." />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="assets/sharing/OG-Image.png" />
+  <meta name="twitter:image" content="assets/sharing/OG-Image.png" />
+  <meta name="theme-color" content="#F3EFE5" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0E334D" media="(prefers-color-scheme: dark)" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="assets/sharing/Favicon-180x180.svg" />
+  <link rel="icon" type="image/png" sizes="180x180" href="assets/sharing/Favicon-180x180.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/sharing/Apple-Touch-Icon-180x180.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Page-specific styles. Tokens, fonts, buttons, cards inherited from styles.css. -->
+  <style>
+    .guide-hero { padding: var(--s-9) 0 var(--s-6); }
+    .guide-hero h1 em { font-style: italic; color: var(--accent); }
+    .guide-hero .lede {
+      font-size: var(--fs-body-lg);
+      color: var(--text-muted);
+      max-width: 56ch;
+      margin: var(--s-4) 0 0;
+    }
+
+    /* Table of contents — clickable provider chips that jump to each section */
+    .guide-toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--s-3);
+      margin: var(--s-7) 0 0;
+    }
+    .guide-toc-item {
+      display: flex;
+      align-items: center;
+      gap: var(--s-3);
+      padding: var(--s-4);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease);
+    }
+    .guide-toc-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+    .guide-toc-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      background: var(--bg-2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .guide-toc-icon img { width: 22px; height: 22px; object-fit: contain; }
+    .guide-toc-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .guide-toc-name {
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .guide-toc-sub {
+      font-size: var(--fs-micro);
+      color: var(--text-subtle);
+      line-height: 1.2;
+    }
+
+    /* Per-provider section */
+    .guide-section {
+      padding: var(--s-9) 0;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 80px;
+    }
+    .guide-section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--s-4);
+      margin-bottom: var(--s-4);
+    }
+    .guide-section-icon {
+      width: 64px; height: 64px;
+      border-radius: var(--r-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .guide-section-icon img { width: 36px; height: 36px; object-fit: contain; }
+    .guide-section h2 { margin: 0; }
+    .guide-section h2 em { font-style: italic; color: var(--accent); }
+    .guide-section .what {
+      font-size: var(--fs-body-lg);
+      color: var(--text-muted);
+      max-width: 60ch;
+      margin: 0 0 var(--s-5);
+    }
+
+    /* "Before you start" callout */
+    .guide-prereq {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--s-4) var(--s-5);
+      margin: var(--s-5) 0;
+      max-width: 720px;
+    }
+    .guide-prereq-head {
+      display: flex;
+      align-items: center;
+      gap: var(--s-2);
+      margin-bottom: var(--s-3);
+    }
+    .guide-prereq-head svg { color: var(--accent); }
+    .guide-prereq-head h4 {
+      font-family: var(--font-sans);
+      font-size: var(--fs-micro);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin: 0;
+    }
+    .guide-prereq ul {
+      margin: 0;
+      padding-left: var(--s-4);
+      color: var(--text-muted);
+      font-size: var(--fs-small);
+      line-height: 1.7;
+    }
+    .guide-prereq li { margin-bottom: 4px; }
+    .guide-prereq li:last-child { margin-bottom: 0; }
+
+    /* Numbered step list with vertical rail */
+    .step-list {
+      list-style: none;
+      counter-reset: step;
+      padding: 0;
+      margin: var(--s-6) 0 var(--s-5);
+      max-width: 760px;
+    }
+    .step-list > li {
+      counter-increment: step;
+      position: relative;
+      padding: 0 0 var(--s-7) calc(var(--s-6) + var(--s-3));
+      margin-left: 18px;
+      border-left: 2px solid var(--border);
+    }
+    .step-list > li:last-child {
+      border-left-color: transparent;
+      padding-bottom: 0;
+    }
+    .step-list > li::before {
+      content: counter(step);
+      position: absolute;
+      left: -19px;
+      top: -6px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent-ink);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+    [data-theme="dark"] .step-list > li::before {
+      background: var(--brand-200);
+      color: var(--ink-900);
+    }
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: var(--fs-h4);
+      margin: 0 0 var(--s-2);
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .step-body { color: var(--text-muted); margin: 0 0 var(--s-3); max-width: 60ch; }
+    .step-body p { margin: 0 0 var(--s-2); color: var(--text-muted); max-width: 60ch; }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* Code/command block — visually consistent with the existing brew-row on index */
+    .step-cmd {
+      display: flex;
+      align-items: center;
+      gap: var(--s-2);
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      padding: 12px 14px;
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: var(--fs-small);
+      color: var(--text);
+      margin: var(--s-3) 0;
+      max-width: 600px;
+    }
+    .step-cmd .brew-prompt {
+      color: var(--text-subtle);
+      user-select: none;
+      margin-right: 6px;
+    }
+    .step-cmd .brew-cmd {
+      flex: 1;
+      overflow-x: auto;
+      white-space: nowrap;
+      color: var(--text);
+    }
+
+    /* "What you'll see" green-tinted callout */
+    .step-expect {
+      background: color-mix(in srgb, #4caf7d 10%, var(--surface));
+      border: 1px solid color-mix(in srgb, #4caf7d 30%, var(--border));
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      margin: var(--s-3) 0 0;
+      font-size: var(--fs-small);
+      color: var(--text);
+      display: flex;
+      gap: var(--s-3);
+      align-items: flex-start;
+      max-width: 600px;
+    }
+    .step-expect svg { color: #4caf7d; flex-shrink: 0; margin-top: 3px; }
+    .step-expect strong { color: var(--text); font-weight: 600; }
+
+    /* Inline tip / amber callout for fallbacks */
+    .step-tip {
+      background: color-mix(in srgb, #c98a3d 10%, var(--surface));
+      border: 1px solid color-mix(in srgb, #c98a3d 30%, var(--border));
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      margin: var(--s-3) 0 0;
+      font-size: var(--fs-small);
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+    .step-tip strong { color: var(--text); font-weight: 600; }
+
+    /* "How to know it worked" final card per provider */
+    .guide-success {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-md);
+      padding: var(--s-4) var(--s-5);
+      margin: var(--s-5) 0;
+      max-width: 760px;
+    }
+    .guide-success h4 {
+      font-family: var(--font-sans);
+      font-size: var(--fs-small);
+      font-weight: 600;
+      margin: 0 0 var(--s-2);
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .guide-success p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: var(--fs-small);
+      max-width: none;
+    }
+
+    /* Per-provider troubleshooting — reuses .faq-item styling */
+    .guide-trouble {
+      margin-top: var(--s-6);
+      max-width: 760px;
+    }
+    .guide-trouble .feature-kicker { margin-bottom: var(--s-2); }
+
+    /* Final "still stuck?" CTA */
+    .guide-cta {
+      padding: var(--s-9) 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .guide-cta h2 { margin-bottom: var(--s-3); }
+    .guide-cta h2 em { font-style: italic; color: var(--accent); }
+    .guide-cta .btn-row { justify-content: center; margin-top: var(--s-5); }
+
+    /* Back-to-top floating link in nav */
+    .guide-backlink {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: var(--fs-small);
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: var(--s-3);
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .guide-backlink:hover { color: var(--accent); }
+    .guide-backlink svg { width: 14px; height: 14px; }
+
+    @media (max-width: 720px) {
+      .step-list > li { padding-left: calc(var(--s-5) + var(--s-3)); margin-left: 14px; }
+      .step-list > li::before { width: 30px; height: 30px; left: -16px; font-size: 13px; }
+      .guide-section-header { gap: var(--s-3); }
+      .guide-section-icon { width: 48px; height: 48px; }
+      .guide-section-icon img { width: 28px; height: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAV  (mirrors index.html — keeps the brand consistent)
+     ══════════════════════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Tokenomics home">
+      <span class="brand-mark">
+        <img src="assets/Tokenomics-logo.svg" alt="" width="24" height="24" />
+      </span>
+      Tokenomics
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#widgets">Widgets</a>
+      <a href="index.html#install">Install</a>
+      <a href="setup.html" aria-current="page" style="color: var(--text); font-weight: 500;">Setup</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <div style="display:flex; gap: 10px; align-items:center; flex-shrink:0;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Dark</button>
+      <a href="https://github.com/rob-stout/Tokenomics/releases/latest" class="btn btn-primary btn-sm js-download" rel="noopener">Download</a>
+    </div>
+  </div>
+</nav>
+
+
+<main id="main-content">
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO + TABLE OF CONTENTS
+     ══════════════════════════════════════════════════════════ -->
+<header class="guide-hero">
+  <div class="section-wrap">
+    <a href="index.html" class="guide-backlink">
+      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M9.78 4.22a.75.75 0 0 1 0 1.06L7.06 8l2.72 2.72a.75.75 0 1 1-1.06 1.06l-3.25-3.25a.75.75 0 0 1 0-1.06l3.25-3.25a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      Back to home
+    </a>
+
+    <p class="feature-kicker">Setup guide</p>
+    <h1>Connect your <em>platforms</em>.</h1>
+    <p class="lede">
+      Most AI providers run on a shared usage pool — sign in once and Tokenomics tracks everything that account covers, across chat, agents, and creative tools. Pick the platform you use below for plain-English setup steps. No assumptions about what you've installed before.
+    </p>
+
+    <!-- Jump-link grid — platforms first, single-product tools second -->
+    <div class="guide-toc" role="navigation" aria-label="Provider setup links">
+      <a class="guide-toc-item" href="#anthropic">
+        <span class="guide-toc-icon">
+          <img class="icon-light-only" src="assets/icons/Claude-d.blue.svg" alt="" />
+          <img class="icon-dark-only"  src="assets/icons/Claude-white.svg"  alt="" />
+        </span>
+        <span class="guide-toc-text">
+          <span class="guide-toc-name">Anthropic</span>
+          <span class="guide-toc-sub">Claude Chat · Claude Cowork · Claude Code</span>
+        </span>
+      </a>
+      <a class="guide-toc-item" href="#openai">
+        <span class="guide-toc-icon">
+          <img class="icon-light-only" src="assets/icons/Codex-d.blue.svg" alt="" />
+          <img class="icon-dark-only"  src="assets/icons/Codex-white.svg"  alt="" />
+        </span>
+        <span class="guide-toc-text">
+          <span class="guide-toc-name">OpenAI</span>
+          <span class="guide-toc-sub">ChatGPT · Codex · DALL-E · Sora</span>
+        </span>
+      </a>
+      <a class="guide-toc-item" href="#google">
+        <span class="guide-toc-icon">
+          <img class="icon-light-only" src="assets/icons/Gemini-d.blue.svg" alt="" />
+          <img class="icon-dark-only"  src="assets/icons/Gemini-white.svg"  alt="" />
+        </span>
+        <span class="guide-toc-text">
+          <span class="guide-toc-name">Google</span>
+          <span class="guide-toc-sub">Gemini · Nano Banana · Veo</span>
+        </span>
+      </a>
+      <a class="guide-toc-item" href="#copilot">
+        <span class="guide-toc-icon">
+          <img class="icon-light-only" src="assets/icons/Copilot-d.blue.svg" alt="" />
+          <img class="icon-dark-only"  src="assets/icons/Copilot-white.svg"  alt="" />
+        </span>
+        <span class="guide-toc-text">
+          <span class="guide-toc-name">GitHub</span>
+          <span class="guide-toc-sub">Copilot</span>
+        </span>
+      </a>
+      <a class="guide-toc-item" href="#cursor">
+        <span class="guide-toc-icon">
+          <img class="icon-light-only" src="assets/icons/Cursor-d.blue.svg" alt="" />
+          <img class="icon-dark-only"  src="assets/icons/Cursor-white.svg"  alt="" />
+        </span>
+        <span class="guide-toc-text">
+          <span class="guide-toc-name">Cursor</span>
+          <span class="guide-toc-sub">Editor &amp; agents</span>
+        </span>
+      </a>
+      <a class="guide-toc-item" href="#api-key">
+        <span class="guide-toc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <circle cx="9" cy="12" r="4"/>
+            <path d="M13 12h8"/>
+            <path d="M17 12v3"/>
+            <path d="M19 12v2"/>
+          </svg>
+        </span>
+        <span class="guide-toc-text">
+          <span class="guide-toc-name">Stability · Runway · ElevenLabs</span>
+          <span class="guide-toc-sub">Paste an API key</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ANTHROPIC  (Claude Chat · Claude Cowork · Claude Code)
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-section" id="anthropic" aria-labelledby="anthropic-heading">
+  <div class="section-wrap">
+    <div class="guide-section-header">
+      <div class="guide-section-icon">
+        <img class="icon-light-only" src="assets/icons/Claude-d.blue.svg" alt="" />
+        <img class="icon-dark-only"  src="assets/icons/Claude-white.svg"  alt="" />
+      </div>
+      <h2 id="anthropic-heading"><em>Anthropic</em></h2>
+    </div>
+    <p class="what">
+      Anthropic runs three products on a single shared usage pool — <strong>Claude Chat</strong> (claude.ai and the Claude desktop app), <strong>Claude Cowork</strong> (the collaborative agent surface), and <strong>Claude Code</strong> (the developer CLI). Whichever you use, it's the same 5-hour and 7-day windows. Connecting once gets you all three.
+    </p>
+    <p class="what" style="font-size: var(--fs-small); color: var(--text-subtle);">
+      Today Tokenomics reads your auth token from Claude Code's credential file — so the install path below routes through the CLI. We're working on detecting the Claude desktop app's credentials directly so you'll be able to skip the Terminal step entirely.
+    </p>
+
+    <div class="guide-prereq">
+      <div class="guide-prereq-head">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM7.25 4.75a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4zM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </svg>
+        <h4>Before you start</h4>
+      </div>
+      <ul>
+        <li>An Anthropic account on the <strong>Claude Pro plan or higher</strong> — covers Chat, Cowork, and Code (free accounts don't expose usage data).</li>
+        <li>About 5 minutes.</li>
+        <li>Don't worry if you've never opened Terminal — every step explains what to expect.</li>
+      </ul>
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <h3 class="step-title">Open Terminal</h3>
+        <div class="step-body">
+          <p>Press <kbd>⌘ Space</kbd>, type <code>Terminal</code>, and press Return. A black or white window opens with a blinking cursor — that's where you'll paste the next command. Don't worry, you can't break anything by typing here.</p>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Install Claude Code</h3>
+        <div class="step-body">
+          <p>Copy the line below, paste it into Terminal, and press Return. (Cmd-V to paste — just like anywhere else on your Mac.)</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">npm install -g @anthropic-ai/claude-code</span>
+          <button class="copy-btn" data-copy="npm install -g @anthropic-ai/claude-code" aria-label="Copy install command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="step-expect">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          <span><strong>What you'll see:</strong> a short download, then <code>added 1 package</code>. Takes about 30 seconds.</span>
+        </div>
+        <div class="step-tip">
+          <strong>If you see "command not found: npm"</strong> — that means Node.js isn't installed yet. Tokenomics handles this for you: when you click Install in the app, it'll open <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org</a> automatically. Run the .pkg installer, then come back here and try again.
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Sign in</h3>
+        <div class="step-body">
+          <p>Type <code>claude</code> and press Return. Your default browser will open and ask you to sign in to your Anthropic account. Sign in. The browser will say "You can close this tab" when it's done.</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">claude</span>
+          <button class="copy-btn" data-copy="claude" aria-label="Copy login command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="step-expect">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          <span><strong>What you'll see:</strong> Terminal will print "Welcome to Claude Code" and a project picker. You can press <kbd>Ctrl-C</kbd> to exit — your sign-in is saved.</span>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Open Tokenomics</h3>
+        <div class="step-body">
+          <p>If Tokenomics is already running, click its menu bar icon — within ~30 seconds the Claude tab shows two rings: 5-hour usage on the outside, 7-day usage on the inside. If it's not running, launch it from Applications.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="guide-success">
+      <h4>How you'll know it worked</h4>
+      <p>Two rings appear on the Anthropic tab — even at 0% usage, the rings render at 0% rather than spinning forever. The menu bar shows the same rings, miniaturized.</p>
+      <p style="margin-top: var(--s-2);">The rings reflect your <em>whole</em> Anthropic account: anything you do in <strong>Claude Chat</strong>, <strong>Claude Cowork</strong>, and <strong>Claude Code</strong> all counts against the same 5-hour and 7-day pool.</p>
+    </div>
+
+    <div class="guide-trouble">
+      <p class="feature-kicker">Common issues</p>
+      <details class="faq-item">
+        <summary>
+          I only use Claude Chat — do I really have to install Claude Code?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Today, yes — but not for long. Anthropic's three products share one usage pool, so the data Tokenomics needs is the same regardless of which app you use. The current path uses Claude Code's auth token because that's what Tokenomics knows how to read. We're adding direct support for the Claude desktop app's credentials so chat-only users can skip Terminal entirely. Watch the changelog.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          The popover still shows "Anthropic isn't set up yet."
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p>That means Tokenomics can't find the Claude Code credentials file at <code>~/.claude/</code>. Either step 3 didn't complete (the browser closed before it could write the token), or the CLI was installed under a different user. Open Terminal, type <code>claude</code>, finish the browser sign-in all the way through, then click "Refresh" in Tokenomics.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          I'm on the free Claude plan — will Tokenomics work?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p>The CLI installs and signs in fine on free, but Anthropic doesn't expose a usage endpoint for free accounts — so Tokenomics has nothing to read. The Anthropic tab will say "Pro plan required" instead of showing rings. Pro is $20/month; that's the lowest tier with usage data, and it covers all three products in the pool.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          Terminal said "permission denied" on the npm install.
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Some Node installs put the global folder in a place that requires admin rights. Try the same command with <code>sudo</code> at the start — Terminal will ask for your Mac password (you won't see it as you type, that's normal). If that still fails, the cleanest fix is to install Node via the official .pkg from <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org</a> instead of Homebrew.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     GITHUB  (Copilot)
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-section" id="copilot" aria-labelledby="copilot-heading">
+  <div class="section-wrap">
+    <div class="guide-section-header">
+      <div class="guide-section-icon">
+        <img class="icon-light-only" src="assets/icons/Copilot-d.blue.svg" alt="" />
+        <img class="icon-dark-only"  src="assets/icons/Copilot-white.svg"  alt="" />
+      </div>
+      <h2 id="copilot-heading"><em>GitHub</em></h2>
+    </div>
+    <p class="what">
+      GitHub has one AI product Tokenomics tracks: <strong>GitHub Copilot</strong>. To read its usage, Tokenomics talks to GitHub through GitHub's official command-line tool, called <code>gh</code>. You sign in once, and Tokenomics piggybacks on that sign-in.
+    </p>
+
+    <div class="guide-prereq">
+      <div class="guide-prereq-head">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM7.25 4.75a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4zM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+        <h4>Before you start</h4>
+      </div>
+      <ul>
+        <li>A <strong>GitHub Copilot subscription</strong> (Individual, Business, or Enterprise — any tier with premium-request quotas).</li>
+        <li>About 3 minutes.</li>
+      </ul>
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <h3 class="step-title">Install the GitHub CLI</h3>
+        <div class="step-body">
+          <p>Open Terminal (<kbd>⌘ Space</kbd> → <code>Terminal</code>) and paste:</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">brew install gh</span>
+          <button class="copy-btn" data-copy="brew install gh" aria-label="Copy install command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="step-tip">
+          <strong>Don't have Homebrew?</strong> Either install it (one line — <a href="https://brew.sh" target="_blank" rel="noopener">brew.sh</a>) or skip Homebrew entirely and download the official GitHub CLI installer from the <a href="https://github.com/cli/cli/releases/latest" target="_blank" rel="noopener">GitHub CLI releases page</a> — look for the <code>.pkg</code> file. Tokenomics will offer both options when you click Install in the app.
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Sign in to GitHub</h3>
+        <div class="step-body">
+          <p>Run the login command. <code>gh</code> will ask a few short questions in Terminal — pick the defaults (GitHub.com, HTTPS, log in with a web browser).</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">gh auth login</span>
+          <button class="copy-btn" data-copy="gh auth login" aria-label="Copy login command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="step-expect">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          <span><strong>What you'll see:</strong> a one-time code in Terminal. Copy it, your browser opens to <code>github.com/login/device</code>, paste the code, click Authorize. Done.</span>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Open Tokenomics</h3>
+        <div class="step-body">
+          <p>The Copilot tab shows your premium-request usage and your monthly request quota within ~30 seconds. No additional setup needed inside the app.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="guide-success">
+      <h4>How you'll know it worked</h4>
+      <p>The Copilot tab shows two bars: "Premium" (your premium-model request usage) and "Requests" (total monthly requests). If you don't have a paid Copilot plan, the tab says so explicitly instead of spinning.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CURSOR
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-section" id="cursor" aria-labelledby="cursor-heading">
+  <div class="section-wrap">
+    <div class="guide-section-header">
+      <div class="guide-section-icon">
+        <img class="icon-light-only" src="assets/icons/Cursor-d.blue.svg" alt="" />
+        <img class="icon-dark-only"  src="assets/icons/Cursor-white.svg"  alt="" />
+      </div>
+      <h2 id="cursor-heading">Cursor</h2>
+    </div>
+    <p class="what">
+      Cursor is an AI-powered code editor — a single Mac app, not a multi-product platform. You'll never need to touch Terminal for this one. Tokenomics reads its usage directly from Cursor's local config file.
+    </p>
+
+    <div class="guide-prereq">
+      <div class="guide-prereq-head">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM7.25 4.75a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4zM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+        <h4>Before you start</h4>
+      </div>
+      <ul>
+        <li>A <strong>Cursor Pro or Business plan</strong> (free plans don't expose usage data).</li>
+        <li>About 2 minutes.</li>
+      </ul>
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <h3 class="step-title">Install Cursor</h3>
+        <div class="step-body">
+          <p>Two options — pick whichever you prefer:</p>
+          <p><strong>Option 1 (recommended for non-technical users):</strong> download Cursor directly from <a href="https://www.cursor.com/downloads" target="_blank" rel="noopener">cursor.com/downloads</a>. Open the .dmg, drag Cursor to Applications. Done.</p>
+          <p><strong>Option 2 (if you already use Homebrew):</strong> open Terminal and run <code>brew install --cask cursor</code>.</p>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Sign in to Cursor</h3>
+        <div class="step-body">
+          <p>Open the Cursor app. The first time you launch it, Cursor walks you through signing in with your Cursor account (or with GitHub / Google). Complete the sign-in. You don't need to write any code yet — just signing in is enough for Tokenomics.</p>
+        </div>
+        <div class="step-expect">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          <span><strong>What you'll see:</strong> Cursor's main editor window with your account name in the bottom-left corner.</span>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Open Tokenomics</h3>
+        <div class="step-body">
+          <p>The Cursor tab populates within ~30 seconds. There's no additional CLI step — Tokenomics reads Cursor's local config the moment you've signed in to the app.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="guide-success">
+      <h4>How you'll know it worked</h4>
+      <p>The Cursor tab shows two bars — "Premium" (your premium-model usage) and "Requests" (total monthly requests). If you signed in with the wrong account, sign out and back in inside Cursor; Tokenomics picks up the change automatically.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     OPENAI  (ChatGPT · Codex · DALL-E · Sora)
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-section" id="openai" aria-labelledby="openai-heading">
+  <div class="section-wrap">
+    <div class="guide-section-header">
+      <div class="guide-section-icon">
+        <img class="icon-light-only" src="assets/icons/Codex-d.blue.svg" alt="" />
+        <img class="icon-dark-only"  src="assets/icons/Codex-white.svg"  alt="" />
+      </div>
+      <h2 id="openai-heading"><em>OpenAI</em></h2>
+    </div>
+    <p class="what">
+      OpenAI runs four products on a single shared usage pool — <strong>ChatGPT</strong> (web and desktop app), <strong>Codex</strong> (the CLI coding agent), <strong>DALL-E</strong> (image generation), and <strong>Sora</strong> (video). Whatever you use, it's the same 5-hour window and context-token budget. Connecting once gets you all four.
+    </p>
+    <p class="what" style="font-size: var(--fs-small); color: var(--text-subtle);">
+      Today Tokenomics reads your auth token from the Codex CLI's credential file. We're working on detecting the ChatGPT desktop app's credentials directly so non-coders can skip Terminal entirely.
+    </p>
+
+    <div class="guide-prereq">
+      <div class="guide-prereq-head">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM7.25 4.75a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4zM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+        <h4>Before you start</h4>
+      </div>
+      <ul>
+        <li>A <strong>ChatGPT Plus, Pro, Business, or Enterprise</strong> account — covers all four products in the pool.</li>
+        <li>About 5 minutes.</li>
+        <li>If you don't have Node.js yet, the install will guide you to <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org</a> first.</li>
+      </ul>
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <h3 class="step-title">Install the Codex CLI</h3>
+        <div class="step-body">
+          <p>Codex is OpenAI's command-line coding agent — and it's the auth path Tokenomics currently uses for all four products in the pool. Open Terminal and paste:</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">npm install -g @openai/codex</span>
+          <button class="copy-btn" data-copy="npm install -g @openai/codex" aria-label="Copy install command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="step-expect">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          <span><strong>What you'll see:</strong> a short download log, ending in <code>added 1 package</code>.</span>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Sign in</h3>
+        <div class="step-body">
+          <p>Run the login command. Your browser opens, signs you into your ChatGPT account, then redirects back. Terminal will say you're signed in.</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">codex login</span>
+          <button class="copy-btn" data-copy="codex login" aria-label="Copy login command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Open Tokenomics</h3>
+        <div class="step-body">
+          <p>The OpenAI tab shows two bars — "5-hour" usage and "Context" (your remaining session-token budget) within ~30 seconds.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="guide-success">
+      <h4>How you'll know it worked</h4>
+      <p>The OpenAI tab shows your 5-hour usage and remaining context-token budget. The numbers reflect your whole OpenAI account — anything you do in <strong>ChatGPT</strong>, <strong>Codex</strong>, <strong>DALL-E</strong>, and <strong>Sora</strong> all counts against the same pool.</p>
+    </div>
+
+    <div class="guide-trouble">
+      <p class="feature-kicker">Common issues</p>
+      <details class="faq-item">
+        <summary>
+          I only use ChatGPT — do I really have to install Codex?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p>Today, yes — but only because Tokenomics currently reads your auth token from the Codex CLI's credential file. Once that auth is in place, the data covers your entire OpenAI account: chat, image, and video usage all included. We're working on detecting the ChatGPT desktop app's credentials directly so the CLI step won't be required for chat-only users.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     GOOGLE  (Gemini · Nano Banana · Veo)
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-section" id="google" aria-labelledby="google-heading">
+  <div class="section-wrap">
+    <div class="guide-section-header">
+      <div class="guide-section-icon">
+        <img class="icon-light-only" src="assets/icons/Gemini-d.blue.svg" alt="" />
+        <img class="icon-dark-only"  src="assets/icons/Gemini-white.svg"  alt="" />
+      </div>
+      <h2 id="google-heading"><em>Google</em></h2>
+    </div>
+    <p class="what">
+      Google AI runs three products on a shared usage pool — <strong>Gemini</strong> (chat and the Gemini CLI), <strong>Nano Banana</strong> (image generation), and <strong>Veo</strong> (video). Sign in once and Tokenomics tracks your usage across all three.
+    </p>
+    <p class="what" style="font-size: var(--fs-small); color: var(--text-subtle);">
+      Today Tokenomics reads your auth token from the Gemini CLI's credential file. Direct desktop-app auth is on the roadmap.
+    </p>
+
+    <div class="guide-prereq">
+      <div class="guide-prereq-head">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM7.25 4.75a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4zM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+        <h4>Before you start</h4>
+      </div>
+      <ul>
+        <li>A Google account on <strong>Gemini Code Assist</strong> (free works, but limits vary by plan — pick your tier in Tokenomics → Settings → Google).</li>
+        <li>About 5 minutes.</li>
+      </ul>
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <h3 class="step-title">Install Gemini CLI</h3>
+        <div class="step-body">
+          <p>Open Terminal and paste:</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">npm install -g @google/gemini-cli</span>
+          <button class="copy-btn" data-copy="npm install -g @google/gemini-cli" aria-label="Copy install command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Sign in</h3>
+        <div class="step-body">
+          <p>Run the login command — your browser opens, you pick your Google account, grant access, and the browser closes itself.</p>
+        </div>
+        <div class="step-cmd">
+          <span class="brew-prompt">$</span>
+          <span class="brew-cmd">gemini login</span>
+          <button class="copy-btn" data-copy="gemini login" aria-label="Copy login command">
+            <svg class="copy-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2 0v8h8V2H6zM2 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h-2v2H2V6h2V4H2z"/></svg>
+            Copy
+          </button>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Pick your plan in Tokenomics</h3>
+        <div class="step-body">
+          <p>Open Tokenomics → click the gear icon → Providers → Google → set your plan (Free, Standard, or Enterprise). This tells Tokenomics which limits to compare your usage against. The right plan = accurate rings.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="guide-success">
+      <h4>How you'll know it worked</h4>
+      <p>The Google tab shows your token usage and request count. The numbers reflect your whole Google AI account — anything you do in <strong>Gemini</strong>, <strong>Nano Banana</strong>, and <strong>Veo</strong> all counts against the same pool.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     API-KEY PROVIDERS
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-section" id="api-key" aria-labelledby="api-key-heading">
+  <div class="section-wrap">
+    <div class="guide-section-header">
+      <div class="guide-section-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="9" cy="12" r="4"/>
+          <path d="M13 12h8"/>
+          <path d="M17 12v3"/>
+          <path d="M19 12v2"/>
+        </svg>
+      </div>
+      <h2 id="api-key-heading">API-key <em>providers</em></h2>
+    </div>
+    <p class="what">
+      Stability AI, Runway, and ElevenLabs don't have CLIs — you connect them by pasting an API key into Tokenomics. The pattern is the same for all three.
+    </p>
+
+    <div class="guide-prereq">
+      <div class="guide-prereq-head">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM7.25 4.75a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4zM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+        <h4>Before you start</h4>
+      </div>
+      <ul>
+        <li>A paid account with the provider (free tiers usually don't expose a usage endpoint).</li>
+        <li>About 2 minutes per provider.</li>
+      </ul>
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <h3 class="step-title">Get an API key</h3>
+        <div class="step-body">
+          <p>Sign in to the provider's website and look for "API keys" in account settings. Direct links:</p>
+          <ul style="color: var(--text-muted); font-size: var(--fs-small); padding-left: var(--s-4);">
+            <li><a href="https://platform.stability.ai/account/keys" target="_blank" rel="noopener">Stability AI → Account → API Keys</a></li>
+            <li><a href="https://app.runwayml.com/account" target="_blank" rel="noopener">Runway → Account Settings</a></li>
+            <li><a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener">ElevenLabs → Settings → API Keys</a></li>
+          </ul>
+          <p>Click "Create new key" (or similar). Give it a name like "Tokenomics". Copy the key — it's a long string of letters and numbers. Keep it private; treat it like a password.</p>
+        </div>
+      </li>
+
+      <li>
+        <h3 class="step-title">Paste it into Tokenomics</h3>
+        <div class="step-body">
+          <p>In Tokenomics, click the gear icon → Providers → pick the provider → "Paste API key". Paste, click Save.</p>
+        </div>
+        <div class="step-tip">
+          <strong>Where the key is stored:</strong> macOS Keychain on your computer. Tokenomics never sends it anywhere except to the provider you chose. You can revoke or rotate the key any time on the provider's website — Tokenomics will surface an error and prompt you to re-enter.
+        </div>
+      </li>
+    </ol>
+
+    <div class="guide-success">
+      <h4>How you'll know it worked</h4>
+      <p>The provider's tab shows credits remaining, monthly usage, or character count (depending on the provider). If the key is wrong, you'll see "Invalid API key" rather than a spinner.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     STILL STUCK CTA
+     ══════════════════════════════════════════════════════════ -->
+<section class="guide-cta" aria-labelledby="cta-heading">
+  <div class="section-wrap">
+    <p class="feature-kicker">Still stuck?</p>
+    <h2 id="cta-heading">Open an <em>issue</em> on GitHub.</h2>
+    <p style="color: var(--text-muted); max-width: 56ch; margin: 0 auto;">
+      If something didn't work or a step needs better wording, the fastest fix is to tell us. Most setup bugs get patched in the next release.
+    </p>
+    <div class="btn-row">
+      <a href="https://github.com/rob-stout/Tokenomics/issues/new" class="btn btn-primary" target="_blank" rel="noopener">
+        Report a setup issue
+      </a>
+      <a href="index.html#install" class="btn btn-secondary">
+        Back to install
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER  (mirrors index.html)
+     ══════════════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-tagline">Know where you <em>stand</em>.</p>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="setup.html">Setup</a>
+      <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/rob-stout/Tokenomics/releases" target="_blank" rel="noopener">Changelog</a>
+      <a href="license.html">License</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+
+    <div class="footer-meta">
+      <span class="pill dot js-version" style="font-size: 11px; padding: 2px 8px;">v2.8.0 · macOS 14+</span>
+      <span class="sep">·</span>
+      <span>&copy; 2026 Acorn Designs, LLC · Created by Rob Stout</span>
+      <span class="sep">·</span>
+      <span>Not affiliated with any AI service provider displayed in the app.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="app.js"></script>
+</body>
+</html>
