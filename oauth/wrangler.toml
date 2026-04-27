@@ -1,0 +1,12 @@
+name = "tokenomics-github-oauth"
+main = "github-worker.js"
+compatibility_date = "2026-04-01"
+
+# Route the Worker at trytokenomics.com/oauth/github* — set up the route in the
+# Cloudflare dashboard (Workers > Routes) or via:
+#   wrangler deploy --route 'trytokenomics.com/oauth/github*'
+#
+# Required secrets (set via `wrangler secret put GITHUB_OAUTH_CLIENT_ID` and
+# `wrangler secret put GITHUB_OAUTH_CLIENT_SECRET`):
+#   GITHUB_OAUTH_CLIENT_ID      — from github.com/settings/applications/new
+#   GITHUB_OAUTH_CLIENT_SECRET  — from the same OAuth App settings page
