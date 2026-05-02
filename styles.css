@@ -3,7 +3,7 @@
    trytokenomics.com
 
    STRUCTURE:
-   1. DESIGN SYSTEM CORE (verbatim from design-system.html)
+   1. DESIGN SYSTEM CORE (verbatim from design-system-v3.html)
       — Tokens, base, layout, nav, typography, buttons,
         pills, inputs, widgets, cards
    2. LANDING PAGE EXTENSIONS
@@ -15,7 +15,7 @@
 
 /* ════════════════════════════════════════════════════════════
    PART 1 — DESIGN SYSTEM CORE
-   (Source of truth: design-system.html — do not rename tokens)
+   (Source of truth: design-system-v3.html / design-system.md — do not rename tokens)
    ════════════════════════════════════════════════════════════ */
 
 /* ---------- TOKENS ---------- */
