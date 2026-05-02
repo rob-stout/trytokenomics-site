@@ -280,6 +280,8 @@
 
   .btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
   .btn-secondary:hover { background: var(--surface-2); }
+  .btn-secondary:disabled { color: rgba(14,51,77,0.80); border-color: var(--border); cursor: default; }
+  [data-theme="dark"] .btn-secondary:disabled { color: rgba(230,238,246,0.80); border-color: var(--border); }
 
   .btn-ghost { background: transparent; color: var(--text-muted); padding: 10px 14px;}
   .btn-ghost:hover { color: var(--text); background: var(--surface-2); }

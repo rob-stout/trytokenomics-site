@@ -718,6 +718,13 @@ Five variants. Hover surface is **always `--surface-2`** (off-white tint) for un
 - HTML: `.btn.btn-secondary` — transparent fill, `--border-strong` 1px, hovers to `--surface-2`
 - SwiftUI: similar to Primary but `.background(Tokens.Color.surface2.opacity(isHover ? 1 : 0))` and `.overlay(Capsule().strokeBorder(Tokens.Color.borderStrong, lineWidth: 1))`
 
+**Disabled state** (e.g. "Continuing…" while a step auto-advances):
+- Text: `--text` at **0.80 alpha** (heavier than `--text-muted` at 0.64 — keeps the label clearly legible while signalling inactivity)
+- Border: drops from `--border-strong` (0.22) to `--border` (0.12)
+- No background, no compound `.opacity()` on the whole button (which would dim text + border equally and read too dark)
+- HTML: `.btn-secondary:disabled { color: rgba(14,51,77,0.80); border-color: var(--border); cursor: default; }`
+- SwiftUI: `text.opacity(0.80)` foreground when `@Environment(\.isEnabled) == false`; `border` instead of `borderStrong` for the capsule outline
+
 #### Ghost
 
 - HTML: `.btn.btn-ghost` — transparent, `--text-muted`, smaller padding (10px 14px), hovers to `--surface-2`
