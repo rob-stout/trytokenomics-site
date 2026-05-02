@@ -1,6 +1,5 @@
 # Tokenomics — Landing Page Copy v2
-# Revised to editorial voice per design-system.html principles
-# Round 1 copy preserved at copy.md
+# Revised to editorial voice per design-system-v3.html principles
 
 ---
 
