@@ -1832,6 +1832,23 @@
         </div>
       </div>
 
+      <h3 style="margin-top: var(--s-6);">Footer pairing</h3>
+      <div class="card">
+        <p style="font-size: var(--fs-small);">A window footer pairs a recoverable action (left) with a forward action (right). The right slot's weight should match what the left slot is doing — otherwise one side dominates. Both pills together = balanced & bold. A bare text-link Back next to a primary pill reads as "you must press this" and is forbidden.</p>
+        <table class="motion" style="margin-top: var(--s-4);">
+          <thead>
+            <tr><th>Left</th><th>Right</th><th>Use case</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>.btn-primary</code></td><td><code>.btn-secondary</code></td><td>Two genuine alternatives, both worth pursuing. Both bold, balanced.</td></tr>
+            <tr><td><code>.btn-secondary</code></td><td><code>.btn-primary</code></td><td>One forward CTA + one alternative. Same balance, reversed by emphasis.</td></tr>
+            <tr><td>Text-link <code>← Back</code></td><td><code>.btn-secondary</code></td><td>The forward action is real but not the screen's main event (chooser, install previews). Asymmetry is intentional — secondary is the only window-level affordance.</td></tr>
+            <tr><td>Text-link <code>← Back</code></td><td><code>.btn-ghost</code> or text-link</td><td>The forward action is optional/dismissive ("Skip", "Maybe later"). Both sides feel light; user isn't pushed.</td></tr>
+            <tr><td>Text-link <code>← Back</code></td><td><code>.btn-primary</code></td><td><strong>Don't.</strong> Use Secondary on the right, or upgrade Back to a Ghost button.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <h3 style="margin-top: var(--s-6);">Progress bars</h3>
       <div class="card">
         <p style="font-size: var(--fs-small);">Marketing-page bars match the in-app widget bars: 4px height, pill radius, optional pace dot. <strong>Pace dot is only rendered when <code>0.01 &lt; pace &lt; 0.99</code></strong> (i.e. between 1% and 99%) — at the extremes it merges with the cap and adds visual noise. This rule comes from <code>WidgetProgressBar</code> in <code>TokenomicsWidgetEntryView.swift</code>.</p>
