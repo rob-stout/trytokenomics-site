@@ -787,6 +787,20 @@ Three size variants apply to **any** of the variants above (`.btn-primary`, `.bt
 
 `.btn-lg` is reserved for hero CTAs (Welcome's "Get started"). `.btn-sm` is for compact inline contexts (helper "Skip" links, "← Back" in tight footers). The default `.btn` covers everything else.
 
+#### Footer pairing — picking secondary vs ghost vs text-link
+
+A window footer pairs a recoverable action (left) with a forward action (right). The right slot's weight should match what the left slot is doing — otherwise one side dominates.
+
+| Left slot | Right slot | Use case |
+|---|---|---|
+| Primary `.btn-primary` | Secondary `.btn-secondary` | Two genuine alternatives, both worth pursuing. Both bold, balanced. (Welcome: "Get started" / "Skip"; Done: "Add another" / "I'm all set") |
+| Secondary `.btn-secondary` | Primary `.btn-primary` | One forward CTA + one alternative. Same balance, just reversed by emphasis. |
+| Text-link `← Back` | Secondary `.btn-secondary` | The forward action is real but not the screen's main event. Examples: chooser ("I'm all set" exits the flow but per-row CTAs are the primary actions); install previews ("Continue" advances but sign-in happens externally). The bordered pill on the right reads heavier than the back link, but that asymmetry is intentional — the secondary action is the only window-level affordance. |
+| Text-link `← Back` | Ghost `.btn-ghost` or text-link | The forward action is optional/dismissive ("Skip", "Maybe later", "Not now"). Both sides feel light; user isn't being pushed. |
+| Text-link `← Back` | Primary `.btn-primary` | Don't. A primary pill paired with a bare text-link reads as "you must press this" — use Secondary for the right slot, or upgrade Back to a Ghost button if you really want a primary CTA. |
+
+**Why two text-link/secondary patterns coexist:** the chooser and external-step previews keep "I'm all set" / "Continue" as `.btn-secondary` even though they sit next to a text-link Back. That's because those buttons are the only window-level forward affordance — downgrading them to Ghost would leave the screen with no visible call-to-action. When the screen has both a real Primary AND a tertiary "leave" action, use Ghost for the leave (Connected state's "I'm all set — show my usage" is the exception that proves the rule: there it's a Ghost because "Add another provider" is the screen's Primary).
+
 ### Pills & badges
 
 - HTML: `.pill` — accent fill at 14% opacity + 30% border + accent text color
