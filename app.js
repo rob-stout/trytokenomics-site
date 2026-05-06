@@ -273,35 +273,25 @@
     }, HOLD);
   }
 
-  // ── Latest release — version badge + download links ──────
-  // Rewrites .js-version pills and .js-download hrefs from the GitHub API.
-  // Falls back silently to the hardcoded values if the API call fails.
+  // ── Latest release — version badge ───────────────────────
+  // Updates .js-version pills from the GitHub API. Download links go through
+  // /download/dmg/latest so the Cloudflare Pages Function can count them and
+  // redirect to the right release — no client-side href rewrite needed.
 
   (function fetchLatestRelease() {
-    var badges    = document.querySelectorAll('.js-version');
-    var downloads = document.querySelectorAll('.js-download');
-    if (!badges.length && !downloads.length) return;
+    var badges = document.querySelectorAll('.js-version');
+    if (!badges.length) return;
 
     fetch('https://api.github.com/repos/rob-stout/Tokenomics/releases/latest', {
       headers: { 'Accept': 'application/vnd.github+json' }
     })
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
-        if (!data) return;
-        if (data.tag_name) {
-          var tag = data.tag_name.replace(/^v?/, 'v');
-          badges.forEach(function (el) {
-            el.textContent = tag + ' · macOS 14+';
-          });
-        }
-        var dmg = (data.assets || []).find(function (a) {
-          return a.name && /\.dmg$/i.test(a.name);
+        if (!data || !data.tag_name) return;
+        var tag = data.tag_name.replace(/^v?/, 'v');
+        badges.forEach(function (el) {
+          el.textContent = tag + ' · macOS 14+';
         });
-        if (dmg && dmg.browser_download_url) {
-          downloads.forEach(function (el) {
-            el.setAttribute('href', dmg.browser_download_url);
-          });
-        }
       })
       .catch(function () { /* keep hardcoded fallback */ });
   })();

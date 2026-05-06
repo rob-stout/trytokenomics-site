@@ -247,7 +247,7 @@
     <p class="feature-kicker">Privacy Policy</p>
     <h1>What Tokenomics <em>touches</em>, and what it doesn't.</h1>
     <p class="lede" style="font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: var(--s-4) 0 0;">
-      Short version: Tokenomics reads usage data from the AI tools you already pay for, holds it in memory while the app is open, and never sends anything to a server we control. No analytics. No third-party SDKs. No tracking.
+      Short version: the Tokenomics app reads usage data from the AI tools you already pay for, holds it in memory while the app is open, and never sends anything to a server we control. No analytics, no third-party SDKs, no tracking inside the app. The marketing website you're reading does count anonymous download requests — details below.
     </p>
 
     <div class="doc-meta">
@@ -351,11 +351,32 @@
     </div>
 
 
-    <h2>What Tokenomics does NOT do</h2>
+    <h2>About this website</h2>
+    <p>
+      The Tokenomics app and the marketing website at <code>trytokenomics.com</code> are separate things, and they have different (but both narrow) data footprints. Everything above this line is about the <strong>app</strong>. Everything in this section is about the <strong>website</strong>.
+    </p>
+    <p>
+      The site is hosted on Cloudflare Pages. Cloudflare provides standard server-side request analytics — visit counts, top pages, country breakdown — drawn from request headers as the page is served. There is <strong>no client-side tracking script</strong>, no cookies, no fingerprinting, no third-party SDKs loaded in the page.
+    </p>
+    <p>
+      We also count download requests so we can estimate how many people are using Tokenomics. When you click a download button (or run <code>brew install rob-stout/tap/tokenomics</code>), the request goes through <code>trytokenomics.com/download/...</code>, which records a single row before redirecting you to the actual <code>.dmg</code> file on GitHub. The row contains:
+    </p>
+    <ul>
+      <li>Timestamp (UTC)</li>
+      <li>Version requested (e.g. <code>2.8.7</code>)</li>
+      <li>Channel — <code>web</code>, <code>brew</code>, or <code>other</code> (a coarse bucket from the request's <code>User-Agent</code>; the User-Agent string itself is not stored)</li>
+      <li>Country code (ISO-2, from Cloudflare's <code>CF-IPCountry</code> header)</li>
+    </ul>
+    <p>
+      <strong>What we do not store:</strong> IP addresses, User-Agent strings, cookies, referrers, anything that could identify you. The download counter is one anonymous row per download. Aggregates live in a Cloudflare D1 database that only the author can query.
+    </p>
+
+
+    <h2>What the Tokenomics app does NOT do</h2>
     <ul class="doc-not-list">
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
-        <span>No analytics or telemetry of any kind</span>
+        <span>No analytics or telemetry of any kind from inside the app</span>
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
