@@ -1,0 +1,20 @@
+# Wrangler config for the trytokenomics.com Pages site.
+#
+# Pages Functions auto-deploy when you push to the connected branch — this
+# file exists so `wrangler pages dev` and `wrangler d1 execute` work locally
+# and so the D1 binding name is recorded alongside the code.
+#
+# The actual D1 binding is created in the Cloudflare dashboard:
+#   Pages → trytokenomics-site → Settings → Functions → D1 database bindings
+#   Variable name: DB
+#   D1 database:   tokenomics-downloads
+
+name = "trytokenomics-site"
+pages_build_output_dir = "."
+compatibility_date = "2026-05-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tokenomics-downloads"
+# database_id is filled in after `wrangler d1 create tokenomics-downloads`
+database_id = "104add1b-a3da-4e36-90f6-1d2a44236543"
