@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /design-system-v3.html
+
+Sitemap: https://trytokenomics.com/sitemap.xml
