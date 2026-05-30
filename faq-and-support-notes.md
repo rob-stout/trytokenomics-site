@@ -133,3 +133,61 @@ to specific explainers — e.g., the `estimated` indicator could open
 
 Until then, the popup carries no such links; we don't want dead anchors
 in a shipped UI.
+
+---
+
+## Why some tabs show two windows and others show one
+
+Added 2026-05-18 after deciding the brand-vs-pool aggregation model. Drafts
+below — not finished copy.
+
+### "Why does my ChatGPT tab show two progress bars?"
+
+ChatGPT and Codex CLI are two different products that share an OpenAI
+account, but they have **separate usage limits**. ChatGPT consumer chat
+runs on its own 3-hour and weekly windows; Codex CLI has its own weekly
+quota tied to your ChatGPT subscription tier. Same login, different
+meters.
+
+So when you check "ChatGPT" in setup, Tokenomics tracks both — but they
+have to render separately, because OpenAI doesn't return one combined
+view. The two windows under the ChatGPT tab let you see at a glance which
+limit you're closer to.
+
+The same is true for **Gemini**: gemini.google.com chat and the Gemini
+CLI share a Google account but track usage independently.
+
+### "Why does Anthropic show only one window when others show two?"
+
+Anthropic is the exception. Claude on claude.ai, the Claude desktop app,
+and Claude Code all count against the **same 5-hour and 7-day windows**
+in your Anthropic subscription. One window covers everything, so the
+Anthropic tab only needs one progress bar (or two, for the 5h + 7d
+split).
+
+OpenAI and Google structure their products differently — same account,
+separate meters per surface.
+
+### "Why does my widget show OpenAI twice?"
+
+Same reason. Widgets render each usage pool as its own row because the
+small format doesn't have room to nest. If you have ChatGPT and Codex CLI
+both connected, the OpenAI brand contributes two rows. On the small
+widget, you pick exactly one pool to display — open the widget's edit
+panel and choose between "ChatGPT" or "Codex CLI".
+
+> **Migration note for users upgrading from earlier versions:** if your
+> small widget used to be set to "OpenAI" or "Google AI", it now maps to
+> "Codex CLI" or "Gemini CLI" respectively — that's what those entries
+> have actually been tracking, since chat readers for those brands didn't
+> exist before. If you want the chat pool instead, re-select it from the
+> edit panel.
+
+---
+
+## Copy voice reminder
+
+These three new entries should match the rest of the page — editorial,
+not breezy. The framing here ("Anthropic is the exception") matches the
+"every shipping ChatGPT tracker has the same constraint" framing
+elsewhere on the page: name the limit, move on, don't apologize.
