@@ -6,17 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://trytokenomics.com/setup.html</loc>
+    <loc>https://trytokenomics.com/setup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://trytokenomics.com/privacy.html</loc>
+    <loc>https://trytokenomics.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://trytokenomics.com/license.html</loc>
+    <loc>https://trytokenomics.com/license</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
