@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — Tokenomics</title>
-  <meta name="description" content="Tokenomics reads your AI usage from credentials your tools already store locally — no analytics, no telemetry, no third-party SDKs. Here's exactly what we touch and what we don't." />
+  <meta name="description" content="Tokenomics reads your AI usage from credentials your tools already store locally — no analytics, no telemetry, no tracking. Here's exactly what we touch and what we don't." />
   <meta property="og:title" content="Privacy Policy — Tokenomics" />
-  <meta property="og:description" content="No analytics. No telemetry. No third-party SDKs. Here's everything Tokenomics reads, and everywhere it sends data — both very short lists." />
+  <meta property="og:description" content="No analytics. No telemetry. No tracking. Here's everything Tokenomics reads, and everywhere it sends data — both very short lists." />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:url" content="https://trytokenomics.com/privacy" />
@@ -249,11 +249,11 @@
     <p class="feature-kicker">Privacy Policy</p>
     <h1>What Tokenomics <em>touches</em>, and what it doesn't.</h1>
     <p class="lede" style="font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: var(--s-4) 0 0;">
-      Short version: the Tokenomics app reads usage data from the AI tools you already pay for, holds it in memory while the app is open, and never sends anything to a server we control. No analytics, no third-party SDKs, no tracking inside the app. The marketing website you're reading does count anonymous download requests — details below.
-    </p>
+  Short version: Tokenomics shows your AI usage using the sign-ins you already have. We never receive it. The Mac app, the browser extension, and Tokenomics for Safari all talk only to the AI services you use and to your own Mac. No analytics, no telemetry, no tracking inside any of them. The marketing website you're reading does count anonymous download requests; details below.
+</p>
 
     <div class="doc-meta">
-      <span><strong>Effective date:</strong> April 21, 2026</span>
+      <span><strong>Effective date:</strong> October 27, 2026</span>
       <span><strong>Owned by:</strong> Acorn Designs, LLC</span>
       <span><strong>Created by:</strong> Rob Stout</span>
       <span><strong>Contact:</strong> <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a></span>
@@ -268,7 +268,23 @@
 <section class="doc-body">
   <div class="section-wrap">
 
-    <h2>What Tokenomics accesses</h2>
+    <h2>What this policy covers</h2>
+    <p>This policy is published at <a href="https://trytokenomics.com/privacy">https://trytokenomics.com/privacy</a>. It covers everything called Tokenomics:</p>
+    <ul>
+      <li><strong>The Tokenomics Mac app</strong> (menu bar app and desktop widgets), downloaded from this website, GitHub, or Homebrew.</li>
+      <li><strong>The Tokenomics browser extension</strong> for Google Chrome and Microsoft Edge (and other Chromium browsers that can install from those stores).</li>
+      <li><strong>Tokenomics for Safari</strong>, a Mac App Store app that contains a Safari extension.</li>
+      <li><strong>This website</strong>, trytokenomics.com.</li>
+    </ul>
+    <p>
+      The key point is the same for all of them: <strong>Tokenomics does not send your data to the author or to any server the author controls.</strong> The app, the extension, and the Safari app have no analytics, no telemetry, no crash reporting, and no accounts. They connect only to the AI services you already use (to ask for your own usage numbers) and, on your computer, to each other.
+    </p>
+    <p>
+      Tokenomics is an independent tool. It is not affiliated with, endorsed by, or sponsored by any AI service it works with. Names such as Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, and Leonardo are trademarks of their owners and are used only to say which services Tokenomics works with.
+    </p>
+
+
+    <h2>Mac app: what it accesses</h2>
     <p>
       Tokenomics reads authentication credentials stored locally on your Mac by the AI tools you have installed. It never asks you to paste credentials it could have read automatically; it only asks for an API key for providers that don't have a CLI.
     </p>
@@ -281,10 +297,11 @@
       <li><strong>Stability AI, Runway, ElevenLabs</strong> — API keys you paste into Tokenomics, stored in the macOS Keychain</li>
     </ul>
     <p>
-      These credentials are read into memory as needed and are never written to disk by Tokenomics, logged, or transmitted anywhere other than to the provider endpoints below.
+      These credentials are read into memory as needed. The Mac app does not write them anywhere itself, log them, or send them anywhere other than the provider endpoints below.
     </p>
+    <!-- DECISION NEEDED: Draft says VERIFY: confirm the Mac provider list and the "Midjourney, Suno, and Udio are placeholder tiles" sentence below still match the shipped app (the extension and web companion now read Midjourney). If the Mac app now reads web-sourced data from the extension, say so in the Mac-app/extension link text. -->
 
-    <h2>Network calls Tokenomics makes</h2>
+    <h2>Mac app: network calls</h2>
     <p>
       Tokenomics only makes outbound API calls to the provider endpoints that own your usage data:
     </p>
@@ -352,14 +369,153 @@
       </table>
     </div>
 
+    <p>
+      Like any internet request, the services Tokenomics contacts (the AI providers above, and GitHub for update checks) can see your IP address when your Mac connects to them. Tokenomics does not add anything to that beyond what the request itself needs.
+    </p>
+
+
+    <h2>Browser extension (Chrome and Edge)</h2>
+    <p>
+      The Tokenomics extension shows your usage for AI services you're signed in to, in a toolbar popup and a small badge. It runs in your browser. <strong>It does not send anything to the author.</strong> Its only network requests go to the AI services listed below, to ask for your own account's usage.
+    </p>
+
+    <h3>How it gets your usage</h3>
+    <p>
+      You must already be signed in to each AI service in your browser. The extension then uses your existing sign-in, the same way the service's own website does, to ask that service how much of your plan you've used. It does not ask for your password and has no account of its own.
+    </p>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Service</th>
+            <th>What the extension requests (your account only)</th>
+            <th style="width: 30%;">Sign-in it uses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Claude (claude.ai)</td>
+            <td><code>claude.ai/api/organizations</code> and <code>/organizations/&lt;id&gt;/usage</code></td>
+            <td>Your browser's existing session cookie</td>
+          </tr>
+          <tr>
+            <td>ChatGPT (chatgpt.com)</td>
+            <td><code>/api/auth/session</code>, <code>/backend-api/me</code>, <code>/backend-api/wham/usage</code></td>
+            <td>Your session cookie, and a short-lived access token that chatgpt.com returns to you (held in memory for the request, not saved)</td>
+          </tr>
+          <tr>
+            <td>Midjourney</td>
+            <td><code>www.midjourney.com/api/user-account</code></td>
+            <td>Your session cookie</td>
+          </tr>
+          <tr>
+            <td>Gemini (gemini.google.com)</td>
+            <td>One usage request made from inside the open Gemini page, to the page's own <code>/_/BardChatUi/data/batchexecute</code> endpoint</td>
+            <td>The Gemini page's own session values, used inside that page; they are not copied out</td>
+          </tr>
+          <tr>
+            <td>ElevenLabs</td>
+            <td><code>api.us.elevenlabs.io/v1/user/subscription</code></td>
+            <td>An access token the extension reads from the ElevenLabs site's own browser storage while you're signed in, and saves (see below)</td>
+          </tr>
+          <tr>
+            <td>Grok (grok.com)</td>
+            <td><code>grok.com/rest/rate-limits</code></td>
+            <td>Your session cookie</td>
+          </tr>
+          <tr>
+            <td>Perplexity</td>
+            <td><code>www.perplexity.ai/rest/rate-limit/all</code></td>
+            <td>Your session cookie</td>
+          </tr>
+          <tr>
+            <td>Leonardo</td>
+            <td><code>api.leonardo.ai/v1/graphql</code></td>
+            <td>An access token and account ID that the extension notices on Leonardo's own requests while the Leonardo site is open, and saves (see below)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>What the extension stores, and where</h3>
+    <p>
+      The extension keeps the following in your browser's local extension storage on your computer. It is not synced to your Google or Microsoft account by the extension, and it is not sent to the author.
+    </p>
+    <ul>
+      <li><strong>Usage readings</strong>: percentages, reset times, and plan name for each service.</li>
+      <li><strong>Settings</strong>: which service is pinned, which tab you last viewed, which services are shown, and the ChatGPT plan you chose (if you override it).</li>
+      <li><strong>A ChatGPT message log</strong>: used only as a backup estimate when ChatGPT's exact numbers are unavailable. Each entry is just the time and the model name of a message you sent on chatgpt.com. It never contains your message text. Entries older than 7 days are deleted.</li>
+      <li><strong>Two saved sign-in tokens</strong>: the ElevenLabs access token and the Leonardo access token and account ID. They're saved so the extension can keep refreshing your usage without you reopening those sites. They are used only to call that same service. The extension does not add its own encryption to this storage, so anyone with access to your unlocked browser profile on your computer could read them. Both tokens are issued by those services and expire on their own schedule.</li>
+      <li><strong>Connection status</strong>: the last 50 status messages about the link to the Mac app, and rate-limit backoff timers.</li>
+    </ul>
+    <p>
+      The extension never saves your passwords, the text of your conversations, or your cookies. (It uses your cookies by letting the browser attach them to its requests, as it would for the site itself.)
+    </p>
+
+    <h3>What the extension watches on the AI sites</h3>
+    <p>
+      On a few sites, the extension runs a small script inside the page so it can read your usage. Specifically:
+    </p>
+    <ul>
+      <li><strong>chatgpt.com</strong>: it notices each time you send a message and records only the time and model name (for the backup estimate above).</li>
+      <li><strong>gemini.google.com</strong>: it asks Gemini for your usage using the page's own session, and passes the resulting usage numbers to the extension.</li>
+      <li><strong>elevenlabs.io</strong>: it reads the access token that ElevenLabs' sign-in stores in your browser, and passes it to the extension.</li>
+      <li><strong>app.leonardo.ai</strong>: it watches the page's own requests to Leonardo's servers to pick up the access token and account ID, then passes them to the extension. It does not change, block, or delay those requests.</li>
+    </ul>
+    <p>The extension does not read your prompts, replies, files, or browsing history, and it does nothing on any site not listed on this page.</p>
+
+    <h3>Link to the Mac app (optional)</h3>
+    <p>
+      If the Tokenomics Mac app is installed, the extension uses your browser's Native Messaging to talk to a small helper that ships with the Mac app. This stays on your computer. Over this link, the extension sends your usage readings (percentages, reset times, plan name) and which services you've chosen to show, and receives the Mac app's readings and settings back. <strong>Sign-in tokens, cookies, and the ChatGPT message log are never sent over this link.</strong> (ElevenLabs readings are not forwarded to the Mac app; the Mac app reads ElevenLabs on its own with an API key you provide.) If the Mac app isn't installed, the extension works on its own and this link simply does nothing.
+    </p>
+
+    <h3>Permissions the extension asks for, and why</h3>
+    <ul>
+      <li><strong>Storage</strong>: to save the items listed above.</li>
+      <li><strong>Alarms</strong>: to refresh your usage every few minutes while your browser is open.</li>
+      <li><strong>Native Messaging</strong>: to talk to the Mac app, as described above.</li>
+      <li><strong>Access to the AI sites listed above</strong> (claude.ai, chatgpt.com, www.midjourney.com, gemini.google.com, elevenlabs.io and api.us.elevenlabs.io, grok.com, www.perplexity.ai, app.leonardo.ai and api.leonardo.ai): to request your usage and run the page scripts described above. The extension has no access to any other website.</li>
+    </ul>
+
+    <h3>Your controls</h3>
+    <ul>
+      <!-- DECISION NEEDED: Draft had the line "Hide a service in the extension's settings or the popup, and Tokenomics stops showing it." Draft says to keep it only if hiding also stops requests for that service; code today polls all services regardless of visibility. Line omitted (conservative). Restore only if code is changed or Rob/attorney accept a display-only claim. -->
+      <li><strong>Uninstalling the extension deletes everything it stored</strong>, including the saved tokens.</li>
+      <li>Signing out of an AI service makes its saved token stop working, so the extension can no longer read that service.</li>
+      <li>Browser settings let you restrict the extension's site access at any time.</li>
+    </ul>
+
+    <h3>Limited use</h3>
+    <p>
+      Tokenomics uses the data it handles only to show you your own usage and to keep the Mac app and extension in sync. It does not sell or transfer user data to anyone, does not use or transfer it for anything unrelated to that purpose, and does not use or transfer it to determine creditworthiness or for lending. Nobody, including the author, reads your data.
+    </p>
+    <!-- DECISION NEEDED: Draft says VERIFY: confirm the Mac app widget/bridge files (WidgetDataStore, ext-side.json, mac-side.json) contain only what this policy says (usage readings and settings), and that the in-product extension disclosure matches the stored-tokens wording word-for-word. -->
+
+
+    <h2>Tokenomics for Safari</h2>
+    <p>
+      Tokenomics for Safari is a sandboxed Mac App Store app that contains a Safari extension. The Safari extension works like the browser extension described above: it uses your existing sign-in on the supported AI sites to request your own usage, and it keeps the same items in Safari's extension storage on your Mac. It sends nothing to the author.
+    </p>
+    <p>
+      If the Tokenomics Mac app is installed, the Safari extension shares your usage readings and your show/hide settings with it through a shared folder on your Mac (an App Group container). That data never leaves your computer. The Safari app itself has no network access of its own, has no accounts, and collects no data. Its only outbound link is a button that opens trytokenomics.com in your browser.
+    </p>
+    <p>
+      The App Store privacy label for Tokenomics for Safari reads "Data Not Collected", because nothing is sent to the author or any third party.
+    </p>
+
 
     <h2>About this website</h2>
     <p>
-      The Tokenomics app and the marketing website at <code>trytokenomics.com</code> are separate things, and they have different (but both narrow) data footprints. Everything above this line is about the <strong>app</strong>. Everything in this section is about the <strong>website</strong>.
+      The Tokenomics app and the marketing website at <code>trytokenomics.com</code> are separate things, and they have different (but both narrow) data footprints. Everything above this line is about the <strong>apps and the extension</strong>. Everything in this section is about the <strong>website</strong>.
     </p>
     <p>
-      The site is hosted on Cloudflare Pages. Cloudflare provides standard server-side request analytics — visit counts, top pages, country breakdown — drawn from request headers as the page is served. There is <strong>no client-side tracking script</strong>, no cookies, no fingerprinting, no third-party SDKs loaded in the page.
+      The site is hosted on Cloudflare Pages. Cloudflare provides standard server-side request analytics — visit counts, top pages, country breakdown — drawn from request headers as the page is served. There is <strong>no client-side tracking script</strong>, no cookies, no fingerprinting, no third-party scripts or trackers loaded in the page.
     </p>
+    <p>
+      Page text uses web fonts loaded from Google Fonts. Your browser requests them directly from Google, which can see your IP address when it does.
+    </p>
+    <!-- DECISION NEEDED: Google Fonts: the draft prefers self-hosting the fonts (then delete the paragraph above and the fonts.googleapis.com / fonts.gstatic.com links in this page and the other pages). Otherwise keep this disclosure sentence. Disclosure kept as the conservative option; self-hosting not done because it touches other pages. Attorney to confirm if EU traffic matters. -->
     <p>
       We also count download requests so we can estimate how many people are using Tokenomics. When you click a download button (or run <code>brew install rob-stout/tap/tokenomics</code>), the request goes through <code>trytokenomics.com/download/...</code>, which records a single row before redirecting you to the actual <code>.dmg</code> file on GitHub. The row contains:
     </p>
@@ -372,17 +528,21 @@
     <p>
       <strong>What we do not store:</strong> IP addresses, User-Agent strings, cookies, referrers, anything that could identify you. The download counter is one anonymous row per download. Aggregates live in a Cloudflare D1 database that only the author can query.
     </p>
+    <p>
+      The browser-extension and Safari apps do not use this website for anything except opening it when you click a link, and they do not send it any data. Installing from the Chrome Web Store, Microsoft Edge Add-ons, or the Mac App Store does not touch the download counter. Those stores keep their own install statistics under their own privacy policies.
+    </p>
+    <!-- DECISION NEEDED: Download-counter retention period. Draft wanted the sentence "Download-counter rows are kept for [N] months, then deleted." ("24 months" is common). Sentence omitted until Rob picks N; same N is needed in the Data retention section. Do not publish without it. -->
 
 
-    <h2>What the Tokenomics app does NOT do</h2>
+    <h2>What Tokenomics does NOT do</h2>
     <ul class="doc-not-list">
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
-        <span>No analytics or telemetry of any kind from inside the app</span>
+        <span>No analytics or telemetry of any kind from inside the Mac app, the browser extension, or Tokenomics for Safari</span>
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
-        <span>No third-party SDKs</span>
+        <span>No third-party analytics, advertising, or tracking code. (The Mac app uses the Sparkle update framework; the extension bundles the open-source Preact and webextension-polyfill libraries. None of them send data to anyone.)</span>
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
@@ -390,25 +550,58 @@
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
-        <span>No tracking of how you use the app</span>
+        <span>No tracking of how you use the apps or extension</span>
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
         <span>No crash reporting</span>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+        <span>No ads, no accounts, and no selling or sharing of data</span>
       </li>
     </ul>
 
 
     <h2>Data retention</h2>
     <p>
-      Tokenomics holds your credentials and usage data in memory while the app is running. When you quit Tokenomics, all data is discarded. Nothing is persisted to disk by Tokenomics.
+      <strong>Mac app:</strong> holds your credentials in memory while it runs and discards them when you quit. It does save usage readings (percentages and reset times, not credentials) to a shared folder on your Mac so the desktop widgets can display them, and it saves your settings. Uninstalling the app removes these.
     </p>
+    <p>
+      <strong>Browser extension and Tokenomics for Safari:</strong> keep their data in the browser's local extension storage until you uninstall the extension, which deletes it. See "What the extension stores" above for exactly what's kept and for how long (the ChatGPT message log is trimmed to 7 days).
+    </p>
+    <p>
+      <strong>Website:</strong> keeps anonymous download-counter rows. See "About this website."
+    </p>
+    <!-- DECISION NEEDED: Download-counter retention period [N] months (same question as in About this website). Draft text said "keeps anonymous download-counter rows for [N] months"; period omitted until Rob picks N. -->
+
+
+    <h2>Third-party services</h2>
+    <p>
+      When Tokenomics asks an AI service for your usage, that request goes to the service and is handled under that service's own terms and privacy policy. Tokenomics does not control those services or what they do with the request. Tokenomics is independent software and is not affiliated with, endorsed by, or sponsored by any of them. Using Tokenomics with a service may be subject to that service's terms; please read them.
+    </p>
+
+    <h2>Your rights and the author's role</h2>
+    <p>
+      Because the author does not receive your data, there is nothing for the author to give you a copy of, correct, or delete, other than the anonymous download-counter rows, which contain no information that identifies you. Whatever you want to know or change about your account data is with the AI service that holds it. If you think we hold something about you, email <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a> and we'll look. This applies the same way wherever you live, including California and the EU/UK.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      Tokenomics is a developer and productivity utility. It is not directed to children under 13 (or under 16 where local law sets that age), and the author does not knowingly collect information from children.
+    </p>
+    <!-- DECISION NEEDED: Attorney questions on "Your rights": (a) is Acorn Designs a "controller" for the download counter (country code plus timestamp, no IP stored); (b) any EU/UK representative or CCPA notice needed at this scale; (c) "Children" wording. Plain-language position kept as drafted. -->
 
 
     <h2>Changes to this policy</h2>
     <p>
-      If this policy changes, the updated version will be published in the GitHub repository with a new effective date. Significant changes will be noted in the release notes.
+      If this policy changes, the updated version will be published at this address with a new effective date, and significant changes will be noted in the release notes and the store listings. Past versions are available in the history of the <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub repository</a>.
     </p>
+    <p><strong>Change log</strong></p>
+    <ul>
+      <li><strong>October 27, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website. Added what the extension stores and reads. Clarified that the Mac app saves usage readings for widgets. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
+      <li><strong>April 21, 2026</strong>: Previous version (Mac app and website).</li>
+    </ul>
 
     <div class="doc-callout">
       <p><strong>Verifying any of this yourself:</strong> the source code is open and the network calls are auditable. Run Little Snitch or any equivalent firewall and you'll see Tokenomics talking only to the endpoints listed above. The repository at <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">github.com/rob-stout/Tokenomics</a> contains the full source for every claim on this page.</p>
@@ -416,7 +609,10 @@
 
 
     <h2>Contact</h2>
-    <p>Questions about this policy: <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a></p>
+    <p>
+      Questions about this policy: <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a><br>
+      Bugs and requests: <a href="https://github.com/rob-stout/Tokenomics/issues" target="_blank" rel="noopener">github.com/rob-stout/Tokenomics/issues</a> (public; don't post tokens or personal information there).
+    </p>
 
   </div>
 </section>
@@ -445,7 +641,7 @@
       <span class="sep">·</span>
       <span>&copy; 2026 Acorn Designs, LLC · Created by Rob Stout</span>
       <span class="sep">·</span>
-      <span>Not affiliated with any AI service provider displayed in the app.</span>
+      <span>Not affiliated with, endorsed by, or sponsored by any AI service Tokenomics works with.</span>
     </div>
   </div>
 </footer>
