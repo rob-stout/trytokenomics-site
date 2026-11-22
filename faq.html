@@ -71,7 +71,7 @@
         "name": "Is my usage data sent anywhere?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Tokenomics reads usage from the AI tools you already use, holds the numbers in memory while it's open, and sends nothing to any server the author controls. There is no analytics, no telemetry, and no third-party SDKs inside the app. The full, auditable breakdown is on the Privacy page at https://trytokenomics.com/privacy."
+          "text": "No. Tokenomics reads usage from the AI tools you already use, saves only the usage numbers its widgets need on your Mac, and sends nothing to any server the author controls: no analytics, no telemetry, no tracking code inside the app or the browser extension. The full breakdown is on the Privacy page."
         }
       },
       {
@@ -87,7 +87,79 @@
         "name": "How do I uninstall Tokenomics?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Quit the app, then drag Tokenomics from your Applications folder to the Trash. Tokenomics keeps nothing of its own on disk while it runs. The only possible leftover is the update checker's saved preference; if you want a completely clean removal you can delete Tokenomics' entry from ~/Library/Preferences, but it's harmless to leave."
+          "text": "Quit the app, then drag Tokenomics from your Applications folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from ~/Library/Preferences, but it's harmless to leave. To remove the browser extension, right-click its toolbar icon and choose Remove; that deletes everything it saved."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the browser extension have access to?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity and Leonardo. It doesn't ask for access to all websites. On those sites it reads your own usage and limit numbers, using the sign-in you already have. It saves your settings and latest numbers in your browser's extension storage on your device, and for ElevenLabs and Leonardo it also saves the access token the site gives your browser. Numbers refresh every few minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it start reading as soon as I install it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. On install it shows a short consent screen that explains what it reads and stores. Nothing is read until you click Agree and turn on. To turn it off later, open the extension's settings and click Stop reading and delete my data. That deletes everything it saved, and it stays off until you agree again."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it need access to the AI sites?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each site shows your usage in its own account pages, with no shared way to get it. To show it in the popup, the extension asks that site for your numbers, the same way the site's own pages do. That is the only reason it has access to those sites. It doesn't touch any others."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Chrome say it can “communicate with cooperating native applications”?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "That's the permission the extension uses to hand your usage numbers to the Tokenomics Mac app, if you have it installed. It stays on your computer, and your sign-in tokens are never sent over it. Without the Mac app, nothing happens."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it see my chats or prompts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The extension reads usage numbers, not conversations, and it doesn't store your prompts or chats. On ChatGPT it notes the time and model of each message you send, to estimate usage when exact numbers aren't available. It never keeps what you wrote. Details are on the privacy page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of my data sent to Tokenomics?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There's no analytics or telemetry in the extension. It talks only to the AI sites you use, plus the Mac app on your own computer if you have it. The privacy page lists exactly what it connects to."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the numbers exact?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always. Some sites report your usage directly. Others don't, and Tokenomics can only estimate. When a reading is an estimate, the popup shows an “estimated” label next to the plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the extension work without the Mac app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It works on its own in your browser. The Mac app adds menu bar rings and desktop widgets, and brings in Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. If you have both, they sync."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tokenomics affiliated with these AI services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo and related names are the property of their owners and are used here only to say which services Tokenomics works with."
         }
       }
     ]
@@ -295,6 +367,15 @@
         <li><a href="#data">Is my usage data sent anywhere?</a></li>
         <li><a href="#sign-in">How does signing in work?</a></li>
         <li><a href="#uninstall">How do I uninstall Tokenomics?</a></li>
+        <li><a href="#ext-access">What does the browser extension have access to?</a></li>
+        <li><a href="#ext-consent">Does it start reading as soon as I install it?</a></li>
+        <li><a href="#ext-why-sites">Why does it need access to the AI sites?</a></li>
+        <li><a href="#ext-native">Why does Chrome say it can “communicate with cooperating native applications”?</a></li>
+        <li><a href="#ext-chats">Does it see my chats or prompts?</a></li>
+        <li><a href="#ext-data">Is any of my data sent to Tokenomics?</a></li>
+        <li><a href="#ext-exact">Are the numbers exact?</a></li>
+        <li><a href="#ext-standalone">Does the extension work without the Mac app?</a></li>
+        <li><a href="#ext-allowed">Is Tokenomics affiliated with these AI services?</a></li>
       </ul>
     </nav>
   </div>
@@ -345,7 +426,7 @@
 
     <h3 class="faq-q" id="data">Is my usage data sent anywhere?</h3>
     <p>
-      No. Tokenomics reads usage from the AI tools you already use, holds the numbers in memory while it's open, and sends nothing to any server the author controls — no analytics, no telemetry, no third-party SDKs inside the app. The full, auditable breakdown is on the <a href="/privacy">Privacy page</a>.
+      No. Tokenomics reads usage from the AI tools you already use, saves only the usage numbers its widgets need on your Mac, and sends nothing to any server the author controls — no analytics, no telemetry, no tracking code inside the app or the browser extension. The full, auditable breakdown is on the <a href="/privacy">Privacy page</a>.
     </p>
 
     <h3 class="faq-q" id="sign-in">How does signing in work?</h3>
@@ -355,7 +436,54 @@
 
     <h3 class="faq-q" id="uninstall">How do I uninstall Tokenomics?</h3>
     <p>
-      Quit the app, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. Tokenomics keeps nothing of its own on disk while it runs. The only possible leftover is the update checker's saved preference; for a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave.
+      Quit the app, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave. To remove the browser extension, right-click its toolbar icon and choose <strong>Remove</strong>; that deletes everything it saved.
+    </p>
+
+    <h2 class="faq-group" id="browser-extension">The browser extension</h2>
+
+    <h3 class="faq-q" id="ext-access">What does the browser extension have access to?</h3>
+    <p>
+      Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity and Leonardo. It doesn't ask for access to all websites. On those sites it reads your own usage and limit numbers, using the sign-in you already have. It saves your settings and latest numbers in your browser's extension storage on your device, and for ElevenLabs and Leonardo it also saves the access token the site gives your browser. Numbers refresh every few minutes.
+    </p>
+
+    <h3 class="faq-q" id="ext-consent">Does it start reading as soon as I install it?</h3>
+    <p>
+      No. On install it shows a short consent screen that explains what it reads and stores. Nothing is read until you click <strong>Agree and turn on</strong>. To turn it off later, open the extension's settings and click <strong>Stop reading and delete my data</strong>. That deletes everything it saved, and it stays off until you agree again.
+    </p>
+
+    <h3 class="faq-q" id="ext-why-sites">Why does it need access to the AI sites?</h3>
+    <p>
+      Each site shows your usage in its own account pages, with no shared way to get it. To show it in the popup, the extension asks that site for your numbers, the same way the site's own pages do. That is the only reason it has access to those sites. It doesn't touch any others.
+    </p>
+
+    <h3 class="faq-q" id="ext-native">Why does Chrome say it can “communicate with cooperating native applications”?</h3>
+    <p>
+      That's the permission the extension uses to hand your usage numbers to the Tokenomics Mac app, if you have it installed. It stays on your computer, and your sign-in tokens are never sent over it. Without the Mac app, nothing happens.
+    </p>
+
+    <h3 class="faq-q" id="ext-chats">Does it see my chats or prompts?</h3>
+    <p>
+      No. The extension reads usage numbers, not conversations, and it doesn't store your prompts or chats. On ChatGPT it notes the time and model of each message you send, to estimate usage when exact numbers aren't available. It never keeps what you wrote. Details are on the <a href="/privacy#browser-extension">privacy page</a>.
+    </p>
+
+    <h3 class="faq-q" id="ext-data">Is any of my data sent to Tokenomics?</h3>
+    <p>
+      No. There's no analytics or telemetry in the extension. It talks only to the AI sites you use, plus the Mac app on your own computer if you have it. The <a href="/privacy#browser-extension">privacy page</a> lists exactly what it connects to.
+    </p>
+
+    <h3 class="faq-q" id="ext-exact">Are the numbers exact?</h3>
+    <p>
+      Not always. Some sites report your usage directly. Others don't, and Tokenomics can only estimate. When a reading is an estimate, the popup shows an “estimated” label next to the plan.
+    </p>
+
+    <h3 class="faq-q" id="ext-standalone">Does the extension work without the Mac app?</h3>
+    <p>
+      Yes. It works on its own in your browser. The Mac app adds menu bar rings and desktop widgets, and brings in Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. If you have both, they sync.
+    </p>
+
+    <h3 class="faq-q" id="ext-allowed">Is Tokenomics affiliated with these AI services?</h3>
+    <p>
+      No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo and related names are the property of their owners and are used here only to say which services Tokenomics works with.
     </p>
 
     <div class="faq-contact">
@@ -392,7 +520,7 @@
       <span class="sep">·</span>
       <span>&copy; 2026 Acorn Designs, LLC · Created by Rob Stout</span>
       <span class="sep">·</span>
-      <span>Not affiliated with any AI service provider displayed in the app.</span>
+      <span>Not affiliated with, endorsed by, or sponsored by any AI service Tokenomics works with.</span>
     </div>
   </div>
 </footer>

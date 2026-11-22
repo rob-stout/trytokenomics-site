@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — Tokenomics</title>
-  <meta name="description" content="Tokenomics reads your AI usage from credentials your tools already store locally — no analytics, no telemetry, no tracking. Here's exactly what we touch and what we don't." />
+  <meta name="description" content="How the Tokenomics Mac app, browser extension and Safari app read your AI usage with the sign-ins you already have. No analytics, no telemetry, no tracking. Here's exactly what we touch and what we don't." />
   <meta property="og:title" content="Privacy Policy — Tokenomics" />
   <meta property="og:description" content="No analytics. No telemetry. No tracking. Here's everything Tokenomics reads, and everywhere it sends data — both very short lists." />
   <meta property="og:type" content="article" />
@@ -253,7 +253,7 @@
 </p>
 
     <div class="doc-meta">
-      <span><strong>Effective date:</strong> October 27, 2026</span>
+      <span><strong>Effective date:</strong> November 22, 2026</span>
       <span><strong>Owned by:</strong> Acorn Designs, LLC</span>
       <span><strong>Created by:</strong> Rob Stout</span>
       <span><strong>Contact:</strong> <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a></span>
@@ -299,7 +299,6 @@
     <p>
       These credentials are read into memory as needed. The Mac app does not write them anywhere itself, log them, or send them anywhere other than the provider endpoints below.
     </p>
-    <!-- DECISION NEEDED: Draft says VERIFY: confirm the Mac provider list and the "Midjourney, Suno, and Udio are placeholder tiles" sentence below still match the shipped app (the extension and web companion now read Midjourney). If the Mac app now reads web-sourced data from the extension, say so in the Mac-app/extension link text. -->
 
     <h2>Mac app: network calls</h2>
     <p>
@@ -347,7 +346,7 @@
     </div>
 
     <p>
-      <strong>OpenAI and Google usage data is read from local CLI session files</strong> — no network calls are made for those providers. Midjourney, Suno, and Udio currently ship as placeholder tiles; Tokenomics does not read credentials or make network calls for them.
+      <strong>OpenAI and Google usage data is read from local CLI session files</strong> — no network calls are made for those providers. The Mac app makes no network calls for Midjourney or the other sites the browser extension reads; if you use the extension, the Mac app shows the readings the extension passes to it on your computer (see "Link to the Mac app" below). Suno and Udio aren't supported yet; Tokenomics does not read credentials or make network calls for them.
     </p>
 
     <h3>Update checks</h3>
@@ -374,9 +373,12 @@
     </p>
 
 
-    <h2>Browser extension (Chrome and Edge)</h2>
+    <h2 id="browser-extension">Browser extension (Chrome and Edge)</h2>
     <p>
       The Tokenomics extension shows your usage for AI services you're signed in to, in a toolbar popup and a small badge. It runs in your browser. <strong>It does not send anything to the author.</strong> Its only network requests go to the AI services listed below, to ask for your own account's usage.
+    </p>
+    <p>
+      <strong>Nothing happens until you agree.</strong> When you install the extension, it shows a short consent screen (in a settings tab and in the popup) that explains what it reads and stores. Until you click <strong>Agree and turn on</strong>, it requests no usage, saves no tokens, logs no messages, and sends nothing to the Mac app. If you click <strong>No thanks</strong>, it stays off.
     </p>
 
     <h3>How it gets your usage</h3>
@@ -447,6 +449,7 @@
       <li><strong>Settings</strong>: which service is pinned, which tab you last viewed, which services are shown, and the ChatGPT plan you chose (if you override it).</li>
       <li><strong>A ChatGPT message log</strong>: used only as a backup estimate when ChatGPT's exact numbers are unavailable. Each entry is just the time and the model name of a message you sent on chatgpt.com. It never contains your message text. Entries older than 7 days are deleted.</li>
       <li><strong>Two saved sign-in tokens</strong>: the ElevenLabs access token and the Leonardo access token and account ID. They're saved so the extension can keep refreshing your usage without you reopening those sites. They are used only to call that same service. The extension does not add its own encryption to this storage, so anyone with access to your unlocked browser profile on your computer could read them. Both tokens are issued by those services and expire on their own schedule.</li>
+      <li><strong>Your consent</strong>: that you agreed to the consent screen, which version of it, and when.</li>
       <li><strong>Connection status</strong>: the last 50 status messages about the link to the Mac app, and rate-limit backoff timers.</li>
     </ul>
     <p>
@@ -480,8 +483,8 @@
 
     <h3>Your controls</h3>
     <ul>
-      <!-- DECISION NEEDED: Draft had the line "Hide a service in the extension's settings or the popup, and Tokenomics stops showing it." Draft says to keep it only if hiding also stops requests for that service; code today polls all services regardless of visibility. Line omitted (conservative). Restore only if code is changed or Rob/attorney accept a display-only claim. -->
-      <li><strong>Uninstalling the extension deletes everything it stored</strong>, including the saved tokens.</li>
+      <li><strong>"Stop reading and delete my data"</strong> in the extension's settings turns it off and deletes everything it stored, including the saved tokens. It stays off until you agree again.</li>
+      <li><strong>Uninstalling the extension</strong> also deletes everything it stored.</li>
       <li>Signing out of an AI service makes its saved token stop working, so the extension can no longer read that service.</li>
       <li>Browser settings let you restrict the extension's site access at any time.</li>
     </ul>
@@ -490,10 +493,9 @@
     <p>
       Tokenomics uses the data it handles only to show you your own usage and to keep the Mac app and extension in sync. It does not sell or transfer user data to anyone, does not use or transfer it for anything unrelated to that purpose, and does not use or transfer it to determine creditworthiness or for lending. Nobody, including the author, reads your data.
     </p>
-    <!-- DECISION NEEDED: Draft says VERIFY: confirm the Mac app widget/bridge files (WidgetDataStore, ext-side.json, mac-side.json) contain only what this policy says (usage readings and settings), and that the in-product extension disclosure matches the stored-tokens wording word-for-word. -->
 
 
-    <h2>Tokenomics for Safari</h2>
+    <h2 id="safari">Tokenomics for Safari</h2>
     <p>
       Tokenomics for Safari is a sandboxed Mac App Store app that contains a Safari extension. The Safari extension works like the browser extension described above: it uses your existing sign-in on the supported AI sites to request your own usage, and it keeps the same items in Safari's extension storage on your Mac. It sends nothing to the author.
     </p>
@@ -515,7 +517,6 @@
     <p>
       Page text uses web fonts loaded from Google Fonts. Your browser requests them directly from Google, which can see your IP address when it does.
     </p>
-    <!-- DECISION NEEDED: Google Fonts: the draft prefers self-hosting the fonts (then delete the paragraph above and the fonts.googleapis.com / fonts.gstatic.com links in this page and the other pages). Otherwise keep this disclosure sentence. Disclosure kept as the conservative option; self-hosting not done because it touches other pages. Attorney to confirm if EU traffic matters. -->
     <p>
       We also count download requests so we can estimate how many people are using Tokenomics. When you click a download button (or run <code>brew install rob-stout/tap/tokenomics</code>), the request goes through <code>trytokenomics.com/download/...</code>, which records a single row before redirecting you to the actual <code>.dmg</code> file on GitHub. The row contains:
     </p>
@@ -531,7 +532,9 @@
     <p>
       The browser-extension and Safari apps do not use this website for anything except opening it when you click a link, and they do not send it any data. Installing from the Chrome Web Store, Microsoft Edge Add-ons, or the Mac App Store does not touch the download counter. Those stores keep their own install statistics under their own privacy policies.
     </p>
-    <!-- DECISION NEEDED: Download-counter retention period. Draft wanted the sentence "Download-counter rows are kept for [N] months, then deleted." ("24 months" is common). Sentence omitted until Rob picks N; same N is needed in the Data retention section. Do not publish without it. -->
+    <p>
+      Download-counter rows contain nothing that identifies you, and they are kept for as long as the site runs.
+    </p>
 
 
     <h2>What Tokenomics does NOT do</h2>
@@ -568,12 +571,11 @@
       <strong>Mac app:</strong> holds your credentials in memory while it runs and discards them when you quit. It does save usage readings (percentages and reset times, not credentials) to a shared folder on your Mac so the desktop widgets can display them, and it saves your settings. Uninstalling the app removes these.
     </p>
     <p>
-      <strong>Browser extension and Tokenomics for Safari:</strong> keep their data in the browser's local extension storage until you uninstall the extension, which deletes it. See "What the extension stores" above for exactly what's kept and for how long (the ChatGPT message log is trimmed to 7 days).
+      <strong>Browser extension and Tokenomics for Safari:</strong> keep their data in the browser's local extension storage until you click "Stop reading and delete my data" in settings or uninstall the extension. Either one deletes it. See "What the extension stores" above for exactly what's kept and for how long (the ChatGPT message log is trimmed to 7 days).
     </p>
     <p>
-      <strong>Website:</strong> keeps anonymous download-counter rows. See "About this website."
+      <strong>Website:</strong> keeps anonymous download-counter rows for as long as the site runs. See "About this website."
     </p>
-    <!-- DECISION NEEDED: Download-counter retention period [N] months (same question as in About this website). Draft text said "keeps anonymous download-counter rows for [N] months"; period omitted until Rob picks N. -->
 
 
     <h2>Third-party services</h2>
@@ -590,7 +592,6 @@
     <p>
       Tokenomics is a developer and productivity utility. It is not directed to children under 13 (or under 16 where local law sets that age), and the author does not knowingly collect information from children.
     </p>
-    <!-- DECISION NEEDED: Attorney questions on "Your rights": (a) is Acorn Designs a "controller" for the download counter (country code plus timestamp, no IP stored); (b) any EU/UK representative or CCPA notice needed at this scale; (c) "Children" wording. Plain-language position kept as drafted. -->
 
 
     <h2>Changes to this policy</h2>
@@ -599,12 +600,12 @@
     </p>
     <p><strong>Change log</strong></p>
     <ul>
-      <li><strong>October 27, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website. Added what the extension stores and reads. Clarified that the Mac app saves usage readings for widgets. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
+      <li><strong>November 22, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website: what the extension reads, stores and sends, its consent screen, and the "Stop reading and delete my data" control. Clarified that the Mac app saves usage readings for widgets, and how long download-counter rows are kept. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
       <li><strong>April 21, 2026</strong>: Previous version (Mac app and website).</li>
     </ul>
 
     <div class="doc-callout">
-      <p><strong>Verifying any of this yourself:</strong> the source code is open and the network calls are auditable. Run Little Snitch or any equivalent firewall and you'll see Tokenomics talking only to the endpoints listed above. The repository at <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">github.com/rob-stout/Tokenomics</a> contains the full source for every claim on this page.</p>
+      <p><strong>Verifying any of this yourself:</strong> the source code is available and the network calls are auditable. Run Little Snitch or any equivalent firewall and you'll see Tokenomics talking only to the endpoints listed above. The repository at <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">github.com/rob-stout/Tokenomics</a> contains the full source for every claim on this page.</p>
     </div>
 
 
