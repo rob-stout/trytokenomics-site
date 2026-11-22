@@ -26,10 +26,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/sharing/Apple-Touch-Icon-180x180.png" />
   <link rel="manifest" href="site.webmanifest" />
 
-  <!-- Fonts: verbatim from design-system-v3.html -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet">
+  <!-- Fonts: self-hosted (assets/fonts), same families as design-system-v3.html -->
+  <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/hedvig-letters-serif-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
 
   <link rel="stylesheet" href="styles.css" />
   <!-- app.js loaded before closing body so DOM is ready -->

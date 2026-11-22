@@ -22,9 +22,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/sharing/Apple-Touch-Icon-180x180.png" />
   <link rel="manifest" href="site.webmanifest" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/hedvig-letters-serif-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
 
   <link rel="stylesheet" href="styles.css" />
 
@@ -515,7 +515,7 @@
       The site is hosted on Cloudflare Pages. Cloudflare provides standard server-side request analytics — visit counts, top pages, country breakdown — drawn from request headers as the page is served. There is <strong>no client-side tracking script</strong>, no cookies, no fingerprinting, no third-party scripts or trackers loaded in the page.
     </p>
     <p>
-      Page text uses web fonts loaded from Google Fonts. Your browser requests them directly from Google, which can see your IP address when it does.
+      The site's fonts are served from trytokenomics.com itself, so loading a page doesn't contact Google or any other third party.
     </p>
     <p>
       We also count download requests so we can estimate how many people are using Tokenomics. When you click a download button (or run <code>brew install rob-stout/tap/tokenomics</code>), the request goes through <code>trytokenomics.com/download/...</code>, which records a single row before redirecting you to the actual <code>.dmg</code> file on GitHub. The row contains:
@@ -600,7 +600,7 @@
     </p>
     <p><strong>Change log</strong></p>
     <ul>
-      <li><strong>November 22, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website: what the extension reads, stores and sends, its consent screen, and the "Stop reading and delete my data" control. Clarified that the Mac app saves usage readings for widgets, and how long download-counter rows are kept. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
+      <li><strong>November 22, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website: what the extension reads, stores and sends, its consent screen, and the "Stop reading and delete my data" control. Clarified that the Mac app saves usage readings for widgets, and how long download-counter rows are kept. The website now serves its own fonts instead of loading them from Google Fonts. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
       <li><strong>April 21, 2026</strong>: Previous version (Mac app and website).</li>
     </ul>
 

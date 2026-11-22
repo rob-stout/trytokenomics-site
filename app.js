@@ -274,7 +274,8 @@
   }
 
   // ── Latest release — version badge ───────────────────────
-  // Updates .js-version pills from the GitHub API. Download links go through
+  // Updates .js-version pills from /api/latest-version (a same-site function
+  // that asks GitHub, so visitors' browsers never contact GitHub). Download links go through
   // /download/dmg/latest so the Cloudflare Pages Function can count them and
   // redirect to the right release — no client-side href rewrite needed.
 
@@ -282,13 +283,11 @@
     var badges = document.querySelectorAll('.js-version');
     if (!badges.length) return;
 
-    fetch('https://api.github.com/repos/rob-stout/Tokenomics/releases/latest', {
-      headers: { 'Accept': 'application/vnd.github+json' }
-    })
+    fetch('/api/latest-version')
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
-        if (!data || !data.tag_name) return;
-        var tag = data.tag_name.replace(/^v?/, 'v');
+        if (!data || !data.tag) return;
+        var tag = data.tag;
         badges.forEach(function (el) {
           el.textContent = tag + ' · macOS 14+';
         });
