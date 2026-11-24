@@ -260,7 +260,7 @@
     /* ── Find zone: search + common questions ───────────────────────── */
     .faq-find { margin-top: var(--s-6); }
 
-    .faq-search { position: relative; max-width: 720px; margin: 0; }
+    .faq-search { position: relative; max-width: 1040px; margin: 0; }
     .faq-search-icon {
       position: absolute;
       left: 16px; top: 50%;
@@ -292,22 +292,6 @@
       /* 1px accent + 1px border = a 2px visible edge, plus the system ring */
       box-shadow: 0 0 0 1px var(--accent), var(--shadow-ring);
     }
-    .faq-search-kbd {
-      position: absolute;
-      right: 14px; top: 50%;
-      transform: translateY(-50%);
-      font-family: var(--font-sans);
-      font-size: var(--fs-micro);
-      line-height: 1;
-      color: var(--text-subtle);
-      background: transparent;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--r-xs);
-      padding: 4px 7px;
-      pointer-events: none;
-    }
-    .faq-search-input:focus ~ .faq-search-kbd,
-    .faq-search-input:not(:placeholder-shown) ~ .faq-search-kbd { display: none; }
     @media (hover: none), (pointer: coarse) {
       .faq-search-kbd { display: none; }
     }
@@ -318,12 +302,12 @@
       font-size: var(--fs-small);
       color: var(--text-muted);
       margin: var(--s-4) 0 0;
-      max-width: 720px;
+      max-width: 1040px;
       overflow-wrap: anywhere;
     }
     .faq-status:empty { margin: 0; }
 
-    .faq-results { max-width: 720px; margin-top: var(--s-3); }
+    .faq-results { max-width: 1040px; margin-top: var(--s-3); }
     .faq-result-list { list-style: none; margin: 0; padding: 0; }
     .faq-result {
       position: relative;
@@ -371,6 +355,41 @@
     .faq-empty p { font-size: var(--fs-small); margin: 0 0 var(--s-2); }
 
     .faq-common { margin-top: var(--s-6); }
+    /* "What this page covers": three topics across the same span as the cards. */
+    .faq-topics {
+      list-style: none;
+      margin: var(--s-5) 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-4);
+      max-width: 1040px;
+    }
+    .faq-topics a {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: var(--s-3);
+      row-gap: 2px;
+      padding-top: var(--s-3);
+      border-top: 1px solid var(--border-strong);
+      color: inherit;
+      text-decoration: none;
+    }
+    .faq-topic-num {
+      grid-row: span 2;
+      font-family: var(--font-serif);
+      font-size: var(--fs-h3, 1.5rem);
+      line-height: 1;
+      color: var(--accent);
+    }
+    .faq-topic-title { font-weight: 600; color: var(--text); }
+    .faq-topic-desc { font-size: var(--fs-small); line-height: 1.5; color: var(--text-muted); }
+    .faq-topics a:hover .faq-topic-title,
+    .faq-topics a:focus-visible .faq-topic-title { color: var(--accent); }
+    @media (max-width: 860px) {
+      .faq-topics { grid-template-columns: 1fr; gap: var(--s-3); }
+    }
+
     .faq-cards {
       list-style: none;
       margin: 0;
@@ -381,7 +400,7 @@
       max-width: 1040px;
     }
     @media (max-width: 860px) {
-      .faq-cards { grid-template-columns: 1fr; max-width: 720px; }
+      .faq-cards { grid-template-columns: 1fr; }
     }
     .faq-card {
       position: relative;
@@ -429,7 +448,8 @@
 
     /* ── Browse zone: grouped, collapsible answers ──────────────────── */
     .doc-body { padding: var(--s-7) 0 var(--s-9); }
-    .doc-body .section-wrap > * { max-width: 720px; }
+    /* Same span as the cards; answer text keeps its own 64ch reading width. */
+    .doc-body .section-wrap > * { max-width: 1040px; }
     .faq-browse-head {
       display: flex;
       align-items: center;
@@ -653,9 +673,23 @@
 
     <p class="feature-kicker">FAQ</p>
     <h1>The windows, the meters, and the <em>caveats</em>.</h1>
-    <p class="lede" style="font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: var(--s-4) 0 0;">
-      This page covers getting set up, which browsers work, what Tokenomics costs and how it handles your data. It also explains the numbers themselves, because each provider counts usage its own way and Tokenomics shows it in that provider's units.
-    </p>
+    <ul class="faq-topics" aria-label="What this page covers">
+      <li><a href="#browser-extension">
+        <span class="faq-topic-num" aria-hidden="true">1</span>
+        <span class="faq-topic-title">Getting set up</span>
+        <span class="faq-topic-desc">Installing, which browsers work, what it costs, and what to try when something's off.</span>
+      </a></li>
+      <li><a href="#reading-numbers">
+        <span class="faq-topic-num" aria-hidden="true">2</span>
+        <span class="faq-topic-title">Reading your numbers</span>
+        <span class="faq-topic-desc">Each provider counts usage its own way. Here's what each meter means.</span>
+      </a></li>
+      <li><a href="#privacy-permissions">
+        <span class="faq-topic-num" aria-hidden="true">3</span>
+        <span class="faq-topic-title">Privacy &amp; permissions</span>
+        <span class="faq-topic-desc">What Tokenomics reads, what it stores on your device, and what it never sends.</span>
+      </a></li>
+    </ul>
 
     <div class="faq-find">
       <!-- Hidden until the script runs: without JS there's nothing to search
@@ -670,7 +704,6 @@
                placeholder="Search, like “privacy” or “ElevenLabs key”"
                autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search"
                aria-describedby="faq-search-hint" aria-controls="faq-result-list" />
-        <kbd class="faq-search-kbd" aria-hidden="true">/</kbd>
         <span id="faq-search-hint" class="sr-only">Results appear below as you type. Press Enter to open the first one, or the down arrow to move through them.</span>
       </form>
 
@@ -850,7 +883,7 @@
     </div>
 
     <!-- ── Reading your usage numbers ──────────────────────── -->
-    <h2 class="faq-group">Reading your usage numbers</h2>
+    <h2 class="faq-group" id="reading-numbers">Reading your usage numbers</h2>
     <div class="faq-list">
 
       <div class="faq-item" data-keywords="anthropic limit quota rate reset weekly week rolling opus pro max">
@@ -925,7 +958,7 @@
     </div>
 
     <!-- ── Privacy & permissions ───────────────────────────── -->
-    <h2 class="faq-group">Privacy &amp; permissions</h2>
+    <h2 class="faq-group" id="privacy-permissions">Privacy &amp; permissions</h2>
     <div class="faq-list">
 
       <div class="faq-item" data-keywords="privacy private tracking telemetry analytics safe secure security collect server">
