@@ -92,6 +92,14 @@
       },
       {
         "@type": "Question",
+        "name": "Which sites does the browser extension work with?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In your browser, the extension works with Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. Sign in to a site the way you normally do, and its meter shows up in the popup. With the free Tokenomics Mac app you also get Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor, and the extension's readings show in your menu bar and widgets."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "What does the browser extension have access to?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -159,7 +167,7 @@
         "name": "How do I set up ElevenLabs?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "There are three ways, and you can use any of them: 1. Sign in at elevenlabs.io in your browser, with the extension installed. It reads your usage using that sign-in. 2. Paste an API key into the extension (open the extension’s Settings and find ElevenLabs). It reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back. 3. Paste an API key into the Mac app (gear icon → Providers → ElevenLabs). It reads your usage even when your browser is closed. Which one shows in the Mac app? If you've pasted a key into the Mac app, it uses that key. If you haven't, it shows the numbers the extension reads, which update every few minutes while your browser is open. It never uses both at once. Your key never moves between the extension and the Mac app; only the usage numbers do. Making a key. In ElevenLabs, open <a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener">API Keys</a> and create a key. Set User to Access and leave everything else on No Access. That's all Tokenomics needs, and a key like that can't generate audio or change your account. If the key is missing that permission, Tokenomics won't save it and tells you why. Things you might notice: Reset dates on Free accounts. ElevenLabs sometimes keeps reporting the first month's reset date long after it passed. Characters still refresh monthly on that day, so Tokenomics counts forward to the next one. The extension saves keys on your device, in your browser's extension storage, unencrypted. Use a key with only the User permission so it's harmless if it ever leaked. The Mac app keeps its key in your Mac's Keychain. Without a Mac app key, the Mac app only updates while your browser is open. Close the browser and the Mac app keeps showing the last numbers it got."
+          "text": "There are three ways, and you can use any of them: 1. Sign in at elevenlabs.io in your browser, with the extension installed. It reads your usage using that sign-in. 2. Paste an API key into the extension (open the extension’s Settings and find ElevenLabs). It reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back. 3. Paste an API key into the Mac app (gear icon → Providers → ElevenLabs). It reads your usage even when your browser is closed. Which one shows in the Mac app? If you've pasted a key into the Mac app, it uses that key. If you haven't, it shows the numbers the extension reads, which update every few minutes while your browser is open. It never uses both at once. Your key never moves between the extension and the Mac app; only the usage numbers do. Making a key. In ElevenLabs, open API Keys in your account settings and create a key. Set User to Access and leave everything else on No Access. That's all Tokenomics needs, and a key like that can't generate audio or change your account. If the key is missing that permission, Tokenomics won't save it and tells you why. Things you might notice: Reset dates on Free accounts. ElevenLabs sometimes keeps reporting the first month's reset date long after it passed. Characters still refresh monthly on that day, so Tokenomics counts forward to the next one. The extension saves keys on your device, in your browser's extension storage, unencrypted. Use a key with only the User permission so it's harmless if it ever leaked. The Mac app keeps its key in your Mac's Keychain. Without a Mac app key, the Mac app only updates while your browser is open. Close the browser and the Mac app keeps showing the last numbers it got."
         }
       },
       {
@@ -385,6 +393,7 @@
         <li><a href="#data">Is my usage data sent anywhere?</a></li>
         <li><a href="#sign-in">How does signing in work?</a></li>
         <li><a href="#uninstall">How do I uninstall Tokenomics?</a></li>
+        <li><a href="#ext-sites">Which sites does the browser extension work with?</a></li>
         <li><a href="#ext-access">What does the browser extension have access to?</a></li>
         <li><a href="#ext-consent">Does it start reading as soon as I install it?</a></li>
         <li><a href="#ext-why-sites">Why does it need access to the AI sites?</a></li>
@@ -459,6 +468,14 @@
     </p>
 
     <h2 class="faq-group" id="browser-extension">The browser extension</h2>
+
+    <h3 class="faq-q" id="ext-sites">Which sites does the browser extension work with?</h3>
+    <p>
+      In your browser: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. Sign in to a site the way you normally do, and its meter shows up in the popup.
+    </p>
+    <p>
+      With the free Tokenomics Mac app, you also get Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor, and the extension's readings show in your menu bar and widgets.
+    </p>
 
     <h3 class="faq-q" id="ext-access">What does the browser extension have access to?</h3>
     <p>
