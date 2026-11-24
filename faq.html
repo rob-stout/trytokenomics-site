@@ -362,28 +362,30 @@
       padding: 0;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--s-4);
+      gap: var(--s-6);
       max-width: 1040px;
     }
+    /* One left edge: rule, number and description all start at the same x;
+       the number sits inline with the title. */
     .faq-topics a {
       display: grid;
       grid-template-columns: auto 1fr;
-      column-gap: var(--s-3);
-      row-gap: 2px;
+      align-items: baseline;
+      column-gap: var(--s-2);
+      row-gap: 4px;
       padding-top: var(--s-3);
       border-top: 1px solid var(--border-strong);
       color: inherit;
       text-decoration: none;
     }
     .faq-topic-num {
-      grid-row: span 2;
       font-family: var(--font-serif);
       font-size: var(--fs-h3, 1.5rem);
       line-height: 1;
       color: var(--accent);
     }
     .faq-topic-title { font-weight: 600; color: var(--text); }
-    .faq-topic-desc { font-size: var(--fs-small); line-height: 1.5; color: var(--text-muted); }
+    .faq-topic-desc { grid-column: 1 / -1; font-size: var(--fs-small); line-height: 1.5; color: var(--text-muted); }
     .faq-topics a:hover .faq-topic-title,
     .faq-topics a:focus-visible .faq-topic-title { color: var(--accent); }
     @media (max-width: 860px) {
