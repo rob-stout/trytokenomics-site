@@ -253,7 +253,7 @@
 </p>
 
     <div class="doc-meta">
-      <span><strong>Effective date:</strong> November 22, 2026</span>
+      <span><strong>Effective date:</strong> November 23, 2026</span>
       <span><strong>Owned by:</strong> Acorn Designs, LLC</span>
       <span><strong>Created by:</strong> Rob Stout</span>
       <span><strong>Contact:</strong> <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a></span>
@@ -346,7 +346,7 @@
     </div>
 
     <p>
-      <strong>OpenAI and Google usage data is read from local CLI session files</strong> — no network calls are made for those providers. The Mac app makes no network calls for Midjourney or the other sites the browser extension reads; if you use the extension, the Mac app shows the readings the extension passes to it on your computer (see "Link to the Mac app" below). Suno and Udio aren't supported yet; Tokenomics does not read credentials or make network calls for them.
+      <strong>OpenAI and Google usage data is read from local CLI session files</strong> — no network calls are made for those providers. The Mac app makes no network calls for Midjourney or the other sites the browser extension reads; if you use the extension, the Mac app shows the readings the extension passes to it on your computer (see "Link to the Mac app" below).
     </p>
 
     <h3>Update checks</h3>
@@ -419,7 +419,7 @@
           <tr>
             <td>ElevenLabs</td>
             <td><code>api.us.elevenlabs.io/v1/user/subscription</code></td>
-            <td>An access token the extension reads from the ElevenLabs site's own browser storage while you're signed in, and saves (see below)</td>
+            <td>An access token the extension reads from the ElevenLabs site's own browser storage while you're signed in, and saves (see below). Or, if you paste one in the extension's settings, your ElevenLabs API key, sent as the <code>xi-api-key</code> header</td>
           </tr>
           <tr>
             <td>Grok (grok.com)</td>
@@ -433,8 +433,18 @@
           </tr>
           <tr>
             <td>Leonardo</td>
-            <td><code>api.leonardo.ai/v1/graphql</code></td>
-            <td>An access token and account ID that the extension notices on Leonardo's own requests while the Leonardo site is open, and saves (see below)</td>
+            <td><code>api.leonardo.ai/v1/graphql</code>, or <code>cloud.leonardo.ai/api/rest/v1/me</code> when you use an API key</td>
+            <td>An access token and account ID that the extension notices on Leonardo's own requests while the Leonardo site is open, and saves (see below). Or, if you paste one in the extension's settings, your Leonardo API key</td>
+          </tr>
+          <tr>
+            <td>Suno</td>
+            <td><code>studio-api.prod.suno.com/api/billing/info/</code></td>
+            <td>The short-lived sign-in token that suno.com keeps in a browser cookie, read while a suno.com tab is open and used once for this request. It is not saved</td>
+          </tr>
+          <tr>
+            <td>Udio</td>
+            <td><code>www.udio.com/api/users/current/api-usage</code> and <code>/api/subscriptions</code></td>
+            <td>Your session cookie</td>
           </tr>
         </tbody>
       </table>
@@ -446,9 +456,10 @@
     </p>
     <ul>
       <li><strong>Usage readings</strong>: percentages, reset times, and plan name for each service.</li>
-      <li><strong>Settings</strong>: which service is pinned, which tab you last viewed, which services are shown, and the ChatGPT plan you chose (if you override it).</li>
+      <li><strong>Settings</strong>: which service is pinned, which tab you last viewed, which services are shown, whether to show site names instead of logos, and the ChatGPT plan you chose (if you override it).</li>
       <li><strong>A ChatGPT message log</strong>: used only as a backup estimate when ChatGPT's exact numbers are unavailable. Each entry is just the time and the model name of a message you sent on chatgpt.com. It never contains your message text. Entries older than 7 days are deleted.</li>
-      <li><strong>Two saved sign-in tokens</strong>: the ElevenLabs access token and the Leonardo access token and account ID. They're saved so the extension can keep refreshing your usage without you reopening those sites. They are used only to call that same service. The extension does not add its own encryption to this storage, so anyone with access to your unlocked browser profile on your computer could read them. Both tokens are issued by those services and expire on their own schedule.</li>
+      <li><strong>Saved sign-in tokens and API keys</strong>: the ElevenLabs access token and the Leonardo access token and account ID, plus an ElevenLabs or Leonardo API key if you choose to paste one in settings. They're saved so the extension can keep refreshing your usage without you reopening those sites. Each is used only to call the service that issued it. The extension does not add its own encryption to this storage, so anyone with access to your unlocked browser profile on your computer could read them. Tokens expire on the service's own schedule; an API key works until you remove it in settings or revoke it on the service's site. (The Suno token is never saved.)</li>
+      <li><strong>Learned renewal dates</strong>: for Leonardo and Suno, which don't report when your monthly credits renew, the last balance seen and the date a refill was first noticed, so the extension can estimate your next renewal date.</li>
       <li><strong>Your consent</strong>: that you agreed to the consent screen, which version of it, and when.</li>
       <li><strong>Connection status</strong>: the last 50 status messages about the link to the Mac app, and rate-limit backoff timers.</li>
     </ul>
@@ -465,12 +476,13 @@
       <li><strong>gemini.google.com</strong>: it asks Gemini for your usage using the page's own session, and passes the resulting usage numbers to the extension.</li>
       <li><strong>elevenlabs.io</strong>: it reads the access token that ElevenLabs' sign-in stores in your browser, and passes it to the extension.</li>
       <li><strong>app.leonardo.ai</strong>: it watches the page's own requests to Leonardo's servers to pick up the access token and account ID, then passes them to the extension. It does not change, block, or delay those requests.</li>
+      <li><strong>suno.com</strong>: it reads suno.com's short-lived sign-in token from the page's cookie, uses it once to ask Suno for your credit balance, and passes only the resulting numbers to the extension.</li>
     </ul>
     <p>The extension does not read your prompts, replies, files, or browsing history, and it does nothing on any site not listed on this page.</p>
 
     <h3>Link to the Mac app (optional)</h3>
     <p>
-      If the Tokenomics Mac app is installed, the extension uses your browser's Native Messaging to talk to a small helper that ships with the Mac app. This stays on your computer. Over this link, the extension sends your usage readings (percentages, reset times, plan name) and which services you've chosen to show, and receives the Mac app's readings and settings back. <strong>Sign-in tokens, cookies, and the ChatGPT message log are never sent over this link.</strong> (ElevenLabs readings are not forwarded to the Mac app; the Mac app reads ElevenLabs on its own with an API key you provide.) If the Mac app isn't installed, the extension works on its own and this link simply does nothing.
+      If the Tokenomics Mac app is installed, the extension uses your browser's Native Messaging to talk to a small helper that ships with the Mac app. This stays on your computer. Over this link, the extension sends your usage readings (percentages, reset times, plan name) and which services you've chosen to show, and receives the Mac app's readings and settings back. <strong>Sign-in tokens, cookies, and the ChatGPT message log are never sent over this link.</strong> ElevenLabs works the same way: only the usage numbers cross, never the token or API key. If you've also given the Mac app its own ElevenLabs API key, the Mac app uses its own reading instead. If the Mac app isn't installed, the extension works on its own and this link simply does nothing.
     </p>
 
     <h3>Permissions the extension asks for, and why</h3>
@@ -478,12 +490,12 @@
       <li><strong>Storage</strong>: to save the items listed above.</li>
       <li><strong>Alarms</strong>: to refresh your usage every few minutes while your browser is open.</li>
       <li><strong>Native Messaging</strong>: to talk to the Mac app, as described above.</li>
-      <li><strong>Access to the AI sites listed above</strong> (claude.ai, chatgpt.com, www.midjourney.com, gemini.google.com, elevenlabs.io and api.us.elevenlabs.io, grok.com, www.perplexity.ai, app.leonardo.ai and api.leonardo.ai): to request your usage and run the page scripts described above. The extension has no access to any other website.</li>
+      <li><strong>Access to the AI sites listed above</strong> (claude.ai, chatgpt.com, www.midjourney.com, gemini.google.com, elevenlabs.io and api.us.elevenlabs.io, grok.com, www.perplexity.ai, app.leonardo.ai, api.leonardo.ai and cloud.leonardo.ai, suno.com, www.udio.com): to request your usage and run the page scripts described above. The extension has no access to any other website.</li>
     </ul>
 
     <h3>Your controls</h3>
     <ul>
-      <li><strong>"Stop reading and delete my data"</strong> in the extension's settings turns it off and deletes everything it stored, including the saved tokens. It stays off until you agree again.</li>
+      <li><strong>"Stop reading and delete my data"</strong> in the extension's settings turns it off and deletes everything it stored, including the saved tokens and API keys. It stays off until you agree again.</li>
       <li><strong>Uninstalling the extension</strong> also deletes everything it stored.</li>
       <li>Signing out of an AI service makes its saved token stop working, so the extension can no longer read that service.</li>
       <li>Browser settings let you restrict the extension's site access at any time.</li>
@@ -600,6 +612,7 @@
     </p>
     <p><strong>Change log</strong></p>
     <ul>
+      <li><strong>November 23, 2026</strong>: Added Suno and Udio to the browser extension. Covers the optional ElevenLabs and Leonardo API keys you can paste into the extension, the renewal dates it learns for Leonardo and Suno, and that ElevenLabs usage numbers (never the key) can now pass to the Mac app.</li>
       <li><strong>November 22, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website: what the extension reads, stores and sends, its consent screen, and the "Stop reading and delete my data" control. Clarified that the Mac app saves usage readings for widgets, and how long download-counter rows are kept. The website now serves its own fonts instead of loading them from Google Fonts. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
       <li><strong>April 21, 2026</strong>: Previous version (Mac app and website).</li>
     </ul>
