@@ -182,6 +182,38 @@
           "@type": "Answer",
           "text": "No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno, Udio and related names are the property of their owners and are used here only to say which services Tokenomics works with."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Which browsers does the extension work in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google Chrome and Microsoft Edge. Install it from the Chrome Web Store or Microsoft Edge Add-ons. It's a standard Chromium extension, so other Chromium browsers like Brave, Arc, Vivaldi and Opera can install it from the Chrome Web Store too. The Mac app links up with Chrome (including Beta and Canary), Edge, Brave, Vivaldi, Opera and Arc, so your readings reach the menu bar and widgets from any of them. The Mac app is macOS only, so that link needs a Mac. For Safari, there's Tokenomics for Safari, a separate app on the Mac App Store. Firefox isn't supported."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tokenomics free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Mac app, the browser extension and Tokenomics for Safari are all free. There's no subscription, no ads and no account to make. The code is source-available on GitHub, so you can read every line, and the license makes it free for personal use. If paid capabilities ever ship, the current app stays free for everyone who already has it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Something's not working. What can I try?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most problems clear up with one of these: Check you're signed in to that site in the same browser. For Gemini and Suno, open a tab of the site, since the extension reads those from the page. Click refresh in the extension's popup. Check the site is switched on in the extension's settings. If the popup shows nothing at all, make sure you clicked Agree and turn on on the consent screen. If the Mac app isn't getting readings, check that it's running and that you've opened it at least once since installing the extension. That's when it sets up the link. Then reopen the popup. Just updated the extension? Quit and reopen your browser. Still stuck? Email hello@trytokenomics.com or open an issue on GitHub."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Midjourney's Fast Hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Midjourney measures paid usage in Fast Hours: GPU time spent generating in Fast mode. Each plan comes with a set number every month. The extension shows how many Fast Hours you've used of your plan's monthly total, refreshed from your Midjourney account. Relax mode doesn't use Fast Hours, so Relax jobs don't move the meter. If it shows no plan, your Midjourney account doesn't have an active subscription."
+        }
       }
     ]
   }
@@ -622,7 +654,7 @@
     <p class="feature-kicker">FAQ</p>
     <h1>The windows, the meters, and the <em>caveats</em>.</h1>
     <p class="lede" style="font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: var(--s-4) 0 0;">
-      Tokenomics shows each provider's usage in that provider's own units — and providers don't agree on how to count. This page explains what the numbers mean, why some tabs show two meters and others one, and how sign-in and privacy work.
+      This page covers getting set up, which browsers work, what Tokenomics costs and how it handles your data. It also explains the numbers themselves, because each provider counts usage its own way and Tokenomics shows it in that provider's units.
     </p>
 
     <div class="faq-find">
@@ -713,6 +745,21 @@
         </div>
       </div>
 
+      <div class="faq-item" data-keywords="browser browsers chrome edge chromium brave arc opera vivaldi safari firefox beta canary store install supported">
+        <h3 class="faq-q" id="browsers">Which browsers does the extension work in?</h3>
+        <div class="faq-a">
+          <p>
+            Google Chrome and Microsoft Edge. Install it from the Chrome Web Store or Microsoft Edge Add-ons.
+          </p>
+          <p>
+            It's a standard Chromium extension, so other Chromium browsers like Brave, Arc, Vivaldi and Opera can install it from the Chrome Web Store too. The Mac app links up with Chrome (including Beta and Canary), Edge, Brave, Vivaldi, Opera and Arc, so your readings reach the menu bar and widgets from any of them. The Mac app is macOS only, so that link needs a Mac.
+          </p>
+          <p>
+            For Safari, there's <a href="/privacy#safari">Tokenomics for Safari</a>, a separate app on the Mac App Store. Firefox isn't supported.
+          </p>
+        </div>
+      </div>
+
       <div class="faq-item" data-keywords="without alone standalone only need required require both sync together connect menubar widgets">
         <h3 class="faq-q" id="ext-standalone">Does the extension work without the Mac app?</h3>
         <div class="faq-a">
@@ -722,7 +769,19 @@
         </div>
       </div>
 
-      <div class="faq-item" data-keywords="consent agree enable disable turn off stop pause delete data start broken blank empty nothing showing">
+      <div class="faq-item" data-keywords="price pricing cost costs pay paid money subscription buy charge ads account sponsor license licence opensource source github">
+        <h3 class="faq-q" id="free">Is Tokenomics free?</h3>
+        <div class="faq-a">
+          <p>
+            Yes. The Mac app, the browser extension and Tokenomics for Safari are all free. There's no subscription, no ads and no account to make.
+          </p>
+          <p>
+            The code is source-available on <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>, so you can read every line, and the <a href="/license">license</a> makes it free for personal use. If paid capabilities ever ship, the current app stays free for everyone who already has it.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="consent agree enable disable turn off stop pause delete data start blank empty">
         <h3 class="faq-q" id="ext-consent">Does it start reading as soon as I install it?</h3>
         <div class="faq-a">
           <p>
@@ -769,6 +828,21 @@
         <div class="faq-a">
           <p>
             Quit the app, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave. To remove the browser extension, right-click its toolbar icon and choose <strong>Remove</strong>; that deletes everything it saved.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="broken troubleshoot troubleshooting fix help error problem issue stuck blank empty nothing missing zero refresh reload restart update updated sync">
+        <h3 class="faq-q" id="not-working">Something's not working. What can I try?</h3>
+        <div class="faq-a">
+          <p>
+            Most problems clear up with one of these:
+          </p>
+          <ul>
+            <li><strong>Check you're signed in</strong> to that site in the same browser. For Gemini and Suno, open a tab of the site, since the extension reads those from the page.</li><li><strong>Click refresh</strong> in the extension's popup.</li><li><strong>Check the site is switched on</strong> in the extension's settings.</li><li><strong>If the popup shows nothing at all,</strong> make sure you clicked <strong>Agree and turn on</strong> on the <a href="#ext-consent">consent screen</a>.</li><li><strong>If the Mac app isn't getting readings,</strong> check that it's running and that you've opened it at least once since installing the extension. That's when it sets up the link. Then reopen the popup.</li><li><strong>Just updated the extension?</strong> Quit and reopen your browser.</li>
+          </ul>
+          <p>
+            Still stuck? Email <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a> or open an issue on <a href="https://github.com/rob-stout/Tokenomics/issues" target="_blank" rel="noopener">GitHub</a>.
           </p>
         </div>
       </div>
@@ -832,6 +906,18 @@
         <div class="faq-a">
           <p>
             Not always. Some sites report your usage directly. Others don't, and Tokenomics can only estimate. When a reading is an estimate, the popup shows an “estimated” label next to the plan.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="midjourney fast hour hours relax mode gpu credits plan monthly basic standard pro mega">
+        <h3 class="faq-q" id="midjourney-fast-hours">What are Midjourney's Fast Hours?</h3>
+        <div class="faq-a">
+          <p>
+            Midjourney measures paid usage in Fast Hours: GPU time spent generating in Fast mode. Each plan comes with a set number every month.
+          </p>
+          <p>
+            The extension shows how many Fast Hours you've used of your plan's monthly total, refreshed from your Midjourney account. Relax mode doesn't use Fast Hours, so Relax jobs don't move the meter. If it shows no plan, your Midjourney account doesn't have an active subscription.
           </p>
         </div>
       </div>
@@ -1072,20 +1158,15 @@
       form.hidden = false;
 
       // Answers that live elsewhere on the site, so common searches
-      // ("price", "safari", "windows") don't dead-end. Same tab, plain links.
+      // ("install", "windows", "setup") don't dead-end. Same tab, plain links.
       // w: rank weight vs. answers on this page (default 0.8, so this page
       // wins close calls; install is 1 because its title is the exact ask).
       var ELSEWHERE = [
-        { title: 'Is Tokenomics free?', href: '/#faq', where: 'On the home page',
-          text: "Yes. Tokenomics is free to download and use. There's no subscription, no paid tier, and no feature gating.",
-          kw: 'price pricing cost free pay paid money subscription buy charge' },
         { title: 'How do I install Tokenomics?', href: '/#install', where: 'On the home page', w: 1,
           text: 'Download the Mac app from this site, or install it with Homebrew. The browser extension installs from the Chrome Web Store or Microsoft Edge Add-ons.',
           kw: 'install installing download homebrew brew dmg get' },
-        { title: 'Which browsers does the extension work in?', href: '/privacy#browser-extension', where: 'On the privacy page',
-          text: 'Google Chrome and Microsoft Edge, plus other Chromium browsers that can install from those stores. For Safari, there’s Tokenomics for Safari, a Mac App Store app.',
-          kw: 'browser browsers chrome edge chromium brave arc opera vivaldi safari firefox supported' },
-        { title: 'Tokenomics for Safari', href: '/privacy#safari', where: 'On the privacy page',
+        // 0.5: the on-page browsers answer covers Safari and should come first.
+        { title: 'Tokenomics for Safari', href: '/privacy#safari', where: 'On the privacy page', w: 0.5,
           text: 'A Mac App Store app that contains a Safari extension. It works like the browser extension, and if you have the Mac app, it shares your readings with it on your computer.',
           kw: 'safari apple appstore supported' },
         { title: 'Connecting your AI tools to the Mac app', href: '/setup', where: 'On the setup page',
