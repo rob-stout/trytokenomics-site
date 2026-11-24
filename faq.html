@@ -16,6 +16,11 @@
   <meta name="theme-color" content="#F3EFE5" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0E334D" media="(prefers-color-scheme: dark)" />
 
+  <!-- Flags that JS is running so answers can start collapsed without a
+       flash of every answer expanded. Without JS the class never lands and
+       the page shows every answer, fully readable. -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="assets/sharing/Favicon-180x180.svg" />
   <link rel="icon" type="image/png" sizes="180x180" href="assets/sharing/Favicon-180x180.png" />
@@ -103,7 +108,7 @@
         "name": "What does the browser extension have access to?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity and Leonardo. It doesn't ask for access to all websites. On those sites it reads your own usage and limit numbers, using the sign-in you already have. It saves your settings and latest numbers in your browser's extension storage on your device, and for ElevenLabs and Leonardo it also saves the access token the site gives your browser. Numbers refresh every few minutes."
+          "text": "Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. It doesn't ask for access to all websites. On those sites it reads your own usage and limit numbers, using the sign-in you already have. It saves your settings and latest numbers in your browser's extension storage on your device, and for ElevenLabs and Leonardo it also saves the access token the site gives your browser, or an API key you paste in its settings. Numbers refresh every few minutes."
         }
       },
       {
@@ -175,7 +180,7 @@
         "name": "Is Tokenomics affiliated with these AI services?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo and related names are the property of their owners and are used here only to say which services Tokenomics works with."
+          "text": "No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno, Udio and related names are the property of their owners and are used here only to say which services Tokenomics works with."
         }
       }
     ]
@@ -185,7 +190,7 @@
   <!-- Shared document-page styling. Tokens, fonts, nav, footer inherited from styles.css. -->
   <style>
     .doc-hero {
-      padding: var(--s-9) 0 var(--s-6);
+      padding: var(--s-9) 0 var(--s-7);
       border-bottom: 1px solid var(--border);
     }
     .doc-hero h1 em { font-style: italic; color: var(--accent); }
@@ -204,52 +209,259 @@
     .doc-backlink:hover { color: var(--accent); }
     .doc-backlink svg { width: 14px; height: 14px; }
 
-    /* On-this-page jump nav */
-    .faq-toc {
-      margin: var(--s-5) 0 0;
-      padding: var(--s-4) var(--s-5);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      max-width: 600px;
-    }
-    .faq-toc h2 {
+    /* ── Small uppercase label (same recipe as .feature-kicker) ─────────
+       Used for "Common questions" and "All questions" so the two zones
+       of the page read as a pair: find above, browse below. */
+    .faq-label {
       font-family: var(--font-sans);
-      font-size: var(--fs-small);
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: var(--fs-micro);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-subtle);
+      /* --text-muted, not --text-subtle: subtle is ~3.9:1 in dark mode,
+         too faint for a label that names a whole zone of the page. */
+      color: var(--text-muted);
       margin: 0 0 var(--s-3);
     }
-    .faq-toc ul { list-style: none; padding: 0; margin: 0; }
-    .faq-toc li { margin-bottom: var(--s-2); }
-    .faq-toc li:last-child { margin-bottom: 0; }
-    .faq-toc a {
+
+    /* ── Find zone: search + common questions ───────────────────────── */
+    .faq-find { margin-top: var(--s-6); }
+
+    .faq-search { position: relative; max-width: 720px; margin: 0; }
+    .faq-search-icon {
+      position: absolute;
+      left: 16px; top: 50%;
+      width: 18px; height: 18px;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .faq-search-input {
+      display: block;
+      width: 100%;
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);   /* 16px also stops iOS zooming on focus */
+      line-height: 1.5;
+      padding: 12px 48px 12px 46px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
+      appearance: none;
+      transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .faq-search-input::placeholder { color: var(--text-muted); opacity: 1; }
+    .faq-search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      /* 1px accent + 1px border = a 2px visible edge, plus the system ring */
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow-ring);
+    }
+    .faq-search-kbd {
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-sans);
+      font-size: var(--fs-micro);
+      line-height: 1;
+      color: var(--text-subtle);
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-xs);
+      padding: 4px 7px;
+      pointer-events: none;
+    }
+    .faq-search-input:focus ~ .faq-search-kbd,
+    .faq-search-input:not(:placeholder-shown) ~ .faq-search-kbd { display: none; }
+    @media (hover: none), (pointer: coarse) {
+      .faq-search-kbd { display: none; }
+    }
+
+    /* Result count. Always rendered (a live region must exist before it
+       changes to be announced reliably); collapses to nothing when empty. */
+    .faq-status {
       font-size: var(--fs-small);
       color: var(--text-muted);
+      margin: var(--s-4) 0 0;
+      max-width: 720px;
+      overflow-wrap: anywhere;
+    }
+    .faq-status:empty { margin: 0; }
+
+    .faq-results { max-width: 720px; margin-top: var(--s-3); }
+    .faq-result-list { list-style: none; margin: 0; padding: 0; }
+    .faq-result {
+      position: relative;
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-result:first-child { border-top: 1px solid var(--border); }
+    .faq-result-link {
+      font-family: var(--font-serif);
+      font-size: var(--fs-body-lg);
+      line-height: 1.35;
+      color: var(--text);
       text-decoration: none;
       transition: color var(--dur-fast) var(--ease);
     }
-    .faq-toc a:hover { color: var(--accent); text-decoration: underline; }
+    /* Whole row is clickable; the link text alone is what gets announced. */
+    .faq-result-link::after { content: ""; position: absolute; inset: 0; }
+    .faq-result:hover .faq-result-link { color: var(--accent); }
+    .faq-result-link:focus-visible { outline: none; }
+    .faq-result:has(.faq-result-link:focus-visible) {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: var(--r-xs);
+    }
+    @supports not selector(:has(*)) {
+      .faq-result-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    }
+    .faq-result p {
+      margin: var(--s-1) 0 0;
+      max-width: none;
+      font-size: var(--fs-small);
+      line-height: 1.55;
+      color: var(--text-muted);
+      overflow-wrap: anywhere;
+    }
+    .faq-result .faq-result-where { font-size: var(--fs-micro); color: var(--text-muted); }
+    .faq-find mark {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+      color: inherit;
+      border-radius: 3px;
+      padding: 0 1px;
+    }
 
+    .faq-empty { max-width: 640px; margin-top: var(--s-2); }
+    .faq-empty p { font-size: var(--fs-small); margin: 0 0 var(--s-2); }
+
+    .faq-common { margin-top: var(--s-6); }
+    .faq-cards {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-4);
+      max-width: 1040px;
+    }
+    @media (max-width: 860px) {
+      .faq-cards { grid-template-columns: 1fr; max-width: 720px; }
+    }
+    .faq-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s-5);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--dur) var(--ease);
+    }
+    .faq-card:hover { box-shadow: var(--shadow-md); }
+    .faq-card h3 {
+      font-family: var(--font-serif);
+      font-size: var(--fs-h4);
+      line-height: 1.2;
+      margin: 0 0 var(--s-2);
+    }
+    .faq-card h3 a { color: var(--text); text-decoration: none; transition: color var(--dur-fast) var(--ease); }
+    .faq-card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+    .faq-card:hover h3 a { color: var(--accent); }
+    .faq-card h3 a:focus-visible { outline: none; }
+    .faq-card:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @supports not selector(:has(*)) {
+      .faq-card h3 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    }
+    .faq-card p {
+      font-size: var(--fs-small);
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin: 0 0 var(--s-4);
+      max-width: none;
+    }
+    .faq-card-more {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--fs-small);
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .faq-card-more svg { width: 14px; height: 14px; }
+
+    /* ── Browse zone: grouped, collapsible answers ──────────────────── */
     .doc-body { padding: var(--s-7) 0 var(--s-9); }
+    .doc-body .section-wrap > * { max-width: 720px; }
+    .faq-browse-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-4);
+      margin-bottom: var(--s-5);
+    }
+    .faq-browse-head .faq-label { margin: 0; scroll-margin-top: 96px; }
+    .faq-expand { margin-right: -14px; } /* optically align the label with the chevrons */
+    .faq-expand[hidden] { display: none; }
+
     .doc-body .faq-group {
       font-size: var(--fs-h3);
-      margin-top: var(--s-8);
-      margin-bottom: var(--s-2);
+      margin-top: var(--s-7);
+      margin-bottom: var(--s-3);
+      scroll-margin-top: 96px;
     }
     .doc-body .faq-group:first-of-type { margin-top: 0; }
+    .doc-body .faq-list { margin-top: 0; }
+
     .doc-body .faq-q {
-      font-size: var(--fs-h4);
-      font-family: var(--font-sans);
-      font-weight: 600;
+      font-family: var(--font-serif);
+      font-size: var(--fs-body-lg);
+      font-weight: 400;
       letter-spacing: -0.005em;
-      margin-top: var(--s-6);
-      margin-bottom: var(--s-2);
+      line-height: 1.35;
+      margin: 0;
+      padding: var(--s-4) 0 var(--s-3);
       color: var(--text);
       scroll-margin-top: 96px; /* clear the sticky nav on anchor jumps */
     }
+    .doc-body.is-enhanced .faq-q { padding: 0; }
+    .faq-q-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-4);
+      width: 100%;
+      margin: 0;
+      padding: var(--s-4) 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .faq-q-btn:hover { color: var(--accent); }
+    .faq-q-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: var(--r-sm);
+    }
+    .faq-item.is-open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
+
+    /* Before the script enhances the list, keep answers collapsed so the page
+       doesn't paint every answer and then snap shut. Only applies with JS. */
+    .js .doc-body:not(.is-enhanced) .faq-a { display: none; }
+    .faq-a > :first-child { margin-top: 0; }
+    .faq-a > :last-child { margin-bottom: var(--s-5); }
+
     .doc-body p {
       font-size: var(--fs-body);
       line-height: 1.7;
@@ -277,6 +489,7 @@
       padding: 2px 6px;
       border-radius: var(--r-xs);
       border: 1px solid var(--border);
+      overflow-wrap: anywhere;
     }
 
     /* Plan → Fast Hours style table (kept for future provider-unit entries) */
@@ -328,8 +541,37 @@
       margin-top: var(--s-8);
       padding-top: var(--s-6);
       border-top: 1px solid var(--border);
+      scroll-margin-top: 96px;
     }
     .faq-contact p { max-width: 60ch; }
+
+    /* ── Phone width ─────────────────────────────────────────────────
+       The shared .section-wrap gutter is 48px, which leaves ~280px of
+       text on a 375px phone. Tighten to 16px here (nav + footer too, so
+       the left edges still line up). Candidate to promote site-wide. */
+    @media (max-width: 540px) {
+      .section-wrap,
+      .footer-inner { padding-left: var(--s-4); padding-right: var(--s-4); }
+      .nav { padding-left: var(--s-4); padding-right: var(--s-4); }
+      .doc-hero { padding-top: var(--s-7); padding-bottom: var(--s-6); }
+      .faq-find { margin-top: var(--s-5); }
+      .faq-card { padding: var(--s-4) var(--s-5); }
+    }
+
+    /* Printing (or "Save as PDF") should include every answer. */
+    @media print {
+      .faq-a[hidden] { display: block !important; content-visibility: visible !important; }
+      .faq-search, .faq-expand, .faq-chevron, .faq-common { display: none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .faq-chevron,
+      .faq-q-btn,
+      .faq-card,
+      .faq-card h3 a,
+      .faq-result-link,
+      .faq-search-input { transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -366,7 +608,7 @@
 <main id="main-content">
 
 <!-- ══════════════════════════════════════════════════════════
-     HERO
+     HERO — the "find" zone: search, then three common questions
      ══════════════════════════════════════════════════════════ -->
 <header class="doc-hero">
   <div class="section-wrap">
@@ -383,166 +625,289 @@
       Tokenomics shows each provider's usage in that provider's own units — and providers don't agree on how to count. This page explains what the numbers mean, why some tabs show two meters and others one, and how sign-in and privacy work.
     </p>
 
-    <nav class="faq-toc" aria-label="On this page">
-      <h2>On this page</h2>
-      <ul>
-        <li><a href="#claude-windows">How Claude's 5-Hour and 7-Day windows work</a></li>
-        <li><a href="#anthropic-one-window">Why Anthropic shows one window when others show two</a></li>
-        <li><a href="#chatgpt-two-bars">Why my ChatGPT tab shows two progress bars</a></li>
-        <li><a href="#widget-openai-twice">Why my widget shows OpenAI twice</a></li>
-        <li><a href="#data">Is my usage data sent anywhere?</a></li>
-        <li><a href="#sign-in">How does signing in work?</a></li>
-        <li><a href="#uninstall">How do I uninstall Tokenomics?</a></li>
-        <li><a href="#ext-sites">Which sites does the browser extension work with?</a></li>
-        <li><a href="#ext-access">What does the browser extension have access to?</a></li>
-        <li><a href="#ext-consent">Does it start reading as soon as I install it?</a></li>
-        <li><a href="#ext-why-sites">Why does it need access to the AI sites?</a></li>
-        <li><a href="#ext-native">Why does Chrome say it can “communicate with cooperating native applications”?</a></li>
-        <li><a href="#ext-chats">Does it see my chats or prompts?</a></li>
-        <li><a href="#ext-data">Is any of my data sent to Tokenomics?</a></li>
-        <li><a href="#ext-exact">Are the numbers exact?</a></li>
-        <li><a href="#ext-standalone">Does the extension work without the Mac app?</a></li>
-        <li><a href="#ext-elevenlabs">How do I set up ElevenLabs?</a></li>
-        <li><a href="#ext-allowed">Is Tokenomics affiliated with these AI services?</a></li>
-      </ul>
-    </nav>
+    <div class="faq-find">
+      <!-- Hidden until the script runs: without JS there's nothing to search
+           with, and every answer below is already expanded. -->
+      <form class="faq-search" id="faq-search" role="search" action="/faq" method="get" hidden>
+        <label for="faq-search-input" class="sr-only">Search the FAQ</label>
+        <svg class="faq-search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="8.75" cy="8.75" r="5.75"/>
+          <path d="M13 13l4.25 4.25"/>
+        </svg>
+        <input class="faq-search-input" id="faq-search-input" type="search" name="q"
+               placeholder="Search, like “privacy” or “ElevenLabs key”"
+               autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search"
+               aria-describedby="faq-search-hint" aria-controls="faq-result-list" />
+        <kbd class="faq-search-kbd" aria-hidden="true">/</kbd>
+        <span id="faq-search-hint" class="sr-only">Results appear below as you type. Press Enter to open the first one, or the down arrow to move through them.</span>
+      </form>
+
+      <p class="faq-status" id="faq-status" role="status" aria-live="polite"></p>
+
+      <div class="faq-results" id="faq-results" hidden>
+        <ol class="faq-result-list" id="faq-result-list" aria-label="Search results"></ol>
+      </div>
+
+      <div class="faq-empty" id="faq-empty" hidden>
+        <p>Try fewer words, or the name of a site like Claude, ChatGPT or ElevenLabs.</p>
+        <p>Still stuck? Email <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a> or open an issue on <a href="https://github.com/rob-stout/Tokenomics/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+      </div>
+
+      <section class="faq-common" id="faq-common" aria-labelledby="faq-common-heading">
+        <h2 class="faq-label" id="faq-common-heading">Common questions</h2>
+        <ul class="faq-cards">
+          <li class="faq-card">
+            <h3><a href="#ext-sites">Which sites and tools does it work with?</a></h3>
+            <p>Ten AI sites in your browser, from Claude and ChatGPT to Suno and Udio. The Mac app adds coding tools like Claude Code and Cursor.</p>
+            <span class="faq-card-more" aria-hidden="true">Full answer
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+            </span>
+          </li>
+          <li class="faq-card">
+            <h3><a href="#data">Is my usage data sent anywhere?</a></h3>
+            <p>No. There's no analytics, telemetry or tracking, and nothing is sent to any server the author controls.</p>
+            <span class="faq-card-more" aria-hidden="true">Full answer
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+            </span>
+          </li>
+          <li class="faq-card">
+            <h3><a href="#ext-standalone">Does the extension work without the Mac app?</a></h3>
+            <p>Yes, on its own in your browser. The Mac app adds menu bar rings, widgets and coding tools, and the two stay in sync.</p>
+            <span class="faq-card-more" aria-hidden="true">Full answer
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
   </div>
 </header>
 
 
 <!-- ══════════════════════════════════════════════════════════
-     BODY
+     BODY — the "browse" zone: every question, grouped by intent.
+     data-keywords holds extra words people search with that the
+     answer itself doesn't use (read by the search script only).
      ══════════════════════════════════════════════════════════ -->
-<section class="doc-body">
+<section class="doc-body" aria-labelledby="all-questions">
   <div class="section-wrap">
 
-    <h2 class="faq-group">Reading your usage numbers</h2>
-
-    <h3 class="faq-q" id="claude-windows">How do Claude's 5-Hour and 7-Day windows work?</h3>
-    <p>
-      These are Anthropic's own quota windows, not something Tokenomics invented. The <strong>5-Hour Window</strong> is the rolling cap most people hit first — it resets about five hours after your first message in the current block. If Tokenomics shows 80% with two hours left, you're close to a rate limit, so pace your prompts or switch tasks.
-    </p>
-    <p>
-      The <strong>7-Day Window</strong> is the longer ceiling, resetting weekly from your first message of the cycle. On Pro plans you'll also see an <strong>Opus</strong> sub-counter inside the 7-day window — Opus carries its own weekly cap on top of the shared total, so it can run dry while the 7-day window still has room.
-    </p>
-
-    <h3 class="faq-q" id="anthropic-one-window">Why does Anthropic show only one window when other providers show two?</h3>
-    <p>
-      Anthropic is the exception. Claude on the web, the Claude desktop app, and Claude Code all draw down the <strong>same 5-hour and 7-day windows</strong> on your subscription — one set of limits covers every surface, so the Anthropic tab needs only the 5-hour and 7-day split.
-    </p>
-    <p>
-      OpenAI and Google structure their products the other way: the same account has a <strong>separate meter per surface</strong>. That's why those brands render two bars instead of one — see the next answer.
-    </p>
-
-    <h3 class="faq-q" id="chatgpt-two-bars">Why does my ChatGPT tab show two progress bars?</h3>
-    <p>
-      ChatGPT and Codex CLI are two different products that share one OpenAI login but bill against <strong>separate limits</strong>. Consumer ChatGPT runs on its own 3-hour and weekly windows; Codex CLI has its own weekly quota tied to your subscription tier. Same account, different meters — and OpenAI doesn't return a combined view, so Tokenomics renders them as two bars to show which limit you're closer to.
-    </p>
-    <p>
-      The same is true for <strong>Gemini</strong>: <code>gemini.google.com</code> and the Gemini CLI share a Google account but track usage independently.
-    </p>
-
-    <h3 class="faq-q" id="widget-openai-twice">Why does my widget show OpenAI twice?</h3>
-    <p>
-      Widgets render each usage pool as its own row, because the compact format has no room to nest. If you've connected both ChatGPT and Codex CLI, the OpenAI brand contributes two rows. On the <strong>small widget</strong> you pick exactly one pool to show — open the widget's edit panel and choose <strong>ChatGPT</strong> or <strong>Codex CLI</strong>.
-    </p>
-    <div class="doc-callout">
-      <p><strong>Upgrading from an earlier version?</strong> If your small widget was set to "OpenAI" or "Google AI," it now maps to <strong>Codex CLI</strong> or <strong>Gemini CLI</strong> respectively — those entries were already tracking the CLI pools, since chat readers for those brands didn't exist before. To show the chat pool instead, re-select it from the edit panel.</p>
+    <div class="faq-browse-head">
+      <p class="faq-label" id="all-questions">All questions</p>
+      <button type="button" class="btn btn-ghost btn-sm faq-expand" id="faq-expand-all" hidden>Expand all</button>
     </div>
 
-    <h2 class="faq-group">Accounts &amp; privacy</h2>
+    <!-- ── Getting started ─────────────────────────────────── -->
+    <h2 class="faq-group" id="browser-extension">Getting started</h2>
+    <div class="faq-list">
 
-    <h3 class="faq-q" id="data">Is my usage data sent anywhere?</h3>
-    <p>
-      No. Tokenomics reads usage from the AI tools you already use, saves only the usage numbers its widgets need on your Mac, and sends nothing to any server the author controls — no analytics, no telemetry, no tracking code inside the app or the browser extension. The full, auditable breakdown is on the <a href="/privacy">Privacy page</a>.
-    </p>
+      <div class="faq-item" data-keywords="supported compatible list providers websites tools claude chatgpt gemini midjourney elevenlabs grok perplexity leonardo suno udio claude code codex cli github copilot cursor">
+        <h3 class="faq-q" id="ext-sites">Which sites does the browser extension work with?</h3>
+        <div class="faq-a">
+          <p>
+            In your browser: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. Sign in to a site the way you normally do, and its meter shows up in the popup.
+          </p>
+          <p>
+            With the free Tokenomics Mac app, you also get Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor, and the extension's readings show in your menu bar and widgets.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="sign-in">How does signing in work?</h3>
-    <p>
-      For every provider that ships a command-line tool, Tokenomics reads the credentials those tools <strong>already stored on your Mac</strong> — you never hand Tokenomics a password, and there's nothing to paste. The few providers without a CLI use an API key you paste once, kept in the macOS Keychain. Tokenomics never extracts or copies your tokens anywhere else. The specifics are itemized on the <a href="/privacy">Privacy page</a>.
-    </p>
+      <div class="faq-item" data-keywords="without alone standalone only need required require both sync together connect menubar widgets">
+        <h3 class="faq-q" id="ext-standalone">Does the extension work without the Mac app?</h3>
+        <div class="faq-a">
+          <p>
+            Yes. It works on its own in your browser. The Mac app adds menu bar rings and desktop widgets, and brings in Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. If you have both, they sync.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="uninstall">How do I uninstall Tokenomics?</h3>
-    <p>
-      Quit the app, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave. To remove the browser extension, right-click its toolbar icon and choose <strong>Remove</strong>; that deletes everything it saved.
-    </p>
+      <div class="faq-item" data-keywords="consent agree enable disable turn off stop pause delete data start broken blank empty nothing showing">
+        <h3 class="faq-q" id="ext-consent">Does it start reading as soon as I install it?</h3>
+        <div class="faq-a">
+          <p>
+            No. On install it shows a short consent screen that explains what it reads and stores. Nothing is read until you click <strong>Agree and turn on</strong>. To turn it off later, open the extension's settings and click <strong>Stop reading and delete my data</strong>. That deletes everything it saved, and it stays off until you agree again.
+          </p>
+        </div>
+      </div>
 
-    <h2 class="faq-group" id="browser-extension">The browser extension</h2>
+      <div class="faq-item" data-keywords="signin login password credentials keychain token api key cli auth account">
+        <h3 class="faq-q" id="sign-in">How does signing in work?</h3>
+        <div class="faq-a">
+          <p>
+            For every provider that ships a command-line tool, Tokenomics reads the credentials those tools <strong>already stored on your Mac</strong> — you never hand Tokenomics a password, and there's nothing to paste. The few providers without a CLI use an API key you paste once, kept in the macOS Keychain. Tokenomics never extracts or copies your tokens anywhere else. The specifics are itemized on the <a href="/privacy">Privacy page</a>.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-sites">Which sites does the browser extension work with?</h3>
-    <p>
-      In your browser: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. Sign in to a site the way you normally do, and its meter shows up in the popup.
-    </p>
-    <p>
-      With the free Tokenomics Mac app, you also get Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor, and the extension's readings show in your menu bar and widgets.
-    </p>
+      <div class="faq-item" data-keywords="elevenlabs api key keys setup permission user access characters credits">
+        <h3 class="faq-q" id="ext-elevenlabs">How do I set up ElevenLabs?</h3>
+        <div class="faq-a">
+          <p>
+            There are three ways, and you can use any of them:
+          </p>
+          <ol>
+            <li><strong>Sign in at elevenlabs.io</strong> in your browser, with the extension installed. It reads your usage using that sign-in.</li><li><strong>Paste an API key into the extension</strong> (open the extension’s Settings and find ElevenLabs). It reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back.</li><li><strong>Paste an API key into the Mac app</strong> (gear icon → Providers → ElevenLabs). It reads your usage even when your browser is closed.</li>
+          </ol>
+          <p>
+            <strong>Which one shows in the Mac app?</strong> If you've pasted a key into the Mac app, it uses that key. If you haven't, it shows the numbers the extension reads, which update every few minutes while your browser is open. It never uses both at once. Your key never moves between the extension and the Mac app; only the usage numbers do.
+          </p>
+          <p>
+            <strong>Making a key.</strong> In ElevenLabs, open <a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener">API Keys</a> and create a key. Set “User” to “Access” and leave everything else on “No Access”. That's all Tokenomics needs, and a key like that can't generate audio or change your account. If the key is missing that permission, Tokenomics won't save it and tells you why.
+          </p>
+          <p>
+            <strong>Things you might notice:</strong>
+          </p>
+          <ul>
+            <li><strong>Reset dates on Free accounts.</strong> ElevenLabs sometimes keeps reporting the first month's reset date long after it passed. Characters still refresh monthly on that day, so Tokenomics counts forward to the next one.</li><li><strong>The extension saves keys on your device</strong>, in your browser's extension storage, unencrypted. Use a key with only the “User” permission so it's harmless if it ever leaked. The Mac app keeps its key in your Mac's Keychain.</li><li><strong>Without a Mac app key, the Mac app only updates while your browser is open.</strong> Close the browser and the Mac app keeps showing the last numbers it got.</li>
+          </ul>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-access">What does the browser extension have access to?</h3>
-    <p>
-      Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity and Leonardo. It doesn't ask for access to all websites. On those sites it reads your own usage and limit numbers, using the sign-in you already have. It saves your settings and latest numbers in your browser's extension storage on your device, and for ElevenLabs and Leonardo it also saves the access token the site gives your browser. Numbers refresh every few minutes.
-    </p>
+      <div class="faq-item" data-keywords="uninstall remove delete trash removal clean leftover preferences extension">
+        <h3 class="faq-q" id="uninstall">How do I uninstall Tokenomics?</h3>
+        <div class="faq-a">
+          <p>
+            Quit the app, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave. To remove the browser extension, right-click its toolbar icon and choose <strong>Remove</strong>; that deletes everything it saved.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-consent">Does it start reading as soon as I install it?</h3>
-    <p>
-      No. On install it shows a short consent screen that explains what it reads and stores. Nothing is read until you click <strong>Agree and turn on</strong>. To turn it off later, open the extension's settings and click <strong>Stop reading and delete my data</strong>. That deletes everything it saved, and it stays off until you agree again.
-    </p>
+    </div>
 
-    <h3 class="faq-q" id="ext-why-sites">Why does it need access to the AI sites?</h3>
-    <p>
-      Each site shows your usage in its own account pages, with no shared way to get it. To show it in the popup, the extension asks that site for your numbers, the same way the site's own pages do. That is the only reason it has access to those sites. It doesn't touch any others.
-    </p>
+    <!-- ── Reading your usage numbers ──────────────────────── -->
+    <h2 class="faq-group">Reading your usage numbers</h2>
+    <div class="faq-list">
 
-    <h3 class="faq-q" id="ext-native">Why does Chrome say it can “communicate with cooperating native applications”?</h3>
-    <p>
-      That's the permission the extension uses to hand your usage numbers to the Tokenomics Mac app, if you have it installed. It stays on your computer, and your sign-in tokens are never sent over it. Without the Mac app, nothing happens.
-    </p>
+      <div class="faq-item" data-keywords="anthropic limit quota rate reset weekly week rolling opus pro max">
+        <h3 class="faq-q" id="claude-windows">How do Claude's 5-Hour and 7-Day windows work?</h3>
+        <div class="faq-a">
+          <p>
+            These are Anthropic's own quota windows, not something Tokenomics invented. The <strong>5-Hour Window</strong> is the rolling cap most people hit first — it resets about five hours after your first message in the current block. If Tokenomics shows 80% with two hours left, you're close to a rate limit, so pace your prompts or switch tasks.
+          </p>
+          <p>
+            The <strong>7-Day Window</strong> is the longer ceiling, resetting weekly from your first message of the cycle. On Pro plans you'll also see an <strong>Opus</strong> sub-counter inside the 7-day window — Opus carries its own weekly cap on top of the shared total, so it can run dry while the 7-day window still has room.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-chats">Does it see my chats or prompts?</h3>
-    <p>
-      No. The extension reads usage numbers, not conversations, and it doesn't store your prompts or chats. On ChatGPT it notes the time and model of each message you send, to estimate usage when exact numbers aren't available. It never keeps what you wrote. Details are on the <a href="/privacy#browser-extension">privacy page</a>.
-    </p>
+      <div class="faq-item" data-keywords="claude single one window only desktop">
+        <h3 class="faq-q" id="anthropic-one-window">Why does Anthropic show only one window when other providers show two?</h3>
+        <div class="faq-a">
+          <p>
+            Anthropic is the exception. Claude on the web, the Claude desktop app, and Claude Code all draw down the <strong>same 5-hour and 7-day windows</strong> on your subscription — one set of limits covers every surface, so the Anthropic tab needs only the 5-hour and 7-day split.
+          </p>
+          <p>
+            OpenAI and Google structure their products the other way: the same account has a <strong>separate meter per surface</strong>. That's why those brands render two bars instead of one — see <a href="#chatgpt-two-bars">the next answer</a>.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-data">Is any of my data sent to Tokenomics?</h3>
-    <p>
-      No. There's no analytics or telemetry in the extension. It talks only to the AI sites you use, plus the Mac app on your own computer if you have it. The <a href="/privacy#browser-extension">privacy page</a> lists exactly what it connects to.
-    </p>
+      <div class="faq-item" data-keywords="openai codex gemini meters separate gpt">
+        <h3 class="faq-q" id="chatgpt-two-bars">Why does my ChatGPT tab show two progress bars?</h3>
+        <div class="faq-a">
+          <p>
+            ChatGPT and Codex CLI are two different products that share one OpenAI login but bill against <strong>separate limits</strong>. Consumer ChatGPT runs on its own 3-hour and weekly windows; Codex CLI has its own weekly quota tied to your subscription tier. Same account, different meters — and OpenAI doesn't return a combined view, so Tokenomics renders them as two bars to show which limit you're closer to.
+          </p>
+          <p>
+            The same is true for <strong>Gemini</strong>: <code>gemini.google.com</code> and the Gemini CLI share a Google account but track usage independently.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-exact">Are the numbers exact?</h3>
-    <p>
-      Not always. Some sites report your usage directly. Others don't, and Tokenomics can only estimate. When a reading is an estimate, the popup shows an “estimated” label next to the plan.
-    </p>
+      <div class="faq-item" data-keywords="widget small medium large duplicate duplicated double rows chatgpt codex gemini cli google">
+        <h3 class="faq-q" id="widget-openai-twice">Why does my widget show OpenAI twice?</h3>
+        <div class="faq-a">
+          <p>
+            Widgets render each usage pool as its own row, because the compact format has no room to nest. If you've connected both ChatGPT and Codex CLI, the OpenAI brand contributes two rows. On the <strong>small widget</strong> you pick exactly one pool to show — open the widget's edit panel and choose <strong>ChatGPT</strong> or <strong>Codex CLI</strong>.
+          </p>
+          <div class="doc-callout">
+            <p><strong>Upgrading from an earlier version?</strong> If your small widget was set to "OpenAI" or "Google AI," it now maps to <strong>Codex CLI</strong> or <strong>Gemini CLI</strong> respectively — those entries were already tracking the CLI pools, since chat readers for those brands didn't exist before. To show the chat pool instead, re-select it from the edit panel.</p>
+          </div>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-standalone">Does the extension work without the Mac app?</h3>
-    <p>
-      Yes. It works on its own in your browser. The Mac app adds menu bar rings and desktop widgets, and brings in Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. If you have both, they sync.
-    </p>
+      <div class="faq-item" data-keywords="accurate accuracy estimate wrong correct precise numbers chatgpt">
+        <h3 class="faq-q" id="ext-exact">Are the numbers exact?</h3>
+        <div class="faq-a">
+          <p>
+            Not always. Some sites report your usage directly. Others don't, and Tokenomics can only estimate. When a reading is an estimate, the popup shows an “estimated” label next to the plan.
+          </p>
+        </div>
+      </div>
 
-    <h3 class="faq-q" id="ext-elevenlabs">How do I set up ElevenLabs?</h3>
-    <p>
-      There are three ways, and you can use any of them:
-    </p>
-    <ol>
-      <li><strong>Sign in at elevenlabs.io</strong> in your browser, with the extension installed. It reads your usage using that sign-in.</li><li><strong>Paste an API key into the extension</strong> (open the extension’s Settings and find ElevenLabs). It reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back.</li><li><strong>Paste an API key into the Mac app</strong> (gear icon → Providers → ElevenLabs). It reads your usage even when your browser is closed.</li>
-    </ol>
-    <p>
-      <strong>Which one shows in the Mac app?</strong> If you've pasted a key into the Mac app, it uses that key. If you haven't, it shows the numbers the extension reads, which update every few minutes while your browser is open. It never uses both at once. Your key never moves between the extension and the Mac app; only the usage numbers do.
-    </p>
-    <p>
-      <strong>Making a key.</strong> In ElevenLabs, open <a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener">API Keys</a> and create a key. Set “User” to “Access” and leave everything else on “No Access”. That's all Tokenomics needs, and a key like that can't generate audio or change your account. If the key is missing that permission, Tokenomics won't save it and tells you why.
-    </p>
-    <p>
-      <strong>Things you might notice:</strong>
-    </p>
-    <ul>
-      <li><strong>Reset dates on Free accounts.</strong> ElevenLabs sometimes keeps reporting the first month's reset date long after it passed. Characters still refresh monthly on that day, so Tokenomics counts forward to the next one.</li><li><strong>The extension saves keys on your device</strong>, in your browser's extension storage, unencrypted. Use a key with only the “User” permission so it's harmless if it ever leaked. The Mac app keeps its key in your Mac's Keychain.</li><li><strong>Without a Mac app key, the Mac app only updates while your browser is open.</strong> Close the browser and the Mac app keeps showing the last numbers it got.</li>
-    </ul>
+    </div>
 
-    <h3 class="faq-q" id="ext-allowed">Is Tokenomics affiliated with these AI services?</h3>
-    <p>
-      No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo and related names are the property of their owners and are used here only to say which services Tokenomics works with.
-    </p>
+    <!-- ── Privacy & permissions ───────────────────────────── -->
+    <h2 class="faq-group">Privacy &amp; permissions</h2>
+    <div class="faq-list">
 
-    <div class="faq-contact">
+      <div class="faq-item" data-keywords="privacy private tracking telemetry analytics safe secure security collect server">
+        <h3 class="faq-q" id="data">Is my usage data sent anywhere?</h3>
+        <div class="faq-a">
+          <p>
+            No. Tokenomics reads usage from the AI tools you already use, saves only the usage numbers its widgets need on your Mac, and sends nothing to any server the author controls — no analytics, no telemetry, no tracking code inside the app or the browser extension. The full, auditable breakdown is on the <a href="/privacy">Privacy page</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="privacy server telemetry analytics tracking extension">
+        <h3 class="faq-q" id="ext-data">Is any of my data sent to Tokenomics?</h3>
+        <div class="faq-a">
+          <p>
+            No. There's no analytics or telemetry in the extension. It talks only to the AI sites you use, plus the Mac app on your own computer if you have it. The <a href="/privacy#browser-extension">privacy page</a> lists exactly what it connects to.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="chat prompt conversation message history read private">
+        <h3 class="faq-q" id="ext-chats">Does it see my chats or prompts?</h3>
+        <div class="faq-a">
+          <p>
+            No. The extension reads usage numbers, not conversations, and it doesn't store your prompts or chats. On ChatGPT it notes the time and model of each message you send, to estimate usage when exact numbers aren't available. It never keeps what you wrote. Details are on the <a href="/privacy#browser-extension">privacy page</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="permission permissions host storage store token see">
+        <h3 class="faq-q" id="ext-access">What does the browser extension have access to?</h3>
+        <div class="faq-a">
+          <p>
+            Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. It doesn't ask for access to all websites. On those sites it reads your own usage and limit numbers, using the sign-in you already have. It saves your settings and latest numbers in your browser's extension storage on your device, and for ElevenLabs and Leonardo it also saves the access token the site gives your browser, or an API key you paste in its settings. Numbers refresh every few minutes.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="permission permissions host websites reason">
+        <h3 class="faq-q" id="ext-why-sites">Why does it need access to the AI sites?</h3>
+        <div class="faq-a">
+          <p>
+            Each site shows your usage in its own account pages, with no shared way to get it. To show it in the popup, the extension asks that site for your numbers, the same way the site's own pages do. That is the only reason it has access to those sites. It doesn't touch any others.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="native application messaging warning permission bridge">
+        <h3 class="faq-q" id="ext-native">Why does Chrome say it can “communicate with cooperating native applications”?</h3>
+        <div class="faq-a">
+          <p>
+            That's the permission the extension uses to hand your usage numbers to the Tokenomics Mac app, if you have it installed. It stays on your computer, and your sign-in tokens are never sent over it. Without the Mac app, nothing happens.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="affiliated official unofficial endorsed partner terms allowed ban banned legal trademark">
+        <h3 class="faq-q" id="ext-allowed">Is Tokenomics affiliated with these AI services?</h3>
+        <div class="faq-a">
+          <p>
+            No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage. Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno, Udio and related names are the property of their owners and are used here only to say which services Tokenomics works with.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-contact" id="contact">
       <p>
         Still stuck, or hit something this page doesn't cover? Email <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a> — or open an issue on <a href="https://github.com/rob-stout/Tokenomics/issues" target="_blank" rel="noopener">GitHub</a>.
       </p>
@@ -583,5 +948,541 @@
 
 
 <script src="app.js"></script>
+<script>
+  // FAQ page: collapsible answers, deep links, and on-page search.
+  // Progressive: without JS every answer shows expanded and the search field
+  // stays hidden. Runs entirely in the browser; no requests, nothing stored.
+  (function () {
+    'use strict';
+    var root = document.documentElement;
+    try { initFaq(); } catch (err) {
+      // Anything unexpected: fall back to the no-JS page (all answers visible).
+      root.classList.remove('js');
+      var b = document.querySelector('.doc-body');
+      if (b) b.classList.remove('is-enhanced');
+      Array.prototype.forEach.call(document.querySelectorAll('.faq-a'), function (a) { a.removeAttribute('hidden'); });
+      if (window.console) console.error(err);
+    }
+
+    function initFaq() {
+      var body  = document.querySelector('.doc-body');
+      var items = Array.prototype.slice.call(document.querySelectorAll('.faq-item'));
+      if (!body || !items.length) return;
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // hidden="until-found" lets the browser's own Find (Cmd-F) reach
+      // collapsed answers and open them. Where unsupported, plain hidden.
+      var untilFound = 'onbeforematch' in document.body;
+      var CHEVRON = '<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>';
+
+      // ── 1. Collapsible answers (heading > button, per the ARIA accordion pattern)
+      var expandBtn = document.getElementById('faq-expand-all');
+
+      function setOpen(item, open) {
+        var a = item.querySelector('.faq-a');
+        item.classList.toggle('is-open', open);
+        item.querySelector('.faq-q-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) a.removeAttribute('hidden');
+        else a.setAttribute('hidden', untilFound ? 'until-found' : '');
+      }
+      function allOpen() {
+        return items.every(function (i) { return i.classList.contains('is-open'); });
+      }
+      function syncExpandAll() {
+        if (expandBtn) expandBtn.textContent = allOpen() ? 'Collapse all' : 'Expand all';
+      }
+
+      items.forEach(function (item) {
+        var q = item.querySelector('.faq-q');
+        var a = item.querySelector('.faq-a');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'faq-q-btn';
+        a.id = q.id + '-answer';
+        btn.setAttribute('aria-controls', a.id);
+        while (q.firstChild) btn.appendChild(q.firstChild);
+        btn.insertAdjacentHTML('beforeend', CHEVRON);
+        q.appendChild(btn);
+        setOpen(item, false);
+        btn.addEventListener('click', function () {
+          setOpen(item, !item.classList.contains('is-open'));
+          syncExpandAll();
+        });
+        if (untilFound) {
+          a.addEventListener('beforematch', function () { setOpen(item, true); syncExpandAll(); });
+        }
+      });
+      body.classList.add('is-enhanced');
+
+      if (expandBtn) {
+        expandBtn.hidden = false;
+        expandBtn.addEventListener('click', function () {
+          var open = !allOpen();
+          items.forEach(function (i) { setOpen(i, open); });
+          syncExpandAll();
+        });
+      }
+
+      // ── 2. Deep links: #anchor opens its answer (on load, on hash change,
+      //       and on any in-page link, even when the hash is already set).
+      function itemForHash(hash) {
+        if (!hash || hash.charAt(0) !== '#' || hash.length < 2) return null;
+        var id;
+        try { id = decodeURIComponent(hash.slice(1)); } catch (e) { return null; }
+        var el = document.getElementById(id);
+        return el && el.classList.contains('faq-q') ? el.closest('.faq-item') : null;
+      }
+      function focusQuestion(item) {
+        var btn = item.querySelector('.faq-q-btn');
+        setTimeout(function () {
+          try { btn.focus({ preventScroll: true }); } catch (e) { btn.focus(); }
+        }, 0);
+      }
+
+      var initial = itemForHash(location.hash);
+      if (initial) {
+        setOpen(initial, true);
+        syncExpandAll();
+        initial.querySelector('.faq-q').scrollIntoView({ block: 'start' });
+      }
+      window.addEventListener('hashchange', function () {
+        var item = itemForHash(location.hash);
+        if (item) { setOpen(item, true); syncExpandAll(); }
+      });
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!link) return;
+        var item = itemForHash(link.getAttribute('href'));
+        if (!item) return;
+        setOpen(item, true);
+        syncExpandAll();
+        // Keyboard activation (detail 0): land focus on the question itself.
+        if (e.detail === 0) focusQuestion(item);
+      });
+
+      // ── 3. Search
+      var form      = document.getElementById('faq-search');
+      var input     = document.getElementById('faq-search-input');
+      var resultsEl = document.getElementById('faq-results');
+      var listEl    = document.getElementById('faq-result-list');
+      var statusEl  = document.getElementById('faq-status');
+      var emptyEl   = document.getElementById('faq-empty');
+      var commonEl  = document.getElementById('faq-common');
+      if (!form || !input) return;
+      form.hidden = false;
+
+      // Answers that live elsewhere on the site, so common searches
+      // ("price", "safari", "windows") don't dead-end. Same tab, plain links.
+      // w: rank weight vs. answers on this page (default 0.8, so this page
+      // wins close calls; install is 1 because its title is the exact ask).
+      var ELSEWHERE = [
+        { title: 'Is Tokenomics free?', href: '/#faq', where: 'On the home page',
+          text: "Yes. Tokenomics is free to download and use. There's no subscription, no paid tier, and no feature gating.",
+          kw: 'price pricing cost free pay paid money subscription buy charge' },
+        { title: 'How do I install Tokenomics?', href: '/#install', where: 'On the home page', w: 1,
+          text: 'Download the Mac app from this site, or install it with Homebrew. The browser extension installs from the Chrome Web Store or Microsoft Edge Add-ons.',
+          kw: 'install installing download homebrew brew dmg get' },
+        { title: 'Which browsers does the extension work in?', href: '/privacy#browser-extension', where: 'On the privacy page',
+          text: 'Google Chrome and Microsoft Edge, plus other Chromium browsers that can install from those stores. For Safari, there’s Tokenomics for Safari, a Mac App Store app.',
+          kw: 'browser browsers chrome edge chromium brave arc opera vivaldi safari firefox supported' },
+        { title: 'Tokenomics for Safari', href: '/privacy#safari', where: 'On the privacy page',
+          text: 'A Mac App Store app that contains a Safari extension. It works like the browser extension, and if you have the Mac app, it shares your readings with it on your computer.',
+          kw: 'safari apple appstore supported' },
+        { title: 'Connecting your AI tools to the Mac app', href: '/setup', where: 'On the setup page',
+          text: 'Step-by-step setup for Claude Code, GitHub Copilot, Cursor, Codex CLI, Gemini CLI and API-key providers, with fixes for common problems.',
+          kw: 'setup install installing connect connecting troubleshoot troubleshooting fix broken steps guide' },
+        { title: 'macOS only? What about Windows and Linux?', href: '/#faq', where: 'On the home page',
+          text: 'The Mac app is macOS only for now (14 Sonoma or later). A Windows and Linux version is on the roadmap.',
+          kw: 'windows linux pc requirements requirement macos version sonoma supported' },
+        { title: 'Is it open source?', href: '/#faq', where: 'On the home page',
+          text: 'You can read every line on GitHub. The license is source-available, and the current app is free for anyone who installs it.',
+          kw: 'opensource source code github license licence' },
+        { title: 'Privacy policy', href: '/privacy', where: 'On the privacy page',
+          text: 'Exactly what the Mac app, the browser extension and Tokenomics for Safari read, store and connect to.',
+          kw: 'privacy policy gdpr legal data stored storage' },
+        { title: 'Contact and support', href: '#contact', where: '',
+          text: 'Email hello@trytokenomics.com or open an issue on GitHub.',
+          kw: 'contact email support help bug report issue feedback question human' }
+      ];
+
+      // Words people type → words the answers use. Any word in a set
+      // matches the others (at a slightly lower weight than the word itself).
+      var SYNONYMS = [
+        'privacy private data tracking track tracker telemetry analytics safe safety secure security spy spying collect collection personal sell sold selling gdpr',
+        'extension chrome browser edge chromium brave arc opera vivaldi addon plugin firefox',
+        'price pricing cost free pay paid money subscription charge purchase buy cheap refund trial',
+        'mac macos macbook osx menubar desktop sonoma imac',
+        'safari appstore apple',
+        'uninstall remove removal delete trash erase wipe',
+        'signin sign signing login logged password credential auth authenticate authentication oauth account token session',
+        'key apikey api',
+        'elevenlabs eleven xi',
+        'chatgpt gpt openai codex',
+        'claude anthropic opus sonnet',
+        'gemini google bard',
+        'copilot github gh',
+        'broken error missing blank empty nothing stuck issue problem bug fix troubleshoot zero',
+        'exact accurate accuracy inaccurate estimate estimated approximate precise correct wrong',
+        'limit quota cap window rolling',
+        'reset refresh renew',
+        'chat prompt conversation message history',
+        'permission access allowed allow scope host',
+        'native cooperating communicate messaging nmh',
+        'widget',
+        'sync connect connected talk link pair together both share',
+        'consent agree enable disable start stop pause',
+        'affiliated affiliation official unofficial endorsed partner terms ban banned',
+        // "support" on its own usually means "help", so it's left out here.
+        'supported compatible compatibility list provider service tool site website',
+        'two twice double duplicate second',
+        'opensource source license licence'
+      ];
+
+      // Multi-word things people type, folded to one search word first.
+      var PHRASES = [
+        ['how much', 'price'], ['how many', ''],
+        ['not working', 'broken'], ['doesnt work', 'broken'], ['dont work', 'broken'], ['isnt working', 'broken'],
+        ['wont work', 'broken'], ['stopped working', 'broken'], ['not showing', 'broken'], ['doesnt show', 'broken'],
+        ['not updating', 'broken'], ['cant see', 'broken'], ['shows nothing', 'broken'], ['showing nothing', 'broken'],
+        ['menu bar', 'menubar'], ['app store', 'appstore'], ['chat gpt', 'chatgpt'], ['open ai', 'openai'],
+        ['eleven labs', 'elevenlabs'], ['11 labs', 'elevenlabs'], ['11labs', 'elevenlabs'],
+        ['sign in', 'signin'], ['signed in', 'signin'], ['log in', 'signin'], ['logged in', 'signin'],
+        ['open source', 'opensource'], ['source code', 'opensource'],
+        ['turn off', 'disable'], ['switch off', 'disable'], ['turn it off', 'disable'], ['switch it off', 'disable'],
+        ['turn on', 'enable'], ['turn it on', 'enable'], ['phone home', 'telemetry'],
+        ['work with', 'supported'], ['works with', 'supported'], ['work on', 'supported'], ['works on', 'supported'],
+        ['work in', 'supported'], ['works in', 'supported'], ['compatible with', 'supported'], ['support for', 'supported'],
+        ['5h', '5 hour'], ['5hr', '5 hour'], ['five hour', '5 hour'], ['7d', '7 day'], ['seven day', '7 day'],
+        ['rate limit', 'limit'], ['rate limited', 'limit'], ['get rid of', 'remove']
+      ];
+
+      var STOP = {};
+      ('a an the is are was were be been it its im i me my mine we us our you your do does did doing how what why ' +
+       'when where which who can could should would will may might must to of in on at for with and or but if so ' +
+       'than then about from as by into this that these those there here any all some not no yes get got use using ' +
+       'used work works working app apps tokenomics ai please just still also only have has had need needs usage ' +
+       'want show shows being been').split(' ').forEach(function (w) { STOP[w] = true; });
+
+      function norm(s) {
+        return String(s).toLowerCase()
+          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/['‘’]/g, '')
+          .replace(/[^a-z0-9]+/g, ' ')
+          .trim();
+      }
+      // Light stemming: plural "s" only, applied the same way to answers and queries.
+      function stem(w) { return (w.length > 3 && /s$/.test(w) && !/ss$/.test(w)) ? w.slice(0, -1) : w; }
+      function words(s) {
+        var seen = {}, out = [];
+        norm(s).split(' ').forEach(function (w) {
+          if (!w) return;
+          w = stem(w);
+          if (!seen[w]) { seen[w] = true; out.push(w); }
+        });
+        return out;
+      }
+
+      var SYN = {};
+      SYNONYMS.forEach(function (line) {
+        var set = words(line);
+        set.forEach(function (w) {
+          SYN[w] = SYN[w] || {};
+          set.forEach(function (o) { if (o !== w) SYN[w][o] = true; });
+        });
+      });
+
+      function makeEntry(e, order) {
+        return {
+          title: e.title, text: e.text, href: e.href, where: e.where || '', order: order,
+          w: order >= 100 ? (e.w || 0.8) : 1,
+          t: words(e.title), k: words(e.kw || ''), b: words(e.text)
+        };
+      }
+      var entries = items.map(function (item, i) {
+        var q = item.querySelector('.faq-q');
+        return makeEntry({
+          title: q.textContent.replace(/\s+/g, ' ').trim(),
+          // Block elements (paragraphs, list items) carry no spaces between them in
+          // textContent, so join them with one to keep snippets readable.
+          text: Array.prototype.map.call(
+            item.querySelector('.faq-a').querySelectorAll('p, li, dt, dd, td, th'),
+            function (el) { return el.textContent; }
+          ).join(' ').replace(/\s+/g, ' ').trim() || item.querySelector('.faq-a').textContent.replace(/\s+/g, ' ').trim(),
+          kw: item.getAttribute('data-keywords'),
+          href: '#' + q.id
+        }, i);
+      }).concat(ELSEWHERE.map(function (e, j) { return makeEntry(e, 100 + j); }));
+
+      var VOCAB = {};
+      entries.forEach(function (e) {
+        e.t.concat(e.k, e.b).forEach(function (w) { VOCAB[w] = true; });
+      });
+      Object.keys(SYN).forEach(function (w) { VOCAB[w] = true; });
+      var VOCAB_LIST = Object.keys(VOCAB);
+
+      // Optimal string alignment distance (Levenshtein + adjacent swaps),
+      // so "chatgtp" and "privcy" still find their words.
+      function distance(a, b, max) {
+        if (Math.abs(a.length - b.length) > max) return max + 1;
+        var d = [], i, j;
+        for (i = 0; i <= a.length; i++) { d[i] = [i]; }
+        for (j = 0; j <= b.length; j++) { d[0][j] = j; }
+        for (i = 1; i <= a.length; i++) {
+          for (j = 1; j <= b.length; j++) {
+            var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+            d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+            if (i > 1 && j > 1 && a.charAt(i - 1) === b.charAt(j - 2) && a.charAt(i - 2) === b.charAt(j - 1)) {
+              d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+            }
+          }
+        }
+        return d[a.length][b.length];
+      }
+      function known(t) {
+        if (VOCAB[t]) return true;
+        if (t.length < 3) return false;
+        for (var i = 0; i < VOCAB_LIST.length; i++) if (VOCAB_LIST[i].indexOf(t) === 0) return true;
+        return false;
+      }
+      // Only words of 5+ letters get corrected: shorter ones ("sold",
+      // "edge") are too easy to "fix" into a different real word.
+      function correct(t) {
+        if (t.length < 5 || known(t)) return t;
+        var max = t.length >= 7 ? 2 : 1, best = null, bestD = max + 1;
+        VOCAB_LIST.forEach(function (w) {
+          var dd = distance(t, w, max);
+          if (dd < bestD) { bestD = dd; best = w; }
+        });
+        return best || t;
+      }
+
+      function queryTokens(q) {
+        var s = ' ' + norm(q) + ' ';
+        PHRASES.forEach(function (p) {
+          s = s.split(' ' + p[0] + ' ').join(' ' + (p[1] ? p[1] + ' ' : ''));
+        });
+        var raw = s.split(' ').filter(Boolean);
+        var kept = raw.filter(function (w) { return !STOP[w]; });
+        if (!kept.length) kept = raw;           // "how does it work" still searches something
+        var seen = {}, out = [];
+        kept.forEach(function (w) {
+          w = correct(stem(w));
+          if (!seen[w]) { seen[w] = true; out.push(w); }
+        });
+        return out;
+      }
+
+      // 1 = whole word, 0.8 = start of a word ("elevenlab" → "elevenlabs").
+      function hit(x, list) {
+        if (list.indexOf(x) !== -1) return 1;
+        if (x.length >= 3) {
+          for (var i = 0; i < list.length; i++) if (list[i].indexOf(x) === 0) return 0.8;
+        }
+        return 0;
+      }
+
+      // Ranking: a question title outweighs hidden keywords, which outweigh
+      // answer text. The word you typed beats its synonyms. Each query word
+      // scores its best field, plus a little for matching in more than one
+      // place. Answers covering more of the query win; answers elsewhere on
+      // the site carry a lower weight so this page wins close calls.
+      var W = [10, 8, 3];   // title, keywords, body
+      var SYN_WEIGHT = 0.6;
+      function rank(q) {
+        var tokens = queryTokens(q);
+        if (!tokens.length) return [];
+        var groups = tokens.map(function (t) {
+          var alts = [{ x: t, w: 1 }];
+          Object.keys(SYN[t] || {}).forEach(function (s) { alts.push({ x: s, w: SYN_WEIGHT }); });
+          return alts;
+        });
+        var scored = [];
+        entries.forEach(function (e) {
+          var total = 0, matched = 0, terms = {};
+          groups.forEach(function (alts) {
+            var best = [0, 0, 0];
+            alts.forEach(function (alt) {
+              [e.t, e.k, e.b].forEach(function (field, f) {
+                var m = hit(alt.x, field);
+                if (!m) return;
+                var s = W[f] * m * alt.w;
+                if (s > best[f]) best[f] = s;
+                if (f !== 1) terms[alt.x] = true; // keywords aren't visible, so don't highlight them
+              });
+            });
+            var top = Math.max(best[0], best[1], best[2]);
+            if (top > 0) {
+              matched++;
+              total += top + 0.2 * (best[0] + best[1] + best[2] - top);
+            }
+          });
+          if (!matched) return;
+          var score = total * (0.4 + 0.6 * matched / groups.length) * e.w;
+          scored.push({ e: e, score: score, terms: Object.keys(terms) });
+        });
+        scored.sort(function (a, b) { return b.score - a.score || a.e.order - b.e.order; });
+        var floor = scored.length ? scored[0].score * 0.3 : 0;
+        return scored.filter(function (r) { return r.score >= floor; }).slice(0, 8);
+      }
+
+      // Build text with <mark>s using text nodes only (no HTML from the query).
+      function appendMarked(el, text, terms) {
+        if (!terms.length) { el.appendChild(document.createTextNode(text)); return; }
+        var pattern = new RegExp('\\b(?:' + terms.slice().sort(function (a, b) { return b.length - a.length; }).join('|') + ')[a-z0-9]*', 'gi');
+        var last = 0, m;
+        while ((m = pattern.exec(text))) {
+          if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index)));
+          var mark = document.createElement('mark');
+          mark.textContent = m[0];
+          el.appendChild(mark);
+          last = m.index + m[0].length;
+          if (!m[0].length) pattern.lastIndex++;
+        }
+        if (last < text.length) el.appendChild(document.createTextNode(text.slice(last)));
+      }
+      function snippet(text, terms) {
+        var LEN = 170, idx = -1;
+        terms.forEach(function (t) {
+          var m = new RegExp('\\b' + t, 'i').exec(text);
+          if (m && (idx === -1 || m.index < idx)) idx = m.index;
+        });
+        if (idx < 0 || idx < 60) {
+          return text.length > LEN ? text.slice(0, text.lastIndexOf(' ', LEN)) + '…' : text;
+        }
+        var start = text.lastIndexOf(' ', idx - 50) + 1;
+        var end = start + LEN;
+        var out = text.slice(start, end < text.length ? text.lastIndexOf(' ', end) : text.length);
+        return '…' + out + (end < text.length ? '…' : '');
+      }
+
+      function render(results) {
+        listEl.textContent = '';
+        results.forEach(function (r) {
+          var li = document.createElement('li');
+          li.className = 'faq-result';
+          var a = document.createElement('a');
+          a.className = 'faq-result-link';
+          a.href = r.e.href;
+          appendMarked(a, r.e.title, r.terms);
+          li.appendChild(a);
+          var p = document.createElement('p');
+          appendMarked(p, snippet(r.e.text, r.terms), r.terms);
+          li.appendChild(p);
+          if (r.e.where) {
+            var w = document.createElement('p');
+            w.className = 'faq-result-where';
+            w.textContent = r.e.where;
+            li.appendChild(w);
+          }
+          listEl.appendChild(li);
+        });
+      }
+
+      var statusTimer, urlTimer;
+      function setStatus(text, now) {
+        clearTimeout(statusTimer);
+        // Short delay so screen readers hear the count once typing pauses,
+        // not on every keystroke.
+        if (now) statusEl.textContent = text;
+        else statusTimer = setTimeout(function () { statusEl.textContent = text; }, 350);
+      }
+      function syncUrl(q) {
+        clearTimeout(urlTimer);
+        urlTimer = setTimeout(function () {
+          try {
+            history.replaceState(history.state, '',
+              location.pathname + (q ? '?q=' + encodeURIComponent(q) : '') + location.hash);
+          } catch (e) { /* file:// or sandboxed: skip */ }
+        }, 400);
+      }
+
+      function run(value, now) {
+        var q = value.trim();
+        if (!q) {
+          resultsEl.hidden = true;
+          emptyEl.hidden = true;
+          commonEl.hidden = false;
+          listEl.textContent = '';
+          setStatus('', true);
+          return;
+        }
+        var results = rank(q);
+        if (results.length) {
+          render(results);
+          resultsEl.hidden = false;
+          emptyEl.hidden = true;
+          commonEl.hidden = true;
+          setStatus(results.length + (results.length === 1 ? ' answer' : ' answers') + ' for “' + q + '”', now);
+        } else {
+          listEl.textContent = '';
+          resultsEl.hidden = true;
+          emptyEl.hidden = false;
+          commonEl.hidden = false;
+          setStatus('No answers for “' + q + '”', now);
+        }
+      }
+
+      function go(link) {
+        var href = link.getAttribute('href');
+        var item = itemForHash(href);
+        if (!item && href.charAt(0) !== '#') { window.location.href = link.href; return; }
+        if (item) { setOpen(item, true); syncExpandAll(); }
+        var target = document.getElementById(href.slice(1));
+        if (location.hash === href && target) {
+          target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        } else {
+          location.hash = href;
+        }
+        if (item) focusQuestion(item);
+      }
+
+      input.addEventListener('input', function () { run(input.value); syncUrl(input.value.trim()); });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        run(input.value, true);
+        var first = resultsEl.hidden ? null : listEl.querySelector('.faq-result-link');
+        if (first) go(first);
+      });
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown') {
+          var first = resultsEl.hidden ? null : listEl.querySelector('.faq-result-link');
+          if (first) { e.preventDefault(); first.focus(); }
+        } else if (e.key === 'Escape' && input.value) {
+          e.preventDefault();
+          input.value = '';
+          run('');
+          syncUrl('');
+        }
+      });
+      listEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { e.preventDefault(); input.focus(); return; }
+        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+        var links = Array.prototype.slice.call(listEl.querySelectorAll('.faq-result-link'));
+        var i = links.indexOf(document.activeElement);
+        if (i < 0) return;
+        e.preventDefault();
+        if (e.key === 'ArrowDown') (links[i + 1] || links[i]).focus();
+        else (i === 0 ? input : links[i - 1]).focus();
+      });
+
+      // "/" or Cmd/Ctrl-K jumps to search, unless you're already typing somewhere.
+      document.addEventListener('keydown', function (e) {
+        var t = e.target, tag = t && t.tagName;
+        var typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable);
+        var slash = e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey && !typing;
+        var cmdK = (e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (e.key === 'k' || e.key === 'K');
+        if (!slash && !cmdK) return;
+        e.preventDefault();
+        input.focus();
+        input.select();
+      });
+
+      // Restore a search from the URL (?q=…), e.g. a link from support email.
+      var initialQ = '';
+      try { initialQ = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
+      if (initialQ) { input.value = initialQ; run(initialQ, true); }
+    }
+  })();
+</script>
 </body>
 </html>
