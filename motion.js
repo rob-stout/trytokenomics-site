@@ -281,10 +281,10 @@
     if (stroke) {
       var len = stroke.getTotalLength();
       var art = flow.querySelector('.arrow-line'), arrowHead = flow.querySelector('.arrow-head');
+      var headLine = flow.querySelector('.arrow-head-line'), headLen = headLine ? headLine.getTotalLength() : 0;
+      if (headLine) headLine.style.strokeDasharray = headLen;
       var after = [document.querySelector('.install-flow-caption'), document.getElementById('install-support-line')].filter(Boolean);
       stroke.style.strokeDasharray = len;
-      arrowHead.style.transformBox = 'fill-box';
-      arrowHead.style.transformOrigin = '80% 50%';
       // The story: the Tokenomics icon pops in, the arrow draws, Applications pops as
       // the arrowhead lands, then the caption and macOS line. The extension card's
       // "Works with" pills build one by one across the same run, so both cards finish together.
@@ -325,10 +325,10 @@
         // Artwork (on top) fades in over the solid stroke; the stroke drops once it's covered.
         stroke.setAttribute('opacity', swap < 1 ? 1 : 0);
         art.style.opacity = swap;
-        var h = seg(p, 0.6, 0.72, appEase);
+        var h = seg(p, 0.6, 0.72, scrollEase);
         pop(folder, clamp((p - 0.66) / 0.14));
-        arrowHead.style.opacity = h;
-        arrowHead.style.transform = 'scale(' + (0.6 + 0.4 * h).toFixed(3) + ')';
+        // The arrowhead draws in from top to bottom: upper arm, through the tip, lower arm.
+        if (headLine) headLine.style.strokeDashoffset = (headLen * (1 - h)).toFixed(1);
         var c = seg(p, 0.82, 0.96, appEase);
         after.forEach(function (el) {
           el.style.opacity = c;
