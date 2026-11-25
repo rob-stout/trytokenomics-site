@@ -1793,3 +1793,4 @@ svg tspan[font-style="italic"] { font-style: normal; }
     justify-items: center;
   }
 }
+.extension-section .feature-body a { color: var(--accent); }

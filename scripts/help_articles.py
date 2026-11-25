@@ -38,7 +38,7 @@ ARTICLES = [
 <table class="doc-table">
 <thead><tr><th scope="col">Tool</th><th scope="col">What it tracks</th><th scope="col">Connects through</th></tr></thead>
 <tbody>
-<tr><td>Claude</td><td>5-hour and 7-day limits, shared by chats and Claude Code</td><td>Mac app or extension</td></tr>
+<tr><td>Claude</td><td>5-hour and 7-day limits, shared by chats and Claude Code</td><td>Mac app (through Claude Code) or extension</td></tr>
 <tr><td>ChatGPT</td><td>Chats on chatgpt.com</td><td>Extension</td></tr>
 <tr><td>Codex CLI</td><td>OpenAI's coding agent, in Terminal</td><td>Mac app</td></tr>
 <tr><td>Gemini</td><td>Chats on gemini.google.com</td><td>Extension</td></tr>
@@ -57,7 +57,7 @@ ARTICLES = [
 </tbody>
 </table>
 </div>
-<p>If you have both the Mac app and the extension, everything the extension reads also shows in your menu bar and widgets. Suno and Udio reach the Mac app in its next update; the extension shows them today.</p>
+<p>If you have both the Mac app and the extension, the web tools the extension reads also show in your menu bar and widgets (<a href="/help/mac-app-and-extension">how they work together</a>). Suno and Udio reach the Mac app in its next update; the extension shows them today.</p>
 <p>Setting up a coding tool? The <a href="/setup">setup guide</a> walks through each one.</p>
 """,
     },
@@ -91,7 +91,54 @@ ARTICLES = [
 <li><strong>Desktop widgets</strong> in three sizes.</li>
 <li><strong>Coding tools</strong> the browser can't see: Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor.</li>
 </ul>
-<p>If you have both, they sync: the extension's readings show in the menu bar and widgets, and the order you set for your tabs carries across.</p>
+<p>If you have both, they sync: the extension's readings show in the menu bar and widgets, and the order you set for your tabs carries across. See <a href="/help/mac-app-and-extension">how the two work together</a>.</p>
+""",
+    },
+    {
+        "slug": "mac-app-and-extension",
+        "topic": "browser-extension",
+        "title": "How do the Mac app and the browser extension work together?",
+        "summary": "The Mac app reads your coding tools, the extension reads your web tools, and they share usage numbers on your computer so each shows the full picture.",
+        "keywords": "sync syncing synced together both link linked connect connection bridge share mac app extension primary source which wins conflict order visibility settings refresh helper native messaging",
+        "legacy": [],
+        "body": """
+<p>Each one reads the tools it can reach. Then they share what they read, so both show the full picture.</p>
+<h2>Who reads what</h2>
+<div class="doc-table-wrap doc-table-wrap--wide">
+<table class="doc-table">
+<thead><tr><th scope="col">Read by</th><th scope="col">Tools</th></tr></thead>
+<tbody>
+<tr><td>Mac app</td><td>Claude (through Claude Code's sign-in), Codex CLI, Gemini CLI, GitHub Copilot, Cursor, and Stability AI, Runway and ElevenLabs with an API key</td></tr>
+<tr><td>Browser extension</td><td>ChatGPT, Gemini, Midjourney, Leonardo, Grok, Perplexity, Suno and Udio, plus Claude and ElevenLabs from their websites</td></tr>
+</tbody>
+</table>
+</div>
+<h2>What the Mac app gets from the extension</h2>
+<p>Everything the extension reads from a web-only tool shows in your menu bar, popover, widgets and notifications, usually within a second or two of the extension reading it.</p>
+<p>When your browser is closed, the Mac app keeps showing the last reading, marked “Last read 2h ago”, for up to two days or until that limit resets. Usage can't go down until a reset, so the last number is still a safe guide.</p>
+<p>Two tools can come from either side, and the Mac app picks one:</p>
+<ul>
+<li><strong>Claude:</strong> the Mac app always uses Claude Code's sign-in. Chats and Claude Code share the same limits, so the website reading would show the same numbers. If you only use claude.ai and don't have Claude Code, Claude shows in the extension but not in the Mac app.</li>
+<li><strong>ElevenLabs:</strong> if you've pasted an API key into the Mac app, it uses that. If not, it uses the extension's reading. See <a href="/help/elevenlabs-setup">setting up ElevenLabs</a>.</li>
+</ul>
+<h2>What the extension gets from the Mac app</h2>
+<p>The extension's popup also shows GitHub Copilot, Cursor and Gemini CLI from the Mac app, so you can check them from your browser. For Claude, the popup shows whichever reading is newer.</p>
+<h2>Settings that sync</h2>
+<ul>
+<li><strong>Tab order</strong> syncs both ways. Rearrange tabs in either one and the other follows; the most recent change wins.</li>
+<li><strong>Turning a tool off in the Mac app</strong> hides it in the extension's popup too. Turning a site off in the extension only affects the extension.</li>
+<li><strong>Refresh</strong> works across both: refreshing in the Mac app asks the extension to re-read its sites within a minute, and refreshing in the extension makes the Mac app re-check its tools.</li>
+</ul>
+<h2>What never crosses over</h2>
+<p>Only usage numbers and these few settings. Your sign-ins, cookies and API keys stay where they are: a key you paste into the extension never reaches the Mac app, and the other way round.</p>
+<p>The link is entirely on your computer. When the extension has new numbers, your browser hands them to a small helper inside Tokenomics.app, which saves them to a file the Mac app reads. Nothing goes over the internet. This is the “communicate with cooperating native applications” permission Chrome mentions; see <a href="/help/extension-permissions">what the extension can access</a>.</p>
+<h2>Setting up the link</h2>
+<ol>
+<li>Install the Mac app and the browser extension.</li>
+<li>Open the Mac app at least once after installing the extension. That's when it sets up the link, for Chrome (including Beta and Canary), Edge, Brave, Vivaldi, Opera and Arc.</li>
+<li>Open the extension's popup. Your web tools appear in the Mac app shortly after.</li>
+</ol>
+<p>Not seeing readings in the Mac app? Try the steps in <a href="/help/troubleshooting">Something's not working</a>.</p>
 """,
     },
     {
