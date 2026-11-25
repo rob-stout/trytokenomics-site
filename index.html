@@ -610,74 +610,77 @@
       <div data-build="children" style="display:flex; flex-direction:column; gap: var(--s-4);">
         <!-- Auth credential path cards -->
         <p class="feature-kicker" style="margin: 0;">On your Mac</p>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Claude-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+        <!-- One card for everything read on the Mac; each row says how it connects. -->
+        <div class="card mac-tools">
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Claude-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Claude</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">macOS Keychain · authentication token</div>
+            </div>
           </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Claude</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">macOS Keychain · authentication token</div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Copilot-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Copilot-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">GitHub Copilot</div>
+              <div style="font-size: 12px; color: var(--text-subtle);"><code>gh</code> CLI · zero-friction</div>
+            </div>
           </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Copilot-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Copilot-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Cursor-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Cursor-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Cursor</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+            </div>
           </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">GitHub Copilot</div>
-            <div style="font-size: 12px; color: var(--text-subtle);"><code>gh</code> CLI · zero-friction</div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Codex-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Codex CLI</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+            </div>
           </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Cursor-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Cursor-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Gemini-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Gemini CLI</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+            </div>
           </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Cursor</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/stability-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/stability-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Stability AI</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">API key · paste once in Settings</div>
+            </div>
           </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Codex-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Codex CLI</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Gemini-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Gemini CLI</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/stability-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/stability-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Stability AI</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">API key · paste once in Settings</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/runway-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/runway-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Runway</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">API key · paste once in Settings</div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/runway-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/runway-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Runway</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">API key · paste once in Settings</div>
+            </div>
           </div>
         </div>
         <p class="feature-kicker" style="margin: var(--s-3) 0 0 0;">In your browser</p>
