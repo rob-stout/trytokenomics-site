@@ -285,7 +285,30 @@
       stroke.style.strokeDasharray = len;
       arrowHead.style.transformBox = 'fill-box';
       arrowHead.style.transformOrigin = '80% 50%';
+      // The extension card's "Works with" pills build on the same scroll as the arrow,
+      // one after another while it draws, so both cards finish together.
+      var sitesLabel = document.querySelector('.download-sites-label');
+      var pills = Array.prototype.slice.call(document.querySelectorAll('.download-sites li'));
+      var pillSpan = 0.68 - 0.1, pillDur = 0.1;
+      function popIn(el, k) {
+        el.style.opacity = k;
+        el.style.transform = 'translateY(' + ((1 - k) * 6).toFixed(1) + 'px) scale(' + (0.94 + 0.06 * k).toFixed(3) + ')';
+      }
+      function buildPills(p) {
+        if (sitesLabel) popIn(sitesLabel, seg(p, 0, 0.08, appEase));
+        pills.forEach(function (li, i) {
+          var a = 0.04 + (pills.length > 1 ? i * (pillSpan - 0.04) / (pills.length - 1) : 0);
+          popIn(li, seg(p, a, a + pillDur, appEase));
+        });
+      }
+      // Side by side, the arrow drives the pills. Stacked (phones), the arrow is far
+      // below, so the pills follow their own position instead.
+      var grid = document.querySelector('.download-grid');
+      function sideBySide() { return !grid || getComputedStyle(grid).gridTemplateColumns.split(' ').length > 1; }
+      var sitesList = document.querySelector('.download-sites');
+      if (sitesList) addScrubber(sitesList, function (p) { if (!sideBySide()) buildPills(p); }, 0.85, 0.4);
       addScrubber(flow, function (p) {
+        if (sideBySide()) buildPills(p);
         stroke.style.strokeDashoffset = (len * (1 - seg(p, 0, 0.68, scrollEase))).toFixed(1);
         // The drawn stroke hands over to the hand-drawn artwork as the arrowhead lands.
         var swap = seg(p, 0.66, 0.76, appEase);

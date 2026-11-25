@@ -818,7 +818,9 @@ section { scroll-margin-top: 72px; }
   margin-top: var(--s-7);
   border-radius: var(--r-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  /* Its own, tighter shadow: the shared --shadow-lg reached ~60px below and bled
+     onto the Small / Medium / Large cards; this one stays inside the 32px gap. */
+  box-shadow: 0 12px 24px -8px rgba(14,51,77,0.22), 0 4px 10px -4px rgba(14,51,77,0.12);
   background: linear-gradient(160deg, #1e3a52 0%, #0d2035 40%, #07101a 100%);
   padding: var(--s-7) var(--s-6) var(--s-6);
   position: relative;
