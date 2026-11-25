@@ -1743,7 +1743,9 @@ svg tspan[font-style="italic"] { font-style: normal; }
 /* ---------- BROWSER EXTENSION ---------- */
 .web-tools {
   list-style: none; margin: 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: var(--s-2);
+  /* Spread edge to edge across the card, first and last icons flush with the text. */
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: var(--s-2);
 }
 .web-tools .web-tool {
   width: 36px; height: 36px; border-radius: 10px;
