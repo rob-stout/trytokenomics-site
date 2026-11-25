@@ -1,0 +1,7 @@
+/design-system-v3.html
+  X-Robots-Tag: noindex, nofollow
+
+# Cloudflare's backup address serves the same site. Keep it out of search so
+# only trytokenomics.com is indexed (every page's canonical already points there).
+https://trytokenomics-site.pages.dev/*
+  X-Robots-Tag: noindex

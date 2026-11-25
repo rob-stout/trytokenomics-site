@@ -119,63 +119,6 @@
     });
   }
 
-  // ── Scroll Animations (IntersectionObserver) ─────────────
-  // Respects prefers-reduced-motion: skip animation, snap to final state.
-
-  function initScrollAnimations() {
-    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reducedMotion) {
-      // Snap everything to final state immediately
-      document.querySelectorAll('.reveal, .craft-card').forEach(function (el) {
-        el.classList.add('animated');
-      });
-      return;
-    }
-
-    if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal, .craft-card').forEach(function (el) {
-        el.classList.add('animated');
-      });
-      return;
-    }
-
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
-        setTimeout(function () {
-          entry.target.classList.add('animated');
-        }, delay);
-        revealObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach(function (el, i) {
-      if (!el.hasAttribute('data-delay')) {
-        el.setAttribute('data-delay', Math.min(i % 3 * 80, 160));
-      }
-      revealObserver.observe(el);
-    });
-
-    // Craft cards stagger independently
-    var craftObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var delay = parseInt(entry.target.getAttribute('data-delay') || '0', 10);
-        setTimeout(function () {
-          entry.target.classList.add('animated');
-        }, delay);
-        craftObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.craft-card').forEach(function (el, i) {
-      el.setAttribute('data-delay', i * 60);
-      craftObserver.observe(el);
-    });
-  }
-
   // ── Nav active link highlighting ─────────────────────────
   // Highlights nav links as sections scroll into view.
 
@@ -223,7 +166,7 @@
 
     initCopyButtons();
     initInstallTabs();
-    initScrollAnimations();
+
     initNavHighlight();
     initProviderFlip();
     initHashDetails();

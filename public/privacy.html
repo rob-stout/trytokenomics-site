@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — Tokenomics</title>
-  <meta name="description" content="How the Tokenomics Mac app, browser extension and Safari app read your AI usage with the sign-ins you already have. No analytics, no telemetry, no tracking. Here's exactly what we touch and what we don't." />
+  <meta name="description" content="How Tokenomics reads your AI usage with the sign-ins you already have. No analytics, no telemetry, no tracking. Exactly what we touch, and what we don't." />
   <meta property="og:title" content="Privacy Policy — Tokenomics" />
   <meta property="og:description" content="No analytics. No telemetry. No tracking. Here's everything Tokenomics reads, and everywhere it sends data — both very short lists." />
   <meta property="og:type" content="article" />
@@ -216,11 +216,11 @@
     </a>
 
     <div class="nav-links">
-      <a href="index.html#features">Features</a>
-      <a href="index.html#widgets">Widgets</a>
-      <a href="index.html#install">Install</a>
+      <a href="/#features">Features</a>
+      <a href="/#widgets">Widgets</a>
+      <a href="/#install">Download</a>
       <a href="/setup">Setup</a>
-      <a href="index.html#faq">FAQ</a>
+      <a href="/help/">Help</a>
       <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
     </div>
 
@@ -253,7 +253,7 @@
 </p>
 
     <div class="doc-meta">
-      <span><strong>Effective date:</strong> November 23, 2026</span>
+      <span><strong>Effective date:</strong> November 25, 2026</span>
       <span><strong>Owned by:</strong> Acorn Designs, LLC</span>
       <span><strong>Created by:</strong> Rob Stout</span>
       <span><strong>Contact:</strong> <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a></span>
@@ -289,15 +289,25 @@
       Tokenomics reads authentication credentials stored locally on your Mac by the AI tools you have installed. It never asks you to paste credentials it could have read automatically; it only asks for an API key for providers that don't have a CLI.
     </p>
     <ul>
-      <li><strong>Anthropic</strong> (Claude Chat · Claude Cowork · Claude Code) — OAuth token from macOS Keychain (<code>Claude Code-credentials</code>)</li>
-      <li><strong>OpenAI</strong> (ChatGPT · Codex · DALL-E · Sora) — OAuth token from <code>~/.codex/auth.json</code></li>
-      <li><strong>Google</strong> (Gemini · Nano Banana · Veo) — OAuth credentials from <code>~/.gemini/oauth_creds.json</code></li>
+      <li><strong>Anthropic</strong> (Claude Code, whose limits Claude chats share) — OAuth token from macOS Keychain (<code>Claude Code-credentials</code>)</li>
+      <li><strong>OpenAI</strong> (Codex CLI) — usage from Codex's local session files, and its sign-in in <code>~/.codex/auth.json</code></li>
+      <li><strong>Google</strong> (Gemini CLI) — usage counted from Gemini CLI's local session files, and its sign-in in <code>~/.gemini/oauth_creds.json</code></li>
       <li><strong>GitHub Copilot</strong> — OAuth token via the <code>gh</code> CLI</li>
       <li><strong>Cursor</strong> — session token from Cursor's local config</li>
-      <li><strong>Stability AI, Runway, ElevenLabs</strong> — API keys you paste into Tokenomics, stored in the macOS Keychain</li>
+      <li><strong>Stability AI, Runway</strong> — API keys you paste into Tokenomics, stored in the macOS Keychain (plus an ElevenLabs API key, if you added one in an earlier version; current versions get ElevenLabs from the browser extension)</li>
     </ul>
     <p>
-      These credentials are read into memory as needed. The Mac app does not write them anywhere itself, log them, or send them anywhere other than the provider endpoints below.
+      These credentials are read into memory as needed. The Mac app does not copy them anywhere else, log them, or send them anywhere other than the provider endpoints below.
+    </p>
+    <p>
+      Besides its own settings and the usage numbers its widgets need, the Mac app adds a few things to your Mac:
+    </p>
+    <ul>
+      <li>Small link files in the Native Messaging folders of Chromium browsers you have (Chrome, Edge, Brave, Vivaldi, Opera, Arc), so the browser extension can hand usage numbers to the Mac app. They contain only the helper's location and the extension's ID.</li>
+      <li>If you use guided setup to install a coding tool: the tool itself (Codex CLI and Gemini CLI in <code>~/.tokenomics-cli</code>, Claude Code in <code>~/.local/bin</code>), Homebrew, Node.js or the GitHub CLI when that tool needs them, and one line in <code>~/.zprofile</code> (or <code>~/.bash_profile</code>) so your Terminal can find Claude Code.</li>
+    </ul>
+    <p>
+      <strong>Uninstall Tokenomics…</strong> in Settings removes the app's settings, saved numbers, link files and the Keychain items it created. It leaves your AI tools, and Claude Code's own sign-in, in place.
     </p>
 
     <h2>Mac app: network calls</h2>
@@ -367,6 +377,10 @@
         </tbody>
       </table>
     </div>
+
+    <p>
+      <strong>Guided setup</strong>, only when you use it to install a coding tool, also downloads from that tool's official source: Anthropic's installer (<code>claude.ai/install.sh</code> and <code>downloads.claude.ai</code>) for Claude Code, Homebrew's installer and packages for Homebrew, Node.js and the GitHub CLI, and the npm registry for Codex CLI and Gemini CLI. Signing in to those tools happens on the provider's own sign-in pages, in Terminal or your browser.
+    </p>
 
     <p>
       Like any internet request, the services Tokenomics contacts (the AI providers above, and GitHub for update checks) can see your IP address when your Mac connects to them. Tokenomics does not add anything to that beyond what the request itself needs.
@@ -612,6 +626,7 @@
     </p>
     <p><strong>Change log</strong></p>
     <ul>
+      <li><strong>November 25, 2026</strong>: Corrected which credentials the Mac app reads for OpenAI and Google, and that it no longer takes an ElevenLabs API key. Added what the Mac app adds to your Mac (browser link files, and what guided setup installs), the downloads guided setup makes, and what the in-app uninstaller removes.</li>
       <li><strong>November 23, 2026</strong>: Added Suno and Udio to the browser extension. Covers the optional ElevenLabs and Leonardo API keys you can paste into the extension, the renewal dates it learns for Leonardo and Suno, and that ElevenLabs usage numbers (never the key) can now pass to the Mac app.</li>
       <li><strong>November 22, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website: what the extension reads, stores and sends, its consent screen, and the "Stop reading and delete my data" control. Clarified that the Mac app saves usage readings for widgets, and how long download-counter rows are kept. The website now serves its own fonts instead of loading them from Google Fonts. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
       <li><strong>April 21, 2026</strong>: Previous version (Mac app and website).</li>
@@ -644,10 +659,12 @@
     <nav class="footer-links" aria-label="Footer navigation">
       <a href="/">Home</a>
       <a href="/setup">Setup</a>
+      <a href="/help/">Help</a>
       <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/rob-stout/Tokenomics/releases" target="_blank" rel="noopener">Changelog</a>
       <a href="/license">License</a>
       <a href="/privacy" aria-current="page">Privacy</a>
+      <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a>
     </nav>
 
     <div class="footer-meta">

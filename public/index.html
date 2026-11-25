@@ -3,19 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tokenomics — AI Usage for Your Menu Bar</title>
-  <meta name="description" content="Track Claude, Copilot, Cursor, OpenAI, and Gemini from your macOS menu bar. One glance tells you if you're about to hit a wall. Free download." />
+  <title>Tokenomics: Claude &amp; ChatGPT Usage Limits in Your Menu Bar</title>
+  <meta name="description" content="See how much of your Claude, ChatGPT, Gemini, Copilot and Cursor limits you've used, right in your Mac menu bar. Free, with a Chrome extension too." />
   <meta property="og:title" content="Tokenomics — Never be surprised by a rate limit" />
-  <meta property="og:description" content="A macOS menu bar app that shows AI usage as concentric rings. Eight providers. Zero-friction auth. The pace dot tells you if you're burning fast before the API tells you to stop." />
+  <meta property="og:description" content="A macOS menu bar app and browser extension that show AI usage at a glance. Fourteen AI tools. Nothing to paste for most of them. The pace dot tells you if you're burning fast before the limit stops you." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Tokenomics — AI usage for your menu bar" />
-  <meta name="twitter:description" content="Eight providers. One glance. The pace dot shows if you're burning fast — before the API stops you. Free for macOS." />
+  <meta name="twitter:description" content="Fourteen AI tools. One glance. The pace dot shows if you're burning fast, before the limit stops you. Free for macOS and Chrome." />
   <meta property="og:url" content="https://trytokenomics.com/" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
   <meta name="twitter:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
   <link rel="canonical" href="https://trytokenomics.com/" />
-  <!-- TODO: add Google Search Console verification meta tag here once Rob generates it in GSC -->
   <meta name="theme-color" content="#F3EFE5" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0E334D" media="(prefers-color-scheme: dark)" />
 
@@ -33,6 +32,167 @@
 
   <link rel="stylesheet" href="styles.css" />
   <!-- app.js loaded before closing body so DOM is ready -->
+  <!-- seo:structured-data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://trytokenomics.com/#org",
+      "name": "Acorn Designs, LLC",
+      "url": "https://trytokenomics.com/",
+      "logo": "https://trytokenomics.com/assets/sharing/Apple-Touch-Icon-180x180.png",
+      "email": "hello@trytokenomics.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Rob Stout"
+      },
+      "sameAs": [
+        "https://github.com/rob-stout/Tokenomics",
+        "https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://trytokenomics.com/#website",
+      "url": "https://trytokenomics.com/",
+      "name": "Tokenomics",
+      "alternateName": [
+        "Tokenomics AI usage tracker",
+        "trytokenomics"
+      ],
+      "publisher": {
+        "@id": "https://trytokenomics.com/#org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://trytokenomics.com/#app",
+      "name": "Tokenomics",
+      "alternateName": "Tokenomics for Mac",
+      "description": "A macOS menu bar app and desktop widgets that show your AI usage limits for Claude, ChatGPT, Gemini, GitHub Copilot, Cursor and more, with a pace dot that shows whether you'll run out before the limit resets.",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "AI usage tracker",
+      "operatingSystem": "macOS 14 Sonoma or later",
+      "url": "https://trytokenomics.com/",
+      "downloadUrl": "https://trytokenomics.com/download/dmg/latest",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "screenshot": "https://trytokenomics.com/assets/sharing/OG-Image.png",
+      "featureList": [
+        "Usage rings in the macOS menu bar",
+        "Desktop widgets in three sizes",
+        "Pace dot that shows if you're burning faster than even use",
+        "Usage alerts before you hit a limit",
+        "Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor read from your Mac",
+        "Web tools synced from the browser extension"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Rob Stout"
+      },
+      "publisher": {
+        "@id": "https://trytokenomics.com/#org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://trytokenomics.com/#extension",
+      "name": "Tokenomics browser extension",
+      "description": "A free Chrome extension that shows your usage limits for ChatGPT, Claude, Gemini, Midjourney, Leonardo, ElevenLabs, Suno, Udio, Grok and Perplexity in your toolbar.",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Chrome on macOS, Windows and Linux",
+      "installUrl": "https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl",
+      "url": "https://trytokenomics.com/#extension",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@id": "https://trytokenomics.com/#org"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://trytokenomics.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Mac app and the browser extension are both free to download and use. There's no subscription, no paid tier, and no feature gating."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does signing in work? Do I need to paste any tokens?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not for most tools. The Mac app reads the sign-in your coding tools already keep on your Mac: macOS Keychain for Claude, the gh CLI for GitHub Copilot, and local configuration files for Cursor, Codex CLI and Gemini CLI. The browser extension uses the sites you're already signed in to. Only Stability AI and Runway need an API key, pasted once and kept in the macOS Keychain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it send my API keys or credentials anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Tokenomics uses your sign-ins only to ask each AI service for your own usage, and keeps the numbers on your device. Nothing goes to any server the author controls: no analytics, no telemetry, no tracking code in the app or the extension. The full breakdown is on the Privacy page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it open source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can read every line on GitHub. The license is source-available rather than MIT — it keeps commercial rights reserved so I have room to build paid capabilities later (a team or enterprise version is one possibility). The current app is free forever for anyone who installs it. This isn't a SaaS in disguise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "macOS only? What about Windows and Linux?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, gh CLI, local config files) are Mac-specific. A Windows/Linux version of the app is on the roadmap. In the meantime, the browser extension works in Chrome on Windows and Linux today."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AI tools does it work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Coding tools: Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. Chat: Claude, ChatGPT, Gemini, Grok and Perplexity. Creative: Midjourney, Leonardo, Stability AI, Runway, ElevenLabs, Suno and Udio. The web tools connect through the browser extension. The full list says how each one connects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why not just open a browser tab and check the dashboard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You could. The problem is that you don't know you need to check until you're mid-task and something breaks. The pace dot is specifically useful here: it shows whether you're on track to hit a limit before you actually do, so you can make a call about whether to start a long agentic run. A dashboard answers \"how much have I used?\" — Tokenomics answers \"am I about to run out?\""
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is it different from other Claude/AI usage trackers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Two things: breadth and signal quality. Breadth: your coding tools, chat apps and creative tools in one place, not just Claude. Signal quality: the pace dot. Most usage meters show a percentage. Tokenomics shows whether that percentage is ahead of or behind where you'd expect given how much of the window has elapsed. That turns a number into an answer."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- /seo:structured-data -->
 </head>
 <body>
 
@@ -51,8 +211,8 @@
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#widgets">Widgets</a>
-      <a href="#install">Install</a>
-      <a href="#faq">FAQ</a>
+      <a href="#install">Download</a>
+      <a href="/help/">Help</a>
       <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
     </div>
 
@@ -80,7 +240,7 @@
   </h1>
 
   <p class="lede">
-    Tokenomics sits in your menu bar and watches every AI tool you pay for — so you know if you have room for one more run.
+    Tokenomics shows your Claude, ChatGPT, Gemini and Copilot usage limits in your Mac menu bar, so you know if you have room for one more run.
   </p>
 
   <div class="hero-ctas">
@@ -101,7 +261,7 @@
   </div>
 
   <!-- Product shot: menu bar above two medium widgets -->
-  <div class="hero-visual reveal" data-delay="100">
+  <div class="hero-visual reveal">
 
     <!-- Menu bar: light/dark theme variants, each with a shorter mobile asset -->
     <div class="hero-menubar" aria-hidden="true">
@@ -185,20 +345,12 @@
               <div class="head"><span class="lbl">Premium</span><span class="pct">22%</span></div>
               <div class="pbar"><div class="track"></div><div class="fill" style="width:22%"></div><div class="pace" style="left:34%"></div></div>
             </div>
-            <div class="col">
-              <div class="head"><span class="lbl">Requests</span><span class="pct long">15%</span></div>
-              <div class="pbar"><div class="track"></div><div class="fill long" style="width:15%"></div></div>
-            </div>
           </div>
           <div class="row-compact">
             <span class="pico"><img src="assets/icons/Cursor-d.blue.svg" alt="" /></span>
             <div class="col">
               <div class="head"><span class="lbl">Premium</span><span class="pct">10%</span></div>
               <div class="pbar"><div class="track"></div><div class="fill" style="width:10%"></div></div>
-            </div>
-            <div class="col">
-              <div class="head"><span class="lbl">Requests</span><span class="pct long">8%</span></div>
-              <div class="pbar"><div class="track"></div><div class="fill long" style="width:8%"></div></div>
             </div>
           </div>
         </div>
@@ -221,71 +373,119 @@
     <div class="provider-strip">
       <div class="provider-item">
         <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/Claude-d.blue.svg" alt="Claude" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/Claude-white.svg"  alt="Claude" width="28" height="28" />
+          <img class="icon-light-only" src="assets/icons/Claude-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Claude-white.svg"  alt="" width="28" height="28" />
         </div>
         <span class="pname">Claude</span>
-        <span class="psub">5h &amp; 7d windows</span>
+        <span class="psub">5-hour &amp; weekly limits</span>
       </div>
       <div class="provider-item">
         <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/Copilot-d.blue.svg" alt="GitHub Copilot" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/Copilot-white.svg"  alt="GitHub Copilot" width="28" height="28" />
+          <img class="icon-light-only" src="assets/icons/Codex-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Codex-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">ChatGPT</span>
+        <span class="psub">Chats + Codex CLI</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Gemini-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Gemini-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Gemini</span>
+        <span class="psub">App + Gemini CLI</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/Copilot-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Copilot-white.svg"  alt="" width="28" height="28" />
         </div>
         <span class="pname">GitHub Copilot</span>
         <span class="psub">Premium requests</span>
       </div>
       <div class="provider-item">
         <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/Cursor-d.blue.svg" alt="Cursor" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/Cursor-white.svg"  alt="Cursor" width="28" height="28" />
+          <img class="icon-light-only" src="assets/icons/Cursor-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/Cursor-white.svg"  alt="" width="28" height="28" />
         </div>
         <span class="pname">Cursor</span>
-        <span class="psub">Premium &amp; requests</span>
+        <span class="psub">Premium requests</span>
       </div>
       <div class="provider-item">
         <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/Codex-d.blue.svg" alt="OpenAI" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/Codex-white.svg"  alt="OpenAI" width="28" height="28" />
-        </div>
-        <span class="pname">OpenAI</span>
-        <span class="psub">5h &amp; context</span>
-      </div>
-      <div class="provider-item">
-        <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/Gemini-d.blue.svg" alt="Gemini" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/Gemini-white.svg"  alt="Gemini" width="28" height="28" />
-        </div>
-        <span class="pname">Gemini</span>
-        <span class="psub">Tokens &amp; requests</span>
-      </div>
-      <div class="provider-item">
-        <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/stability-d.blue.svg" alt="Stability AI" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/stability-white.svg"  alt="Stability AI" width="28" height="28" />
+          <img class="icon-light-only" src="assets/icons/stability-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/stability-white.svg"  alt="" width="28" height="28" />
         </div>
         <span class="pname">Stability AI</span>
-        <span class="psub">Credit balance</span>
-      </div>
-      <div class="provider-item">
-        <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/runway-d.blue.svg" alt="Runway" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/runway-white.svg"  alt="Runway" width="28" height="28" />
-        </div>
-        <span class="pname">Runway</span>
         <span class="psub">Credits</span>
       </div>
       <div class="provider-item">
         <div class="provider-icon-wrap">
-          <img class="icon-light-only" src="assets/icons/elevenlabs-d.blue.svg" alt="ElevenLabs" width="28" height="28" />
-          <img class="icon-dark-only"  src="assets/icons/elevenlabs-white.svg"  alt="ElevenLabs" width="28" height="28" />
+          <img class="icon-light-only" src="assets/icons/midjourney-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/midjourney-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Midjourney</span>
+        <span class="psub">Fast hours</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/leonardo-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/leonardo-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Leonardo</span>
+        <span class="psub">Image credits</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/runway-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/runway-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Runway</span>
+        <span class="psub">Video credits</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/elevenlabs-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/elevenlabs-white.svg"  alt="" width="28" height="28" />
         </div>
         <span class="pname">ElevenLabs</span>
-        <span class="psub">Monthly characters</span>
+        <span class="psub">Voice credits</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/suno-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/suno-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Suno</span>
+        <span class="psub">Music credits</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/udio-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/udio-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Udio</span>
+        <span class="psub">Music credits</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/grok-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/grok-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Grok</span>
+        <span class="psub">Chats</span>
+      </div>
+      <div class="provider-item">
+        <div class="provider-icon-wrap">
+          <img class="icon-light-only" src="assets/icons/perplexity-d.blue.svg" alt="" width="28" height="28" />
+          <img class="icon-dark-only"  src="assets/icons/perplexity-white.svg"  alt="" width="28" height="28" />
+        </div>
+        <span class="pname">Perplexity</span>
+        <span class="psub">Pro searches</span>
       </div>
     </div>
 
-    <p class="provider-coming">Coming soon — Midjourney, Suno, and Udio, once their public APIs ship.</p>
+    <p class="provider-coming">ChatGPT, the Gemini app, Midjourney, Leonardo, ElevenLabs, Grok, Perplexity, Suno and Udio connect through the free <a href="#extension">browser extension</a>.</p>
   </div>
 </section>
 
@@ -299,18 +499,18 @@
     <!-- Annotated diagram -->
     <div class="pace-diagram-wrap">
       <div class="pace-diagram" role="img"
-           aria-label="Ring diagram: outer ring shows 60% of the 5-hour window used; inner ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption.">
+           aria-label="Ring diagram: inner ring shows 60% of the 5-hour window used; outer ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption. The 5-hour window is burning ahead of pace, so its tokens will run out before it resets.">
 
         <svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
              font-family="'DM Sans', system-ui, sans-serif">
 
           <!-- ── Key / legend ─────────────────────────────── -->
           <g transform="translate(30 22)">
-            <circle cx="8" cy="10" r="7" fill="var(--ring-outer)"/>
+            <circle cx="8" cy="10" r="7" fill="var(--ring-short)"/>
             <text x="24" y="15" font-size="16" fill="currentColor" opacity="0.82">5-Hour Window</text>
           </g>
           <g transform="translate(240 22)">
-            <circle cx="8" cy="10" r="7" fill="var(--ring-inner)"/>
+            <circle cx="8" cy="10" r="7" fill="var(--ring-long)"/>
             <text x="24" y="15" font-size="16" fill="currentColor" opacity="0.82">7-Day Window</text>
           </g>
 
@@ -321,18 +521,18 @@
           <!-- Outer track -->
           <circle cx="200" cy="230" r="100" fill="none"
                   stroke="var(--ring-track)" stroke-width="20"/>
-          <!-- Outer fill 60% (circumference 628.32, offset 251.33) -->
+          <!-- Outer = 7-day (long) window, 38% (circumference 628.32, offset 389.56) -->
           <circle cx="200" cy="230" r="100" fill="none"
-                  stroke="var(--ring-outer)" stroke-width="20" stroke-linecap="round"
-                  stroke-dasharray="628.32" stroke-dashoffset="251.33"
+                  stroke="var(--ring-long)" stroke-width="20" stroke-linecap="round"
+                  stroke-dasharray="628.32" stroke-dashoffset="389.56"
                   transform="rotate(-90 200 230)"/>
           <!-- Inner track -->
           <circle cx="200" cy="230" r="75" fill="none"
                   stroke="var(--ring-track)" stroke-width="20"/>
-          <!-- Inner fill 38% (circumference 471.24, offset 292.17) -->
+          <!-- Inner = 5-hour (short) window, 60% (circumference 471.24, offset 188.50) -->
           <circle cx="200" cy="230" r="75" fill="none"
-                  stroke="var(--ring-inner)" stroke-width="20" stroke-linecap="round"
-                  stroke-dasharray="471.24" stroke-dashoffset="292.17"
+                  stroke="var(--ring-short)" stroke-width="20" stroke-linecap="round"
+                  stroke-dasharray="471.24" stroke-dashoffset="188.50"
                   transform="rotate(-90 200 230)"/>
 
           <!-- ── Pace dots at 45% of circumference ──────────
@@ -340,15 +540,15 @@
                Outer: (200+100·sin162°, 230−100·cos162°) = (230.9, 325.1)
                Inner: (200+75·sin162°,  230−75·cos162°)  = (223.2, 301.3)
                Solid fill, sized to match the thicker stroke. -->
-          <circle cx="230.9" cy="325.1" r="9" fill="var(--pace-dot)"/>
-          <circle cx="223.2" cy="301.3" r="8" fill="var(--pace-dot)"/>
+          <circle class="pace-dot" r="9" fill="var(--pace-dot)" transform="rotate(162 200 230) translate(200 130)"/>
+          <circle class="pace-dot" r="8" fill="var(--pace-dot)" transform="rotate(162 200 230) translate(200 155)"/>
 
           <!-- ── Center label ──────────────────────────────
-               Percentage uses the inner ring color per brand direction. -->
+               Shows the short window, in its color, like the small widget. -->
           <text x="200" y="244" text-anchor="middle"
                 font-family="-apple-system,'SF Pro Text',system-ui,sans-serif"
                 font-size="46" font-weight="700"
-                fill="var(--ring-inner)"
+                fill="var(--ring-short)"
                 style="font-variant-numeric: tabular-nums;">60%</text>
 
           <!-- ── Connector lines + labels ──────────────────
@@ -356,39 +556,42 @@
 
           <!-- "Usage so far" — touches outer fill arc outer edge at θ=61°.
                (200+110·sin61°, 230−110·cos61°) = (296.2, 176.7) -->
-          <line x1="296.2" y1="176.7" x2="340" y2="150"
+          <line class="callout-line" data-step="1" x1="296.2" y1="176.7" x2="340" y2="150"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <line x1="340" y1="150" x2="372" y2="150"
+          <line class="callout-line" data-step="1" x1="340" y1="150" x2="372" y2="150"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
 
           <!-- "Even-pace mark" — touches outer pace dot (r=9), so start at x=240 -->
-          <line x1="240" y1="325.1" x2="340" y2="325"
+          <line class="callout-line" data-step="2" x1="240" y1="325.1" x2="340" y2="325"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <line x1="340" y1="325" x2="372" y2="325"
+          <line class="callout-line" data-step="2" x1="340" y1="325" x2="372" y2="325"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
 
-          <!-- "Burning ahead of pace" — touches outer edge of outer arc at θ=189° (52.5% of circumference).
-               (200+110·sin189°, 230−110·cos189°) = (182.8, 338.6) -->
-          <line x1="182.8" y1="338.6" x2="182.8" y2="395"
+          <!-- "Burning ahead of pace" — touches the outer edge of the inner (5-hour) arc at θ=189°
+               (52.5% of the way round, past the 45% pace mark).
+               (200+85·sin189°, 230−85·cos189°) = (186.7, 314.0) -->
+          <line class="callout-line" data-step="3" x1="186.7" y1="314.0" x2="186.7" y2="395"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <text x="182.8" y="416" text-anchor="middle" font-size="16" font-weight="600"
-                fill="currentColor">Burning <tspan fill="var(--accent)">ahead</tspan> of pace</text>
         </svg>
 
-        <div class="pace-label pace-label--top">
+        <div class="pace-label pace-label--top callout-label" data-step="1">
           <div class="pace-label__title">Usage so far</div>
           <div class="pace-label__sub">What you've used this window</div>
         </div>
-        <div class="pace-label pace-label--bottom">
+        <div class="pace-label pace-label--bottom callout-label" data-step="2">
           <div class="pace-label__title">Even-pace mark</div>
           <div class="pace-label__sub">Where even consumption sits</div>
+        </div>
+        <div class="pace-label pace-label--under callout-label" data-step="3">
+          <div class="pace-label__title">Burning <span class="pace-label__accent">ahead</span> of pace</div>
+          <div class="pace-label__sub">Your 5-hour tokens will run out before the window resets</div>
         </div>
 
       </div>
     </div>
 
     <!-- Copy -->
-    <div class="pace-text reveal">
+    <div class="pace-text" data-build="children">
       <p class="feature-kicker">SIGNAL</p>
       <h2 id="pace-heading">The <em>dot</em> that tells you if you're on track.</h2>
       <div class="feature-body">
@@ -409,7 +612,7 @@
 <section class="feature-section" id="providers-detail" aria-labelledby="providers-heading">
   <div class="section-wrap">
     <div class="feature-layout">
-      <div class="reveal">
+      <div data-build="children">
         <p class="feature-kicker">BREADTH</p>
         <h2 id="providers-heading">Every tool you run, in <em>one</em> place.</h2>
         <div class="feature-body">
@@ -417,19 +620,19 @@
           <p>Drag to reorder. Hide the ones you're not using today. The menu bar shows the one you're closest to hitting.</p>
         </div>
       </div>
-      <div class="reveal menubar-scene" data-delay="80" aria-label="Tokenomics menu bar with popover open">
+      <div class="reveal menubar-scene" aria-label="Tokenomics menu bar with popover open">
         <!-- Desktop scene: menu bar anchored to the right (rest of screen is empty). -->
         <div class="menubar-bar" aria-hidden="true">
           <img src="assets/menu-bar-items.svg" alt="" class="menubar-svg-img"/>
         </div>
 
         <!-- Popover dropping down under the Tokenomics icon on the right -->
-        <div class="menubar-popover" aria-hidden="true">
+        <div class="menubar-popover">
           <!-- Header: app name + plan pill + share -->
-          <div class="pop-head">
+          <div class="pop-head" aria-hidden="true">
             <div class="pop-head-title">Tokenomics</div>
             <div class="pop-head-actions">
-              <span class="pop-plan-pill">Max</span>
+              <span class="pop-plan-pill" data-pop-plan>Max</span>
               <!-- SF Symbol: square.and.arrow.up (Regular-S) -->
               <button class="pop-iconbtn" type="button" aria-label="Share">
                 <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -445,33 +648,39 @@
           </div>
 
           <!-- Tab bar: active tab is a pill with icon + name; others icon-only -->
-          <div class="pop-tabs">
-            <button class="pop-tab active" type="button">
+          <!-- Tabs are live: pick a tool to see its meters (popover-demo.js). -->
+          <div class="pop-tabs" role="tablist" aria-label="Try the popover: pick a tool">
+            <button class="pop-tab active" type="button" role="tab" aria-selected="true" data-provider="claude">
               <img src="assets/icons/Claude-white.svg" alt="" width="16" height="16"/>
               <span>Claude</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="OpenAI">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="chatgpt">
               <img src="assets/icons/Codex-white.svg" alt="" width="16" height="16"/>
+              <span>ChatGPT</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="Gemini">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="gemini">
               <img src="assets/icons/Gemini-white.svg" alt="" width="16" height="16"/>
+              <span>Gemini</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="GitHub Copilot">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="copilot">
               <img src="assets/icons/Copilot-white.svg" alt="" width="16" height="16"/>
+              <span>GitHub Copilot</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="Cursor">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="cursor">
               <img src="assets/icons/Cursor-white.svg" alt="" width="16" height="16"/>
+              <span>Cursor</span>
             </button>
           </div>
 
+          <div class="pop-body" role="tabpanel" aria-live="polite">
           <!-- 5-Hour Window -->
           <div class="pop-section">
             <div class="pop-section-head">
               <div class="pop-section-title">5-Hour Window</div>
-              <div class="pop-section-pct">46%</div>
+              <div class="pop-section-pct">43%</div>
             </div>
             <div class="pop-bar">
-              <div class="pop-bar-fill" style="width: 46%;"></div>
+              <div class="pop-bar-fill" style="width: 43%;"></div>
               <div class="pop-bar-pace" style="left: 60%;"></div>
             </div>
             <div class="pop-section-resets">Resets in 1h 36m</div>
@@ -492,10 +701,12 @@
             <div class="pop-section-resets">Resets tomorrow</div>
           </div>
 
+          </div>
+
           <div class="pop-divider"></div>
 
           <!-- Footer -->
-          <div class="pop-foot">
+          <div class="pop-foot" aria-hidden="true">
             <div class="pop-foot-left">Updated just now</div>
             <div class="pop-foot-right">
               <!-- SF Symbol: arrow.clockwise (Regular-S) -->
@@ -547,94 +758,132 @@
 <section class="feature-section" aria-labelledby="auth-heading">
   <div class="section-wrap">
     <div class="feature-layout reverse">
-      <div class="reveal">
+      <div data-build="children">
         <p class="feature-kicker">Zero-friction authentication</p>
         <h2 id="auth-heading">No token pasting. No <em>cookie</em> hunting.</h2>
         <div class="feature-body">
-          <p>Everyday AI tools store their credentials in different places. Tokenomics reads each one automatically: macOS Keychain for Claude, the <code>gh</code> CLI for Copilot, local configuration files for Cursor, OpenAI, and Gemini.</p>
-          <p>For providers that only give out API keys (Stability, Runway, ElevenLabs), paste once in Settings — that's the most friction you'll hit.</p>
-          <p>If Claude rotates your authentication token during a sleep/wake cycle — which it does — Tokenomics notices and re-reads Keychain silently. You won't see a logout screen.</p>
+          <p>Coding tools already keep your sign-in on your Mac. Tokenomics reads each one where it lives: macOS Keychain for Claude, the <code>gh</code> CLI for Copilot, local configuration files for Cursor, Codex CLI and Gemini CLI.</p>
+          <p>Web tools like ChatGPT and Midjourney don't leave anything on your Mac, so the <a href="#extension">browser extension</a> reads them from the sites you're already signed in to. Stability AI and Runway take an API key you paste once. That's the most friction you'll hit.</p>
+          <p>Claude Code's sign-in lives in your Mac's Keychain, so macOS asks once before Tokenomics can read it. Choose Always Allow and you won't be asked again. When Claude Code refreshes its sign-in, Tokenomics picks up the new one on its own.</p>
         </div>
       </div>
-      <div class="reveal" data-delay="80" style="display:flex; flex-direction:column; gap: var(--s-4);">
+      <div data-build="children" style="display:flex; flex-direction:column; gap: var(--s-4);">
         <!-- Auth credential path cards -->
-        <p class="feature-kicker" style="margin: 0;">Everyday AI</p>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Claude-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+        <!-- One card for everything read on the Mac; each row says how it connects. -->
+        <div class="card mac-tools">
+          <h3 class="signin-card-title">On your Mac</h3>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Claude-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Claude</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">macOS Keychain · uses Claude Code's sign-in</div>
+            </div>
           </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Claude</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">macOS Keychain · authentication token</div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Copilot-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Copilot-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">GitHub Copilot</div>
+              <div style="font-size: 12px; color: var(--text-subtle);"><code>gh</code> CLI · uses your GitHub sign-in</div>
+            </div>
+          </div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Cursor-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Cursor-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Cursor</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+            </div>
+          </div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Codex-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Codex CLI</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+            </div>
+          </div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Gemini-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Gemini CLI</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
+            </div>
+          </div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/stability-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/stability-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Stability AI</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">API key · paste once in Settings</div>
+            </div>
+          </div>
+          <div class="mac-tool">
+            <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
+              <img src="assets/icons/runway-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/runway-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
+            </div>
+            <div>
+              <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Runway</div>
+              <div style="font-size: 12px; color: var(--text-subtle);">API key · paste once in Settings</div>
+            </div>
           </div>
         </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Copilot-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Copilot-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">GitHub Copilot</div>
-            <div style="font-size: 12px; color: var(--text-subtle);"><code>gh</code> CLI · zero-friction</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Cursor-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Cursor-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Cursor</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Codex-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">OpenAI</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
-          <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-            <img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Gemini-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </div>
-          <div>
-            <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Gemini</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
-          </div>
-        </div>
-        <p class="feature-kicker" style="margin: var(--s-3) 0 0 0;">Creative AI</p>
         <div class="card" style="display:flex; flex-direction:column; gap: var(--s-3);">
-          <ul role="list" style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap: var(--s-3);">
-            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
-              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-                <img src="assets/icons/stability-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-                <img src="assets/icons/stability-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-              </div>
-              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Stability AI</span>
+          <h3 class="signin-card-title">In your browser</h3>
+          <ul role="list" class="web-tools">
+            <li class="web-tool" title="ChatGPT">
+              <img src="assets/icons/Codex-d.blue.svg" alt="ChatGPT" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Codex-white.svg"  alt="ChatGPT" class="icon-dark-only"  width="20" height="20"/>
             </li>
-            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
-              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-                <img src="assets/icons/runway-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-                <img src="assets/icons/runway-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-              </div>
-              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Runway</span>
+            <li class="web-tool" title="Gemini">
+              <img src="assets/icons/Gemini-d.blue.svg" alt="Gemini" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/Gemini-white.svg"  alt="Gemini" class="icon-dark-only"  width="20" height="20"/>
             </li>
-            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
-              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-                <img src="assets/icons/elevenlabs-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-                <img src="assets/icons/elevenlabs-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-              </div>
-              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">ElevenLabs</span>
+            <li class="web-tool" title="Midjourney">
+              <img src="assets/icons/midjourney-d.blue.svg" alt="Midjourney" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/midjourney-white.svg"  alt="Midjourney" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="Leonardo">
+              <img src="assets/icons/leonardo-d.blue.svg" alt="Leonardo" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/leonardo-white.svg"  alt="Leonardo" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="Grok">
+              <img src="assets/icons/grok-d.blue.svg" alt="Grok" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/grok-white.svg"  alt="Grok" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="Perplexity">
+              <img src="assets/icons/perplexity-d.blue.svg" alt="Perplexity" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/perplexity-white.svg"  alt="Perplexity" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="Suno">
+              <img src="assets/icons/suno-d.blue.svg" alt="Suno" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/suno-white.svg"  alt="Suno" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="ElevenLabs">
+              <img src="assets/icons/elevenlabs-d.blue.svg" alt="ElevenLabs" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/elevenlabs-white.svg"  alt="ElevenLabs" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="Udio">
+              <img src="assets/icons/udio-d.blue.svg" alt="Udio" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/udio-white.svg"  alt="Udio" class="icon-dark-only"  width="20" height="20"/>
             </li>
           </ul>
-          <div style="font-size: 12px; color: var(--text-subtle); padding-top: 4px; margin-left: calc(36px + var(--s-4));">API key · paste once in Settings</div>
+          <div style="font-size: 12px; color: var(--text-subtle);">Browser extension · reads the sites you're signed in to</div>
         </div>
       </div>
     </div>
@@ -664,15 +913,15 @@
               <image href="assets/icons/Claude-white.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
               <g transform="translate(50 47.4)">
                 <circle r="30.5" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
-                <circle r="30.5" fill="none" stroke="#75CBF5" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                <circle r="30.5" fill="none" stroke="#3389C7" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="128.40"
                   transform="rotate(-90)"/>
                 <circle r="23" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
-                <circle r="23" fill="none" stroke="#3389C7" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                <circle r="23" fill="none" stroke="#75CBF5" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="65.03"
                   transform="rotate(-90)"/>
-                <circle r="3.5" fill="#FFFFFF" transform="rotate(198) translate(0 -30.5)"/>
-                <circle r="3.5" fill="#FFFFFF" transform="rotate(54)  translate(0 -23)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(54)  translate(0 -30.5)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(198) translate(0 -23)"/>
                 <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
                   font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
                   font-size="12.5" font-weight="700" letter-spacing="-0.3"
@@ -691,15 +940,15 @@
               <image href="assets/icons/Claude-d.blue.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
               <g transform="translate(50 47.4)">
                 <circle r="30.5" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
-                <circle r="30.5" fill="none" stroke="#2F84BF" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                <circle r="30.5" fill="none" stroke="#56A2D6" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="128.40"
                   transform="rotate(-90)"/>
                 <circle r="23" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
-                <circle r="23" fill="none" stroke="#56A2D6" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                <circle r="23" fill="none" stroke="#2F84BF" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="65.03"
                   transform="rotate(-90)"/>
-                <circle r="3.5" fill="#0E334D" transform="rotate(198) translate(0 -30.5)"/>
-                <circle r="3.5" fill="#0E334D" transform="rotate(54)  translate(0 -23)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(54)  translate(0 -30.5)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(198) translate(0 -23)"/>
                 <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
                   font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
                   font-size="12.5" font-weight="700" letter-spacing="-0.3"
@@ -734,15 +983,6 @@
                       <div class="pace" style="left:50%"></div>
                     </div>
                     <span class="pct">42%</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="lbl">Requests</span>
-                    <div class="pbar">
-                      <div class="track"></div>
-                      <div class="fill long" style="width:18%"></div>
-                      <div class="pace" style="left:28%"></div>
-                    </div>
-                    <span class="pct long">18%</span>
                   </div>
                 </div>
               </div>
@@ -780,7 +1020,7 @@
                   <div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:30%"></div></div>
                 </div>
                 <div class="col">
-                  <div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div>
+                  <div class="head"><span class="lbl">Weekly</span><span class="pct long">13%</span></div>
                   <div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div>
                 </div>
               </div>
@@ -816,12 +1056,11 @@
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Copilot-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">42%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:42%"></div><div class="pace" style="left:46%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Codex-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">5-Hour</span><span class="pct">1%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:1%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Weekly</span><span class="pct long">13%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Gemini-white.svg" alt="" /></span>
@@ -831,17 +1070,14 @@
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Cursor-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">8%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:8%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">12%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:12%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/stability-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Credits</span><span class="pct">25%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:35%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Monthly</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/elevenlabs-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Chars</span><span class="pct">62%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:62%"></div><div class="pace" style="left:48%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Monthly</span><span class="pct long">41%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:41%"></div></div></div>
               </div>
             </div>
             <div class="w-foot">Tokenomics · 7 providers</div>
@@ -924,6 +1160,8 @@
 </section>
 
 
+
+
 <!-- ══════════════════════════════════════════════════════════
      SUPPORT / PRICING
      ══════════════════════════════════════════════════════════ -->
@@ -968,28 +1206,61 @@
 
 
 <!-- ══════════════════════════════════════════════════════════
-     INSTALL
+     DOWNLOAD: browser extension (left) + Mac app (right)
      ══════════════════════════════════════════════════════════ -->
-<section class="install-section" id="install" aria-labelledby="install-heading">
+<section class="download-section" id="install" aria-labelledby="download-heading">
   <div class="section-wrap">
-    <div class="install-layout">
-      <div class="install-block">
-        <p class="feature-kicker">Install</p>
-        <h2 id="install-heading">Install once. Stay <em>current</em>.</h2>
-        <p style="color: var(--text-muted); margin-bottom: var(--s-6); max-width: 48ch;">
-          Sparkle handles silent background updates. No re-downloading from GitHub every time there's a new version.
-        </p>
+    <div class="download-intro" data-build="children">
+      <p class="feature-kicker">Download</p>
+      <h2 id="download-heading">Two ways <em>in</em>.</h2>
+      <p class="download-lede">Start with whichever fits. The browser extension reads the AI sites you use in a browser. The Mac app reads the coding tools signed in on your Mac. Run both and they share one set of numbers. <a href="/help/mac-app-and-extension">How they work together</a>.</p>
+    </div>
 
+    <div class="download-grid">
+
+      <!-- Browser extension -->
+      <article class="download-card" id="extension" aria-labelledby="extension-heading">
+        <p class="feature-kicker">Browser extension</p>
+        <h3 id="extension-heading">Your web AI, <em>too</em>.</h3>
+        <p class="download-body">Sign in to a site the way you normally do, and its meter shows up in your toolbar. Works on its own, on Mac or Windows.</p>
+        <div class="store-badges">
+          <a class="store-badge" href="https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl" target="_blank" rel="noopener">
+            <img src="assets/badges/chrome-web-store-border.png" alt="Available in the Chrome Web Store" width="206" height="62" />
+          </a>
+          <span class="store-soon"><span class="store-soon-name">Microsoft Edge</span><span class="store-soon-tag">Coming soon</span></span>
+          <span class="store-soon"><span class="store-soon-name">Safari</span><span class="store-soon-tag">Coming soon</span></span>
+        </div>
+        <p class="store-note">Free. Brave, Arc, Vivaldi and Opera can install it from the&nbsp;Chrome&nbsp;Web&nbsp;Store.</p>
+        <p class="download-sites-label">Works with</p>
+        <div class="download-sites" role="group" aria-label="Sites the extension works with">
+          <!-- Chat tools on one row, creative tools on the next. -->
+          <ul class="download-sites-row" role="list" aria-label="Chat">
+            <li><img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/Claude-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Claude</li>
+            <li><img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/Codex-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>ChatGPT</li>
+            <li><img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/Gemini-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Gemini</li>
+            <li><img src="assets/icons/perplexity-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/perplexity-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Perplexity</li>
+            <li><img src="assets/icons/grok-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/grok-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Grok</li>
+          </ul>
+          <ul class="download-sites-row" role="list" aria-label="Creative">
+            <li><img src="assets/icons/midjourney-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/midjourney-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Midjourney</li>
+            <li><img src="assets/icons/leonardo-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/leonardo-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Leonardo</li>
+            <li><img src="assets/icons/elevenlabs-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/elevenlabs-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>ElevenLabs</li>
+            <li><img src="assets/icons/suno-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/suno-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Suno</li>
+            <li><img src="assets/icons/udio-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/udio-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Udio</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Mac app -->
+      <article class="download-card" aria-labelledby="mac-heading">
+        <p class="feature-kicker">Mac app</p>
+        <h3 id="mac-heading">Install once. Stay <em>current</em>.</h3>
+        <p class="download-body">Menu bar rings and desktop widgets for Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor, plus anything the extension reads. It checks for updates itself and installs them when you say so.</p>
         <div class="install-tabs" role="tablist">
           <button class="install-tab active" data-tab="download" role="tab" aria-selected="true" aria-controls="panel-download">Download</button>
           <button class="install-tab" data-tab="homebrew" role="tab" aria-selected="false" aria-controls="panel-homebrew">Homebrew</button>
         </div>
-
-        <p class="install-support" id="install-support-line">macOS 14 Sonoma or later · Developer ID signed &amp; notarized</p>
-      </div>
-
-      <!-- Right column: swaps between download flow and brew command -->
-      <div class="install-right">
+        <div class="install-right">
         <div id="panel-download" class="install-panel active" role="tabpanel">
           <a href="/download/dmg/latest"
              class="install-flow"
@@ -1001,7 +1272,20 @@
               </div>
               <span class="install-flow-icon-label">Tokenomics</span>
             </div>
-            <img class="install-flow-arrow" src="assets/brand/install-arrow.svg" alt="" aria-hidden="true" />
+            <svg class="install-flow-arrow" viewBox="0 0 272 138" fill="none" aria-hidden="true">
+              <!-- install-arrow.svg, inlined so motion.js can draw it. While it draws, a stroke
+                   follows the squiggle's centerline (fitted to the artwork, ~9.5 wide), so the
+                   crossing appears only when the line gets there; the artwork fades in as it lands. -->
+              <path class="arrow-stroke" d="M3 55 C3.7 54.2 5.7 51.8 7 50.1 C8.3 48.4 9.4 46.5 10.6 44.8 C11.8 43.1 13.1 41.4 14.4 39.7 C15.7 38.0 17.0 36.4 18.4 34.7 C19.8 33.0 21.1 31.3 22.5 29.7 C23.9 28.1 25.4 26.6 26.8 25 C28.2 23.4 29.6 21.9 31.2 20.4 C32.8 18.9 34.4 17.5 36.1 16.2 C37.8 14.9 39.5 13.7 41.3 12.5 C43.1 11.3 44.9 10.1 46.9 9.2 C48.9 8.2 51.0 7.4 53 6.8 C55.0 6.2 57.1 5.7 59.1 5.3 C61.1 4.9 63.1 4.6 65.1 4.4 C67.1 4.2 69.2 4.2 71.3 4.3 C73.4 4.4 75.5 4.6 77.6 4.9 C79.7 5.2 81.9 5.7 83.9 6.3 C86.0 6.9 88.0 7.7 89.9 8.6 C91.9 9.5 93.8 10.4 95.6 11.6 C97.3 12.8 98.8 14.6 100.4 15.9 C102.1 17.2 103.8 18.4 105.5 19.7 C107.2 21.0 108.8 22.3 110.4 23.7 C112.0 25.1 113.3 25.4 115.3 27.8 C117.3 30.2 120.6 35.8 122.3 38.4 C124.0 41.0 124.4 41.8 125.4 43.5 C126.4 45.2 127.3 46.9 128.2 48.7 C129.1 50.5 130.0 52.3 130.8 54.2 C131.6 56.1 132.4 58.0 133.1 59.9 C133.8 61.8 134.3 63.8 134.9 65.7 C135.5 67.7 136.0 69.6 136.4 71.6 C136.8 73.6 137.2 75.5 137.5 77.5 C137.8 79.5 137.9 81.3 138 83.3 C138.1 85.3 138.2 87.3 138.2 89.3 C138.2 91.3 138.0 93.3 137.8 95.3 C137.6 97.3 137.2 99.3 136.8 101.3 C136.4 103.3 135.8 105.2 135.1 107.1 C134.4 109.0 133.7 110.9 132.8 112.6 C131.9 114.3 130.8 115.9 129.7 117.5 C128.5 119.1 127.3 120.6 125.9 122 C124.5 123.4 122.9 124.7 121.2 125.9 C119.5 127.1 117.7 128.2 115.8 129 C113.9 129.8 112.0 130.5 110 131 C108.0 131.5 106.0 131.7 103.9 131.8 C101.9 131.9 99.7 131.9 97.7 131.7 C95.7 131.5 93.7 131.1 91.7 130.5 C89.8 129.9 87.8 129.1 86 128.2 C84.2 127.3 82.4 126.2 80.8 124.9 C79.2 123.6 77.6 122.1 76.2 120.5 C74.8 118.9 73.6 117.1 72.6 115.3 C71.6 113.5 70.8 111.5 70.2 109.5 C69.6 107.5 69.1 105.5 68.8 103.4 C68.5 101.4 68.3 99.3 68.2 97.2 C68.1 95.1 68.2 93.1 68.3 91 C68.4 88.9 68.7 86.8 69 84.8 C69.3 82.8 69.8 80.7 70.3 78.7 C70.8 76.7 71.5 74.7 72.2 72.7 C72.9 70.8 73.7 68.9 74.6 67 C75.5 65.1 76.4 63.2 77.4 61.4 C78.4 59.6 79.4 57.8 80.6 56 C81.8 54.2 83.0 52.6 84.3 50.9 C85.6 49.2 86.9 47.6 88.3 46 C89.7 44.4 91.2 42.9 92.7 41.4 C94.2 39.9 95.7 38.5 97.3 37.1 C98.9 35.7 100.6 34.4 102.3 33.2 C104.0 32.0 105.8 31.0 107.7 30 C109.6 29.0 111.5 28.2 113.5 27.4 C115.5 26.6 117.5 26.0 119.5 25.2 C121.5 24.4 123.3 23.2 125.3 22.5 C127.3 21.8 129.5 21.5 131.6 21.2 C133.7 20.9 135.8 20.6 137.9 20.5 C140.0 20.4 142.2 20.4 144.3 20.6 C146.4 20.8 148.5 21.1 150.5 21.6 C152.5 22.2 154.4 22.9 156.2 23.9 C158.0 24.9 159.7 26.4 161.3 27.8 C162.9 29.2 164.3 30.9 165.6 32.5 C166.9 34.1 168.0 35.9 169.2 37.7 C170.4 39.5 171.5 41.5 172.7 43.3 C173.9 45.1 175.0 46.8 176.2 48.5 C177.4 50.2 178.6 51.9 180.1 53.5 C181.6 55.1 183.2 56.6 185 57.9 C186.8 59.2 189.0 60.4 191.1 61.1 C193.2 61.8 195.6 62.1 197.8 62.3 C200.0 62.5 202.2 62.3 204.3 62.1 C206.4 61.9 208.5 61.4 210.6 60.9 C212.7 60.4 214.7 59.8 216.7 59.2 C218.7 58.6 220.8 57.9 222.8 57.2 C224.8 56.5 226.7 55.8 228.7 55 C230.7 54.2 232.6 53.5 234.6 52.6 C236.6 51.8 238.5 50.8 240.4 49.9 C242.3 49.0 245.1 47.5 246 47" stroke="#EC7655" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+              <path class="arrow-line" d="M56.9463 1.56079C85.9999 -4.16806 99.3484 6.5958 114.399 22.0667C126.138 17.2785 139.83 12.7448 153 16.4561C165.161 19.8829 170.375 32.4704 175.458 40.1848C180.746 48.2098 185.206 54.5546 194.109 56.5852C202.893 58.5884 214.682 55.8506 224.86 52.1819C229.833 50.3893 234.212 48.4544 237.348 46.9661C238.913 46.2231 240.162 45.5942 241.015 45.1545C241.44 44.9348 241.767 44.7622 241.983 44.6467C242.091 44.5892 242.172 44.5459 242.224 44.5178C242.249 44.5038 242.268 44.4928 242.279 44.4866L242.293 44.4797C242.767 44.219 243.778 44.0085 243.778 44.0085L246.137 44.4737L247.725 46.0569L247.939 49.4561C247.939 49.4561 246.996 51.0224 246.147 51.4895L244.22 47.9846C246.112 51.4239 246.146 51.4905 246.146 51.4905L246.144 51.4915C246.142 51.4925 246.139 51.4939 246.137 51.4954C246.131 51.4984 246.123 51.503 246.114 51.5081C246.096 51.5182 246.07 51.5322 246.037 51.55C245.97 51.5862 245.874 51.6383 245.75 51.7043C245.502 51.8365 245.143 52.0263 244.683 52.2639C243.761 52.7394 242.431 53.4075 240.777 54.1926C237.474 55.7605 232.851 57.8059 227.573 59.7083C217.25 63.4295 203.709 69.5126 192.5 66.9561C180.092 64.1259 173.902 52.3638 168.777 44.5862C163.448 36.498 159.013 29.837 150.135 27.3352C139.887 24.4477 129.625 25.1179 120.055 28.4729C120.409 28.9147 120.762 29.3583 121.108 29.8069C136.484 49.7117 147.028 77.6089 142 101.956C139.816 112.533 133.5 124.456 124 130.956C114.5 137.456 106.326 138.75 95.5 137.456C84.3696 136.125 74.7536 127.843 69.5 119.99C64.3201 112.248 62.695 100.189 63.5 89.4561C65.085 68.3233 77.8826 48.9213 93.7353 35.01C97.7686 31.4707 102.14 28.3461 106.77 25.7522C93.3585 12.8669 76.297 5.89891 58.4931 9.40943C52.3747 10.6159 45.0531 13.8093 38.9999 18.4562C32.9737 23.0824 28.4252 28.9879 23.5849 34.6418C18.7539 40.2851 14.7603 45.7732 11.9736 49.8547C10.5822 51.8927 9.49603 53.573 8.76169 54.7375C8.39462 55.3197 8.11563 55.7728 7.93063 56.0764C7.8382 56.2281 7.76932 56.3426 7.72458 56.4172C7.70221 56.4545 7.68592 56.4822 7.67575 56.4993C7.67073 56.5077 7.66699 56.5135 7.66501 56.5168L7.66305 56.5178L7.66403 56.5188C6.94907 57.7293 4.99995 58.4562 4.99995 58.4562H1.99995L0.775359 56.9562L0 54.4561C0 54.4561 0.397592 53.09 0.775359 52.4504L4.2197 54.4846C0.775724 52.4505 0.776335 52.4485 0.776335 52.4485L0.778289 52.4456C0.779605 52.4433 0.781134 52.4402 0.783171 52.4368C0.787415 52.4296 0.793428 52.4198 0.80075 52.4075C0.815491 52.3827 0.837186 52.3481 0.864226 52.303C0.918425 52.2126 0.997025 52.0816 1.09958 51.9133C1.30466 51.5768 1.60514 51.0893 1.99509 50.4709C2.77497 49.2342 3.9146 47.4715 5.36716 45.344C8.26852 41.0945 12.4385 35.3602 17.5078 29.4387C22.5679 23.5279 28.5875 17.3555 35.1982 12.2805C41.782 7.22628 49.1666 3.09476 56.9463 1.56079ZM112.422 31.7844C107.682 34.2467 103.179 37.3661 99.0117 41.0227C84.5952 53.6736 74.624 72.417 73.209 91.2844C72.4951 100.804 74.2546 108.86 78.1631 114.701C81.9978 120.433 88.1595 124.433 97.1943 125.513C106.141 126.583 113.832 124.427 119.716 119.99C125.618 115.541 129.96 108.601 131.803 99.676C136.275 78.0228 129.003 53.1142 114.777 34.6975C114.01 33.7047 113.224 32.7337 112.422 31.7844Z" fill="#EC7655"/>
+              <defs>
+                <!-- The arrowhead draws along its own centerline: upper arm, into the tip, lower arm. -->
+                <mask id="arrow-head-draw" maskUnits="userSpaceOnUse" x="210" y="10" width="70" height="80">
+                  <path class="arrow-head-line" d="M227 25 L264 39 L243 72" stroke="#fff" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </mask>
+              </defs>
+              <path class="arrow-head" mask="url(#arrow-head-draw)" d="M268.542 42.6239C262.118 54.2136 254.645 65.7634 245.585 75.3508C241.834 79.2225 236.84 73.75 240.183 69.65C246.868 61.4515 251.736 51.7045 256.374 42.3714C250.824 39.8359 244.863 37.0732 239.083 34.9512C234.531 33.51 226.784 33.0038 224.068 28.2513C222.708 25.8746 223.856 23.805 225.822 22.1896C230.622 18.3572 239.219 23.1222 244.18 24.7903C252.237 27.6332 259.425 31.077 266.794 35.1617C269.248 36.5224 269.919 40.1404 268.542 42.6239Z" fill="#EC7655"/>
+            </svg>
             <div class="install-flow-folder">
               <img src="assets/brand/app-folder-icon.svg" alt="" aria-hidden="true" />
               <span class="install-flow-icon-label">Applications</span>
@@ -1028,7 +1312,10 @@
           </div>
           <p class="install-support">Install <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a> first, then run this command.</p>
         </div>
-      </div>
+        </div>
+        <p class="install-support" id="install-support-line">macOS 14 Sonoma or later</p>
+      </article>
+
     </div>
   </div>
 </section>
@@ -1052,19 +1339,19 @@
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Yes. Tokenomics is free to download and use. There's no subscription, no paid tier, and no feature gating. GitHub Sponsors link is in the app if you find it useful.</p>
+          <p>Yes. The Mac app and the browser extension are both free to download and use. There's no subscription, no paid tier, and no feature gating.</p>
         </div>
       </details>
 
       <details class="faq-item">
         <summary>
-          How does it authenticate? Do I need to paste any tokens?
+          How does signing in work? Do I need to paste any tokens?
           <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>No manual setup required for most providers. Tokenomics reads credentials from where your AI tools already store them — macOS Keychain for Claude, the <code>gh</code> CLI for GitHub Copilot, and local configuration files for Cursor, OpenAI, and Gemini. Sign in to each tool once (as you normally would), and Tokenomics detects them automatically.</p>
+          <p>Not for most tools. The Mac app reads the sign-in your coding tools already keep on your Mac: macOS Keychain for Claude, the <code>gh</code> CLI for GitHub Copilot, and local configuration files for Cursor, Codex CLI and Gemini CLI. The browser extension uses the sites you're already signed in to. Only Stability AI and Runway need an API key, pasted once and kept in the macOS Keychain.</p>
         </div>
       </details>
 
@@ -1076,8 +1363,7 @@
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>No. Your credentials are read from local sources into memory. They're never written to disk by Tokenomics, never logged, and never transmitted to any server other than the provider you're fetching usage from.</p>
-          <p>The only outbound calls Tokenomics makes are to Anthropic's API (for Claude usage) and to GitHub's appcast URL to check for app updates. OpenAI, Gemini, Copilot, and Cursor usage is read entirely from local files — no network calls.</p>
+          <p>No. Tokenomics uses your sign-ins only to ask each AI service for your own usage, and keeps the numbers on your device. Nothing goes to any server the author controls: no analytics, no telemetry, no tracking code in the app or the extension. The full breakdown is on the <a href="/privacy">Privacy page</a>.</p>
         </div>
       </details>
 
@@ -1101,19 +1387,19 @@
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, <code>gh</code> CLI, local config files) are Mac-specific. A Windows/Linux version is on the roadmap. We love our Windows users too — we won't forget about you.</p>
+          <p>macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, <code>gh</code> CLI, local config files) are Mac-specific. A Windows/Linux version of the app is on the roadmap. In the meantime, the <a href="#extension">browser extension</a> works in Chrome on Windows and Linux today.</p>
         </div>
       </details>
 
       <details class="faq-item">
         <summary>
-          What about Midjourney, Suno, or Udio?
+          Which AI tools does it work with?
           <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>They're coming once those providers ship a public API with credit/usage endpoints. Tokenomics won't integrate against unofficial endpoints or scraping — that breaks with any platform update and it's against ToS. ElevenLabs, Runway, and Stability AI are next, because they have real APIs with documented quota endpoints.</p>
+          <p>Coding tools: Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. Chat: Claude, ChatGPT, Gemini, Grok and Perplexity. Creative: Midjourney, Leonardo, Stability AI, Runway, ElevenLabs, Suno and Udio. The web tools connect through the <a href="#extension">browser extension</a>. The <a href="/help/supported-tools">full list</a> says how each one connects.</p>
         </div>
       </details>
 
@@ -1138,11 +1424,12 @@
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Two things: breadth and signal quality. Breadth: eight providers in one place — five everyday AI providers (Claude, GitHub Copilot, Cursor, OpenAI, Gemini) plus three creative AI providers (Stability AI, Runway, ElevenLabs). Signal quality: the pace dot. Most usage meters show a percentage. Tokenomics shows whether that percentage is ahead of or behind where you'd expect given how much of the window has elapsed. That turns a number into an answer.</p>
+          <p>Two things: breadth and signal quality. Breadth: your coding tools, chat apps and creative tools in one place, not just Claude. Signal quality: the pace dot. Most usage meters show a percentage. Tokenomics shows whether that percentage is ahead of or behind where you'd expect given how much of the window has elapsed. That turns a number into an answer.</p>
         </div>
       </details>
 
     </div>
+    <p class="faq-more"><a href="/help/">More answers in the Help center</a> · <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a></p>
   </div>
 </section>
 
@@ -1159,8 +1446,10 @@
     <nav class="footer-links" aria-label="Footer navigation">
       <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/rob-stout/Tokenomics/releases" target="_blank" rel="noopener">Changelog</a>
+      <a href="/help/">Help</a>
       <a href="/license">License</a>
       <a href="/privacy">Privacy</a>
+      <a href="mailto:hello@trytokenomics.com">hello@trytokenomics.com</a>
     </nav>
 
     <div class="footer-meta">
@@ -1175,5 +1464,7 @@
 
 
 <script src="app.js"></script>
+<script src="motion.js"></script>
+<script src="popover-demo.js"></script>
 </body>
 </html>

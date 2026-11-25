@@ -10,7 +10,8 @@
 #   D1 database:   tokenomics-downloads
 
 name = "trytokenomics-site"
-pages_build_output_dir = "."
+# Only public/ is published; notes, scripts and tests at the repo root stay private.
+pages_build_output_dir = "public"
 compatibility_date = "2026-05-01"
 
 [[d1_databases]]
