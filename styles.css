@@ -1707,10 +1707,16 @@ svg tspan[font-style="italic"] { font-style: normal; }
   padding: var(--s-9) 0;
   border-top: 1px solid var(--border);
 }
-.download-intro { max-width: 640px; margin-bottom: var(--s-7); }
+/* Centered like the pricing intro (.support-intro) */
+.download-intro {
+  max-width: 640px;
+  margin: 0 auto var(--s-7);
+  padding: 0 var(--s-5);
+  text-align: center;
+}
 .download-section h2 em,
 .download-card h3 em { font-style: italic; color: var(--accent); }
-.download-lede { color: var(--text-muted); margin-top: var(--s-3); }
+.download-lede { color: var(--text-muted); margin-top: var(--s-4); }
 .download-lede a { color: var(--accent); }
 .download-grid {
   display: grid;
