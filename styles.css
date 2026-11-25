@@ -1597,6 +1597,7 @@ svg tspan[font-style="italic"] { font-style: normal; }
 .pop-tab.active {
   grid-auto-flow: column;
   grid-template-columns: auto auto;
+  justify-content: center;   /* keep icon + name together when the tab is wider than they are */
   gap: 8px;
   padding: 0 14px;
   /* Grows to fit longer names ("GitHub Copilot") on one line; the icon tabs share the rest. */
