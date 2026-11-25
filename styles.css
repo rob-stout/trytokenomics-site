@@ -1597,7 +1597,10 @@ svg tspan[font-style="italic"] { font-style: normal; }
   grid-template-columns: auto auto;
   gap: 8px;
   padding: 0 14px;
-  flex: 2 1 0;
+  /* Grows to fit longer names ("GitHub Copilot") on one line; the icon tabs share the rest. */
+  flex: 2 0 auto;
+  min-width: max-content;
+  white-space: nowrap;
   background: var(--pop-tab-active-bg);
   color: var(--pop-text);
   font-size: 13px;
