@@ -467,12 +467,12 @@
         </div>
 
         <!-- Popover dropping down under the Tokenomics icon on the right -->
-        <div class="menubar-popover" aria-hidden="true">
+        <div class="menubar-popover">
           <!-- Header: app name + plan pill + share -->
-          <div class="pop-head">
+          <div class="pop-head" aria-hidden="true">
             <div class="pop-head-title">Tokenomics</div>
             <div class="pop-head-actions">
-              <span class="pop-plan-pill">Max</span>
+              <span class="pop-plan-pill" data-pop-plan>Max</span>
               <!-- SF Symbol: square.and.arrow.up (Regular-S) -->
               <button class="pop-iconbtn" type="button" aria-label="Share">
                 <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -488,25 +488,31 @@
           </div>
 
           <!-- Tab bar: active tab is a pill with icon + name; others icon-only -->
-          <div class="pop-tabs">
-            <button class="pop-tab active" type="button">
+          <!-- Tabs are live: pick a tool to see its meters (popover-demo.js). -->
+          <div class="pop-tabs" role="tablist" aria-label="Try the popover: pick a tool">
+            <button class="pop-tab active" type="button" role="tab" aria-selected="true" data-provider="claude">
               <img src="assets/icons/Claude-white.svg" alt="" width="16" height="16"/>
               <span>Claude</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="OpenAI">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="codex">
               <img src="assets/icons/Codex-white.svg" alt="" width="16" height="16"/>
+              <span>Codex</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="Gemini">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="gemini">
               <img src="assets/icons/Gemini-white.svg" alt="" width="16" height="16"/>
+              <span>Gemini</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="GitHub Copilot">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="copilot">
               <img src="assets/icons/Copilot-white.svg" alt="" width="16" height="16"/>
+              <span>Copilot</span>
             </button>
-            <button class="pop-tab" type="button" aria-label="Cursor">
+            <button class="pop-tab" type="button" role="tab" aria-selected="false" data-provider="cursor">
               <img src="assets/icons/Cursor-white.svg" alt="" width="16" height="16"/>
+              <span>Cursor</span>
             </button>
           </div>
 
+          <div class="pop-body" role="tabpanel" aria-live="polite">
           <!-- 5-Hour Window -->
           <div class="pop-section">
             <div class="pop-section-head">
@@ -535,10 +541,12 @@
             <div class="pop-section-resets">Resets tomorrow</div>
           </div>
 
+          </div>
+
           <div class="pop-divider"></div>
 
           <!-- Footer -->
-          <div class="pop-foot">
+          <div class="pop-foot" aria-hidden="true">
             <div class="pop-foot-left">Updated just now</div>
             <div class="pop-foot-right">
               <!-- SF Symbol: arrow.clockwise (Regular-S) -->
@@ -1276,5 +1284,6 @@
 
 <script src="app.js"></script>
 <script src="motion.js"></script>
+<script src="popover-demo.js"></script>
 </body>
 </html>

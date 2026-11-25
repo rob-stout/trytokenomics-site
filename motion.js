@@ -142,7 +142,8 @@
       if (pace) { var d = pacePiece(pace); parts.push(function (p) { d(seg(p, o, 1, curve)); }); }
     });
     if (!parts.length) return null;
-    return function (p) { parts.forEach(function (f) { f(p); }); };
+    // Once someone clicks a tab (popover-demo.js), the bars are theirs: stop scrubbing.
+    return function (p) { if (!pop.hasAttribute('data-touched')) parts.forEach(function (f) { f(p); }); };
   }
 
   // ── Pace diagram: rings → dots → each callout line, then its label ───

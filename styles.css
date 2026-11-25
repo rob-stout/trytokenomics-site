@@ -766,9 +766,9 @@ section { scroll-margin-top: 72px; }
 }
 .pace-label--top    { top: 30.5%; }
 .pace-label--bottom { top: 70.3%; }
-/* Centered under the "ahead of pace" line, which drops from x=186.7 of 460 (40.6%). */
-.pace-label--under  { top: 91%; left: 5.6%; width: 70%; text-align: center; }
-.pace-label--under .pace-label__sub { text-wrap: balance; }
+/* Under the "ahead of pace" line, left-aligned like the other two labels, starting
+   at the line, which drops from x=186.7 of 460 (40.6%). */
+.pace-label--under  { top: 91%; left: 40.6%; width: 48%; }
 .pace-label__accent { color: var(--accent); }
 .pace-label__title {
   font-size: 15px;
@@ -1581,7 +1581,7 @@ svg tspan[font-style="italic"] { font-style: normal; }
   min-width: 0;
   padding: 0;
   border-radius: 7px;
-  cursor: default;
+  cursor: pointer;
   color: var(--pop-subtle);
   transition: background 180ms ease, color 180ms ease;
 }
@@ -1607,6 +1607,42 @@ svg tspan[font-style="italic"] { font-style: normal; }
     inset 0 0 0 1px var(--pop-tab-active-edge);
 }
 .pop-tab.active img { opacity: 1; }
+.pop-tab span { display: none; }
+.pop-tab.active span { display: inline; }
+.pop-tab:not(.active):hover img { opacity: 0.9; }
+.pop-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ----- Reset celebration (ResetCelebrationView): covers the popover, which keeps its size ----- */
+.menubar-popover.celebrating > :not(.pop-celebrate) { visibility: hidden; }
+.pop-celebrate {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.pop-confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.pop-celebrate > :not(.pop-confetti) { position: relative; }
+.pop-celebrate-mark {
+  font-size: 40px; line-height: 1; margin-bottom: 18px;
+  animation: pop-mark 520ms cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes pop-mark { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+.pop-celebrate-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--pop-text); }
+.pop-celebrate-sub { margin-top: 4px; font-size: 14px; color: var(--pop-subtle); }
+.pop-celebrate-btn {
+  all: unset;
+  margin-top: 20px; padding: 7px 18px;
+  border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  color: var(--pop-text);
+  background: color-mix(in srgb, var(--pop-text) 12%, transparent);
+  cursor: pointer;
+}
+.pop-celebrate-btn:hover { background: color-mix(in srgb, var(--pop-text) 18%, transparent); }
+.pop-celebrate-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .pop-celebrate-mark { animation: none; } }
 
 /* ----- Usage window sections ----- */
 .pop-section { padding: 2px 0; }
