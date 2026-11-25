@@ -264,6 +264,39 @@
       // they near the top (top 20% down), so the growth plays across the whole screen.
       else addScrubber(w, render, 0.85, 0.2);
     });
+    // Pricing: "$19" counts up from $0 as its card rises (skips "$0", nothing to count).
+    document.querySelectorAll('.support-price').forEach(function (el) {
+      var match = /^(\D*)(\d+)(.*)$/.exec(el.textContent.trim());
+      if (!match || match[2] === '0') return;
+      var target = parseInt(match[2], 10);
+      el.style.fontVariantNumeric = 'tabular-nums';
+      addScrubber(el, function (p) {
+        el.textContent = match[1] + Math.round(target * scrollEase(p)) + match[3];
+      }, 0.85, 0.35);
+    });
+    // Install arrow: the squiggle draws in, the arrowhead lands, then the
+    // "Drag to Install…" caption and the macOS line fade in.
+    var flow = document.querySelector('.install-flow');
+    var drawLine = flow && flow.querySelector('.arrow-draw-line');
+    if (drawLine) {
+      var len = drawLine.getTotalLength();
+      var arrowHead = flow.querySelector('.arrow-head');
+      var after = [document.querySelector('.install-flow-caption'), document.getElementById('install-support-line')].filter(Boolean);
+      drawLine.style.strokeDasharray = len;
+      arrowHead.style.transformBox = 'fill-box';
+      arrowHead.style.transformOrigin = '80% 50%';
+      addScrubber(flow, function (p) {
+        drawLine.style.strokeDashoffset = (len * (1 - seg(p, 0, 0.68, scrollEase))).toFixed(1);
+        var h = seg(p, 0.66, 0.8, appEase);
+        arrowHead.style.opacity = h;
+        arrowHead.style.transform = 'scale(' + (0.6 + 0.4 * h).toFixed(3) + ')';
+        var c = seg(p, 0.8, 0.95, appEase);
+        after.forEach(function (el) {
+          el.style.opacity = c;
+          el.style.transform = 'translateY(' + ((1 - c) * 8).toFixed(1) + 'px)';
+        });
+      }, 0.85, 0.4);   // shorter run: it sits low in its card, so finish while it's mid-screen
+    }
     var pop = document.querySelector('.menubar-popover');
     if (pop) addScrubber(pop, popoverRenderer(pop, scrollEase), 0.85, 0.2);
     var diagram = document.querySelector('.pace-diagram');

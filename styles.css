@@ -1511,7 +1511,7 @@ svg tspan[font-style="italic"] { font-style: normal; }
   content: "";
   position: absolute;
   top: -6px;
-  left: 56%;
+  left: var(--pointer-x, 56%);   /* set by popover-demo.js: under the menu bar icon */
   width: 12px;
   height: 12px;
   background: var(--pop-bg);
@@ -1699,6 +1699,14 @@ svg tspan[font-style="italic"] { font-style: normal; }
   background: var(--pop-divider);
   margin: 14px 0;
 }
+/* Multi-tool brands (PopoverView.brandBody): a small label + plan pill per tool,
+   with more air around the break between tools. */
+.pop-divider--pool { margin: 20px 0 14px; }
+.pop-pool-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 0 0 8px;
+}
+.pop-pool-label { font-size: 11px; font-weight: 600; letter-spacing: 0.4px; color: var(--pop-muted); }
 
 /* ----- Footer ----- */
 .pop-foot {
@@ -1821,6 +1829,8 @@ svg tspan[font-style="italic"] { font-style: normal; }
 }
 .download-card .install-tabs { margin-bottom: var(--s-3); }
 .download-card .install-right { flex: 1; justify-content: center; }
+/* macOS line sits on the card's bottom edge, level with the extension card. */
+.download-card #install-support-line { margin-top: auto; padding-top: var(--s-4); }
 @media (max-width: 860px) {
   .download-grid { grid-template-columns: 1fr; }
 }

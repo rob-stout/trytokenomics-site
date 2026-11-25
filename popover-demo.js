@@ -1,10 +1,10 @@
 /* Tokenomics homepage: the menu bar popover is clickable.
  *
- * Each tab shows that tool's real meters (labels match the app). Codex has just
- * reset, so opening its tab plays the app's reset celebration: the 🎉 pop and
+ * Each tab shows that brand's real meters (labels match the app). Codex CLI has
+ * just reset, so opening the ChatGPT tab plays the app's reset celebration: the 🎉 pop and
  * the confetti burst from ResetCelebrationView / ConfettiView, ported to canvas
  * with the same numbers (Tokens.Motion.Confetti). "Let's go" dismisses it and
- * shows the fresh meters. Opening Codex again replays it.
+ * shows the fresh meters. Opening ChatGPT again replays it.
  *
  * With Reduce Motion on, tabs still switch and the celebration still shows,
  * just without movement or confetti.
@@ -19,44 +19,71 @@
   if (!body || !tabs.length) return;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // pct = used %, pace = where even use would sit (%), as in the app's bars.
-  var PROVIDERS = {
-    claude: { plan: 'Max', windows: [
-      { title: '5-Hour Window', pct: 46, pace: 60, resets: 'Resets in 1h 36m' },
-      { title: '7-Day Window', pct: 32, pace: 78, resets: 'Resets tomorrow' }
+  // Tabs group by company, as the app does by default ("Group by company"):
+  // one tab per brand, one block of meters per tool ("pool") inside it.
+  // pct = used %, pace = where even use would sit (%), labels as the app reports them.
+  // A one-pool brand shows its plan in the header; multi-pool brands label each
+  // pool and put its plan pill inline, like PopoverView.brandBody.
+  var BRANDS = {
+    claude: { pools: [
+      { plan: 'Max', windows: [
+        { title: '5-Hour Window', pct: 43, pace: 60, resets: 'Resets in 1h 36m' },
+        { title: '7-Day Window', pct: 32, pace: 78, resets: 'Resets tomorrow' }
+      ] }
     ] },
-    codex: { plan: 'Plus', celebrate: {
-        title: 'Codex CLI is ready again',
-        subtitle: 'Your 5-hour window reset. Ready to build!'
-      }, windows: [
-      { title: '5-Hour Window', pct: 0, pace: 0, resets: 'Resets in 5h' },
-      { title: 'Weekly', pct: 41, pace: 52, resets: 'Resets in 3 days' }
+    chatgpt: {
+      // Codex CLI's 5-hour window just reset.
+      celebrate: { title: 'Codex CLI is ready again', subtitle: 'Your 5-hour window reset. Ready to build!' },
+      pools: [
+        { label: 'ChatGPT', plan: 'Plus', windows: [
+          { title: '5-Hour Window', pct: 24, pace: 40, resets: 'Resets in 3h' },
+          { title: 'Weekly', pct: 18, pace: 35, resets: 'Resets in 4 days' }
+        ] },
+        { label: 'Codex CLI', plan: 'Plus', windows: [
+          { title: '5-Hour Window', pct: 0, pace: 0, resets: 'Resets in 5h' },
+          { title: 'Weekly', pct: 41, pace: 52, resets: 'Resets in 3 days' }
+        ] }
+      ] },
+    gemini: { pools: [
+      { label: 'Gemini (app)', plan: 'AI Pro', windows: [
+        { title: '5-Hour Window', pct: 31, pace: 48, resets: 'Resets in 2h 30m' },
+        { title: 'Weekly', pct: 22, pace: 57, resets: 'Resets in 3 days' }
+      ] },
+      { label: 'Gemini CLI', plan: 'Free', windows: [
+        { title: 'Tokens Today', pct: 28, pace: 40, resets: 'Resets at midnight' },
+        { title: 'Requests Today', pct: 35, pace: 40, resets: 'Resets at midnight' }
+      ] }
     ] },
-    gemini: { plan: 'Free', windows: [
-      { title: 'Requests Today', pct: 28, pace: 40, resets: 'Estimated · Resets at midnight' }
+    copilot: { pools: [
+      { plan: 'Pro', windows: [
+        { title: 'Premium Requests', pct: 64, pace: 55, resets: 'Resets Dec 1' }
+      ] }
     ] },
-    copilot: { plan: 'Pro', windows: [
-      { title: 'Premium Requests', pct: 64, pace: 55, resets: 'Resets Dec 1' }
-    ] },
-    cursor: { plan: 'Pro', windows: [
-      { title: 'Premium Requests', pct: 22, pace: 48, resets: 'Resets in 12 days' }
+    cursor: { pools: [
+      { plan: 'Pro', windows: [
+        { title: 'Premium Requests', pct: 22, pace: 48, resets: 'Resets in 12 days' }
+      ] }
     ] }
   };
 
-  // The popover keeps its size as tabs change (one-meter tools would otherwise shrink it).
-  // Measured while a two-meter tab is showing.
-  function lockHeight() {
-    if (body.querySelectorAll('.pop-section').length < 2) return;
-    body.style.minHeight = ''; body.style.minHeight = body.offsetHeight + 'px';
-  }
-
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function sectionHTML(w) {
     return '<div class="pop-section">' +
-      '<div class="pop-section-head"><div class="pop-section-title">' + w.title + '</div>' +
+      '<div class="pop-section-head"><div class="pop-section-title">' + esc(w.title) + '</div>' +
       '<div class="pop-section-pct">0%</div></div>' +
       '<div class="pop-bar"><div class="pop-bar-fill" style="width:0%"></div>' +
       (w.pace > 0 ? '<div class="pop-bar-pace" style="left:0%"></div>' : '') + '</div>' +
-      '<div class="pop-section-resets">' + w.resets + '</div></div>';
+      '<div class="pop-section-resets">' + esc(w.resets) + '</div></div>';
+  }
+  function poolHTML(pool, multi) {
+    var head = multi
+      ? '<div class="pop-pool-head"><span class="pop-pool-label">' + esc(pool.label) + '</span>' +
+        '<span class="pop-plan-pill">' + esc(pool.plan) + '</span></div>'
+      : '';
+    return head + pool.windows.map(sectionHTML).join('<div class="pop-divider"></div>');
+  }
+  function allWindows(id) {
+    return BRANDS[id].pools.reduce(function (out, p) { return out.concat(p.windows); }, []);
   }
 
   // Bars fill on the app's curve (500ms), pace dots trail (800ms), numbers count with the fill.
@@ -85,10 +112,30 @@
     });
   }
 
+  // The popover grows and shrinks to fit each tab, as the real one does:
+  // one-meter tools (Copilot, Cursor) are short, two-tool brands are tall.
   function showMeters(id) {
-    var p = PROVIDERS[id];
-    body.innerHTML = p.windows.map(sectionHTML).join('<div class="pop-divider"></div>');
-    fillIn(p.windows);
+    var pools = BRANDS[id].pools, multi = pools.length > 1;
+    if (plan) plan.style.visibility = multi ? 'hidden' : '';
+    if (plan && !multi) plan.textContent = pools[0].plan;
+    var from = body.offsetHeight;
+    body.innerHTML = pools.map(function (p) { return poolHTML(p, multi); })
+      .join('<div class="pop-divider pop-divider--pool"></div>');
+    fillIn(allWindows(id));
+    if (reduceMotion) return;
+    var to = body.offsetHeight;
+    if (from === to) return;
+    body.style.height = from + 'px';
+    body.style.overflow = 'hidden';
+    body.offsetHeight;                                // commit the start height
+    body.style.transition = 'height 320ms cubic-bezier(.25,.46,.45,.94)';
+    body.style.height = to + 'px';
+    var done = function (e) {
+      if (e && e.target !== body) return;
+      body.style.height = ''; body.style.overflow = ''; body.style.transition = '';
+      body.removeEventListener('transitionend', done);
+    };
+    body.addEventListener('transitionend', done);
   }
 
   // ── Reset celebration ─────────────────────────────────────────────
@@ -99,7 +146,7 @@
     pop.classList.remove('celebrating');
   }
   function celebrate(id) {
-    var c = PROVIDERS[id].celebrate;
+    var c = BRANDS[id].celebrate;
     endCelebration();
     pop.classList.add('celebrating');
     overlay = document.createElement('div');
@@ -213,16 +260,28 @@
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.tabIndex = on ? 0 : -1;
     });
-    if (plan) plan.textContent = PROVIDERS[id].plan;
     endCelebration();
     showMeters(id);
-    if (PROVIDERS[id].celebrate) celebrate(id);
+    if (BRANDS[id].celebrate) celebrate(id);
   }
-  lockHeight();
-  window.addEventListener('resize', lockHeight);
+  // Point the popover's arrow at the center of the Tokenomics ring in the menu bar.
+  // The ring's center sits at x=335 of the 800-wide menu-bar-items.svg.
+  var barImg = document.querySelector('.menubar-svg-img');
+  function aimPointer() {
+    if (!barImg || !barImg.complete || !barImg.naturalWidth) return;
+    var img = barImg.getBoundingClientRect(), box = pop.getBoundingClientRect();
+    var pad = parseFloat(getComputedStyle(barImg).paddingRight) || 0;
+    var x = img.left + (img.width - pad) * (335 / 800) - box.left;
+    pop.style.setProperty('--pointer-x', x.toFixed(1) + 'px');
+  }
+  if (barImg) {
+    if (barImg.complete) aimPointer(); else barImg.addEventListener('load', aimPointer);
+    window.addEventListener('resize', aimPointer);
+  }
+
   tabs.forEach(function (t, i) {
     t.tabIndex = i === 0 ? 0 : -1;
-    t.addEventListener('click', function () { if (!t.classList.contains('active') || PROVIDERS[t.getAttribute('data-provider')].celebrate) select(t); });
+    t.addEventListener('click', function () { if (!t.classList.contains('active') || BRANDS[t.getAttribute('data-provider')].celebrate) select(t); });
     // Arrow keys move between tabs, as in a standard tab list.
     t.addEventListener('keydown', function (e) {
       var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
