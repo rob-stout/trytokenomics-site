@@ -319,7 +319,9 @@
       addScrubber(flow, function (p) {
         if (sideBySide()) buildPills(p);
         pop(appIcon, clamp(p / 0.14));
-        stroke.style.strokeDashoffset = (len * (1 - seg(p, 0.12, 0.62, scrollEase))).toFixed(1);
+        var drawn = seg(p, 0.12, 0.62, scrollEase);
+        stroke.style.strokeDashoffset = (len * (1 - drawn)).toFixed(1);
+        stroke.style.visibility = drawn > 0 ? '' : 'hidden';   // same round-cap dot
         // The drawn stroke hands over to the hand-drawn artwork as the arrowhead lands.
         var swap = seg(p, 0.6, 0.7, appEase);
         // Artwork (on top) fades in over the solid stroke; the stroke drops once it's covered.
@@ -328,7 +330,11 @@
         var h = seg(p, 0.6, 0.72, scrollEase);
         pop(folder, clamp((p - 0.66) / 0.14));
         // The arrowhead draws in from top to bottom: upper arm, through the tip, lower arm.
-        if (headLine) headLine.style.strokeDashoffset = (headLen * (1 - h)).toFixed(1);
+        if (headLine) {
+          headLine.style.strokeDashoffset = (headLen * (1 - h)).toFixed(1);
+          // A zero-length dash still paints its round cap as a dot, so hide it until it draws.
+          headLine.style.visibility = h > 0 ? '' : 'hidden';
+        }
         var c = seg(p, 0.82, 0.96, appEase);
         after.forEach(function (el) {
           el.style.opacity = c;
