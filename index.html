@@ -389,8 +389,8 @@
                Outer: (200+100·sin162°, 230−100·cos162°) = (230.9, 325.1)
                Inner: (200+75·sin162°,  230−75·cos162°)  = (223.2, 301.3)
                Solid fill, sized to match the thicker stroke. -->
-          <circle cx="230.9" cy="325.1" r="9" fill="var(--pace-dot)"/>
-          <circle cx="223.2" cy="301.3" r="8" fill="var(--pace-dot)"/>
+          <circle class="pace-dot" r="9" fill="var(--pace-dot)" transform="rotate(162 200 230) translate(200 130)"/>
+          <circle class="pace-dot" r="8" fill="var(--pace-dot)" transform="rotate(162 200 230) translate(200 155)"/>
 
           <!-- ── Center label ──────────────────────────────
                Percentage uses the inner ring color per brand direction. -->
@@ -405,30 +405,30 @@
 
           <!-- "Usage so far" — touches outer fill arc outer edge at θ=61°.
                (200+110·sin61°, 230−110·cos61°) = (296.2, 176.7) -->
-          <line x1="296.2" y1="176.7" x2="340" y2="150"
+          <line class="callout-line" data-step="1" x1="296.2" y1="176.7" x2="340" y2="150"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <line x1="340" y1="150" x2="372" y2="150"
+          <line class="callout-line" data-step="1" x1="340" y1="150" x2="372" y2="150"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
 
           <!-- "Even-pace mark" — touches outer pace dot (r=9), so start at x=240 -->
-          <line x1="240" y1="325.1" x2="340" y2="325"
+          <line class="callout-line" data-step="2" x1="240" y1="325.1" x2="340" y2="325"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <line x1="340" y1="325" x2="372" y2="325"
+          <line class="callout-line" data-step="2" x1="340" y1="325" x2="372" y2="325"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
 
           <!-- "Burning ahead of pace" — touches outer edge of outer arc at θ=189° (52.5% of circumference).
                (200+110·sin189°, 230−110·cos189°) = (182.8, 338.6) -->
-          <line x1="182.8" y1="338.6" x2="182.8" y2="395"
+          <line class="callout-line" data-step="3" x1="182.8" y1="338.6" x2="182.8" y2="395"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <text x="182.8" y="416" text-anchor="middle" font-size="16" font-weight="600"
+          <text class="callout-label" data-step="3" x="182.8" y="416" text-anchor="middle" font-size="16" font-weight="600"
                 fill="currentColor">Burning <tspan fill="var(--accent)">ahead</tspan> of pace</text>
         </svg>
 
-        <div class="pace-label pace-label--top">
+        <div class="pace-label pace-label--top callout-label" data-step="1">
           <div class="pace-label__title">Usage so far</div>
           <div class="pace-label__sub">What you've used this window</div>
         </div>
-        <div class="pace-label pace-label--bottom">
+        <div class="pace-label pace-label--bottom callout-label" data-step="2">
           <div class="pace-label__title">Even-pace mark</div>
           <div class="pace-label__sub">Where even consumption sits</div>
         </div>
@@ -1371,5 +1371,6 @@
 
 
 <script src="app.js"></script>
+<script src="motion.js"></script>
 </body>
 </html>
