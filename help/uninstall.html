@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How do I uninstall Tokenomics? | Tokenomics Help</title>
-  <meta name="description" content="Quit the app and drag it from Applications to the Trash. To remove the extension, right-click its toolbar icon and choose Remove." />
+  <meta name="description" content="Use Settings → Uninstall Tokenomics… to remove the app and everything it set up. To remove the extension, right-click its toolbar icon and choose Remove." />
   <meta property="og:title" content="How do I uninstall Tokenomics? | Tokenomics Help" />
-  <meta property="og:description" content="Quit the app and drag it from Applications to the Trash. To remove the extension, right-click its toolbar icon and choose Remove." />
+  <meta property="og:description" content="Use Settings → Uninstall Tokenomics… to remove the app and everything it set up. To remove the extension, right-click its toolbar icon and choose Remove." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/uninstall" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
@@ -35,7 +35,7 @@
     {
       "@type": "TechArticle",
       "headline": "How do I uninstall Tokenomics?",
-      "description": "Quit the app and drag it from Applications to the Trash. To remove the extension, right-click its toolbar icon and choose Remove.",
+      "description": "Use Settings → Uninstall Tokenomics… to remove the app and everything it set up. To remove the extension, right-click its toolbar icon and choose Remove.",
       "url": "https://trytokenomics.com/help/uninstall",
       "dateModified": "2026-11-25",
       "author": {
@@ -64,8 +64,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Getting set up",
-          "item": "https://trytokenomics.com/help/#browser-extension"
+          "name": "Using Tokenomics",
+          "item": "https://trytokenomics.com/help/#using-tokenomics"
         },
         {
           "@type": "ListItem",
@@ -115,7 +115,7 @@
       <nav class="help-crumbs" aria-label="Breadcrumb">
         <a href="/help/">Help</a>
         <span aria-hidden="true">/</span>
-        <a href="/help/#browser-extension">Getting set up</a>
+        <a href="/help/#using-tokenomics">Using Tokenomics</a>
       </nav>
       <form class="help-mini-search" role="search" action="/help/" method="get">
         <label for="help-q" class="sr-only">Search help</label>
@@ -125,21 +125,38 @@
     </div>
 
     <h1 class="help-title">How do I uninstall Tokenomics?</h1>
-    <p class="help-summary">Quit the app and drag it from Applications to the Trash. To remove the extension, right-click its toolbar icon and choose Remove.</p>
+    <p class="help-summary">Use Settings → Uninstall Tokenomics… to remove the app and everything it set up. To remove the extension, right-click its toolbar icon and choose Remove.</p>
 
     <div class="doc-body help-body">
-<p><strong>The Mac app:</strong> quit it, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave.</p>
-<p>Installed with Homebrew? Run <code>brew uninstall --cask tokenomics</code> instead.</p>
-<p><strong>The browser extension:</strong> right-click its toolbar icon and choose <strong>Remove</strong>. That deletes everything it saved.</p>
+<h2>The Mac app</h2>
+<p>Open Settings (the gear in the popover) and choose <strong>Uninstall Tokenomics…</strong>. It removes Tokenomics and everything it set up, then moves the app to the Trash:</p>
+<ul>
+<li>its settings, saved usage numbers and caches;</li>
+<li>Launch at Login;</li>
+<li>the link files it adds to your browsers for the extension;</li>
+<li>API keys you gave it, from your Keychain.</li>
+</ul>
+<p>It leaves your AI tools alone. Your Claude Code sign-in stays, so you won't be signed out.</p>
+<p>Installed with Homebrew? Run <code>brew uninstall --zap tokenomics</code> instead, which does the same cleanup.</p>
+<p>If you just drag the app to the Trash, those extras stay behind. They're harmless, but the in-app option is cleaner.</p>
+<h2>Tools setup installed for you</h2>
+<p>Uninstalling Tokenomics doesn't remove coding tools that guided setup installed, since you may use them on their own (<a href="/help/what-setup-installs">what setup installs</a>). To remove them too:</p>
+<ul>
+<li><strong>Codex CLI and Gemini CLI:</strong> delete the <code>~/.tokenomics-cli</code> folder.</li>
+<li><strong>Claude Code:</strong> follow Anthropic's uninstall instructions, and remove the line setup added to <code>~/.zprofile</code>.</li>
+<li><strong>Homebrew, Node.js and the GitHub CLI:</strong> remove them with Homebrew if you don't use them elsewhere.</li>
+</ul>
+<h2>The browser extension</h2>
+<p>Right-click its toolbar icon and choose <strong>Remove</strong>. That deletes everything it saved.</p>
     </div>
 
     <aside class="help-related" aria-labelledby="related-heading">
       <h2 class="faq-label" id="related-heading">Related questions</h2>
       <ul>
-          <li><a href="/help/supported-tools">Which AI tools does Tokenomics work with?</a></li>
-          <li><a href="/help/browsers">Which browsers does the extension work in?</a></li>
-          <li><a href="/help/extension-without-mac-app">Does the extension work without the Mac app?</a></li>
-          <li><a href="/help/mac-app-and-extension">How do the Mac app and the browser extension work together?</a></li>
+          <li><a href="/help/what-setup-installs">What does guided setup install on my Mac?</a></li>
+          <li><a href="/help/menu-bar">How do I choose what the menu bar shows?</a></li>
+          <li><a href="/help/pace-dot">What does the pace dot mean?</a></li>
+          <li><a href="/help/usage-alerts">How do usage alerts work, and how do I change them?</a></li>
       </ul>
     </aside>
 

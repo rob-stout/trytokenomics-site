@@ -186,20 +186,12 @@
               <div class="head"><span class="lbl">Premium</span><span class="pct">22%</span></div>
               <div class="pbar"><div class="track"></div><div class="fill" style="width:22%"></div><div class="pace" style="left:34%"></div></div>
             </div>
-            <div class="col">
-              <div class="head"><span class="lbl">Requests</span><span class="pct long">15%</span></div>
-              <div class="pbar"><div class="track"></div><div class="fill long" style="width:15%"></div></div>
-            </div>
           </div>
           <div class="row-compact">
             <span class="pico"><img src="assets/icons/Cursor-d.blue.svg" alt="" /></span>
             <div class="col">
               <div class="head"><span class="lbl">Premium</span><span class="pct">10%</span></div>
               <div class="pbar"><div class="track"></div><div class="fill" style="width:10%"></div></div>
-            </div>
-            <div class="col">
-              <div class="head"><span class="lbl">Requests</span><span class="pct long">8%</span></div>
-              <div class="pbar"><div class="track"></div><div class="fill long" style="width:8%"></div></div>
             </div>
           </div>
         </div>
@@ -258,7 +250,7 @@
           <img class="icon-dark-only"  src="assets/icons/Cursor-white.svg"  alt="" width="28" height="28" />
         </div>
         <span class="pname">Cursor</span>
-        <span class="psub">Premium &amp; requests</span>
+        <span class="psub">Premium requests</span>
       </div>
       <div class="provider-item">
         <div class="provider-icon-wrap">
@@ -334,7 +326,7 @@
       </div>
     </div>
 
-    <p class="provider-coming">ChatGPT, the Gemini app, Midjourney, Leonardo, Grok, Perplexity, Suno and Udio connect through the free <a href="#extension">browser extension</a>.</p>
+    <p class="provider-coming">ChatGPT, the Gemini app, Midjourney, Leonardo, ElevenLabs, Grok, Perplexity, Suno and Udio connect through the free <a href="#extension">browser extension</a>.</p>
   </div>
 </section>
 
@@ -601,8 +593,8 @@
         <h2 id="auth-heading">No token pasting. No <em>cookie</em> hunting.</h2>
         <div class="feature-body">
           <p>Coding tools already keep your sign-in on your Mac. Tokenomics reads each one where it lives: macOS Keychain for Claude, the <code>gh</code> CLI for Copilot, local configuration files for Cursor, Codex CLI and Gemini CLI.</p>
-          <p>Web tools like ChatGPT and Midjourney don't leave anything on your Mac, so the <a href="#extension">browser extension</a> reads them from the sites you're already signed in to. Stability, Runway and ElevenLabs take an API key you paste once. That's the most friction you'll hit.</p>
-          <p>If Claude rotates your authentication token during a sleep/wake cycle — which it does — Tokenomics notices and re-reads Keychain silently. You won't see a logout screen.</p>
+          <p>Web tools like ChatGPT and Midjourney don't leave anything on your Mac, so the <a href="#extension">browser extension</a> reads them from the sites you're already signed in to. Stability AI and Runway take an API key you paste once. That's the most friction you'll hit.</p>
+          <p>Claude Code's sign-in lives in your Mac's Keychain, so macOS asks once before Tokenomics can read it. Choose Always Allow and you won't be asked again. When Claude Code refreshes its sign-in, Tokenomics picks up the new one on its own.</p>
         </div>
       </div>
       <div class="reveal" data-delay="80" style="display:flex; flex-direction:column; gap: var(--s-4);">
@@ -635,7 +627,7 @@
           </div>
           <div>
             <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Cursor</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
           </div>
         </div>
         <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
@@ -645,7 +637,7 @@
           </div>
           <div>
             <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Codex CLI</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
           </div>
         </div>
         <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
@@ -655,7 +647,7 @@
           </div>
           <div>
             <div style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Gemini CLI</div>
-            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · no login required</div>
+            <div style="font-size: 12px; color: var(--text-subtle);">Local configuration file · uses your existing sign-in</div>
           </div>
         </div>
         <p class="feature-kicker" style="margin: var(--s-3) 0 0 0;">API key</p>
@@ -674,13 +666,6 @@
                 <img src="assets/icons/runway-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
               </div>
               <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">Runway</span>
-            </li>
-            <li role="listitem" style="display:flex; align-items:center; gap: var(--s-4);">
-              <div style="flex-shrink:0; width:36px; height:36px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); display:grid; place-items:center;">
-                <img src="assets/icons/elevenlabs-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-                <img src="assets/icons/elevenlabs-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-              </div>
-              <span style="font-size: var(--fs-small); font-weight: 600; color: var(--text);">ElevenLabs</span>
             </li>
           </ul>
           <div style="font-size: 12px; color: var(--text-subtle); padding-top: 4px; margin-left: calc(36px + var(--s-4));">API key · paste once in Settings</div>
@@ -715,6 +700,10 @@
             <li class="web-tool" title="Suno">
               <img src="assets/icons/suno-d.blue.svg" alt="Suno" class="icon-light-only" width="20" height="20"/>
               <img src="assets/icons/suno-white.svg"  alt="Suno" class="icon-dark-only"  width="20" height="20"/>
+            </li>
+            <li class="web-tool" title="ElevenLabs">
+              <img src="assets/icons/elevenlabs-d.blue.svg" alt="ElevenLabs" class="icon-light-only" width="20" height="20"/>
+              <img src="assets/icons/elevenlabs-white.svg"  alt="ElevenLabs" class="icon-dark-only"  width="20" height="20"/>
             </li>
             <li class="web-tool" title="Udio">
               <img src="assets/icons/udio-d.blue.svg" alt="Udio" class="icon-light-only" width="20" height="20"/>
@@ -822,15 +811,6 @@
                     </div>
                     <span class="pct">42%</span>
                   </div>
-                  <div class="bar-row">
-                    <span class="lbl">Requests</span>
-                    <div class="pbar">
-                      <div class="track"></div>
-                      <div class="fill long" style="width:18%"></div>
-                      <div class="pace" style="left:28%"></div>
-                    </div>
-                    <span class="pct long">18%</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -867,7 +847,7 @@
                   <div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:30%"></div></div>
                 </div>
                 <div class="col">
-                  <div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div>
+                  <div class="head"><span class="lbl">Weekly</span><span class="pct long">13%</span></div>
                   <div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div>
                 </div>
               </div>
@@ -903,12 +883,11 @@
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Copilot-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">42%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:42%"></div><div class="pace" style="left:46%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Codex-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">5-Hour</span><span class="pct">1%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:1%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Context</span><span class="pct long">13%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div></div>
+                <div class="col"><div class="head"><span class="lbl">Weekly</span><span class="pct long">13%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:13%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Gemini-white.svg" alt="" /></span>
@@ -918,17 +897,14 @@
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/Cursor-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Premium</span><span class="pct">8%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:8%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Requests</span><span class="pct long">12%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:12%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/stability-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Credits</span><span class="pct">25%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:25%"></div><div class="pace" style="left:35%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Monthly</span><span class="pct long">18%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:18%"></div></div></div>
               </div>
               <div class="row-compact">
                 <span class="pico"><img src="assets/icons/elevenlabs-white.svg" alt="" /></span>
                 <div class="col"><div class="head"><span class="lbl">Chars</span><span class="pct">62%</span></div><div class="pbar"><div class="track"></div><div class="fill" style="width:62%"></div><div class="pace" style="left:48%"></div></div></div>
-                <div class="col"><div class="head"><span class="lbl">Monthly</span><span class="pct long">41%</span></div><div class="pbar"><div class="track"></div><div class="fill long" style="width:41%"></div></div></div>
               </div>
             </div>
             <div class="w-foot">Tokenomics · 7 providers</div>
@@ -1171,7 +1147,7 @@
         <p class="feature-kicker">Install</p>
         <h2 id="install-heading">Install once. Stay <em>current</em>.</h2>
         <p style="color: var(--text-muted); margin-bottom: var(--s-6); max-width: 48ch;">
-          Sparkle handles silent background updates. No re-downloading from GitHub every time there's a new version.
+          Tokenomics checks for updates itself and installs them when you say so. No re-downloading from GitHub every time there's a new version.
         </p>
 
         <div class="install-tabs" role="tablist">
@@ -1258,7 +1234,7 @@
           </svg>
         </summary>
         <div class="faq-answer">
-          <p>Not for most tools. The Mac app reads the sign-in your coding tools already keep on your Mac: macOS Keychain for Claude, the <code>gh</code> CLI for GitHub Copilot, and local configuration files for Cursor, Codex CLI and Gemini CLI. The browser extension uses the sites you're already signed in to. Only Stability AI, Runway and ElevenLabs need an API key, pasted once and kept in the macOS Keychain.</p>
+          <p>Not for most tools. The Mac app reads the sign-in your coding tools already keep on your Mac: macOS Keychain for Claude, the <code>gh</code> CLI for GitHub Copilot, and local configuration files for Cursor, Codex CLI and Gemini CLI. The browser extension uses the sites you're already signed in to. Only Stability AI and Runway need an API key, pasted once and kept in the macOS Keychain.</p>
         </div>
       </details>
 

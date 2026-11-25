@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How do I set up ElevenLabs? | Tokenomics Help</title>
-  <meta name="description" content="Sign in at elevenlabs.io with the extension installed, or paste an API key into the extension or the Mac app. Here&#x27;s how each works and how to make a safe key." />
+  <meta name="description" content="Visit elevenlabs.io with the extension installed, or paste an ElevenLabs API key into the extension. The Mac app shows whatever the extension reads." />
   <meta property="og:title" content="How do I set up ElevenLabs? | Tokenomics Help" />
-  <meta property="og:description" content="Sign in at elevenlabs.io with the extension installed, or paste an API key into the extension or the Mac app. Here&#x27;s how each works and how to make a safe key." />
+  <meta property="og:description" content="Visit elevenlabs.io with the extension installed, or paste an ElevenLabs API key into the extension. The Mac app shows whatever the extension reads." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/elevenlabs-setup" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
@@ -35,7 +35,7 @@
     {
       "@type": "TechArticle",
       "headline": "How do I set up ElevenLabs?",
-      "description": "Sign in at elevenlabs.io with the extension installed, or paste an API key into the extension or the Mac app. Here's how each works and how to make a safe key.",
+      "description": "Visit elevenlabs.io with the extension installed, or paste an ElevenLabs API key into the extension. The Mac app shows whatever the extension reads.",
       "url": "https://trytokenomics.com/help/elevenlabs-setup",
       "dateModified": "2026-11-25",
       "author": {
@@ -125,24 +125,21 @@
     </div>
 
     <h1 class="help-title">How do I set up ElevenLabs?</h1>
-    <p class="help-summary">Sign in at elevenlabs.io with the extension installed, or paste an API key into the extension or the Mac app. Here&#x27;s how each works and how to make a safe key.</p>
+    <p class="help-summary">Visit elevenlabs.io with the extension installed, or paste an ElevenLabs API key into the extension. The Mac app shows whatever the extension reads.</p>
 
     <div class="doc-body help-body">
-<p>There are three ways, and you can use any of them:</p>
+<p>ElevenLabs connects through the browser extension, in one of two ways:</p>
 <ol>
-<li><strong>Sign in at elevenlabs.io</strong> in your browser, with the extension installed. It reads your usage using that sign-in.</li>
-<li><strong>Paste an API key into the extension</strong> (open the extension's Settings and find ElevenLabs). It reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back.</li>
-<li><strong>Paste an API key into the Mac app</strong> (gear icon → Providers → ElevenLabs). It reads your usage even when your browser is closed.</li>
+<li><strong>Open elevenlabs.io</strong> in your browser while signed in. The extension picks up the access your browser already has and reads your usage from then on.</li>
+<li><strong>Paste an API key into the extension</strong> (open the extension's settings and find ElevenLabs). It then reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back.</li>
 </ol>
-<h2>Which one shows in the Mac app?</h2>
-<p>If you've pasted a key into the Mac app, it uses that key. If you haven't, it shows the numbers the extension reads, which update every few minutes while your browser is open. It never uses both at once. Your key never moves between the extension and the Mac app; only the usage numbers do.</p>
+<p>The Mac app shows the extension's reading in your menu bar and widgets. It updates every few minutes while your browser is open; with the browser closed, the Mac app keeps the last reading. If you added an ElevenLabs key in an earlier version of the Mac app, it keeps using that key instead.</p>
 <h2>Making a key</h2>
 <p>In ElevenLabs, open <a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener">API Keys</a> and create a key. Set “User” to “Access” and leave everything else on “No Access”. That's all Tokenomics needs, and a key like that can't generate audio or change your account. If the key is missing that permission, Tokenomics won't save it and tells you why.</p>
 <h2>Things you might notice</h2>
 <ul>
 <li><strong>Reset dates on Free accounts.</strong> ElevenLabs sometimes keeps reporting the first month's reset date long after it passed. Characters still refresh monthly on that day, so Tokenomics counts forward to the next one.</li>
-<li><strong>The extension saves keys on your device</strong>, in your browser's extension storage, unencrypted. Use a key with only the “User” permission so it's harmless if it ever leaked. The Mac app keeps its key in your Mac's Keychain.</li>
-<li><strong>Without a Mac app key, the Mac app only updates while your browser is open.</strong> Close the browser and the Mac app keeps showing the last numbers it got.</li>
+<li><strong>The extension saves keys on your device</strong>, in your browser's extension storage, unencrypted. Use a key with only the “User” permission so it's harmless if it ever leaked.</li>
 </ul>
     </div>
 

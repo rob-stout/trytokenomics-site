@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Are the numbers exact? | Tokenomics Help</title>
-  <meta name="description" content="Usually. Most tools report your usage directly. When one doesn&#x27;t, Tokenomics estimates and labels the reading “estimated”." />
+  <meta name="description" content="Almost always. Tokenomics shows the limits each tool reports. The few readings it has to work out itself are marked as estimates." />
   <meta property="og:title" content="Are the numbers exact? | Tokenomics Help" />
-  <meta property="og:description" content="Usually. Most tools report your usage directly. When one doesn&#x27;t, Tokenomics estimates and labels the reading “estimated”." />
+  <meta property="og:description" content="Almost always. Tokenomics shows the limits each tool reports. The few readings it has to work out itself are marked as estimates." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/are-numbers-exact" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
@@ -35,7 +35,7 @@
     {
       "@type": "TechArticle",
       "headline": "Are the numbers exact?",
-      "description": "Usually. Most tools report your usage directly. When one doesn't, Tokenomics estimates and labels the reading “estimated”.",
+      "description": "Almost always. Tokenomics shows the limits each tool reports. The few readings it has to work out itself are marked as estimates.",
       "url": "https://trytokenomics.com/help/are-numbers-exact",
       "dateModified": "2026-11-25",
       "author": {
@@ -64,7 +64,7 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Reading your numbers",
+          "name": "Your numbers",
           "item": "https://trytokenomics.com/help/#reading-numbers"
         },
         {
@@ -115,7 +115,7 @@
       <nav class="help-crumbs" aria-label="Breadcrumb">
         <a href="/help/">Help</a>
         <span aria-hidden="true">/</span>
-        <a href="/help/#reading-numbers">Reading your numbers</a>
+        <a href="/help/#reading-numbers">Your numbers</a>
       </nav>
       <form class="help-mini-search" role="search" action="/help/" method="get">
         <label for="help-q" class="sr-only">Search help</label>
@@ -125,21 +125,26 @@
     </div>
 
     <h1 class="help-title">Are the numbers exact?</h1>
-    <p class="help-summary">Usually. Most tools report your usage directly. When one doesn&#x27;t, Tokenomics estimates and labels the reading “estimated”.</p>
+    <p class="help-summary">Almost always. Tokenomics shows the limits each tool reports. The few readings it has to work out itself are marked as estimates.</p>
 
     <div class="doc-body help-body">
-<p>Usually. Most tools report your usage and limits directly, and Tokenomics shows exactly what they report.</p>
-<p>Some don't publish a number to read. ChatGPT, for example, doesn't tell you how many messages you have left. For those, Tokenomics estimates: on ChatGPT it notes the time and model of each message you send (never what you wrote) and estimates from that.</p>
-<p>When a reading is an estimate, the popup shows an <strong>estimated</strong> label next to the plan, so you always know which kind you're looking at.</p>
-<p>If a number looks wrong, click refresh in the popup first. If it's still off, <a href="mailto:hello@trytokenomics.com">tell us</a> which tool and plan you're on.</p>
+<p>Almost always. For nearly every tool, Tokenomics shows the same limits and reset times the tool itself uses.</p>
+<p>A few readings have to be worked out:</p>
+<ul>
+<li><strong>ChatGPT</strong>: the extension normally reads ChatGPT's real limits. If it can't, it falls back to counting the messages you send from that browser (the time and model only, never what you wrote) against your plan's limits. See <a href="/help/chatgpt-plan">fixing the ChatGPT plan</a>.</li>
+<li><strong>Gemini CLI</strong>: Google doesn't report it, so Tokenomics counts your requests from the session files Gemini CLI keeps on your Mac, against the daily limits of the plan you choose. See <a href="/help/gemini-cli-numbers">how Gemini CLI is counted</a>.</li>
+</ul>
+<p>Estimated readings are labelled: the extension shows an <strong>estimated</strong> tag, and the Mac app's popover says “Estimated from…” under the numbers.</p>
+<p>If a number looks wrong, click refresh first. If it's still off, <a href="/help/report-a-problem">tell us</a> which tool and plan you're on.</p>
     </div>
 
     <aside class="help-related" aria-labelledby="related-heading">
       <h2 class="faq-label" id="related-heading">Related questions</h2>
       <ul>
+          <li><a href="/help/chatgpt-plan">ChatGPT shows the wrong plan or limit. Can I fix it?</a></li>
+          <li><a href="/help/gemini-cli-numbers">How are Gemini CLI numbers counted, and which plan should I pick?</a></li>
+          <li><a href="/help/report-a-problem">How do I report a bug or send feedback?</a></li>
           <li><a href="/help/claude-usage-limits">How do Claude&#x27;s 5-hour and 7-day limits work?</a></li>
-          <li><a href="/help/two-meters">Why do ChatGPT and Gemini show two meters?</a></li>
-          <li><a href="/help/midjourney-fast-hours">What are Midjourney&#x27;s Fast Hours?</a></li>
       </ul>
     </aside>
 

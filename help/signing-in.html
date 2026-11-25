@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How does signing in work? | Tokenomics Help</title>
-  <meta name="description" content="There&#x27;s nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you&#x27;re signed in to, and a few tools take an API key." />
+  <meta name="description" content="There&#x27;s nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you&#x27;re signed in to, and Stability AI and Runway take an API key." />
   <meta property="og:title" content="How does signing in work? | Tokenomics Help" />
-  <meta property="og:description" content="There&#x27;s nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you&#x27;re signed in to, and a few tools take an API key." />
+  <meta property="og:description" content="There&#x27;s nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you&#x27;re signed in to, and Stability AI and Runway take an API key." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/signing-in" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
@@ -35,7 +35,7 @@
     {
       "@type": "TechArticle",
       "headline": "How does signing in work?",
-      "description": "There's nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you're signed in to, and a few tools take an API key.",
+      "description": "There's nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you're signed in to, and Stability AI and Runway take an API key.",
       "url": "https://trytokenomics.com/help/signing-in",
       "dateModified": "2026-11-25",
       "author": {
@@ -125,25 +125,26 @@
     </div>
 
     <h1 class="help-title">How does signing in work?</h1>
-    <p class="help-summary">There&#x27;s nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you&#x27;re signed in to, and a few tools take an API key.</p>
+    <p class="help-summary">There&#x27;s nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you&#x27;re signed in to, and Stability AI and Runway take an API key.</p>
 
     <div class="doc-body help-body">
 <p>Tokenomics has no account of its own, and you never give it a password. It uses the sign-ins you already have:</p>
 <ul>
 <li><strong>Coding tools</strong> (Claude Code, Codex CLI, Gemini CLI, GitHub Copilot, Cursor): the Mac app reads the sign-in those tools already saved on your Mac. There's nothing to paste.</li>
 <li><strong>Web tools</strong> (ChatGPT, Gemini, Midjourney and the rest): the browser extension uses the sites you're signed in to, the same way the site's own pages do.</li>
-<li><strong>Stability AI, Runway and ElevenLabs</strong>: paste an API key once. The Mac app keeps it in the macOS Keychain.</li>
+<li><strong>Stability AI and Runway</strong>: paste an API key once during setup. The Mac app keeps it in the macOS Keychain.</li>
 </ul>
+<p>If a coding tool isn't installed or signed in yet, guided setup does it for you, in Terminal or your browser (<a href="/help/what-setup-installs">what setup installs</a>). For Claude Code, macOS asks once before Tokenomics can read its sign-in; see <a href="/help/keychain-prompt">the Keychain prompt</a>.</p>
 <p>Tokenomics never copies your sign-in anywhere else. The specifics are itemized on the <a href="/privacy">Privacy page</a>.</p>
     </div>
 
     <aside class="help-related" aria-labelledby="related-heading">
       <h2 class="faq-label" id="related-heading">Related questions</h2>
       <ul>
+          <li><a href="/help/what-setup-installs">What does guided setup install on my Mac?</a></li>
+          <li><a href="/help/keychain-prompt">Why does macOS ask for my password to read my Claude Code sign-in?</a></li>
           <li><a href="/help/supported-tools">Which AI tools does Tokenomics work with?</a></li>
           <li><a href="/help/browsers">Which browsers does the extension work in?</a></li>
-          <li><a href="/help/extension-without-mac-app">Does the extension work without the Mac app?</a></li>
-          <li><a href="/help/mac-app-and-extension">How do the Mac app and the browser extension work together?</a></li>
       </ul>
     </aside>
 
