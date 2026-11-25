@@ -510,7 +510,7 @@ APP_ARTICLES = [
         "topic": "reading-numbers",
         "title": "How do I check my GitHub Copilot premium requests?",
         "seo_title": "How to Check Your GitHub Copilot Premium Request Usage",
-        "summary": "GitHub shows premium request usage in your Copilot settings and billing pages, and your editor shows it too. The allowance resets on the 1st of each month (UTC). Tokenomics keeps it in your menu bar.",
+        "summary": "See premium requests in your GitHub Copilot settings, your editor, or your Mac menu bar with Tokenomics. The allowance resets on the 1st of each month (UTC).",
         "keywords": "check github copilot premium requests usage how many left monthly allowance reset settings billing ide tracker",
         "legacy": [],
         "body": """
