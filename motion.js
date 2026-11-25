@@ -285,11 +285,20 @@
       stroke.style.strokeDasharray = len;
       arrowHead.style.transformBox = 'fill-box';
       arrowHead.style.transformOrigin = '80% 50%';
-      // The extension card's "Works with" pills build on the same scroll as the arrow,
-      // one after another while it draws, so both cards finish together.
+      // The story: the Tokenomics icon pops in, the arrow draws, Applications pops as
+      // the arrowhead lands, then the caption and macOS line. The extension card's
+      // "Works with" pills build one by one across the same run, so both cards finish together.
+      var appIcon = flow.querySelector('.install-flow-icon'), folder = flow.querySelector('.install-flow-folder');
+      // Ease-out with a little overshoot (easeOutBack), for the pops.
+      function backOut(k) { var s = 1.70158; k = k - 1; return k * k * ((s + 1) * k + s) + 1; }
+      function pop(el, k) {
+        if (!el) return;
+        el.style.opacity = Math.min(1, k * 2);
+        el.style.transform = 'scale(' + (0.55 + 0.45 * backOut(k)).toFixed(3) + ')';
+      }
       var sitesLabel = document.querySelector('.download-sites-label');
       var pills = Array.prototype.slice.call(document.querySelectorAll('.download-sites li'));
-      var pillSpan = 0.68 - 0.1, pillDur = 0.1;
+      var pillSpan = 0.8 - 0.1, pillDur = 0.1;     // last pill lands with the Applications pop
       function popIn(el, k) {
         el.style.opacity = k;
         el.style.transform = 'translateY(' + ((1 - k) * 6).toFixed(1) + 'px) scale(' + (0.94 + 0.06 * k).toFixed(3) + ')';
@@ -309,16 +318,18 @@
       if (sitesList) addScrubber(sitesList, function (p) { if (!sideBySide()) buildPills(p); }, 0.85, 0.4);
       addScrubber(flow, function (p) {
         if (sideBySide()) buildPills(p);
-        stroke.style.strokeDashoffset = (len * (1 - seg(p, 0, 0.68, scrollEase))).toFixed(1);
+        pop(appIcon, clamp(p / 0.14));
+        stroke.style.strokeDashoffset = (len * (1 - seg(p, 0.12, 0.62, scrollEase))).toFixed(1);
         // The drawn stroke hands over to the hand-drawn artwork as the arrowhead lands.
-        var swap = seg(p, 0.66, 0.76, appEase);
+        var swap = seg(p, 0.6, 0.7, appEase);
         // Artwork (on top) fades in over the solid stroke; the stroke drops once it's covered.
         stroke.setAttribute('opacity', swap < 1 ? 1 : 0);
         art.style.opacity = swap;
-        var h = seg(p, 0.66, 0.8, appEase);
+        var h = seg(p, 0.6, 0.72, appEase);
+        pop(folder, clamp((p - 0.66) / 0.14));
         arrowHead.style.opacity = h;
         arrowHead.style.transform = 'scale(' + (0.6 + 0.4 * h).toFixed(3) + ')';
-        var c = seg(p, 0.8, 0.95, appEase);
+        var c = seg(p, 0.82, 0.96, appEase);
         after.forEach(function (el) {
           el.style.opacity = c;
           el.style.transform = 'translateY(' + ((1 - c) * 8).toFixed(1) + 'px)';
