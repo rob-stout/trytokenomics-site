@@ -186,7 +186,8 @@
     var vh = window.innerHeight || document.documentElement.clientHeight;
     scrubbers.forEach(function (s) {
       var top = s.el.getBoundingClientRect().top;
-      var p = clamp((s.from * vh - top) / ((s.from - s.to) * vh));
+      // Taller than any real screen (a search engine's full-page render): show finished.
+      var p = vh > 2000 ? 1 : clamp((s.from * vh - top) / ((s.from - s.to) * vh));
       if (Math.abs(p - s.last) < 0.001) return;
       s.last = p;
       s.render(p);
@@ -224,11 +225,25 @@
 
   function initBuild() {
     if (!('IntersectionObserver' in window)) return;
-    var items = Array.prototype.slice.call(document.querySelectorAll(BUILD));
+    // Anything already on screen when the page opens just shows; only what's
+    // below the fold builds in. A window taller than any real screen (how search
+    // engines render a page for their snapshot) shows everything at once.
+    var tall = function () { return window.innerHeight > 2000; };
+    var foldAtLoad = window.innerHeight;
+    var items = Array.prototype.slice.call(document.querySelectorAll(BUILD)).filter(function (el) {
+      return !tall() && el.getBoundingClientRect().top > foldAtLoad;
+    });
     if (!items.length) return;
     items.forEach(function (el) { el.classList.add('build'); });
 
     function show(el, delay) {
+      if (tall()) {                       // no fade: show at full strength immediately
+        el.style.transition = 'none';
+        el.classList.add('in');
+        void el.offsetHeight;
+        el.style.transition = '';
+        return;
+      }
       el.style.setProperty('--build-delay', delay + 'ms');
       el.classList.add('in');
     }
