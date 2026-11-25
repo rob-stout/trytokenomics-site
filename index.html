@@ -339,7 +339,7 @@
     <!-- Annotated diagram -->
     <div class="pace-diagram-wrap">
       <div class="pace-diagram" role="img"
-           aria-label="Ring diagram: inner ring shows 60% of the 5-hour window used; outer ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption.">
+           aria-label="Ring diagram: inner ring shows 60% of the 5-hour window used; outer ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption. The 5-hour window is burning ahead of pace, so its tokens will run out before it resets.">
 
         <svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
              font-family="'DM Sans', system-ui, sans-serif">
@@ -412,8 +412,6 @@
                (200+85·sin189°, 230−85·cos189°) = (186.7, 314.0) -->
           <line class="callout-line" data-step="3" x1="186.7" y1="314.0" x2="186.7" y2="395"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <text class="callout-label" data-step="3" x="186.7" y="416" text-anchor="middle" font-size="16" font-weight="600"
-                fill="currentColor">Burning <tspan fill="var(--accent)">ahead</tspan> of pace</text>
         </svg>
 
         <div class="pace-label pace-label--top callout-label" data-step="1">
@@ -423,6 +421,10 @@
         <div class="pace-label pace-label--bottom callout-label" data-step="2">
           <div class="pace-label__title">Even-pace mark</div>
           <div class="pace-label__sub">Where even consumption sits</div>
+        </div>
+        <div class="pace-label pace-label--under callout-label" data-step="3">
+          <div class="pace-label__title">Burning <span class="pace-label__accent">ahead</span> of pace</div>
+          <div class="pace-label__sub">Your 5-hour tokens will run out before the window resets</div>
         </div>
 
       </div>

@@ -130,6 +130,21 @@
     return function (p) { all.forEach(function (f) { f(p); }); };
   }
 
+  // ── Menu bar popover: both bars fill, pace dots trail, percentages count ──
+  function popoverRenderer(pop, curve) {
+    var parts = [];
+    pop.querySelectorAll('.pop-section').forEach(function (s, i) {
+      var o = i * 0.08;
+      var fill = s.querySelector('.pop-bar-fill'), pace = s.querySelector('.pop-bar-pace'), pct = s.querySelector('.pop-section-pct');
+      if (fill) { var f = barPiece(fill); parts.push(function (p) { f(seg(p, o, Math.min(1, o + 0.9), curve)); }); }
+      var c = pct && countPiece(pct);
+      if (c) parts.push(function (p) { c(seg(p, o, Math.min(1, o + 0.9), curve)); });
+      if (pace) { var d = pacePiece(pace); parts.push(function (p) { d(seg(p, o, 1, curve)); }); }
+    });
+    if (!parts.length) return null;
+    return function (p) { parts.forEach(function (f) { f(p); }); };
+  }
+
   // ── Pace diagram: rings → dots → each callout line, then its label ───
   function diagramRenderer(d, curve) {
     function seg2(p, a, b) { return seg(p, a, b, curve); }
@@ -248,6 +263,8 @@
       // they near the top (top 20% down), so the growth plays across the whole screen.
       else addScrubber(w, render, 0.85, 0.2);
     });
+    var pop = document.querySelector('.menubar-popover');
+    if (pop) addScrubber(pop, popoverRenderer(pop, scrollEase), 0.85, 0.2);
     var diagram = document.querySelector('.pace-diagram');
     // Same idea for the diagram: start once it's up on screen, finish near the top.
     if (diagram) addScrubber(diagram, diagramRenderer(diagram, scrollEase), 0.85, 0.15);

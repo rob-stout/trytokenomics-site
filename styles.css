@@ -766,6 +766,10 @@ section { scroll-margin-top: 72px; }
 }
 .pace-label--top    { top: 30.5%; }
 .pace-label--bottom { top: 70.3%; }
+/* Centered under the "ahead of pace" line, which drops from x=186.7 of 460 (40.6%). */
+.pace-label--under  { top: 91%; left: 5.6%; width: 70%; text-align: center; }
+.pace-label--under .pace-label__sub { text-wrap: balance; }
+.pace-label__accent { color: var(--accent); }
 .pace-label__title {
   font-size: 15px;
   font-weight: 600;
