@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — Tokenomics</title>
-  <meta name="description" content="How Tokenomics reads your AI usage with the sign-ins you already have. No analytics, no telemetry, no tracking. Exactly what we touch, and what we don't." />
+  <meta name="description" content="How Tokenomics reads your AI usage with the sign-ins you already have. The apps and extension have no analytics or tracking. Exactly what we touch." />
   <meta property="og:title" content="Privacy Policy — Tokenomics" />
-  <meta property="og:description" content="No analytics. No telemetry. No tracking. Here's everything Tokenomics reads, and everywhere it sends data — both very short lists." />
+  <meta property="og:description" content="The apps and extension have no analytics, telemetry or tracking. Here's everything Tokenomics reads, and everywhere it sends data — both very short lists." />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:url" content="https://trytokenomics.com/privacy" />
@@ -249,7 +249,7 @@
     <p class="feature-kicker">Privacy Policy</p>
     <h1>What Tokenomics <em>touches</em>, and what it doesn't.</h1>
     <p class="lede" style="font-size: var(--fs-body-lg); color: var(--text-muted); max-width: 60ch; margin: var(--s-4) 0 0;">
-  Short version: Tokenomics shows your AI usage using the sign-ins you already have. We never receive it. The Mac app, the browser extension, and Tokenomics for Safari all talk only to the AI services you use and to your own Mac. No analytics, no telemetry, no tracking inside any of them. The marketing website you're reading does count anonymous download requests; details below.
+  Short version: Tokenomics shows your AI usage using the sign-ins you already have. We never receive it. The Mac app, the browser extension, and Tokenomics for Safari all talk only to the AI services you use and to your own Mac. No analytics, no telemetry, no tracking inside any of them. The marketing website you're reading uses Cloudflare's cookie-free Web Analytics and counts anonymous download requests; details below.
 </p>
 
     <div class="doc-meta">
@@ -538,7 +538,10 @@
       The Tokenomics app and the marketing website at <code>trytokenomics.com</code> are separate things, and they have different (but both narrow) data footprints. Everything above this line is about the <strong>apps and the extension</strong>. Everything in this section is about the <strong>website</strong>.
     </p>
     <p>
-      The site is hosted on Cloudflare Pages. Cloudflare provides standard server-side request analytics — visit counts, top pages, country breakdown — drawn from request headers as the page is served. There is <strong>no client-side tracking script</strong>, no cookies, no fingerprinting, no third-party scripts or trackers loaded in the page.
+      The site is hosted on Cloudflare Pages. Cloudflare provides standard server-side request analytics — visit counts, top pages, country breakdown — drawn from request headers as the page is served.
+    </p>
+    <p>
+      The site also uses <strong>Cloudflare Web Analytics</strong>, so we can see which pages help people and how fast they load. Cloudflare adds a small script to each page (loaded from <code>static.cloudflareinsights.com</code>) that reports the page you viewed, the page that linked you here, your browser and device type, your country, and how long the page took to load. It <strong>sets no cookies, stores nothing on your device, and doesn't follow you across other sites</strong>. We see only totals, never individual visitors. There are no other third-party scripts, trackers or ads on the site, and no fingerprinting.
     </p>
     <p>
       The site's fonts are served from trytokenomics.com itself, so loading a page doesn't contact Google or any other third party.
@@ -571,7 +574,7 @@
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
-        <span>No third-party analytics, advertising, or tracking code. (The Mac app uses the Sparkle update framework; the extension bundles the open-source Preact and webextension-polyfill libraries. None of them send data to anyone.)</span>
+        <span>No third-party analytics, advertising, or tracking code in the Mac app, the browser extension or Tokenomics for Safari. (The Mac app uses the Sparkle update framework; the extension bundles the open-source Preact and webextension-polyfill libraries. None of them send data to anyone.)</span>
       </li>
       <li>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
@@ -600,7 +603,7 @@
       <strong>Browser extension and Tokenomics for Safari:</strong> keep their data in the browser's local extension storage until you click "Stop reading and delete my data" in settings or uninstall the extension. Either one deletes it. See "What the extension stores" above for exactly what's kept and for how long (the ChatGPT message log is trimmed to 7 days).
     </p>
     <p>
-      <strong>Website:</strong> keeps anonymous download-counter rows for as long as the site runs. See "About this website."
+      <strong>Website:</strong> keeps anonymous download-counter rows for as long as the site runs. Cloudflare keeps the Web Analytics totals under its own retention policy. See "About this website."
     </p>
 
 
@@ -626,7 +629,7 @@
     </p>
     <p><strong>Change log</strong></p>
     <ul>
-      <li><strong>November 25, 2026</strong>: Corrected which credentials the Mac app reads for OpenAI and Google, and that it no longer takes an ElevenLabs API key. Added what the Mac app adds to your Mac (browser link files, and what guided setup installs), the downloads guided setup makes, and what the in-app uninstaller removes.</li>
+      <li><strong>November 25, 2026</strong>: The website now uses Cloudflare Web Analytics (no cookies, nothing stored on your device); see "About this website." Nothing changes for the apps or the extension. Also corrected which credentials the Mac app reads for OpenAI and Google, and that it no longer takes an ElevenLabs API key. Added what the Mac app adds to your Mac (browser link files, and what guided setup installs), the downloads guided setup makes, and what the in-app uninstaller removes.</li>
       <li><strong>November 23, 2026</strong>: Added Suno and Udio to the browser extension. Covers the optional ElevenLabs and Leonardo API keys you can paste into the extension, the renewal dates it learns for Leonardo and Suno, and that ElevenLabs usage numbers (never the key) can now pass to the Mac app.</li>
       <li><strong>November 22, 2026</strong>: Policy now covers the Tokenomics browser extension (Chrome and Edge) and Tokenomics for Safari in addition to the Mac app and website: what the extension reads, stores and sends, its consent screen, and the "Stop reading and delete my data" control. Clarified that the Mac app saves usage readings for widgets, and how long download-counter rows are kept. The website now serves its own fonts instead of loading them from Google Fonts. Reworded "no third-party SDKs" to "no third-party analytics, advertising, or tracking code". No change to the core promise: nothing is sent to the author.</li>
       <li><strong>April 21, 2026</strong>: Previous version (Mac app and website).</li>
