@@ -16,6 +16,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+PUBLIC = ROOT / "public"   # the published site
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from help_articles import ARTICLES, TOPICS, COMMON, ELSEWHERE  # noqa: E402
 
@@ -350,7 +351,7 @@ def build_hub():
 
 
 def update_sitemap():
-    path = ROOT / "sitemap.xml"
+    path = PUBLIC / "sitemap.xml"
     xml = path.read_text()
     # Drop old FAQ/help entries, then add the hub and every article.
     xml = re.sub(r"\s*<url>\s*<loc>https://trytokenomics\.com/(?:faq|help)[^<]*</loc>.*?</url>", "", xml, flags=re.S)
@@ -370,7 +371,7 @@ def update_sitemap():
 
 
 def main():
-    out = ROOT / "help"
+    out = PUBLIC / "help"
     out.mkdir(exist_ok=True)
     slugs = [a["slug"] for a in ARTICLES]
     assert len(slugs) == len(set(slugs)), "duplicate slug"

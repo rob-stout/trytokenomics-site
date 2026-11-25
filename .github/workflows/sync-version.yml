@@ -1,6 +1,6 @@
 name: Sync version fallbacks
 
-# Keeps the static "vX.Y.Z" fallbacks in index.html / setup.html /
+# Keeps the static "vX.Y.Z" fallbacks in public/index.html / setup.html /
 # license.html / privacy.html in sync with the latest release of
 # rob-stout/Tokenomics. The runtime auto-update via app.js handles users
 # with JS enabled; this workflow keeps the static HTML correct for SEO,
@@ -38,7 +38,7 @@ jobs:
         run: |
           # Pull the version out of the version pill in index.html.
           # Pattern: >v2.8.6 · macOS 14+<
-          CURRENT=$(grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+ · macOS' index.html | head -1 | sed -E 's/^v//; s/ · macOS$//')
+          CURRENT=$(grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+ · macOS' public/index.html | head -1 | sed -E 's/^v//; s/ · macOS$//')
           echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
           echo "Current fallback version: $CURRENT"
 
@@ -53,7 +53,7 @@ jobs:
           OLD="${{ steps.current.outputs.version }}"
           NEW="${{ steps.latest.outputs.version }}"
           echo "Updating $OLD → $NEW"
-          for f in index.html setup.html license.html privacy.html; do
+          for f in public/index.html public/setup.html public/license.html public/privacy.html; do
             [[ -f "$f" ]] || continue
             sed -i "s|v${OLD}/Tokenomics-${OLD}.dmg|v${NEW}/Tokenomics-${NEW}.dmg|g" "$f"
             sed -i "s|>v${OLD} · macOS|>v${NEW} · macOS|g" "$f"

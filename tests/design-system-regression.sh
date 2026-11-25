@@ -12,7 +12,7 @@ set -u
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 MD="$ROOT/design-system.md"
-HTML="$ROOT/design-system-v3.html"
+HTML="$ROOT/public/design-system-v3.html"
 
 # ANSI
 RED='\033[0;31m'
