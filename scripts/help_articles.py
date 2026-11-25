@@ -1,0 +1,343 @@
+# Help center content: one entry per article. Edit here, then run
+#   python3 scripts/build_help.py
+# to regenerate help/index.html, help/<slug>.html and sitemap.xml.
+#
+# Fields:
+#   slug     URL: /help/<slug>
+#   topic    key into TOPICS
+#   title    the question (H1 + <title>)
+#   summary  one or two sentences: meta description, hub list and search snippet
+#   keywords extra words people search with that the answer doesn't use
+#   legacy   old /faq#anchors that should land here
+#   body     the answer, as HTML
+
+TOPICS = [
+    {"id": "browser-extension", "num": 1, "title": "Getting set up",
+     "desc": "Installing, which browsers work, what it costs, and what to try when something's off."},
+    {"id": "reading-numbers", "num": 2, "title": "Reading your numbers",
+     "desc": "Each AI tool counts usage its own way. Here's what each meter means."},
+    {"id": "privacy-permissions", "num": 3, "title": "Privacy & permissions",
+     "desc": "What Tokenomics reads, what it stores on your device, and what it never sends."},
+]
+
+CHROME_URL = "https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl"
+
+ARTICLES = [
+    # ── Getting set up ───────────────────────────────────────────────
+    {
+        "slug": "supported-tools",
+        "topic": "browser-extension",
+        "title": "Which AI tools does Tokenomics work with?",
+        "summary": "From Claude Code and Cursor to ChatGPT, Midjourney and Suno. Here's the full list, what each meter tracks, and how each one connects.",
+        "keywords": "supported compatible list providers websites sites tools claude chatgpt gemini midjourney elevenlabs grok perplexity leonardo suno udio claude code codex cli github copilot cursor stability runway",
+        "legacy": ["ext-sites"],
+        "common": "Coding tools, chat apps and creative tools, from Claude Code to Suno. The web ones connect through the browser extension.",
+        "body": """
+<p>Coding tools connect through the Mac app, which reads the sign-in they already keep on your Mac. Web tools connect through the <a href="/#extension">browser extension</a>, which reads the sites you're signed in to. A few take an API key you paste once.</p>
+<div class="doc-table-wrap doc-table-wrap--wide">
+<table class="doc-table">
+<thead><tr><th scope="col">Tool</th><th scope="col">What it tracks</th><th scope="col">Connects through</th></tr></thead>
+<tbody>
+<tr><td>Claude</td><td>5-hour and 7-day limits, shared by chats and Claude Code</td><td>Mac app or extension</td></tr>
+<tr><td>ChatGPT</td><td>Chats on chatgpt.com</td><td>Extension</td></tr>
+<tr><td>Codex CLI</td><td>OpenAI's coding agent, in Terminal</td><td>Mac app</td></tr>
+<tr><td>Gemini</td><td>Chats on gemini.google.com</td><td>Extension</td></tr>
+<tr><td>Gemini CLI</td><td>Google's coding agent, in Terminal</td><td>Mac app</td></tr>
+<tr><td>GitHub Copilot</td><td>Premium requests</td><td>Mac app</td></tr>
+<tr><td>Cursor</td><td>Premium and regular requests</td><td>Mac app</td></tr>
+<tr><td>Stability AI</td><td>Image and video generation credits</td><td>Mac app, with an API key</td></tr>
+<tr><td>Runway</td><td>Video generation credits</td><td>Mac app, with an API key</td></tr>
+<tr><td>ElevenLabs</td><td>Voice generation credits</td><td>Extension, or Mac app with an API key</td></tr>
+<tr><td>Midjourney</td><td><a href="/help/midjourney-fast-hours">Fast Hours</a></td><td>Extension</td></tr>
+<tr><td>Leonardo</td><td>Image generation credits</td><td>Extension</td></tr>
+<tr><td>Grok</td><td>Chats on grok.com</td><td>Extension</td></tr>
+<tr><td>Perplexity</td><td>Pro searches and research</td><td>Extension</td></tr>
+<tr><td>Suno</td><td>Music generation credits</td><td>Extension</td></tr>
+<tr><td>Udio</td><td>Music generation credits</td><td>Extension</td></tr>
+</tbody>
+</table>
+</div>
+<p>If you have both the Mac app and the extension, everything the extension reads also shows in your menu bar and widgets. Suno and Udio reach the Mac app in its next update; the extension shows them today.</p>
+<p>Setting up a coding tool? The <a href="/setup">setup guide</a> walks through each one.</p>
+""",
+    },
+    {
+        "slug": "browsers",
+        "topic": "browser-extension",
+        "title": "Which browsers does the extension work in?",
+        "summary": "Google Chrome, plus Brave, Arc, Vivaldi and Opera from the Chrome Web Store. Versions for Microsoft Edge and Safari are on the way.",
+        "keywords": "browser browsers chrome edge chromium brave arc opera vivaldi safari firefox beta canary store install supported add-ons",
+        "legacy": ["browsers"],
+        "body": f"""
+<p>Google Chrome. Install it from the <a href="{CHROME_URL}" target="_blank" rel="noopener">Chrome Web Store</a>.</p>
+<p>It's a standard Chromium extension, so other Chromium browsers like Brave, Arc, Vivaldi and Opera can install it from the Chrome Web Store too.</p>
+<p>Versions for Microsoft Edge (on Edge Add-ons) and Safari (Tokenomics for Safari, a free app on the Mac App Store) are in review. We'll link them here as soon as they're live. Firefox isn't supported.</p>
+<p>If you also run the Mac app, it links up with Chrome (including Beta and Canary), Edge, Brave, Vivaldi, Opera and Arc, so your readings reach the menu bar and widgets from any of them.</p>
+""",
+    },
+    {
+        "slug": "extension-without-mac-app",
+        "topic": "browser-extension",
+        "title": "Does the extension work without the Mac app?",
+        "summary": "Yes. It works on its own in your browser. The Mac app adds menu bar rings, widgets and coding tools, and the two stay in sync.",
+        "keywords": "without alone standalone only need required require both sync together connect menubar widgets",
+        "legacy": ["ext-standalone"],
+        "common": "Yes, on its own in your browser. The Mac app adds menu bar rings, widgets and coding tools, and the two stay in sync.",
+        "body": """
+<p>Yes. The extension works on its own in your browser: click its toolbar icon to see a meter for each site you're signed in to.</p>
+<p>The Mac app adds three things:</p>
+<ul>
+<li><strong>Menu bar rings</strong>, so you see your closest limit without opening anything.</li>
+<li><strong>Desktop widgets</strong> in three sizes.</li>
+<li><strong>Coding tools</strong> the browser can't see: Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor.</li>
+</ul>
+<p>If you have both, they sync: the extension's readings show in the menu bar and widgets, and the order you set for your tabs carries across.</p>
+""",
+    },
+    {
+        "slug": "windows-and-linux",
+        "topic": "browser-extension",
+        "title": "Does Tokenomics work on Windows or Linux?",
+        "summary": "The browser extension does, in Chrome. The menu bar app, widgets and coding-tool tracking need a Mac for now.",
+        "keywords": "windows linux pc chromebook requirements requirement macos version sonoma supported platform",
+        "legacy": [],
+        "body": f"""
+<p>The browser extension does. It runs anywhere Chrome does, including Windows and Linux. Install it from the <a href="{CHROME_URL}" target="_blank" rel="noopener">Chrome Web Store</a> and it shows your usage for the AI sites you're signed in to.</p>
+<p>The menu bar app is Mac only for now. It needs macOS 14 Sonoma or later, and it's what tracks coding tools (Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor) and draws the menu bar rings and widgets. A Windows and Linux version of the app is on the roadmap.</p>
+""",
+    },
+    {
+        "slug": "is-it-free",
+        "topic": "browser-extension",
+        "title": "Is Tokenomics free?",
+        "summary": "Yes. The Mac app and the browser extension are free, with no subscription, no ads and no account to make.",
+        "keywords": "price pricing cost costs pay paid money subscription buy charge ads account sponsor license licence opensource open source github code",
+        "legacy": ["free"],
+        "body": """
+<p>Yes. The Mac app, the browser extension and Tokenomics for Safari are all free. There's no subscription, no ads and no account to make.</p>
+<p>The code is source-available on <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>, so you can read every line, and the <a href="/license">license</a> makes it free for personal use. It isn't MIT-licensed: commercial rights are reserved, so there's room for paid capabilities later, like a version for teams. If those ever ship, the current app stays free for everyone who already has it.</p>
+<p>If you'd like to chip in, there's a <a href="https://buymeacoffee.com/robstout" target="_blank" rel="noopener">Buy me a coffee</a> page.</p>
+""",
+    },
+    {
+        "slug": "extension-consent",
+        "topic": "browser-extension",
+        "title": "Does the extension start reading as soon as I install it?",
+        "summary": "No. It shows a short consent screen first, and nothing is read until you click Agree and turn on.",
+        "keywords": "consent agree enable disable turn off stop pause delete data start blank empty install",
+        "legacy": ["ext-consent"],
+        "body": """
+<p>No. On install it shows a short consent screen that explains what it reads and stores. Nothing is read until you click <strong>Agree and turn on</strong>.</p>
+<p>To turn it off later, open the extension's settings and click <strong>Stop reading and delete my data</strong>. That deletes everything it saved, and it stays off until you agree again.</p>
+<p>You can also switch individual sites off in the extension's settings, which hides them from the popup.</p>
+""",
+    },
+    {
+        "slug": "signing-in",
+        "topic": "browser-extension",
+        "title": "How does signing in work?",
+        "summary": "There's nothing to sign in to. The Mac app reads the sign-in your coding tools already keep, the extension uses the sites you're signed in to, and a few tools take an API key.",
+        "keywords": "signin login password credentials keychain token api key cli auth account authenticate paste",
+        "legacy": ["sign-in"],
+        "body": """
+<p>Tokenomics has no account of its own, and you never give it a password. It uses the sign-ins you already have:</p>
+<ul>
+<li><strong>Coding tools</strong> (Claude Code, Codex CLI, Gemini CLI, GitHub Copilot, Cursor): the Mac app reads the sign-in those tools already saved on your Mac. There's nothing to paste.</li>
+<li><strong>Web tools</strong> (ChatGPT, Gemini, Midjourney and the rest): the browser extension uses the sites you're signed in to, the same way the site's own pages do.</li>
+<li><strong>Stability AI, Runway and ElevenLabs</strong>: paste an API key once. The Mac app keeps it in the macOS Keychain.</li>
+</ul>
+<p>Tokenomics never copies your sign-in anywhere else. The specifics are itemized on the <a href="/privacy">Privacy page</a>.</p>
+""",
+    },
+    {
+        "slug": "elevenlabs-setup",
+        "topic": "browser-extension",
+        "title": "How do I set up ElevenLabs?",
+        "summary": "Sign in at elevenlabs.io with the extension installed, or paste an API key into the extension or the Mac app. Here's how each works and how to make a safe key.",
+        "keywords": "elevenlabs eleven labs api key keys setup permission user access characters credits",
+        "legacy": ["ext-elevenlabs"],
+        "body": """
+<p>There are three ways, and you can use any of them:</p>
+<ol>
+<li><strong>Sign in at elevenlabs.io</strong> in your browser, with the extension installed. It reads your usage using that sign-in.</li>
+<li><strong>Paste an API key into the extension</strong> (open the extension's Settings and find ElevenLabs). It reads your usage directly, without you visiting the site. While a key is set, the extension stops using your site sign-in. Remove the key to go back.</li>
+<li><strong>Paste an API key into the Mac app</strong> (gear icon → Providers → ElevenLabs). It reads your usage even when your browser is closed.</li>
+</ol>
+<h2>Which one shows in the Mac app?</h2>
+<p>If you've pasted a key into the Mac app, it uses that key. If you haven't, it shows the numbers the extension reads, which update every few minutes while your browser is open. It never uses both at once. Your key never moves between the extension and the Mac app; only the usage numbers do.</p>
+<h2>Making a key</h2>
+<p>In ElevenLabs, open <a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener">API Keys</a> and create a key. Set “User” to “Access” and leave everything else on “No Access”. That's all Tokenomics needs, and a key like that can't generate audio or change your account. If the key is missing that permission, Tokenomics won't save it and tells you why.</p>
+<h2>Things you might notice</h2>
+<ul>
+<li><strong>Reset dates on Free accounts.</strong> ElevenLabs sometimes keeps reporting the first month's reset date long after it passed. Characters still refresh monthly on that day, so Tokenomics counts forward to the next one.</li>
+<li><strong>The extension saves keys on your device</strong>, in your browser's extension storage, unencrypted. Use a key with only the “User” permission so it's harmless if it ever leaked. The Mac app keeps its key in your Mac's Keychain.</li>
+<li><strong>Without a Mac app key, the Mac app only updates while your browser is open.</strong> Close the browser and the Mac app keeps showing the last numbers it got.</li>
+</ul>
+""",
+    },
+    {
+        "slug": "uninstall",
+        "topic": "browser-extension",
+        "title": "How do I uninstall Tokenomics?",
+        "summary": "Quit the app and drag it from Applications to the Trash. To remove the extension, right-click its toolbar icon and choose Remove.",
+        "keywords": "uninstall remove delete trash removal clean leftover preferences extension get rid",
+        "legacy": ["uninstall"],
+        "body": """
+<p><strong>The Mac app:</strong> quit it, then drag Tokenomics from your <strong>Applications</strong> folder to the Trash. What's left behind is small: your settings and the usage numbers the widgets read. For a completely clean removal you can delete Tokenomics' entry from <code>~/Library/Preferences</code>, but it's harmless to leave.</p>
+<p>Installed with Homebrew? Run <code>brew uninstall --cask tokenomics</code> instead.</p>
+<p><strong>The browser extension:</strong> right-click its toolbar icon and choose <strong>Remove</strong>. That deletes everything it saved.</p>
+""",
+    },
+    {
+        "slug": "troubleshooting",
+        "topic": "browser-extension",
+        "title": "Something's not working. What can I try?",
+        "summary": "Most problems clear up by checking you're signed in, clicking refresh, or reopening your browser. Here's the full checklist.",
+        "keywords": "broken troubleshoot troubleshooting fix help error problem issue stuck blank empty nothing missing zero refresh reload restart update updated sync not working",
+        "legacy": ["not-working"],
+        "body": """
+<p>Most problems clear up with one of these:</p>
+<ul>
+<li><strong>Check you're signed in</strong> to that site in the same browser. For Gemini and Suno, open a tab of the site, since the extension reads those from the page.</li>
+<li><strong>Click refresh</strong> in the extension's popup.</li>
+<li><strong>Check the site is switched on</strong> in the extension's settings.</li>
+<li><strong>If the popup shows nothing at all,</strong> make sure you clicked <strong>Agree and turn on</strong> on the <a href="/help/extension-consent">consent screen</a>.</li>
+<li><strong>If the Mac app isn't getting readings,</strong> check that it's running and that you've opened it at least once since installing the extension. That's when it sets up the link. Then reopen the popup.</li>
+<li><strong>Just updated the extension?</strong> Quit and reopen your browser.</li>
+</ul>
+<p>Problem with a coding tool in the Mac app, like Claude Code or Copilot? The <a href="/setup">setup guide</a> has fixes for each one.</p>
+""",
+    },
+
+    # ── Reading your numbers ─────────────────────────────────────────
+    {
+        "slug": "claude-usage-limits",
+        "topic": "reading-numbers",
+        "title": "How do Claude's 5-hour and 7-day limits work?",
+        "summary": "The 5-hour window is the rolling cap most people hit first; the 7-day window is the weekly ceiling. Chats and Claude Code share both.",
+        "keywords": "anthropic limit quota rate reset weekly week rolling opus pro max 5 hour 7 day window single one desktop claude code",
+        "legacy": ["claude-windows", "anthropic-one-window"],
+        "body": """
+<p>These are Anthropic's own limits, not something Tokenomics invented.</p>
+<h2>The 5-hour window</h2>
+<p>The rolling cap most people hit first. It resets about five hours after your first message in the current block. If Tokenomics shows 80% with two hours left, you're close to a rate limit, so pace your prompts or switch tasks.</p>
+<h2>The 7-day window</h2>
+<p>The longer ceiling, resetting weekly from your first message of the cycle. On some plans you'll also see an <strong>Opus</strong> counter inside it: Opus carries its own weekly cap on top of the shared total, so it can run out while the 7-day window still has room.</p>
+<h2>Why Claude has one set of limits</h2>
+<p>Claude on the web, the Claude desktop app and Claude Code all draw down the <strong>same 5-hour and 7-day windows</strong> on your subscription. One set of limits covers every surface, so Claude gets one meter with two bars. OpenAI and Google do it the other way, with a separate meter per product. See <a href="/help/two-meters">why ChatGPT and Gemini show two meters</a>.</p>
+""",
+    },
+    {
+        "slug": "two-meters",
+        "topic": "reading-numbers",
+        "title": "Why do ChatGPT and Gemini show two meters?",
+        "summary": "ChatGPT and Codex CLI share an OpenAI login but have separate limits, and so do the Gemini app and Gemini CLI. Tokenomics shows each limit on its own.",
+        "keywords": "openai codex gemini meters separate gpt two bars twice double duplicate widget small medium large rows chatgpt cli google",
+        "legacy": ["chatgpt-two-bars", "widget-openai-twice"],
+        "body": """
+<p>ChatGPT and Codex CLI are two different products that share one OpenAI login but count against <strong>separate limits</strong>. ChatGPT has its own chat limits; Codex CLI has its own weekly quota tied to your plan. Same account, different meters, and OpenAI doesn't give a combined number, so Tokenomics shows both and you can see which one you're closer to.</p>
+<p>The same is true for <strong>Gemini</strong>: the Gemini app at <code>gemini.google.com</code> and the Gemini CLI share a Google account but track usage separately.</p>
+<p>Claude is the exception: chats and Claude Code share one set of limits. See <a href="/help/claude-usage-limits">how Claude's limits work</a>.</p>
+<h2>In widgets</h2>
+<p>Widgets show each limit as its own row, because there's no room to nest them. If you've connected both ChatGPT and Codex CLI, you'll see two OpenAI rows. On the <strong>small widget</strong> you pick exactly one: open the widget's edit panel and choose <strong>ChatGPT</strong> or <strong>Codex CLI</strong>.</p>
+<div class="doc-callout">
+<p><strong>Upgrading from an earlier version?</strong> If your small widget was set to “OpenAI” or “Google AI,” it now shows <strong>Codex CLI</strong> or <strong>Gemini CLI</strong>, because that's what those entries were already tracking. To show the chat limit instead, pick it in the edit panel.</p>
+</div>
+""",
+    },
+    {
+        "slug": "are-numbers-exact",
+        "topic": "reading-numbers",
+        "title": "Are the numbers exact?",
+        "summary": "Usually. Most tools report your usage directly. When one doesn't, Tokenomics estimates and labels the reading “estimated”.",
+        "keywords": "accurate accuracy estimate estimated wrong correct precise numbers chatgpt label off",
+        "legacy": ["ext-exact"],
+        "body": """
+<p>Usually. Most tools report your usage and limits directly, and Tokenomics shows exactly what they report.</p>
+<p>Some don't publish a number to read. ChatGPT, for example, doesn't tell you how many messages you have left. For those, Tokenomics estimates: on ChatGPT it notes the time and model of each message you send (never what you wrote) and estimates from that.</p>
+<p>When a reading is an estimate, the popup shows an <strong>estimated</strong> label next to the plan, so you always know which kind you're looking at.</p>
+<p>If a number looks wrong, click refresh in the popup first. If it's still off, <a href="mailto:hello@trytokenomics.com">tell us</a> which tool and plan you're on.</p>
+""",
+    },
+    {
+        "slug": "midjourney-fast-hours",
+        "topic": "reading-numbers",
+        "title": "What are Midjourney's Fast Hours?",
+        "summary": "Fast Hours are the GPU time Midjourney gives your plan each month for Fast mode. Tokenomics shows how many you've used. Relax mode doesn't count.",
+        "keywords": "midjourney fast hour hours relax mode turbo gpu credits plan monthly basic standard pro mega",
+        "legacy": ["midjourney-fast-hours"],
+        "body": """
+<p>Midjourney measures paid usage in Fast Hours: GPU time spent generating in Fast mode. Each plan comes with a set number every month.</p>
+<p>The extension shows how many Fast Hours you've used of your plan's monthly total, refreshed from your Midjourney account. Relax mode doesn't use Fast Hours, so Relax jobs don't move the meter.</p>
+<p>If it shows no plan, your Midjourney account doesn't have an active subscription.</p>
+""",
+    },
+
+    # ── Privacy & permissions ────────────────────────────────────────
+    {
+        "slug": "privacy",
+        "topic": "privacy-permissions",
+        "title": "Is my data sent anywhere? Does Tokenomics see my chats?",
+        "summary": "No. Nothing goes to any server the author controls: no analytics, telemetry or tracking. The extension reads usage numbers, never your chats or prompts.",
+        "keywords": "privacy private tracking telemetry analytics safe secure security collect server data chat prompt conversation message history read sent send",
+        "legacy": ["data", "ext-data", "ext-chats"],
+        "common": "No. There's no analytics, telemetry or tracking, and nothing is sent to any server the author controls.",
+        "body": """
+<p>No. Tokenomics talks only to the AI services you use, to fetch your own usage, plus the Mac app on your own computer if you have it. Nothing goes to any server the author controls. There's no analytics, telemetry or tracking code in the app or the extension.</p>
+<h2>What it keeps</h2>
+<p>The Mac app saves only the usage numbers its widgets need, on your Mac. The extension saves your settings and latest numbers in your browser's extension storage, on your device.</p>
+<h2>Your chats and prompts</h2>
+<p>The extension reads usage numbers, not conversations, and it doesn't store your prompts or chats. On ChatGPT it notes the time and model of each message you send, to <a href="/help/are-numbers-exact">estimate usage</a> when exact numbers aren't available. It never keeps what you wrote.</p>
+<p>The full, itemized breakdown of what each part reads and connects to is on the <a href="/privacy">Privacy page</a>.</p>
+""",
+    },
+    {
+        "slug": "extension-permissions",
+        "topic": "privacy-permissions",
+        "title": "What can the browser extension access, and why?",
+        "summary": "Only the AI sites it works with, to read your own usage numbers. It doesn't ask for access to all websites. Here's what each permission is for.",
+        "keywords": "permission permissions host storage store token see websites reason native application messaging warning bridge cooperating communicate access",
+        "legacy": ["ext-access", "ext-why-sites", "ext-native"],
+        "body": """
+<h2>Which sites</h2>
+<p>Only the AI sites it works with: Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno and Udio. It doesn't ask for access to all websites, and it doesn't touch any others.</p>
+<h2>Why it needs them</h2>
+<p>Each site shows your usage in its own account pages, with no shared way to get it. To show it in the popup, the extension asks that site for your numbers, the same way the site's own pages do, using the sign-in you already have. That's the only reason it has access. Numbers refresh every few minutes.</p>
+<h2>What it stores</h2>
+<p>Your settings and latest numbers, in your browser's extension storage on your device. For ElevenLabs and Leonardo it also saves the access token the site gives your browser, or an API key you paste in its settings.</p>
+<h2>“Communicate with cooperating native applications”</h2>
+<p>Chrome shows this for the permission the extension uses to hand your usage numbers to the Tokenomics Mac app, if you have it installed. It stays on your computer, and your sign-in tokens are never sent over it. Without the Mac app, nothing happens.</p>
+""",
+    },
+    {
+        "slug": "affiliation",
+        "topic": "privacy-permissions",
+        "title": "Is Tokenomics affiliated with these AI services?",
+        "summary": "No. Tokenomics is independent and unofficial. It reads your own usage with your own sign-in.",
+        "keywords": "affiliated official unofficial endorsed partner terms allowed ban banned legal trademark",
+        "legacy": ["ext-allowed"],
+        "body": """
+<p>No. Tokenomics is independent and unofficial. It uses your own signed-in session to read your own usage, the same numbers the services show you on their own account pages.</p>
+<p>Each service has its own terms; please read them. Claude, ChatGPT, Gemini, Midjourney, ElevenLabs, Grok, Perplexity, Leonardo, Suno, Udio and related names are the property of their owners and are used here only to say which services Tokenomics works with.</p>
+""",
+    },
+]
+
+# Common-question cards on the hub, in order.
+COMMON = ["supported-tools", "privacy", "extension-without-mac-app"]
+
+# Answers elsewhere on the site, so hub searches don't dead-end.
+ELSEWHERE = [
+    {"title": "How do I install Tokenomics?", "href": "/#install", "where": "On the home page", "w": 1,
+     "text": "Download the Mac app from this site, or install it with Homebrew. The browser extension installs from the Chrome Web Store.",
+     "kw": "install installing download homebrew brew dmg get"},
+    {"title": "Connecting your AI tools to the Mac app", "href": "/setup", "where": "On the setup page",
+     "text": "Step-by-step setup for Claude Code, GitHub Copilot, Cursor, Codex CLI, Gemini CLI and API-key providers, with fixes for common problems.",
+     "kw": "setup install installing connect connecting troubleshoot troubleshooting fix broken steps guide"},
+    {"title": "Privacy policy", "href": "/privacy", "where": "On the privacy page",
+     "text": "Exactly what the Mac app, the browser extension and Tokenomics for Safari read, store and connect to.",
+     "kw": "privacy policy gdpr legal data stored storage"},
+    {"title": "Contact and support", "href": "#contact", "where": "",
+     "text": "Email hello@trytokenomics.com or open an issue on GitHub.",
+     "kw": "contact email support help bug report issue feedback question human"},
+]

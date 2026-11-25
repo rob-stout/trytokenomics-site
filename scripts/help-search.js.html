@@ -1,0 +1,383 @@
+<script>
+  // Help hub: on-page search across every help article, plus redirects for
+  // old /faq#question links. Runs in the browser only; nothing is stored.
+  (function () {
+    'use strict';
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DATA = JSON.parse(document.getElementById('help-index').textContent);
+
+    // Old FAQ links (/faq#ext-sites, now /help/#ext-sites) go to the article.
+    (function () {
+      var id = (location.hash || '').slice(1);
+      if (id && DATA.legacy[id]) location.replace('/help/' + DATA.legacy[id] + location.search);
+    })();
+
+    try { initSearch(); } catch (err) { if (window.console) console.error(err); }
+
+    function initSearch() {
+      var form      = document.getElementById('faq-search');
+      var input     = document.getElementById('faq-search-input');
+      var resultsEl = document.getElementById('faq-results');
+      var listEl    = document.getElementById('faq-result-list');
+      var statusEl  = document.getElementById('faq-status');
+      var emptyEl   = document.getElementById('faq-empty');
+      var commonEl  = document.getElementById('faq-common');
+      if (!form || !input) return;
+      form.hidden = false;
+
+      // Answers that live elsewhere on the site, so common searches don't dead-end.
+      var ELSEWHERE = DATA.elsewhere;
+      // Words people type → words the answers use. Any word in a set
+      // matches the others (at a slightly lower weight than the word itself).
+      var SYNONYMS = [
+        'privacy private data tracking track tracker telemetry analytics safe safety secure security spy spying collect collection personal sell sold selling gdpr',
+        'extension chrome browser edge chromium brave arc opera vivaldi addon plugin firefox',
+        'price pricing cost free pay paid money subscription charge purchase buy cheap refund trial',
+        'mac macos macbook osx menubar desktop sonoma imac',
+        'safari appstore apple',
+        'uninstall remove removal delete trash erase wipe',
+        'signin sign signing login logged password credential auth authenticate authentication oauth account token session',
+        'key apikey api',
+        'elevenlabs eleven xi',
+        'chatgpt gpt openai codex',
+        'claude anthropic opus sonnet',
+        'gemini google bard',
+        'copilot github gh',
+        'broken error missing blank empty nothing stuck issue problem bug fix troubleshoot zero',
+        'exact accurate accuracy inaccurate estimate estimated approximate precise correct wrong',
+        'limit quota cap window rolling',
+        'reset refresh renew',
+        'chat prompt conversation message history',
+        'permission access allowed allow scope host',
+        'native cooperating communicate messaging nmh',
+        'widget',
+        'sync connect connected talk link pair together both share',
+        'consent agree enable disable start stop pause',
+        'affiliated affiliation official unofficial endorsed partner terms ban banned',
+        // "support" on its own usually means "help", so it's left out here.
+        'supported compatible compatibility list provider service tool site website',
+        'two twice double duplicate second',
+        'opensource source license licence'
+      ];
+
+      // Multi-word things people type, folded to one search word first.
+      var PHRASES = [
+        ['how much', 'price'], ['how many', ''],
+        ['not working', 'broken'], ['doesnt work', 'broken'], ['dont work', 'broken'], ['isnt working', 'broken'],
+        ['wont work', 'broken'], ['stopped working', 'broken'], ['not showing', 'broken'], ['doesnt show', 'broken'],
+        ['not updating', 'broken'], ['cant see', 'broken'], ['shows nothing', 'broken'], ['showing nothing', 'broken'],
+        ['menu bar', 'menubar'], ['app store', 'appstore'], ['chat gpt', 'chatgpt'], ['open ai', 'openai'],
+        ['eleven labs', 'elevenlabs'], ['11 labs', 'elevenlabs'], ['11labs', 'elevenlabs'],
+        ['sign in', 'signin'], ['signed in', 'signin'], ['log in', 'signin'], ['logged in', 'signin'],
+        ['open source', 'opensource'], ['source code', 'opensource'],
+        ['turn off', 'disable'], ['switch off', 'disable'], ['turn it off', 'disable'], ['switch it off', 'disable'],
+        ['turn on', 'enable'], ['turn it on', 'enable'], ['phone home', 'telemetry'],
+        ['work with', 'supported'], ['works with', 'supported'], ['work on', 'supported'], ['works on', 'supported'],
+        ['work in', 'supported'], ['works in', 'supported'], ['compatible with', 'supported'], ['support for', 'supported'],
+        ['5h', '5 hour'], ['5hr', '5 hour'], ['five hour', '5 hour'], ['7d', '7 day'], ['seven day', '7 day'],
+        ['rate limit', 'limit'], ['rate limited', 'limit'], ['get rid of', 'remove']
+      ];
+
+      var STOP = {};
+      ('a an the is are was were be been it its im i me my mine we us our you your do does did doing how what why ' +
+       'when where which who can could should would will may might must to of in on at for with and or but if so ' +
+       'than then about from as by into this that these those there here any all some not no yes get got use using ' +
+       'used work works working app apps tokenomics ai please just still also only have has had need needs usage ' +
+       'want show shows being been').split(' ').forEach(function (w) { STOP[w] = true; });
+
+      function norm(s) {
+        return String(s).toLowerCase()
+          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/['‘’]/g, '')
+          .replace(/[^a-z0-9]+/g, ' ')
+          .trim();
+      }
+      // Light stemming: plural "s" only, applied the same way to answers and queries.
+      function stem(w) { return (w.length > 3 && /s$/.test(w) && !/ss$/.test(w)) ? w.slice(0, -1) : w; }
+      function words(s) {
+        var seen = {}, out = [];
+        norm(s).split(' ').forEach(function (w) {
+          if (!w) return;
+          w = stem(w);
+          if (!seen[w]) { seen[w] = true; out.push(w); }
+        });
+        return out;
+      }
+
+      var SYN = {};
+      SYNONYMS.forEach(function (line) {
+        var set = words(line);
+        set.forEach(function (w) {
+          SYN[w] = SYN[w] || {};
+          set.forEach(function (o) { if (o !== w) SYN[w][o] = true; });
+        });
+      });
+
+      function makeEntry(e, order) {
+        return {
+          title: e.title, text: e.text, href: e.href, where: e.where || '', order: order,
+          w: order >= 100 ? (e.w || 0.8) : 1,
+          t: words(e.title), k: words(e.kw || ''), b: words(e.text)
+        };
+      }
+      var entries = DATA.articles.map(function (e, i) { return makeEntry(e, i); })
+        .concat(ELSEWHERE.map(function (e, j) { return makeEntry(e, 100 + j); }));
+
+      var VOCAB = {};
+      entries.forEach(function (e) {
+        e.t.concat(e.k, e.b).forEach(function (w) { VOCAB[w] = true; });
+      });
+      Object.keys(SYN).forEach(function (w) { VOCAB[w] = true; });
+      var VOCAB_LIST = Object.keys(VOCAB);
+
+      // Optimal string alignment distance (Levenshtein + adjacent swaps),
+      // so "chatgtp" and "privcy" still find their words.
+      function distance(a, b, max) {
+        if (Math.abs(a.length - b.length) > max) return max + 1;
+        var d = [], i, j;
+        for (i = 0; i <= a.length; i++) { d[i] = [i]; }
+        for (j = 0; j <= b.length; j++) { d[0][j] = j; }
+        for (i = 1; i <= a.length; i++) {
+          for (j = 1; j <= b.length; j++) {
+            var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+            d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+            if (i > 1 && j > 1 && a.charAt(i - 1) === b.charAt(j - 2) && a.charAt(i - 2) === b.charAt(j - 1)) {
+              d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+            }
+          }
+        }
+        return d[a.length][b.length];
+      }
+      function known(t) {
+        if (VOCAB[t]) return true;
+        if (t.length < 3) return false;
+        for (var i = 0; i < VOCAB_LIST.length; i++) if (VOCAB_LIST[i].indexOf(t) === 0) return true;
+        return false;
+      }
+      // Only words of 5+ letters get corrected: shorter ones ("sold",
+      // "edge") are too easy to "fix" into a different real word.
+      function correct(t) {
+        if (t.length < 5 || known(t)) return t;
+        var max = t.length >= 7 ? 2 : 1, best = null, bestD = max + 1;
+        VOCAB_LIST.forEach(function (w) {
+          var dd = distance(t, w, max);
+          if (dd < bestD) { bestD = dd; best = w; }
+        });
+        return best || t;
+      }
+
+      function queryTokens(q) {
+        var s = ' ' + norm(q) + ' ';
+        PHRASES.forEach(function (p) {
+          s = s.split(' ' + p[0] + ' ').join(' ' + (p[1] ? p[1] + ' ' : ''));
+        });
+        var raw = s.split(' ').filter(Boolean);
+        var kept = raw.filter(function (w) { return !STOP[w]; });
+        if (!kept.length) kept = raw;           // "how does it work" still searches something
+        var seen = {}, out = [];
+        kept.forEach(function (w) {
+          w = correct(stem(w));
+          if (!seen[w]) { seen[w] = true; out.push(w); }
+        });
+        return out;
+      }
+
+      // 1 = whole word, 0.8 = start of a word ("elevenlab" → "elevenlabs").
+      function hit(x, list) {
+        if (list.indexOf(x) !== -1) return 1;
+        if (x.length >= 3) {
+          for (var i = 0; i < list.length; i++) if (list[i].indexOf(x) === 0) return 0.8;
+        }
+        return 0;
+      }
+
+      // Ranking: a question title outweighs hidden keywords, which outweigh
+      // answer text. The word you typed beats its synonyms. Each query word
+      // scores its best field, plus a little for matching in more than one
+      // place. Answers covering more of the query win; answers elsewhere on
+      // the site carry a lower weight so this page wins close calls.
+      var W = [10, 8, 3];   // title, keywords, body
+      var SYN_WEIGHT = 0.6;
+      function rank(q) {
+        var tokens = queryTokens(q);
+        if (!tokens.length) return [];
+        var groups = tokens.map(function (t) {
+          var alts = [{ x: t, w: 1 }];
+          Object.keys(SYN[t] || {}).forEach(function (s) { alts.push({ x: s, w: SYN_WEIGHT }); });
+          return alts;
+        });
+        var scored = [];
+        entries.forEach(function (e) {
+          var total = 0, matched = 0, terms = {};
+          groups.forEach(function (alts) {
+            var best = [0, 0, 0];
+            alts.forEach(function (alt) {
+              [e.t, e.k, e.b].forEach(function (field, f) {
+                var m = hit(alt.x, field);
+                if (!m) return;
+                var s = W[f] * m * alt.w;
+                if (s > best[f]) best[f] = s;
+                if (f !== 1) terms[alt.x] = true; // keywords aren't visible, so don't highlight them
+              });
+            });
+            var top = Math.max(best[0], best[1], best[2]);
+            if (top > 0) {
+              matched++;
+              total += top + 0.2 * (best[0] + best[1] + best[2] - top);
+            }
+          });
+          if (!matched) return;
+          var score = total * (0.4 + 0.6 * matched / groups.length) * e.w;
+          scored.push({ e: e, score: score, terms: Object.keys(terms) });
+        });
+        scored.sort(function (a, b) { return b.score - a.score || a.e.order - b.e.order; });
+        var floor = scored.length ? scored[0].score * 0.3 : 0;
+        return scored.filter(function (r) { return r.score >= floor; }).slice(0, 8);
+      }
+
+      // Build text with <mark>s using text nodes only (no HTML from the query).
+      function appendMarked(el, text, terms) {
+        if (!terms.length) { el.appendChild(document.createTextNode(text)); return; }
+        var pattern = new RegExp('\\b(?:' + terms.slice().sort(function (a, b) { return b.length - a.length; }).join('|') + ')[a-z0-9]*', 'gi');
+        var last = 0, m;
+        while ((m = pattern.exec(text))) {
+          if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index)));
+          var mark = document.createElement('mark');
+          mark.textContent = m[0];
+          el.appendChild(mark);
+          last = m.index + m[0].length;
+          if (!m[0].length) pattern.lastIndex++;
+        }
+        if (last < text.length) el.appendChild(document.createTextNode(text.slice(last)));
+      }
+      function snippet(text, terms) {
+        var LEN = 170, idx = -1;
+        terms.forEach(function (t) {
+          var m = new RegExp('\\b' + t, 'i').exec(text);
+          if (m && (idx === -1 || m.index < idx)) idx = m.index;
+        });
+        if (idx < 0 || idx < 60) {
+          return text.length > LEN ? text.slice(0, text.lastIndexOf(' ', LEN)) + '…' : text;
+        }
+        var start = text.lastIndexOf(' ', idx - 50) + 1;
+        var end = start + LEN;
+        var out = text.slice(start, end < text.length ? text.lastIndexOf(' ', end) : text.length);
+        return '…' + out + (end < text.length ? '…' : '');
+      }
+
+      function render(results) {
+        listEl.textContent = '';
+        results.forEach(function (r) {
+          var li = document.createElement('li');
+          li.className = 'faq-result';
+          var a = document.createElement('a');
+          a.className = 'faq-result-link';
+          a.href = r.e.href;
+          appendMarked(a, r.e.title, r.terms);
+          li.appendChild(a);
+          var p = document.createElement('p');
+          appendMarked(p, snippet(r.e.text, r.terms), r.terms);
+          li.appendChild(p);
+          if (r.e.where) {
+            var w = document.createElement('p');
+            w.className = 'faq-result-where';
+            w.textContent = r.e.where;
+            li.appendChild(w);
+          }
+          listEl.appendChild(li);
+        });
+      }
+
+      var statusTimer, urlTimer;
+      function setStatus(text, now) {
+        clearTimeout(statusTimer);
+        // Short delay so screen readers hear the count once typing pauses,
+        // not on every keystroke.
+        if (now) statusEl.textContent = text;
+        else statusTimer = setTimeout(function () { statusEl.textContent = text; }, 350);
+      }
+      function syncUrl(q) {
+        clearTimeout(urlTimer);
+        urlTimer = setTimeout(function () {
+          try {
+            history.replaceState(history.state, '',
+              location.pathname + (q ? '?q=' + encodeURIComponent(q) : '') + location.hash);
+          } catch (e) { /* file:// or sandboxed: skip */ }
+        }, 400);
+      }
+
+      function run(value, now) {
+        var q = value.trim();
+        if (!q) {
+          resultsEl.hidden = true;
+          emptyEl.hidden = true;
+          commonEl.hidden = false;
+          listEl.textContent = '';
+          setStatus('', true);
+          return;
+        }
+        var results = rank(q);
+        if (results.length) {
+          render(results);
+          resultsEl.hidden = false;
+          emptyEl.hidden = true;
+          commonEl.hidden = true;
+          setStatus(results.length + (results.length === 1 ? ' answer' : ' answers') + ' for “' + q + '”', now);
+        } else {
+          listEl.textContent = '';
+          resultsEl.hidden = true;
+          emptyEl.hidden = false;
+          commonEl.hidden = false;
+          setStatus('No answers for “' + q + '”', now);
+        }
+      }
+
+      function go(link) { window.location.href = link.href; }
+
+      input.addEventListener('input', function () { run(input.value); syncUrl(input.value.trim()); });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        run(input.value, true);
+        var first = resultsEl.hidden ? null : listEl.querySelector('.faq-result-link');
+        if (first) go(first);
+      });
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown') {
+          var first = resultsEl.hidden ? null : listEl.querySelector('.faq-result-link');
+          if (first) { e.preventDefault(); first.focus(); }
+        } else if (e.key === 'Escape' && input.value) {
+          e.preventDefault();
+          input.value = '';
+          run('');
+          syncUrl('');
+        }
+      });
+      listEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { e.preventDefault(); input.focus(); return; }
+        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+        var links = Array.prototype.slice.call(listEl.querySelectorAll('.faq-result-link'));
+        var i = links.indexOf(document.activeElement);
+        if (i < 0) return;
+        e.preventDefault();
+        if (e.key === 'ArrowDown') (links[i + 1] || links[i]).focus();
+        else (i === 0 ? input : links[i - 1]).focus();
+      });
+
+      // "/" or Cmd/Ctrl-K jumps to search, unless you're already typing somewhere.
+      document.addEventListener('keydown', function (e) {
+        var t = e.target, tag = t && t.tagName;
+        var typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable);
+        var slash = e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey && !typing;
+        var cmdK = (e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (e.key === 'k' || e.key === 'K');
+        if (!slash && !cmdK) return;
+        e.preventDefault();
+        input.focus();
+        input.select();
+      });
+
+      // Restore a search from the URL (?q=…), e.g. a link from support email.
+      var initialQ = '';
+      try { initialQ = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
+      if (initialQ) { input.value = initialQ; run(initialQ, true); }
+    }
+  })();

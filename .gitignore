@@ -7,3 +7,4 @@ node_modules/
 
 # Local working notes / planning docs — not for the public repo
 docs/
+__pycache__/

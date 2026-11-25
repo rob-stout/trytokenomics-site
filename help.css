@@ -1,0 +1,461 @@
+.doc-hero {
+  padding: var(--s-9) 0 var(--s-7);
+  border-bottom: 1px solid var(--border);
+}
+.doc-hero h1 em { font-style: italic; color: var(--accent); }
+
+.doc-backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: var(--s-3);
+  transition: color var(--dur-fast) var(--ease);
+}
+.doc-backlink:hover { color: var(--accent); }
+.doc-backlink svg { width: 14px; height: 14px; }
+
+/* ── Small uppercase label (same recipe as .feature-kicker) ─────────
+   Used for "Common questions" and "All questions" so the two zones
+   of the page read as a pair: find above, browse below. */
+.faq-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* --text-muted, not --text-subtle: subtle is ~3.9:1 in dark mode,
+     too faint for a label that names a whole zone of the page. */
+  color: var(--text-muted);
+  margin: 0 0 var(--s-3);
+}
+
+/* ── Find zone: search + common questions ───────────────────────── */
+.faq-find { margin-top: var(--s-6); }
+
+.faq-search { position: relative; max-width: 1040px; margin: 0; }
+.faq-search-icon {
+  position: absolute;
+  left: 16px; top: 50%;
+  width: 18px; height: 18px;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.faq-search-input {
+  display: block;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);   /* 16px also stops iOS zooming on focus */
+  line-height: 1.5;
+  padding: 12px 48px 12px 46px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.faq-search-input::placeholder { color: var(--text-muted); opacity: 1; }
+.faq-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  /* 1px accent + 1px border = a 2px visible edge, plus the system ring */
+  box-shadow: 0 0 0 1px var(--accent), var(--shadow-ring);
+}
+@media (hover: none), (pointer: coarse) {
+  .faq-search-kbd { display: none; }
+}
+
+/* Result count. Always rendered (a live region must exist before it
+   changes to be announced reliably); collapses to nothing when empty. */
+.faq-status {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  margin: var(--s-4) 0 0;
+  max-width: 1040px;
+  overflow-wrap: anywhere;
+}
+.faq-status:empty { margin: 0; }
+
+.faq-results { max-width: 1040px; margin-top: var(--s-3); }
+.faq-result-list { list-style: none; margin: 0; padding: 0; }
+.faq-result {
+  position: relative;
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+.faq-result:first-child { border-top: 1px solid var(--border); }
+.faq-result-link {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-lg);
+  line-height: 1.35;
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+/* Whole row is clickable; the link text alone is what gets announced. */
+.faq-result-link::after { content: ""; position: absolute; inset: 0; }
+.faq-result:hover .faq-result-link { color: var(--accent); }
+.faq-result-link:focus-visible { outline: none; }
+.faq-result:has(.faq-result-link:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+@supports not selector(:has(*)) {
+  .faq-result-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+}
+.faq-result p {
+  margin: var(--s-1) 0 0;
+  max-width: none;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.faq-result .faq-result-where { font-size: var(--fs-micro); color: var(--text-muted); }
+.faq-find mark {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+.faq-empty { max-width: 640px; margin-top: var(--s-2); }
+.faq-empty p { font-size: var(--fs-small); margin: 0 0 var(--s-2); }
+
+.faq-common { margin-top: var(--s-6); }
+/* "What this page covers": three topics across the same span as the cards. */
+.faq-topics {
+  list-style: none;
+  margin: var(--s-5) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-6);
+  max-width: 1040px;
+}
+/* One left edge: rule, number and description all start at the same x;
+   the number sits inline with the title. */
+.faq-topics a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: var(--s-2);
+  row-gap: 4px;
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--border-strong);
+  color: inherit;
+  text-decoration: none;
+}
+/* Same type as the title; only the colour sets the number apart. */
+.faq-topic-num { font-weight: 600; color: var(--accent); }
+.faq-topic-title { font-weight: 600; color: var(--text); }
+.faq-topic-desc { grid-column: 1 / -1; font-size: var(--fs-small); line-height: 1.5; color: var(--text-muted); }
+.faq-topics a:hover .faq-topic-title,
+.faq-topics a:focus-visible .faq-topic-title { color: var(--accent); }
+@media (max-width: 860px) {
+  .faq-topics { grid-template-columns: 1fr; gap: var(--s-3); }
+}
+
+.faq-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-4);
+  max-width: 1040px;
+}
+@media (max-width: 860px) {
+  .faq-cards { grid-template-columns: 1fr; }
+}
+.faq-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--s-5);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--dur) var(--ease);
+}
+.faq-card:hover { box-shadow: var(--shadow-md); }
+.faq-card h3 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h4);
+  line-height: 1.2;
+  margin: 0 0 var(--s-2);
+}
+.faq-card h3 a { color: var(--text); text-decoration: none; transition: color var(--dur-fast) var(--ease); }
+.faq-card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.faq-card:hover h3 a { color: var(--accent); }
+.faq-card h3 a:focus-visible { outline: none; }
+.faq-card:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+@supports not selector(:has(*)) {
+  .faq-card h3 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+}
+.faq-card p {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 var(--s-4);
+  max-width: none;
+}
+.faq-card-more {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--accent);
+}
+.faq-card-more svg { width: 14px; height: 14px; }
+
+/* ── Browse zone: grouped, collapsible answers ──────────────────── */
+.doc-body { padding: var(--s-7) 0 var(--s-9); }
+/* Same span as the cards; answer text keeps its own 64ch reading width. */
+.doc-body .section-wrap > * { max-width: 1040px; }
+.faq-browse-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-5);
+}
+.faq-browse-head .faq-label { margin: 0; scroll-margin-top: 96px; }
+.faq-expand { margin-right: -14px; } /* optically align the label with the chevrons */
+.faq-expand[hidden] { display: none; }
+
+.doc-body .faq-group {
+  font-size: var(--fs-h3);
+  margin-top: var(--s-7);
+  margin-bottom: var(--s-3);
+  scroll-margin-top: 96px;
+}
+.doc-body .faq-group:first-of-type { margin-top: 0; }
+.doc-body .faq-list { margin-top: 0; }
+
+.doc-body .faq-q {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-lg);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.35;
+  margin: 0;
+  padding: var(--s-4) 0 var(--s-3);
+  color: var(--text);
+  scroll-margin-top: 96px; /* clear the sticky nav on anchor jumps */
+}
+.doc-body.is-enhanced .faq-q { padding: 0; }
+.faq-q-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  width: 100%;
+  margin: 0;
+  padding: var(--s-4) 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease);
+}
+.faq-q-btn:hover { color: var(--accent); }
+.faq-q-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+.faq-item.is-open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
+
+/* Before the script enhances the list, keep answers collapsed so the page
+   doesn't paint every answer and then snap shut. Only applies with JS. */
+.js .doc-body:not(.is-enhanced) .faq-a { display: none; }
+.faq-a > :first-child { margin-top: 0; }
+.faq-a > :last-child { margin-bottom: var(--s-5); }
+
+.doc-body p {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 64ch;
+}
+.doc-body p + p { margin-top: var(--s-3); }
+.doc-body ol, .doc-body ul {
+  max-width: 64ch;
+  margin: var(--s-3) 0;
+  padding-left: 1.4em;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.doc-body li + li { margin-top: var(--s-2); }
+.doc-body ol + p, .doc-body ul + p { margin-top: var(--s-3); }
+.doc-body strong { color: var(--text); font-weight: 600; }
+.doc-body a { color: var(--accent); }
+.doc-body code {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-2);
+  color: var(--text);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  border: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+
+/* Plan → Fast Hours style table (kept for future provider-unit entries) */
+.doc-table-wrap {
+  overflow-x: auto;
+  margin: var(--s-4) 0 var(--s-5);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  max-width: 600px;
+}
+.doc-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+.doc-table thead th {
+  background: var(--surface-2);
+  text-align: left;
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.02em;
+}
+.doc-table td {
+  padding: 12px 16px;
+  vertical-align: top;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+.doc-table tr:last-child td { border-bottom: none; }
+.doc-table td:first-child { color: var(--text); font-weight: 500; }
+
+/* Migration / note callout */
+.doc-callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-5);
+  margin: var(--s-4) 0 var(--s-5);
+  max-width: 640px;
+}
+.doc-callout p { font-size: var(--fs-small); margin: 0; max-width: none; line-height: 1.6; color: var(--text-muted); }
+
+.doc-body hr { border: none; border-top: 1px solid var(--border); margin: var(--s-7) 0; }
+
+/* Still-stuck footer prompt */
+.faq-contact {
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 96px;
+}
+.faq-contact p { max-width: 60ch; }
+
+/* ── Phone width ─────────────────────────────────────────────────
+   The shared .section-wrap gutter is 48px, which leaves ~280px of
+   text on a 375px phone. Tighten to 16px here (nav + footer too, so
+   the left edges still line up). Candidate to promote site-wide. */
+@media (max-width: 540px) {
+  .section-wrap,
+  .footer-inner { padding-left: var(--s-4); padding-right: var(--s-4); }
+  .nav { padding-left: var(--s-4); padding-right: var(--s-4); }
+  .doc-hero { padding-top: var(--s-7); padding-bottom: var(--s-6); }
+  .faq-find { margin-top: var(--s-5); }
+  .faq-card { padding: var(--s-4) var(--s-5); }
+}
+
+/* Printing (or "Save as PDF") should include every answer. */
+@media print {
+  .faq-a[hidden] { display: block !important; content-visibility: visible !important; }
+  .faq-search, .faq-expand, .faq-chevron, .faq-common { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-chevron,
+  .faq-q-btn,
+  .faq-card,
+  .faq-card h3 a,
+  .faq-result-link,
+  .faq-search-input { transition: none !important; }
+}
+
+/* ── Hub: browse list (each question links to its own page) ───────── */
+.help-list { list-style: none; margin: 0; padding: 0; }
+.help-item {
+  position: relative;
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+.help-item:first-child { border-top: 1px solid var(--border); }
+.help-item-link {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-lg);
+  line-height: 1.35;
+  color: var(--text) !important;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.help-item-link::after { content: ""; position: absolute; inset: 0; }
+.help-item:hover .help-item-link { color: var(--accent) !important; }
+.help-item-link:focus-visible { outline: none; }
+.help-item:has(.help-item-link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--r-xs); }
+.doc-body .help-item p { margin: var(--s-1) 0 0; font-size: var(--fs-small); line-height: 1.55; max-width: 72ch; }
+.faq-card-more svg { width: 14px; height: 14px; }
+
+/* ── Article pages ─────────────────────────────────────────────────── */
+.help-article { padding: var(--s-7) 0 var(--s-9); }
+.help-article .section-wrap > * { max-width: 760px; }
+.help-article-top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-4); flex-wrap: wrap;
+  margin-bottom: var(--s-6);
+}
+.help-crumbs { display: flex; align-items: center; gap: var(--s-2); font-size: var(--fs-small); color: var(--text-subtle); }
+.help-crumbs a { color: var(--text-muted); text-decoration: none; }
+.help-crumbs a:hover { color: var(--accent); text-decoration: underline; }
+.help-mini-search { position: relative; width: min(280px, 100%); }
+.help-mini-search .faq-search-input { padding: 8px 12px 8px 40px; font-size: var(--fs-small); }
+.help-mini-search .faq-search-icon { left: 14px; width: 16px; height: 16px; }
+.help-title { font-size: var(--fs-h2); line-height: 1.15; margin: 0 0 var(--s-4); }
+.help-summary { font-size: var(--fs-body-lg); line-height: 1.55; color: var(--text-muted); margin: 0 0 var(--s-6); max-width: 60ch; }
+.help-body { padding: var(--s-6) 0 0; border-top: 1px solid var(--border); }
+.help-body h2 { font-size: var(--fs-h4); margin: var(--s-6) 0 var(--s-2); }
+.help-body > :first-child { margin-top: 0; }
+.doc-table-wrap--wide { max-width: none; }
+.help-related { margin-top: var(--s-8); }
+.help-related ul { list-style: none; margin: 0; padding: 0; }
+.help-related li { border-top: 1px solid var(--border); }
+.help-related li:last-child { border-bottom: 1px solid var(--border); }
+.help-related a {
+  display: block; padding: var(--s-3) 0;
+  font-family: var(--font-serif); font-size: var(--fs-body-lg);
+  color: var(--text); text-decoration: none;
+}
+.help-related a:hover { color: var(--accent); }
+@media (max-width: 540px) {
+  .help-article { padding-top: var(--s-5); }
+  .help-mini-search { width: 100%; }
+}
+.doc-body ul.help-list { padding-left: 0; margin: 0; max-width: none; }
+.doc-body .help-list li + li { margin-top: 0; }
