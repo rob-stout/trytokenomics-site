@@ -277,16 +277,21 @@
     // Install arrow: the squiggle draws in, the arrowhead lands, then the
     // "Drag to Install…" caption and the macOS line fade in.
     var flow = document.querySelector('.install-flow');
-    var drawLine = flow && flow.querySelector('.arrow-draw-line');
-    if (drawLine) {
-      var len = drawLine.getTotalLength();
-      var arrowHead = flow.querySelector('.arrow-head');
+    var stroke = flow && flow.querySelector('.arrow-stroke');
+    if (stroke) {
+      var len = stroke.getTotalLength();
+      var art = flow.querySelector('.arrow-line'), arrowHead = flow.querySelector('.arrow-head');
       var after = [document.querySelector('.install-flow-caption'), document.getElementById('install-support-line')].filter(Boolean);
-      drawLine.style.strokeDasharray = len;
+      stroke.style.strokeDasharray = len;
       arrowHead.style.transformBox = 'fill-box';
       arrowHead.style.transformOrigin = '80% 50%';
       addScrubber(flow, function (p) {
-        drawLine.style.strokeDashoffset = (len * (1 - seg(p, 0, 0.68, scrollEase))).toFixed(1);
+        stroke.style.strokeDashoffset = (len * (1 - seg(p, 0, 0.68, scrollEase))).toFixed(1);
+        // The drawn stroke hands over to the hand-drawn artwork as the arrowhead lands.
+        var swap = seg(p, 0.66, 0.76, appEase);
+        // Artwork (on top) fades in over the solid stroke; the stroke drops once it's covered.
+        stroke.setAttribute('opacity', swap < 1 ? 1 : 0);
+        art.style.opacity = swap;
         var h = seg(p, 0.66, 0.8, appEase);
         arrowHead.style.opacity = h;
         arrowHead.style.transform = 'scale(' + (0.6 + 0.4 * h).toFixed(3) + ')';
