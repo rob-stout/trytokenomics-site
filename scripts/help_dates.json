@@ -1,0 +1,186 @@
+{
+  "add-hide-reorder": {
+    "date": "2026-11-25",
+    "hash": "d28aa84c81f3c497"
+  },
+  "affiliation": {
+    "date": "2026-11-25",
+    "hash": "5d8152ce0753ec24"
+  },
+  "are-numbers-exact": {
+    "date": "2026-11-25",
+    "hash": "be2159b35b80f976"
+  },
+  "browsers": {
+    "date": "2026-11-25",
+    "hash": "41d82a755e4191b8"
+  },
+  "chatgpt-plan": {
+    "date": "2026-11-25",
+    "hash": "a1f16190b78ad1ea"
+  },
+  "check-claude-usage": {
+    "date": "2026-11-25",
+    "hash": "ee86082a6b636e96"
+  },
+  "check-copilot-usage": {
+    "date": "2026-11-25",
+    "hash": "702804ffd0797de3"
+  },
+  "claude-usage-limits": {
+    "date": "2026-11-25",
+    "hash": "d32caf90d3e38ca0"
+  },
+  "codex-numbers": {
+    "date": "2026-11-25",
+    "hash": "0f213cb4f9285c5c"
+  },
+  "copilot-meters": {
+    "date": "2026-11-25",
+    "hash": "79064670f386fed9"
+  },
+  "elevenlabs-setup": {
+    "date": "2026-11-25",
+    "hash": "a00af33c05fe6990"
+  },
+  "extension-consent": {
+    "date": "2026-11-25",
+    "hash": "43b3e3e5f00e0065"
+  },
+  "extension-permissions": {
+    "date": "2026-11-25",
+    "hash": "8834760d704ee868"
+  },
+  "extension-without-mac-app": {
+    "date": "2026-11-25",
+    "hash": "adde2e2ad7fa87c1"
+  },
+  "extra-usage-and-credits": {
+    "date": "2026-11-25",
+    "hash": "d74506dbd0807358"
+  },
+  "gemini-cli-numbers": {
+    "date": "2026-11-25",
+    "hash": "2d8f6bc5c8698d6c"
+  },
+  "group-by-company": {
+    "date": "2026-11-25",
+    "hash": "be662e0424973cfe"
+  },
+  "is-it-free": {
+    "date": "2026-11-25",
+    "hash": "952b913accc588ed"
+  },
+  "keychain-prompt": {
+    "date": "2026-11-25",
+    "hash": "9e1ab334cc5d09b7"
+  },
+  "launch-at-login": {
+    "date": "2026-11-25",
+    "hash": "d89fdcd80334eb32"
+  },
+  "leonardo-setup": {
+    "date": "2026-11-25",
+    "hash": "dfcdef050cac485f"
+  },
+  "mac-app-and-extension": {
+    "date": "2026-11-25",
+    "hash": "26b62509bb6f6942"
+  },
+  "menu-bar": {
+    "date": "2026-11-25",
+    "hash": "9a6329a1bba42ef7"
+  },
+  "menu-bar-not-updating": {
+    "date": "2026-11-25",
+    "hash": "9725270d86518959"
+  },
+  "midjourney-fast-hours": {
+    "date": "2026-11-25",
+    "hash": "ce3f4d4ba7482a13"
+  },
+  "pace-dot": {
+    "date": "2026-11-25",
+    "hash": "08bc62b6bae79f94"
+  },
+  "privacy": {
+    "date": "2026-11-25",
+    "hash": "3e20b26fdd916938"
+  },
+  "rate-limited": {
+    "date": "2026-11-25",
+    "hash": "fb168c2246c07101"
+  },
+  "renewal-dates": {
+    "date": "2026-11-25",
+    "hash": "36a24f894910872e"
+  },
+  "report-a-problem": {
+    "date": "2026-11-25",
+    "hash": "01f66040b33c2b8e"
+  },
+  "safari": {
+    "date": "2026-11-25",
+    "hash": "4e90a13f67fee26b"
+  },
+  "setup-errors": {
+    "date": "2026-11-25",
+    "hash": "b0151ad564aead3a"
+  },
+  "shortcuts-and-settings": {
+    "date": "2026-11-25",
+    "hash": "5869015085e8f820"
+  },
+  "sign-in-expired": {
+    "date": "2026-11-25",
+    "hash": "4bb495a4b66fd7be"
+  },
+  "signing-in": {
+    "date": "2026-11-25",
+    "hash": "200592be833b2373"
+  },
+  "supported-tools": {
+    "date": "2026-11-25",
+    "hash": "ed5366ed33a3352b"
+  },
+  "toolbar-icon": {
+    "date": "2026-11-25",
+    "hash": "44fbfaa6365a8611"
+  },
+  "troubleshooting": {
+    "date": "2026-11-25",
+    "hash": "23470e78d1fa94e6"
+  },
+  "two-meters": {
+    "date": "2026-11-25",
+    "hash": "168626c17a06d44c"
+  },
+  "uninstall": {
+    "date": "2026-11-25",
+    "hash": "1cf0c2419061f894"
+  },
+  "updates": {
+    "date": "2026-11-25",
+    "hash": "36f8b7641d58d84f"
+  },
+  "usage-alerts": {
+    "date": "2026-11-25",
+    "hash": "1f797b4cc5d18e1f"
+  },
+  "what-setup-installs": {
+    "date": "2026-11-25",
+    "hash": "b0a91c7dc5652ae0"
+  },
+  "widget-not-updating": {
+    "date": "2026-11-25",
+    "hash": "fda8d6c58e31ddb5"
+  },
+  "widgets": {
+    "date": "2026-11-25",
+    "hash": "b7144c9eee3e4f8f"
+  },
+  "windows-and-linux": {
+    "date": "2026-11-25",
+    "hash": "79d0793eef522230"
+  }
+}

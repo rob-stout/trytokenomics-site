@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Why do ChatGPT and Gemini show two meters? | Tokenomics Help</title>
+  <title>ChatGPT and Gemini Usage Limits: Why There Are Two Meters</title>
   <meta name="description" content="ChatGPT and Codex CLI share an OpenAI login but have separate limits, and so do the Gemini app and Gemini CLI. Tokenomics shows each limit on its own." />
-  <meta property="og:title" content="Why do ChatGPT and Gemini show two meters? | Tokenomics Help" />
+  <meta property="og:title" content="ChatGPT and Gemini Usage Limits: Why There Are Two Meters" />
   <meta property="og:description" content="ChatGPT and Codex CLI share an OpenAI login but have separate limits, and so do the Gemini app and Gemini CLI. Tokenomics shows each limit on its own." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/two-meters" />
@@ -43,14 +43,22 @@
         "name": "Rob Stout"
       },
       "publisher": {
+        "@id": "https://trytokenomics.com/#org",
         "@type": "Organization",
         "name": "Acorn Designs, LLC"
       },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Tokenomics",
-        "operatingSystem": "macOS, Chrome"
-      }
+      "about": [
+        {
+          "@id": "https://trytokenomics.com/#app",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics"
+        },
+        {
+          "@id": "https://trytokenomics.com/#extension",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics browser extension"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",

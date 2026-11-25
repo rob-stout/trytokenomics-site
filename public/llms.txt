@@ -1,0 +1,29 @@
+# Tokenomics
+
+> Tokenomics shows how much of your AI usage limits you've used, at a glance. A free macOS menu bar app and desktop widgets track Claude Code, Codex CLI, Gemini CLI, GitHub Copilot, Cursor, Stability AI and Runway; a free Chrome extension tracks ChatGPT, Claude, Gemini, Midjourney, Leonardo, ElevenLabs, Suno, Udio, Grok and Perplexity. A pace dot shows whether you're on track to run out before a limit resets.
+
+Key facts:
+
+- Price: free. No account, subscription or paid tier.
+- Mac app: macOS 14 Sonoma or later. Download at https://trytokenomics.com/download/dmg/latest or install with `brew install rob-stout/tap/tokenomics`. Updates itself.
+- Browser extension: Chrome Web Store (also installs in Brave, Arc, Vivaldi and Opera). Works on Mac, Windows and Linux, with or without the Mac app. Edge and Safari versions are coming.
+- Sign-in: the Mac app reads the sign-ins your coding tools already keep on your Mac (Claude Code's in the macOS Keychain, the `gh` CLI for Copilot, local config files for Cursor, Codex CLI and Gemini CLI). Stability AI and Runway take an API key. The extension reads the sites you're already signed in to.
+- Privacy: no analytics or telemetry in the app or extension. Usage is read from each AI service and shown on your device; chats are not read.
+- Made by Rob Stout (Acorn Designs, LLC). Not affiliated with Anthropic, OpenAI, Google, GitHub or the other services it reads.
+
+## Docs
+
+- [Help center](https://trytokenomics.com/help/): every question, searchable
+- [Supported AI tools](https://trytokenomics.com/help/supported-tools): what each tool shows and how it connects
+- [Claude's 5-hour and weekly limits](https://trytokenomics.com/help/claude-usage-limits)
+- [How to check your Claude usage](https://trytokenomics.com/help/check-claude-usage)
+- [How to check GitHub Copilot premium requests](https://trytokenomics.com/help/check-copilot-usage)
+- [What the pace dot means](https://trytokenomics.com/help/pace-dot)
+- [How the Mac app and extension work together](https://trytokenomics.com/help/mac-app-and-extension)
+- [Setup guide](https://trytokenomics.com/setup): connecting each tool, and fixes for each error message
+- [Privacy policy](https://trytokenomics.com/privacy)
+
+## Optional
+
+- [Source code and releases](https://github.com/rob-stout/Tokenomics)
+- [Contact](mailto:hello@trytokenomics.com)

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>How do I uninstall Tokenomics? | Tokenomics Help</title>
+  <title>How to Uninstall Tokenomics on Mac (and Remove Everything)</title>
   <meta name="description" content="Use Settings → Uninstall Tokenomics… to remove the app and everything it set up. To remove the extension, right-click its toolbar icon and choose Remove." />
-  <meta property="og:title" content="How do I uninstall Tokenomics? | Tokenomics Help" />
+  <meta property="og:title" content="How to Uninstall Tokenomics on Mac (and Remove Everything)" />
   <meta property="og:description" content="Use Settings → Uninstall Tokenomics… to remove the app and everything it set up. To remove the extension, right-click its toolbar icon and choose Remove." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/uninstall" />
@@ -43,14 +43,22 @@
         "name": "Rob Stout"
       },
       "publisher": {
+        "@id": "https://trytokenomics.com/#org",
         "@type": "Organization",
         "name": "Acorn Designs, LLC"
       },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Tokenomics",
-        "operatingSystem": "macOS, Chrome"
-      }
+      "about": [
+        {
+          "@id": "https://trytokenomics.com/#app",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics"
+        },
+        {
+          "@id": "https://trytokenomics.com/#extension",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics browser extension"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",

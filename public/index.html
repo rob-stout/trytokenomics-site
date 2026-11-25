@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tokenomics — AI Usage for Your Menu Bar</title>
-  <meta name="description" content="Track Claude, ChatGPT, Gemini, Copilot, Cursor, Midjourney and more from your macOS menu bar, plus a free browser extension for Chrome. One glance tells you if you're about to hit a wall." />
+  <title>Tokenomics: Claude &amp; ChatGPT Usage Limits in Your Menu Bar</title>
+  <meta name="description" content="See how much of your Claude, ChatGPT, Gemini, Copilot and Cursor limits you've used, right in your Mac menu bar. Free, with a Chrome extension too." />
   <meta property="og:title" content="Tokenomics — Never be surprised by a rate limit" />
   <meta property="og:description" content="A macOS menu bar app and browser extension that show AI usage at a glance. Fourteen AI tools. Nothing to paste for most of them. The pace dot tells you if you're burning fast before the limit stops you." />
   <meta property="og:type" content="website" />
@@ -32,6 +32,167 @@
 
   <link rel="stylesheet" href="styles.css" />
   <!-- app.js loaded before closing body so DOM is ready -->
+  <!-- seo:structured-data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://trytokenomics.com/#org",
+      "name": "Acorn Designs, LLC",
+      "url": "https://trytokenomics.com/",
+      "logo": "https://trytokenomics.com/assets/sharing/Apple-Touch-Icon-180x180.png",
+      "email": "hello@trytokenomics.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Rob Stout"
+      },
+      "sameAs": [
+        "https://github.com/rob-stout/Tokenomics",
+        "https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://trytokenomics.com/#website",
+      "url": "https://trytokenomics.com/",
+      "name": "Tokenomics",
+      "alternateName": [
+        "Tokenomics AI usage tracker",
+        "trytokenomics"
+      ],
+      "publisher": {
+        "@id": "https://trytokenomics.com/#org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://trytokenomics.com/#app",
+      "name": "Tokenomics",
+      "alternateName": "Tokenomics for Mac",
+      "description": "A macOS menu bar app and desktop widgets that show your AI usage limits for Claude, ChatGPT, Gemini, GitHub Copilot, Cursor and more, with a pace dot that shows whether you'll run out before the limit resets.",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "AI usage tracker",
+      "operatingSystem": "macOS 14 Sonoma or later",
+      "url": "https://trytokenomics.com/",
+      "downloadUrl": "https://trytokenomics.com/download/dmg/latest",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "screenshot": "https://trytokenomics.com/assets/sharing/OG-Image.png",
+      "featureList": [
+        "Usage rings in the macOS menu bar",
+        "Desktop widgets in three sizes",
+        "Pace dot that shows if you're burning faster than even use",
+        "Usage alerts before you hit a limit",
+        "Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor read from your Mac",
+        "Web tools synced from the browser extension"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Rob Stout"
+      },
+      "publisher": {
+        "@id": "https://trytokenomics.com/#org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://trytokenomics.com/#extension",
+      "name": "Tokenomics browser extension",
+      "description": "A free Chrome extension that shows your usage limits for ChatGPT, Claude, Gemini, Midjourney, Leonardo, ElevenLabs, Suno, Udio, Grok and Perplexity in your toolbar.",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Chrome on macOS, Windows and Linux",
+      "installUrl": "https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl",
+      "url": "https://trytokenomics.com/#extension",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@id": "https://trytokenomics.com/#org"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://trytokenomics.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Mac app and the browser extension are both free to download and use. There's no subscription, no paid tier, and no feature gating."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does signing in work? Do I need to paste any tokens?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not for most tools. The Mac app reads the sign-in your coding tools already keep on your Mac: macOS Keychain for Claude, the gh CLI for GitHub Copilot, and local configuration files for Cursor, Codex CLI and Gemini CLI. The browser extension uses the sites you're already signed in to. Only Stability AI and Runway need an API key, pasted once and kept in the macOS Keychain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it send my API keys or credentials anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Tokenomics uses your sign-ins only to ask each AI service for your own usage, and keeps the numbers on your device. Nothing goes to any server the author controls: no analytics, no telemetry, no tracking code in the app or the extension. The full breakdown is on the Privacy page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it open source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can read every line on GitHub. The license is source-available rather than MIT — it keeps commercial rights reserved so I have room to build paid capabilities later (a team or enterprise version is one possibility). The current app is free forever for anyone who installs it. This isn't a SaaS in disguise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "macOS only? What about Windows and Linux?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "macOS only for now (14 Sonoma or later). The menu bar is a macOS-native concept and the auth paths (Keychain, gh CLI, local config files) are Mac-specific. A Windows/Linux version of the app is on the roadmap. In the meantime, the browser extension works in Chrome on Windows and Linux today."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AI tools does it work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Coding tools: Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor. Chat: Claude, ChatGPT, Gemini, Grok and Perplexity. Creative: Midjourney, Leonardo, Stability AI, Runway, ElevenLabs, Suno and Udio. The web tools connect through the browser extension. The full list says how each one connects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why not just open a browser tab and check the dashboard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You could. The problem is that you don't know you need to check until you're mid-task and something breaks. The pace dot is specifically useful here: it shows whether you're on track to hit a limit before you actually do, so you can make a call about whether to start a long agentic run. A dashboard answers \"how much have I used?\" — Tokenomics answers \"am I about to run out?\""
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is it different from other Claude/AI usage trackers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Two things: breadth and signal quality. Breadth: your coding tools, chat apps and creative tools in one place, not just Claude. Signal quality: the pace dot. Most usage meters show a percentage. Tokenomics shows whether that percentage is ahead of or behind where you'd expect given how much of the window has elapsed. That turns a number into an answer."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- /seo:structured-data -->
 </head>
 <body>
 
@@ -79,7 +240,7 @@
   </h1>
 
   <p class="lede">
-    Tokenomics sits in your menu bar and watches every AI tool you pay for — so you know if you have room for one more run.
+    Tokenomics shows your Claude, ChatGPT, Gemini and Copilot usage limits in your Mac menu bar, so you know if you have room for one more run.
   </p>
 
   <div class="hero-ctas">

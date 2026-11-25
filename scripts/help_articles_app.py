@@ -283,6 +283,7 @@ APP_ARTICLES = [
         "slug": "gemini-cli-numbers",
         "topic": "reading-numbers",
         "title": "How are Gemini CLI numbers counted, and which plan should I pick?",
+        "seo_title": "Gemini CLI Usage Limits: How Requests and Tokens Are Counted",
         "summary": "Google doesn't report Gemini CLI usage, so Tokenomics counts today's requests from Gemini CLI's own files on your Mac, against the daily limits of the plan you choose.",
         "keywords": "gemini cli plan free standard enterprise requests tokens today estimate estimated daily limit midnight pacific reset choose plan google ai",
         "legacy": [],
@@ -309,6 +310,7 @@ APP_ARTICLES = [
         "slug": "copilot-meters",
         "topic": "reading-numbers",
         "title": "What do the GitHub Copilot meters show?",
+        "seo_title": "GitHub Copilot Premium Requests in Tokenomics, Explained",
         "summary": "Paid Copilot plans show your premium requests used this month. Free plans show your monthly chat and code-completion allowances.",
         "keywords": "copilot github premium requests chat completions free pro business enterprise plan monthly reset unlimited zero 0",
         "legacy": [],
@@ -454,6 +456,7 @@ APP_ARTICLES = [
         "slug": "codex-numbers",
         "topic": "reading-numbers",
         "title": "Why don't my Codex CLI numbers change, or say “No active session”?",
+        "seo_title": "Codex CLI Usage Not Updating? Why It Says “No Active Session”",
         "summary": "Codex CLI's numbers come from the logs Codex writes on your Mac, so they only change after you use Codex. ChatGPT in the browser doesn't move them.",
         "keywords": "codex cli no active session not updating zero 0 stale weekly 5 hour openai logs",
         "legacy": [],
@@ -482,6 +485,42 @@ APP_ARTICLES = [
 <li>What you expected to see and what you saw. A screenshot helps.</li>
 </ul>
 <p>Never include API keys or passwords.</p>
+""",
+    },
+    {
+        "slug": "check-claude-usage",
+        "topic": "reading-numbers",
+        "title": "How do I check my Claude usage?",
+        "seo_title": "How to Check Your Claude Usage Limits (3 Ways)",
+        "summary": "On claude.ai, open Settings → Usage. In Claude Code, type /usage. Or keep it in your menu bar with Tokenomics, so you see it before you hit the limit.",
+        "keywords": "check claude usage limit how much left remaining settings usage page /usage command claude code session weekly reset tracker monitor",
+        "legacy": [],
+        "body": """
+<p>Claude shows your usage in two places, and Tokenomics adds a third that's always visible.</p>
+<ul>
+<li><strong>On claude.ai or the Claude desktop app:</strong> open Settings → Usage (or go to <code>claude.ai/settings/usage</code>). <strong>Current session</strong> is your 5-hour window; the weekly bar is your 7-day window. Each shows when it resets.</li>
+<li><strong>In Claude Code:</strong> type <code>/usage</code> to see the same limits and their reset times without leaving the terminal.</li>
+<li><strong>In your menu bar, with Tokenomics:</strong> both windows sit in the menu bar as rings, with a <a href="/help/pace-dot">pace dot</a> that shows whether you're on track to run out early. <a href="/help/usage-alerts">Usage alerts</a> warn you before you hit the limit, so you don't have to remember to check.</li>
+</ul>
+<p>Chats and Claude Code draw from the same limits, so all three show the same numbers. <a href="/help/claude-usage-limits">How the 5-hour and weekly windows work</a>.</p>
+""",
+    },
+    {
+        "slug": "check-copilot-usage",
+        "topic": "reading-numbers",
+        "title": "How do I check my GitHub Copilot premium requests?",
+        "seo_title": "How to Check Your GitHub Copilot Premium Request Usage",
+        "summary": "GitHub shows premium request usage in your Copilot settings and billing pages, and your editor shows it too. The allowance resets on the 1st of each month (UTC). Tokenomics keeps it in your menu bar.",
+        "keywords": "check github copilot premium requests usage how many left monthly allowance reset settings billing ide tracker",
+        "legacy": [],
+        "body": """
+<ul>
+<li><strong>On GitHub:</strong> your Copilot settings page on github.com shows premium requests used this month. The billing pages break it down further.</li>
+<li><strong>In your editor:</strong> Copilot's status menu in supported editors shows your usage too.</li>
+<li><strong>In your menu bar, with Tokenomics:</strong> paid plans get a <strong>Premium Requests</strong> bar, like “75 / 300 used”, with a <a href="/help/pace-dot">pace dot</a> so you can tell if you'll run out before the month ends. Free plans get Chat and Completions bars instead. <a href="/help/copilot-meters">What the Copilot meters show</a>.</li>
+</ul>
+<p>Premium request allowances reset on the 1st of each month at midnight UTC.</p>
+<p>Tokenomics reads Copilot through the GitHub CLI's sign-in. If it isn't connected yet, see the <a href="/setup#copilot">setup guide</a>.</p>
 """,
     },
 ]

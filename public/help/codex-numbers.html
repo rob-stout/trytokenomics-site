@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Why don&#x27;t my Codex CLI numbers change, or say “No active session”? | Tokenomics Help</title>
+  <title>Codex CLI Usage Not Updating? Why It Says “No Active Session”</title>
   <meta name="description" content="Codex CLI&#x27;s numbers come from the logs Codex writes on your Mac, so they only change after you use Codex. ChatGPT in the browser doesn&#x27;t move them." />
-  <meta property="og:title" content="Why don&#x27;t my Codex CLI numbers change, or say “No active session”? | Tokenomics Help" />
+  <meta property="og:title" content="Codex CLI Usage Not Updating? Why It Says “No Active Session”" />
   <meta property="og:description" content="Codex CLI&#x27;s numbers come from the logs Codex writes on your Mac, so they only change after you use Codex. ChatGPT in the browser doesn&#x27;t move them." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/codex-numbers" />
@@ -43,14 +43,22 @@
         "name": "Rob Stout"
       },
       "publisher": {
+        "@id": "https://trytokenomics.com/#org",
         "@type": "Organization",
         "name": "Acorn Designs, LLC"
       },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Tokenomics",
-        "operatingSystem": "macOS, Chrome"
-      }
+      "about": [
+        {
+          "@id": "https://trytokenomics.com/#app",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics"
+        },
+        {
+          "@id": "https://trytokenomics.com/#extension",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics browser extension"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",

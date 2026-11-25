@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>How are Gemini CLI numbers counted, and which plan should I pick? | Tokenomics Help</title>
+  <title>Gemini CLI Usage Limits: How Requests and Tokens Are Counted</title>
   <meta name="description" content="Google doesn&#x27;t report Gemini CLI usage, so Tokenomics counts today&#x27;s requests from Gemini CLI&#x27;s own files on your Mac, against the daily limits of the plan you choose." />
-  <meta property="og:title" content="How are Gemini CLI numbers counted, and which plan should I pick? | Tokenomics Help" />
+  <meta property="og:title" content="Gemini CLI Usage Limits: How Requests and Tokens Are Counted" />
   <meta property="og:description" content="Google doesn&#x27;t report Gemini CLI usage, so Tokenomics counts today&#x27;s requests from Gemini CLI&#x27;s own files on your Mac, against the daily limits of the plan you choose." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/gemini-cli-numbers" />
@@ -43,14 +43,22 @@
         "name": "Rob Stout"
       },
       "publisher": {
+        "@id": "https://trytokenomics.com/#org",
         "@type": "Organization",
         "name": "Acorn Designs, LLC"
       },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Tokenomics",
-        "operatingSystem": "macOS, Chrome"
-      }
+      "about": [
+        {
+          "@id": "https://trytokenomics.com/#app",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics"
+        },
+        {
+          "@id": "https://trytokenomics.com/#extension",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics browser extension"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",

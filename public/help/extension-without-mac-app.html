@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Does the extension work without the Mac app? | Tokenomics Help</title>
+  <title>AI Usage Tracker for Chrome, No Mac App Needed | Tokenomics</title>
   <meta name="description" content="Yes. It works on its own in your browser. The Mac app adds menu bar rings, widgets and coding tools, and the two stay in sync." />
-  <meta property="og:title" content="Does the extension work without the Mac app? | Tokenomics Help" />
+  <meta property="og:title" content="AI Usage Tracker for Chrome, No Mac App Needed | Tokenomics" />
   <meta property="og:description" content="Yes. It works on its own in your browser. The Mac app adds menu bar rings, widgets and coding tools, and the two stay in sync." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/extension-without-mac-app" />
@@ -43,14 +43,22 @@
         "name": "Rob Stout"
       },
       "publisher": {
+        "@id": "https://trytokenomics.com/#org",
         "@type": "Organization",
         "name": "Acorn Designs, LLC"
       },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Tokenomics",
-        "operatingSystem": "macOS, Chrome"
-      }
+      "about": [
+        {
+          "@id": "https://trytokenomics.com/#app",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics"
+        },
+        {
+          "@id": "https://trytokenomics.com/#extension",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics browser extension"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",

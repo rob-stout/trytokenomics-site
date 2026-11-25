@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Is my data sent anywhere? Does Tokenomics see my chats? | Tokenomics Help</title>
+  <title>Does Tokenomics Read Your Chats? Privacy, Answered</title>
   <meta name="description" content="No. Nothing goes to any server the author controls: no analytics, telemetry or tracking. The extension reads usage numbers, never your chats or prompts." />
-  <meta property="og:title" content="Is my data sent anywhere? Does Tokenomics see my chats? | Tokenomics Help" />
+  <meta property="og:title" content="Does Tokenomics Read Your Chats? Privacy, Answered" />
   <meta property="og:description" content="No. Nothing goes to any server the author controls: no analytics, telemetry or tracking. The extension reads usage numbers, never your chats or prompts." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/privacy" />
@@ -43,14 +43,22 @@
         "name": "Rob Stout"
       },
       "publisher": {
+        "@id": "https://trytokenomics.com/#org",
         "@type": "Organization",
         "name": "Acorn Designs, LLC"
       },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Tokenomics",
-        "operatingSystem": "macOS, Chrome"
-      }
+      "about": [
+        {
+          "@id": "https://trytokenomics.com/#app",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics"
+        },
+        {
+          "@id": "https://trytokenomics.com/#extension",
+          "@type": "SoftwareApplication",
+          "name": "Tokenomics browser extension"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",

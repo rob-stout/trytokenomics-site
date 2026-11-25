@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Build the Help center from scripts/help_articles.py.
 
-Writes help/index.html (the hub, with search), help/<slug>.html (one page per
-question) and the help entries in sitemap.xml. Run from anywhere:
+Writes public/help/index.html (the hub, with search), public/help/<slug>.html
+(one page per question), the sitemap (with honest last-modified dates) and the
+homepage's structured data (app, extension, organization, FAQ). Run from anywhere:
 
     python3 scripts/build_help.py
 
 Generated files are committed; Cloudflare Pages serves them as-is.
 """
+import hashlib
 import html
 import json
+import subprocess
 import re
 import sys
 from datetime import date
@@ -25,6 +28,29 @@ TODAY = date.today().isoformat()
 TOPIC = {t["id"]: t for t in TOPICS}
 BY_SLUG = {a["slug"]: a for a in ARTICLES}
 SEARCH_JS = (ROOT / "scripts" / "help-search.js.html").read_text()
+
+# Stable IDs so search engines see the homepage, help pages and extension as one product.
+APP_ID = f"{SITE}/#app"
+EXT_ID = f"{SITE}/#extension"
+ORG_ID = f"{SITE}/#org"
+CHROME_URL = "https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl"
+
+# Each article's last-modified date only moves when its content changes, so the
+# sitemap and dateModified tell search engines the truth about what's new.
+DATES_PATH = ROOT / "scripts" / "help_dates.json"
+DATES = json.loads(DATES_PATH.read_text()) if DATES_PATH.exists() else {}
+
+
+def content_date(slug, *parts):
+    digest = hashlib.sha1("\x00".join(parts).encode()).hexdigest()[:16]
+    rec = DATES.get(slug)
+    if not rec or rec["hash"] != digest:
+        DATES[slug] = {"hash": digest, "date": TODAY}
+    return DATES[slug]["date"]
+
+
+def article_date(a):
+    return content_date(a["slug"], a["title"], a.get("seo_title", ""), a["summary"], a["body"])
 
 esc = html.escape
 
@@ -171,10 +197,11 @@ def build_article(a):
                 "headline": a["title"],
                 "description": a["summary"],
                 "url": url,
-                "dateModified": TODAY,
+                "dateModified": article_date(a),
                 "author": {"@type": "Person", "name": "Rob Stout"},
-                "publisher": {"@type": "Organization", "name": "Acorn Designs, LLC"},
-                "about": {"@type": "SoftwareApplication", "name": "Tokenomics", "operatingSystem": "macOS, Chrome"},
+                "publisher": {"@id": ORG_ID, "@type": "Organization", "name": "Acorn Designs, LLC"},
+                "about": [{"@id": APP_ID, "@type": "SoftwareApplication", "name": "Tokenomics"},
+                          {"@id": EXT_ID, "@type": "SoftwareApplication", "name": "Tokenomics browser extension"}],
             },
             {
                 "@type": "BreadcrumbList",
@@ -190,7 +217,8 @@ def build_article(a):
     rel_html = "\n".join(
         f'          <li><a href="/help/{r["slug"]}">{esc(r["title"])}</a></li>' for r in related
     )
-    page = head(f'{a["title"]} | Tokenomics Help', a["summary"], url, extra=structured)
+    # seo_title, when set, is what search results show; the page keeps its question as the H1.
+    page = head(a.get("seo_title") or f'{a["title"]} | Tokenomics Help', a["summary"], url, extra=structured)
     page += NAV + f"""
 
 <main id="main-content">
@@ -233,8 +261,8 @@ def build_article(a):
 # ── Hub ────────────────────────────────────────────────────────────────
 def build_hub():
     url = f"{SITE}/help/"
-    desc = ("Answers about Tokenomics, the menu bar app and browser extension that track your AI usage: "
-            "supported tools, Claude's 5-hour and 7-day limits, setup, troubleshooting and privacy.")
+    desc = ("Answers about tracking your AI usage limits with Tokenomics: supported tools, "
+            "Claude's 5-hour and weekly limits, setup, troubleshooting and privacy.")
     topics = "\n".join(f"""      <li><a href="#{t['id']}">
         <span class="faq-topic-num" aria-hidden="true">{t['num']}</span>
         <span class="faq-topic-title">{esc(t['title'])}</span>
@@ -278,7 +306,7 @@ def build_hub():
         "hasPart": [{"@type": "TechArticle", "headline": a["title"], "url": f"{SITE}/help/{a['slug']}"} for a in ARTICLES],
     })
 
-    page = head("Help — Tokenomics", desc, url, og_type="website", extra=structured)
+    page = head("Tokenomics Help: AI Usage Limits, Setup & Troubleshooting", desc, url, og_type="website", extra=structured)
     page += NAV + f"""
 
 <main id="main-content">
@@ -350,24 +378,95 @@ def build_hub():
     return page
 
 
+def git_date(rel):
+    """Last commit date of a published file; today if it has uncommitted changes."""
+    f = PUBLIC / rel
+    dirty = subprocess.run(["git", "status", "--porcelain", "--", str(f)], cwd=ROOT,
+                           capture_output=True, text=True).stdout.strip()
+    if dirty:
+        return TODAY
+    out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(f)], cwd=ROOT,
+                         capture_output=True, text=True).stdout.strip()
+    return out or TODAY
+
+
 def update_sitemap():
-    path = PUBLIC / "sitemap.xml"
-    xml = path.read_text()
-    # Drop old FAQ/help entries, then add the hub and every article.
-    xml = re.sub(r"\s*<url>\s*<loc>https://trytokenomics\.com/(?:faq|help)[^<]*</loc>.*?</url>", "", xml, flags=re.S)
-    entries = [f"""  <url>
-    <loc>{SITE}/help/</loc>
-    <lastmod>{TODAY}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>"""] + [f"""  <url>
-    <loc>{SITE}/help/{a['slug']}</loc>
-    <lastmod>{TODAY}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>""" for a in ARTICLES]
-    xml = xml.replace("</urlset>", "\n".join(entries) + "\n</urlset>")
-    path.write_text(xml)
+    """Rewrite the whole sitemap: top-level pages, the Help hub and every article."""
+    top = [("", "index.html", "weekly", "1.0"), ("setup", "setup.html", "monthly", "0.8"),
+           ("privacy", "privacy.html", "yearly", "0.3"), ("license", "license.html", "yearly", "0.3")]
+    hub_date = max([article_date(a) for a in ARTICLES])
+    rows = [(f"{SITE}/{path}", git_date(f), freq, pri) for path, f, freq, pri in top]
+    rows.append((f"{SITE}/help/", hub_date, "weekly", "0.8"))
+    rows += [(f"{SITE}/help/{a['slug']}", article_date(a), "monthly", "0.6") for a in ARTICLES]
+    body = "\n".join(f"""  <url>
+    <loc>{loc}</loc>
+    <lastmod>{d}</lastmod>
+    <changefreq>{freq}</changefreq>
+    <priority>{pri}</priority>
+  </url>""" for loc, d, freq, pri in rows)
+    (PUBLIC / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + body + "\n</urlset>\n")
+
+
+# ── Homepage structured data ───────────────────────────────────────────
+LD_START, LD_END = "<!-- seo:structured-data -->", "<!-- /seo:structured-data -->"
+
+
+def update_homepage_ld():
+    """Describe the product on the homepage, and mirror its visible FAQ as FAQPage
+    (regenerated from the page text every build, so the two can't drift)."""
+    path = PUBLIC / "index.html"
+    page = path.read_text()
+    faqs = []
+    for q, a in re.findall(r'<details class="faq-item"[^>]*>\s*<summary>(.*?)<svg.*?</summary>\s*<div class="faq-answer">(.*?)</div>\s*</details>', page, re.S):
+        faqs.append({"@type": "Question", "name": text_of(q),
+                     "acceptedAnswer": {"@type": "Answer", "text": text_of(a)}})
+    assert faqs, "homepage FAQ not found"
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "Organization", "@id": ORG_ID, "name": "Acorn Designs, LLC", "url": f"{SITE}/",
+             "logo": f"{SITE}/assets/sharing/Apple-Touch-Icon-180x180.png", "email": "hello@trytokenomics.com",
+             "founder": {"@type": "Person", "name": "Rob Stout"},
+             "sameAs": ["https://github.com/rob-stout/Tokenomics", CHROME_URL]},
+            {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": "Tokenomics",
+             "alternateName": ["Tokenomics AI usage tracker", "trytokenomics"], "publisher": {"@id": ORG_ID}},
+            {"@type": "SoftwareApplication", "@id": APP_ID, "name": "Tokenomics",
+             "alternateName": "Tokenomics for Mac",
+             "description": "A macOS menu bar app and desktop widgets that show your AI usage limits "
+                            "for Claude, ChatGPT, Gemini, GitHub Copilot, Cursor and more, with a pace dot "
+                            "that shows whether you'll run out before the limit resets.",
+             "applicationCategory": "DeveloperApplication", "applicationSubCategory": "AI usage tracker",
+             "operatingSystem": "macOS 14 Sonoma or later", "url": f"{SITE}/",
+             "downloadUrl": f"{SITE}/download/dmg/latest", "isAccessibleForFree": True,
+             "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+             "screenshot": f"{SITE}/assets/sharing/OG-Image.png",
+             "featureList": ["Usage rings in the macOS menu bar", "Desktop widgets in three sizes",
+                             "Pace dot that shows if you're burning faster than even use",
+                             "Usage alerts before you hit a limit",
+                             "Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor read from your Mac",
+                             "Web tools synced from the browser extension"],
+             "author": {"@type": "Person", "name": "Rob Stout"}, "publisher": {"@id": ORG_ID}},
+            {"@type": "SoftwareApplication", "@id": EXT_ID, "name": "Tokenomics browser extension",
+             "description": "A free Chrome extension that shows your usage limits for ChatGPT, Claude, Gemini, "
+                            "Midjourney, Leonardo, ElevenLabs, Suno, Udio, Grok and Perplexity in your toolbar.",
+             "applicationCategory": "BrowserApplication", "operatingSystem": "Chrome on macOS, Windows and Linux",
+             "installUrl": CHROME_URL, "url": f"{SITE}/#extension", "isAccessibleForFree": True,
+             "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+             "publisher": {"@id": ORG_ID}},
+            {"@type": "FAQPage", "@id": f"{SITE}/#faq", "mainEntity": faqs},
+        ],
+    }
+    block = (f'{LD_START}\n  <script type="application/ld+json">\n'
+             + json.dumps(graph, indent=2, ensure_ascii=False).replace("</", "<\\/")
+             + f'\n  </script>\n  {LD_END}')
+    if LD_START in page:
+        page = re.sub(re.escape(LD_START) + ".*?" + re.escape(LD_END), lambda m: block, page, flags=re.S)
+    else:
+        page = page.replace("</head>", f"  {block}\n</head>", 1)
+    path.write_text(page)
+    return len(faqs)
 
 
 def main():
@@ -386,7 +485,9 @@ def main():
     for a in ARTICLES:
         (out / f"{a['slug']}.html").write_text(build_article(a))
     update_sitemap()
-    print(f"Built help/index.html + {len(ARTICLES)} articles; sitemap updated.")
+    n_faq = update_homepage_ld()
+    DATES_PATH.write_text(json.dumps(DATES, indent=2, sort_keys=True) + "\n")
+    print(f"Built help/index.html + {len(ARTICLES)} articles; sitemap updated; homepage structured data ({n_faq} FAQs).")
 
 
 if __name__ == "__main__":
