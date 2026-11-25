@@ -815,7 +815,7 @@
       <li>
         <h3 class="step-title">Approve in your browser</h3>
         <div class="step-body">
-          <p>Tokenomics runs <code>gh auth login</code> for you and opens GitHub in your browser. The window says "Waiting for you to approve in your browser…". If GitHub asks for a code, Tokenomics shows it under "If asked for a code", with a copy button. Approve on GitHub. If the page didn't open, click <strong>Reopen browser</strong>.</p>
+          <p>Tokenomics runs <code>gh auth login</code> for you and opens GitHub in your browser. The window says "Waiting for you to approve in your browser…". GitHub asks for a one-time code: Tokenomics shows it under "If asked for a code", with a copy button. Enter it on github.com/login/device and approve. If the page didn't open, click <strong>Reopen browser</strong>.</p>
         </div>
         <div class="step-expect">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
@@ -1114,11 +1114,21 @@
       <p class="feature-kicker">API keys: common issues</p>
       <details class="faq-item">
         <summary>
-          <span class="msg">I clicked Save &amp; connect and nothing happened</span>
+          <span class="msg">“That key didn't work. Check it and try again.”</span>
           <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
         </summary>
         <div class="faq-answer">
-          <p>Tokenomics saved the key but the provider didn't accept it, so the window stays on "Paste your API key" and the row in AI Connections says "Not signed in". Check you copied the whole key, or make a new one, then paste it again and click <strong>Save &amp; connect</strong>.</p>
+          <p>Tokenomics tries the key before saving it, and the provider turned it down. Check you copied the whole key, or make a new one, then paste it again and click <strong>Save &amp; connect</strong>. Nothing was saved, so a key that already worked keeps working.</p>
+          <p>If it says “Couldn't reach Stability AI to check that key” (or Runway), the key may be fine; Tokenomics just couldn't get through. Check your internet connection and try again.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span class="msg">“API key no longer works”</span>
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+        </summary>
+        <div class="faq-answer">
+          <p>A key that used to work was revoked or expired. Click <strong>Update key</strong> on that tab and paste a new one, or change it in Settings → <strong>AI Connections</strong>.</p>
         </div>
       </details>
       <details class="faq-item">
@@ -1197,7 +1207,7 @@
           <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
         </summary>
         <div class="faq-answer">
-          <p>macOS blocked Tokenomics from opening Terminal, which it needs for Homebrew and for Claude Code's sign-in. Click <strong>Open System Settings</strong>. Under Privacy &amp; Security → Automation, find Tokenomics and switch on Terminal. Then click <strong>Cancel</strong> and start the setup again.</p>
+          <p>macOS blocked Tokenomics from opening Terminal, which it needs for Homebrew and for Claude Code's sign-in. Click <strong>Open System Settings</strong>. Under Privacy &amp; Security → Automation, find Tokenomics and switch on Terminal. Then come back and click <strong>Try again</strong>.</p>
         </div>
       </details>
       <details class="faq-item">

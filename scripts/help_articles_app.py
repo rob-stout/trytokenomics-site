@@ -337,6 +337,7 @@ APP_ARTICLES = [
 <li><strong>Server error (503)</strong> or another number: the service had a problem. It usually clears on its own.</li>
 <li><strong>Couldn't read usage data:</strong> the service sent something Tokenomics didn't recognize, often after the service changed. Check for an <a href="/help/updates">update</a>, and <a href="/help/report-a-problem">tell us</a> if it continues.</li>
 <li><strong>Not signed in</strong> or <strong>Session expired:</strong> see <a href="/help/sign-in-expired">signing back in</a>.</li>
+<li><strong>API key no longer works:</strong> your Stability AI or Runway key was revoked or expired. Click <strong>Update key</strong> and paste a new one.</li>
 <li><strong>Keychain access needed:</strong> see <a href="/help/keychain-prompt">the Keychain prompt</a>.</li>
 </ul>
 """,
@@ -372,6 +373,7 @@ APP_ARTICLES = [
 <li><strong>Easiest:</strong> click <strong>Reconnect</strong> on that tab. Guided setup walks you through signing in, and Tokenomics notices automatically when you're done.</li>
 <li><strong>Or do it yourself:</strong> sign in to the tool the usual way (for Claude Code, run <code>claude</code> in Terminal and sign in), then click refresh in the popover.</li>
 </ul>
+<p>For Stability AI and Runway, the message is “API key no longer works”. Click <strong>Update key</strong> and paste a new key.</p>
 <p>For web tools in the browser extension, just sign back in to the site.</p>
 """,
     },
@@ -384,7 +386,7 @@ APP_ARTICLES = [
         "legacy": [],
         "body": f"""
 <ul>
-<li><strong>“Tokenomics needs permission to open Terminal.”</strong> Setup uses Terminal to install tools and sign you in. Click <strong>Open System Settings</strong>, go to Privacy &amp; Security → Automation, and allow Tokenomics to control Terminal.</li>
+<li><strong>“Tokenomics needs permission to open Terminal.”</strong> Setup uses Terminal to install tools and sign you in. Click <strong>Open System Settings</strong>, go to Privacy &amp; Security → Automation, and allow Tokenomics to control Terminal. Then click <strong>Try again</strong>.</li>
 <li><strong>“Homebrew install was cancelled. You'll need to approve the admin prompt to continue.”</strong> Installing Homebrew needs your Mac password. Run the step again and enter it when Terminal asks.</li>
 <li><strong>“Homebrew couldn't download.”</strong> Check your internet connection and try again.</li>
 <li><strong>“The install didn't complete.”</strong> Something went wrong inside Homebrew. Run <code>brew doctor</code> in Terminal to see what, then try again.</li>
@@ -392,6 +394,7 @@ APP_ARTICLES = [
 <li><strong>“Sign-in was cancelled.”</strong> Start the step again when you're ready.</li>
 <li><strong>“We couldn't find … after installing it.”</strong> Click to re-run detection. If it still fails, quit and reopen Tokenomics.</li>
 <li><strong>“Permission denied writing to …”</strong> Click <strong>Clear cache &amp; retry</strong>.</li>
+<li><strong>“That key didn't work. Check it and try again.”</strong> Stability AI or Runway turned down the API key you pasted. Copy the whole key again, or make a new one. If it says it couldn't reach the provider instead, check your connection.</li>
 <li><strong>“We couldn't securely store your sign-in.”</strong> macOS blocked the Keychain. Open Keychain Access and check that your login keychain is unlocked.</li>
 </ul>
 <p>Every install step also has a way to skip it if you already have that tool. The <a href="{SETUP}">setup guide</a> walks through each tool, and <a href="/help/what-setup-installs">what setup installs</a> lists everything it adds.</p>
