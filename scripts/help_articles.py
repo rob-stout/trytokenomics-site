@@ -16,11 +16,13 @@ TOPICS = [
      "desc": "Installing, which tools and browsers work, what it costs, and how the app and extension fit together."},
     {"id": "using-tokenomics", "num": 2, "title": "Using Tokenomics",
      "desc": "The menu bar, widgets, alerts and settings, day to day."},
-    {"id": "reading-numbers", "num": 3, "title": "Your numbers",
+    {"id": "limits", "num": 3, "title": "How AI limits work",
+     "desc": "Every tool rations usage differently. How each one's limits, resets and shared allowances work."},
+    {"id": "reading-numbers", "num": 4, "title": "Your numbers",
      "desc": "Each AI tool counts usage its own way. Here's what each meter means."},
-    {"id": "fixing-problems", "num": 4, "title": "Fixing problems",
+    {"id": "fixing-problems", "num": 5, "title": "Fixing problems",
      "desc": "Error messages, prompts, and what to try when numbers look wrong."},
-    {"id": "privacy-permissions", "num": 5, "title": "Privacy & permissions",
+    {"id": "privacy-permissions", "num": 6, "title": "Privacy & permissions",
      "desc": "What Tokenomics reads, what it stores on your device, and what it never sends."},
 ]
 
@@ -43,20 +45,20 @@ ARTICLES = [
 <table class="doc-table">
 <thead><tr><th scope="col">Tool</th><th scope="col">What it tracks</th><th scope="col">Connects through</th></tr></thead>
 <tbody>
-<tr><td>Claude</td><td>5-hour and 7-day limits, shared by chats and Claude Code</td><td>Mac app (through Claude Code) or extension</td></tr>
-<tr><td>ChatGPT</td><td>Chats on chatgpt.com</td><td>Extension</td></tr>
+<tr><td>Claude</td><td><a href="/help/claude-usage-limits">5-hour and weekly limits</a>, shared by chats and Claude Code</td><td>Mac app (through Claude Code) or extension</td></tr>
+<tr><td>ChatGPT</td><td><a href="/help/chatgpt-limits">Chats on chatgpt.com</a></td><td>Extension</td></tr>
 <tr><td>Codex CLI</td><td>OpenAI's coding agent, in Terminal: 5-hour and weekly limits</td><td>Mac app</td></tr>
 <tr><td>Gemini</td><td>Chats on gemini.google.com</td><td>Extension</td></tr>
 <tr><td>Gemini CLI</td><td>Google's coding agent, in Terminal: <a href="/help/gemini-cli-numbers">requests and tokens today</a>, estimated</td><td>Mac app</td></tr>
-<tr><td>GitHub Copilot</td><td><a href="/help/copilot-meters">Premium requests</a> (paid plans), or chat and completions (free)</td><td>Mac app</td></tr>
-<tr><td>Cursor</td><td>Premium requests</td><td>Mac app</td></tr>
+<tr><td>GitHub Copilot</td><td><a href="/help/copilot-limits">Monthly allowance</a> (paid plans), or chat and completions (free)</td><td>Mac app</td></tr>
+<tr><td>Cursor</td><td><a href="/help/cursor-limits">Usage this billing cycle</a></td><td>Mac app</td></tr>
 <tr><td>Stability AI</td><td>Image and video generation credits</td><td>Mac app, with an API key</td></tr>
-<tr><td>Runway</td><td>Video generation credits</td><td>Mac app, with an API key</td></tr>
-<tr><td>ElevenLabs</td><td>Voice generation credits</td><td>Extension</td></tr>
+<tr><td>Runway</td><td><a href="/help/runway-limits">API credits</a> (not your Runway app plan)</td><td>Mac app, with an API key</td></tr>
+<tr><td>ElevenLabs</td><td><a href="/help/elevenlabs-limits">Voice generation credits</a></td><td>Extension</td></tr>
 <tr><td>Midjourney</td><td><a href="/help/midjourney-fast-hours">Fast Hours</a></td><td>Extension</td></tr>
 <tr><td>Leonardo</td><td>Image generation credits</td><td>Extension</td></tr>
-<tr><td>Grok</td><td>Chats on grok.com</td><td>Extension</td></tr>
-<tr><td>Perplexity</td><td>Pro searches and research</td><td>Extension</td></tr>
+<tr><td>Grok</td><td><a href="/help/grok-limits">Chats on grok.com</a></td><td>Extension</td></tr>
+<tr><td>Perplexity</td><td><a href="/help/perplexity-limits">Pro searches and research</a></td><td>Extension</td></tr>
 <tr><td>Suno</td><td>Music generation credits</td><td>Extension</td></tr>
 <tr><td>Udio</td><td>Music generation credits</td><td>Extension</td></tr>
 </tbody>
@@ -292,25 +294,6 @@ ARTICLES = [
 
     # ── Reading your numbers ─────────────────────────────────────────
     {
-        "slug": "claude-usage-limits",
-        "topic": "reading-numbers",
-        "title": "How do Claude's 5-hour and 7-day limits work?",
-        "seo_title": "Claude Usage Limits Explained: 5-Hour and Weekly Windows",
-        "summary": "The 5-hour window is the rolling cap most people hit first; the 7-day window is the weekly ceiling. Chats and Claude Code share both.",
-        "keywords": "anthropic limit quota rate reset weekly week rolling pro max 5 hour 7 day window single one desktop claude code",
-        "legacy": ["claude-windows", "anthropic-one-window"],
-        "body": """
-<p>These are Anthropic's own limits, not something Tokenomics invented.</p>
-<h2>The 5-hour window</h2>
-<p>The rolling cap most people hit first. It resets about five hours after your first message in the current block. If Tokenomics shows 80% with two hours left, you're close to a rate limit, so pace your prompts or switch tasks.</p>
-<h2>The 7-day window</h2>
-<p>The longer ceiling, resetting weekly from your first message of the cycle.</p>
-<p>If your plan has extra usage turned on, the Claude tab also shows how much of your monthly extra-usage limit you've spent. See <a href="/help/extra-usage-and-credits">Extra Usage</a>.</p>
-<h2>Why Claude has one set of limits</h2>
-<p>Claude on the web, the Claude desktop app and Claude Code all draw down the <strong>same 5-hour and 7-day windows</strong> on your subscription. One set of limits covers every surface, so Claude gets one meter with two bars. OpenAI and Google do it the other way, with a separate meter per product. See <a href="/help/two-meters">why ChatGPT and Gemini show two meters</a>.</p>
-""",
-    },
-    {
         "slug": "two-meters",
         "topic": "reading-numbers",
         "title": "Why do ChatGPT and Gemini show two meters?",
@@ -320,7 +303,8 @@ ARTICLES = [
         "legacy": ["chatgpt-two-bars", "widget-openai-twice"],
         "body": """
 <p>ChatGPT and Codex CLI are two different products that share one OpenAI login but count against <strong>separate limits</strong>. ChatGPT has its own chat limits; Codex CLI has its own weekly quota tied to your plan. Same account, different meters, and OpenAI doesn't give a combined number, so Tokenomics shows both and you can see which one you're closer to.</p>
-<p>The same is true for <strong>Gemini</strong>: the Gemini app at <code>gemini.google.com</code> and the Gemini CLI share a Google account but track usage separately.</p>
+<p><strong>This is changing in December 2026:</strong> OpenAI is moving Plus, Pro and Business plans to one allowance shared across ChatGPT and Codex. See <a href="/help/chatgpt-limits">how ChatGPT's limits work</a> and <a href="/help/codex-limits">how Codex's limits work</a>.</p>
+<p>The same is true for <strong>Gemini</strong>: the Gemini app at <code>gemini.google.com</code> and the Gemini CLI share a Google account but track usage separately. See <a href="/help/gemini-limits">how the Gemini app's limits work</a>.</p>
 <p>Claude is the exception: chats and Claude Code share one set of limits. See <a href="/help/claude-usage-limits">how Claude's limits work</a>.</p>
 <h2>In widgets</h2>
 <p>Widgets show each limit as its own row, because there's no room to nest them. If you've connected both ChatGPT and Codex CLI, you'll see two OpenAI rows. On the <strong>small widget</strong> you pick exactly one: open the widget's edit panel and choose <strong>ChatGPT</strong> or <strong>Codex CLI</strong>.</p>
@@ -345,20 +329,6 @@ ARTICLES = [
 </ul>
 <p>Estimated readings are labelled: the extension shows an <strong>estimated</strong> tag, and the Mac app's popover says “Estimated from…” under the numbers.</p>
 <p>If a number looks wrong, click refresh first. If it's still off, <a href="/help/report-a-problem">tell us</a> which tool and plan you're on.</p>
-""",
-    },
-    {
-        "slug": "midjourney-fast-hours",
-        "topic": "reading-numbers",
-        "title": "What are Midjourney's Fast Hours?",
-        "seo_title": "Midjourney Fast Hours Explained: How to Track What’s Left",
-        "summary": "Fast Hours are the GPU time Midjourney gives your plan each month for Fast mode. Tokenomics shows how many you've used. Relax mode doesn't count.",
-        "keywords": "midjourney fast hour hours relax mode turbo gpu credits plan monthly basic standard pro mega",
-        "legacy": ["midjourney-fast-hours"],
-        "body": """
-<p>Midjourney measures paid usage in Fast Hours: GPU time spent generating in Fast mode. Each plan comes with a set number every month.</p>
-<p>The extension shows how many Fast Hours you've used of your plan's monthly total, refreshed from your Midjourney account. Relax mode doesn't use Fast Hours, so Relax jobs don't move the meter.</p>
-<p>If it shows no plan, your Midjourney account doesn't have an active subscription.</p>
 """,
     },
 
@@ -414,7 +384,8 @@ ARTICLES = [
 ]
 
 from help_articles_app import APP_ARTICLES  # noqa: E402
-ARTICLES += APP_ARTICLES
+from help_articles_limits import LIMIT_ARTICLES  # noqa: E402
+ARTICLES += APP_ARTICLES + LIMIT_ARTICLES
 
 # Common-question cards on the hub, in order.
 COMMON = ["supported-tools", "privacy", "extension-without-mac-app"]

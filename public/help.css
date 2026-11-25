@@ -459,3 +459,6 @@
 }
 .doc-body ul.help-list { padding-left: 0; margin: 0; max-width: none; }
 .doc-body .help-list li + li { margin-top: 0; }
+
+/* "Checked in November 2026" footnote on the limits explainers */
+.help-note { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--border); font-size: var(--fs-small); color: var(--text-subtle); }

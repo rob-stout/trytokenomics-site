@@ -15,29 +15,49 @@
     "date": "2026-11-25",
     "hash": "41d82a755e4191b8"
   },
+  "chatgpt-limits": {
+    "date": "2026-11-25",
+    "hash": "6aa9374a8bd89028"
+  },
   "chatgpt-plan": {
     "date": "2026-11-25",
     "hash": "a1f16190b78ad1ea"
   },
   "check-claude-usage": {
     "date": "2026-11-25",
-    "hash": "ee86082a6b636e96"
+    "hash": "5ffd7755828ac228"
   },
   "check-copilot-usage": {
     "date": "2026-11-25",
-    "hash": "256cef888e325ccf"
+    "hash": "f3232b51a57e7b2a"
   },
   "claude-usage-limits": {
     "date": "2026-11-25",
-    "hash": "d32caf90d3e38ca0"
+    "hash": "c1d1f75a6ce5a834"
+  },
+  "codex-limits": {
+    "date": "2026-11-25",
+    "hash": "2ac6047537114ffb"
   },
   "codex-numbers": {
     "date": "2026-11-25",
     "hash": "0f213cb4f9285c5c"
   },
+  "copilot-limits": {
+    "date": "2026-11-25",
+    "hash": "ea95fc50d38bc0ac"
+  },
   "copilot-meters": {
     "date": "2026-11-25",
-    "hash": "b9c69a62874849ae"
+    "hash": "06d8d7bdd6688ebb"
+  },
+  "cursor-limits": {
+    "date": "2026-11-25",
+    "hash": "1d2552948ab76b3f"
+  },
+  "elevenlabs-limits": {
+    "date": "2026-11-25",
+    "hash": "775bf66db51d0720"
   },
   "elevenlabs-setup": {
     "date": "2026-11-25",
@@ -57,11 +77,19 @@
   },
   "extra-usage-and-credits": {
     "date": "2026-11-25",
-    "hash": "d74506dbd0807358"
+    "hash": "8e160743a7de13ae"
   },
   "gemini-cli-numbers": {
     "date": "2026-11-25",
-    "hash": "2d8f6bc5c8698d6c"
+    "hash": "4e34bc2768d9c4e7"
+  },
+  "gemini-limits": {
+    "date": "2026-11-25",
+    "hash": "699a4e781c576f69"
+  },
+  "grok-limits": {
+    "date": "2026-11-25",
+    "hash": "bb0920a30181ff23"
   },
   "group-by-company": {
     "date": "2026-11-25",
@@ -78,6 +106,10 @@
   "launch-at-login": {
     "date": "2026-11-25",
     "hash": "d89fdcd80334eb32"
+  },
+  "leonardo-limits": {
+    "date": "2026-11-25",
+    "hash": "83d4a150b9c34ac9"
   },
   "leonardo-setup": {
     "date": "2026-11-25",
@@ -97,11 +129,15 @@
   },
   "midjourney-fast-hours": {
     "date": "2026-11-25",
-    "hash": "ce3f4d4ba7482a13"
+    "hash": "b5db1ac3865b9732"
   },
   "pace-dot": {
     "date": "2026-11-25",
     "hash": "08bc62b6bae79f94"
+  },
+  "perplexity-limits": {
+    "date": "2026-11-25",
+    "hash": "7b9329994f51153f"
   },
   "privacy": {
     "date": "2026-11-25",
@@ -118,6 +154,10 @@
   "report-a-problem": {
     "date": "2026-11-25",
     "hash": "01f66040b33c2b8e"
+  },
+  "runway-limits": {
+    "date": "2026-11-25",
+    "hash": "c4327b3d79882968"
   },
   "safari": {
     "date": "2026-11-25",
@@ -139,9 +179,17 @@
     "date": "2026-11-25",
     "hash": "200592be833b2373"
   },
+  "stability-limits": {
+    "date": "2026-11-25",
+    "hash": "70364c2e994b5c5a"
+  },
+  "suno-limits": {
+    "date": "2026-11-25",
+    "hash": "d5dae7259d134fb5"
+  },
   "supported-tools": {
     "date": "2026-11-25",
-    "hash": "ed5366ed33a3352b"
+    "hash": "c10855c173f033b7"
   },
   "toolbar-icon": {
     "date": "2026-11-25",
@@ -153,7 +201,11 @@
   },
   "two-meters": {
     "date": "2026-11-25",
-    "hash": "168626c17a06d44c"
+    "hash": "40946e5ba5510e20"
+  },
+  "udio-limits": {
+    "date": "2026-11-25",
+    "hash": "5a2b4540b9f0646f"
   },
   "uninstall": {
     "date": "2026-11-25",

@@ -192,12 +192,12 @@ APP_ARTICLES = [
         "slug": "extra-usage-and-credits",
         "topic": "reading-numbers",
         "title": "What are Extra Usage and Credits Balance?",
-        "summary": "Extra Usage shows how much of your monthly extra-usage spending limit you've used on Claude. Credits Balance shows prepaid credits on your OpenAI account.",
+        "summary": "Extra Usage shows what you've spent of your Claude usage credits (Anthropic's new name for extra usage) against your monthly spending cap. Credits Balance shows prepaid credits on your OpenAI account.",
         "keywords": "extra usage credits balance spend spending money dollars monthly limit max plan overage paid",
         "legacy": [],
         "body": """
-<p><strong>Extra Usage</strong> appears on the Claude tab when your plan has extra usage turned on. It shows how much you've spent of your monthly extra-usage limit, like “$12.40 / $50.00”. Extra usage is what Anthropic bills once you go past your plan's included limits.</p>
-<p><strong>Credits Balance</strong> appears on the Codex CLI section when your OpenAI account has prepaid credits, showing the remaining balance.</p>
+<p><strong>Extra Usage</strong> appears on the Claude tab when your plan has <strong>usage credits</strong> turned on. (Anthropic renamed “extra usage” to “usage credits” in late 2026.) Usage credits let Claude keep working past your plan's included limits, billed at API rates. Tokenomics shows how much you've spent against your monthly spending cap, like “$12.40 / $50.00”. Turn them on, set the cap or set up auto-reload in Settings → Usage on claude.ai. <a href="/help/claude-usage-limits">How Claude's limits work</a>.</p>
+<p><strong>Credits Balance</strong> appears on the Codex CLI section when your OpenAI account has prepaid credits, showing the remaining balance. Plus and Pro can buy credits to keep using Codex past their allowance. <a href="/help/codex-limits">How Codex's limits work</a>.</p>
 <p>Both only appear when the service reports them. If you don't see them, your account doesn't have them.</p>
 """,
     },
@@ -287,6 +287,9 @@ APP_ARTICLES = [
         "keywords": "gemini cli plan free standard enterprise requests tokens today estimate estimated daily limit midnight pacific reset choose plan google ai",
         "legacy": [],
         "body": """
+<div class="doc-callout">
+<p><strong>Changed in June 2026:</strong> Google stopped serving Gemini CLI for personal Google logins (free Code Assist for individuals, Google AI Pro and AI Ultra) on June 18, 2026, and moved those users to Antigravity CLI. Gemini CLI still works with a <strong>Gemini Code Assist Standard or Enterprise</strong> license and with <strong>paid Gemini API keys</strong>.</p>
+</div>
 <p>Google doesn't offer a way to look up Gemini CLI usage. So Tokenomics counts it itself, from the session files Gemini CLI saves on your Mac, and compares that with the daily limits of your plan. That makes it an estimate, and the popover says “Estimated from your local Gemini CLI sessions”.</p>
 <p>You'll see two bars: <strong>Requests Today</strong> and <strong>Tokens Today</strong>. Both reset at midnight Pacific time, when Google's daily limits do.</p>
 <h2>Choosing your plan</h2>
@@ -295,14 +298,15 @@ APP_ARTICLES = [
 <table class="doc-table">
 <thead><tr><th scope="col">Plan</th><th scope="col">Requests per day</th></tr></thead>
 <tbody>
-<tr><td>Free</td><td>1,000</td></tr>
-<tr><td>Standard</td><td>1,500</td></tr>
-<tr><td>Enterprise</td><td>2,000</td></tr>
+<tr><td>Free (Code Assist for individuals, ended June 18, 2026)</td><td>1,000</td></tr>
+<tr><td>Code Assist Standard</td><td>1,500</td></tr>
+<tr><td>Code Assist Enterprise</td><td>2,000</td></tr>
 </tbody>
 </table>
 </div>
 <p>Tokenomics asks the first time you open the Gemini CLI tab (“Choose your Gemini plan”). To change it later, click the plan badge on the tab, or use the plan control on the Gemini CLI row in Settings → AI Connections.</p>
-<p>The Gemini app at gemini.google.com is separate; the browser extension reads its own limits. See <a href="/help/two-meters">why Gemini shows two meters</a>.</p>
+<p>With a paid API key, Google's limits depend on your API tier rather than a daily request count, so these bars are a rough guide.</p>
+<p>The Gemini app at gemini.google.com is separate; the browser extension reads its own limits. See <a href="/help/gemini-limits">how the Gemini app's limits work</a>.</p>
 """,
     },
     {
@@ -310,15 +314,15 @@ APP_ARTICLES = [
         "topic": "reading-numbers",
         "title": "What do the GitHub Copilot meters show?",
         "seo_title": "GitHub Copilot Premium Requests in Tokenomics, Explained",
-        "summary": "Paid Copilot plans show your premium requests used this month. Free plans show your monthly chat and code-completion allowances.",
+        "summary": "Free plans show your monthly chat and code-completion allowances. Paid plans show your monthly allowance; GitHub moved most paid plans from premium requests to AI credits in June 2026, and Tokenomics is catching up.",
         "keywords": "copilot github premium requests chat completions free pro business enterprise plan monthly reset unlimited zero 0",
         "legacy": [],
         "body": """
 <ul>
-<li><strong>Paid plans</strong> (Pro, Pro+, Business, Enterprise): one bar, <strong>Premium Requests</strong>, with how many you've used of your monthly allowance, like “75 / 300 used”, and when it resets. Chat and code completions are unlimited on these plans, so they don't need a meter. If your premium requests are unlimited, the bar says “Unlimited”.</li>
 <li><strong>Free plan:</strong> two bars, <strong>Chat</strong> and <strong>Completions</strong>, showing how much of each monthly allowance you've used.</li>
+<li><strong>Paid plans:</strong> one bar for your monthly allowance. Code completions are unlimited on paid plans, so they don't need a meter.</li>
 </ul>
-<p>In the current version (2.10.4), paid plans can show 0% or nothing. The Premium Requests bar described here arrives in the next update (2.10.5).</p>
+<p>In June 2026 GitHub replaced <strong>premium requests</strong> with <strong>AI credits</strong> on monthly plans (annual Pro and Pro+ keep premium requests until they renew). Tokenomics' paid-plan meter is being updated for AI credits; until then it may show 0%, nothing, or a number that doesn't match GitHub's. <a href="/help/copilot-limits">How Copilot's limits work now</a>.</p>
 <p>Tokenomics reads these through the GitHub CLI's sign-in. If Copilot isn't connected yet, see the <a href="/setup#copilot">setup guide</a>.</p>
 """,
     },
@@ -497,7 +501,7 @@ APP_ARTICLES = [
         "body": """
 <p>Claude shows your usage in two places, and Tokenomics adds a third that's always visible.</p>
 <ul>
-<li><strong>On claude.ai or the Claude desktop app:</strong> open Settings → Usage (or go to <code>claude.ai/settings/usage</code>). <strong>Current session</strong> is your 5-hour window; the weekly bar is your 7-day window. Each shows when it resets.</li>
+<li><strong>On claude.ai or the Claude desktop app:</strong> open Settings → Usage (or go to <code>claude.ai/settings/usage</code>). <strong>Current session</strong> is your 5-hour window; the weekly bar is your weekly limit. Each shows when it resets. On a verified Ultra plan there's no Current session bar, because Ultra has no 5-hour limit.</li>
 <li><strong>In Claude Code:</strong> type <code>/usage</code> to see the same limits and their reset times without leaving the terminal.</li>
 <li><strong>In your menu bar, with Tokenomics:</strong> both windows sit in the menu bar as rings, with a <a href="/help/pace-dot">pace dot</a> that shows whether you're on track to run out early. <a href="/help/usage-alerts">Usage alerts</a> warn you before you hit the limit, so you don't have to remember to check.</li>
 </ul>
@@ -507,18 +511,18 @@ APP_ARTICLES = [
     {
         "slug": "check-copilot-usage",
         "topic": "reading-numbers",
-        "title": "How do I check my GitHub Copilot premium requests?",
-        "seo_title": "How to Check Your GitHub Copilot Premium Request Usage",
-        "summary": "See premium requests in your GitHub Copilot settings, your editor, or your Mac menu bar with Tokenomics. The allowance resets on the 1st of each month (UTC).",
+        "title": "How do I check my GitHub Copilot usage?",
+        "seo_title": "How to Check Your GitHub Copilot Usage (AI Credits)",
+        "summary": "Open github.com/settings/billing → AI usage, your Copilot settings, or the Copilot icon in your editor. Allowances reset on the 1st of each month (UTC).",
         "keywords": "check github copilot premium requests usage how many left monthly allowance reset settings billing ide tracker",
         "legacy": [],
         "body": """
 <ul>
-<li><strong>On GitHub:</strong> your Copilot settings page on github.com shows premium requests used this month. The billing pages break it down further.</li>
-<li><strong>In your editor:</strong> Copilot's status menu in supported editors shows your usage too.</li>
-<li><strong>In your menu bar, with Tokenomics:</strong> from the next update (2.10.5), paid plans get a <strong>Premium Requests</strong> bar, like “75 / 300 used”, with a <a href="/help/pace-dot">pace dot</a> so you can tell if you'll run out before the month ends. Free plans get Chat and Completions bars instead. <a href="/help/copilot-meters">What the Copilot meters show</a>.</li>
+<li><strong>On GitHub:</strong> github.com/settings/billing → <strong>AI usage</strong> shows what you've used this month, by model. Your profile picture → Copilot settings → Usage shows it too.</li>
+<li><strong>In your editor:</strong> in VS Code, click the Copilot icon in the status bar (it shows the reset date). In JetBrains, use the Copilot icon → View quota usage.</li>
+<li><strong>In your menu bar, with Tokenomics:</strong> see <a href="/help/copilot-meters">what the Copilot meters show</a>.</li>
 </ul>
-<p>Premium request allowances reset on the 1st of each month at midnight UTC.</p>
+<p>Allowances reset at midnight UTC on the 1st of each month, whatever day you subscribed, and nothing rolls over. Most paid plans now count <strong>AI credits</strong> (Pro gets 1,500 a month); annual Pro and Pro+ plans still count premium requests. <a href="/help/copilot-limits">How Copilot's limits work</a>.</p>
 <p>Tokenomics reads Copilot through the GitHub CLI's sign-in. If it isn't connected yet, see the <a href="/setup#copilot">setup guide</a>.</p>
 """,
     },

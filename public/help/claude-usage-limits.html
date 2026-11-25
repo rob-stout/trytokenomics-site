@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Claude Usage Limits Explained: 5-Hour and Weekly Windows</title>
-  <meta name="description" content="The 5-hour window is the rolling cap most people hit first; the 7-day window is the weekly ceiling. Chats and Claude Code share both." />
-  <meta property="og:title" content="Claude Usage Limits Explained: 5-Hour and Weekly Windows" />
-  <meta property="og:description" content="The 5-hour window is the rolling cap most people hit first; the 7-day window is the weekly ceiling. Chats and Claude Code share both." />
+  <title>Claude Usage Limits Explained: 5-Hour, Weekly and Fable</title>
+  <meta name="description" content="Claude has a 5-hour session limit and a weekly limit, shared across chats, Claude Code and the desktop app. Max and Ultra also have a separate weekly Fable limit." />
+  <meta property="og:title" content="Claude Usage Limits Explained: 5-Hour, Weekly and Fable" />
+  <meta property="og:description" content="Claude has a 5-hour session limit and a weekly limit, shared across chats, Claude Code and the desktop app. Max and Ultra also have a separate weekly Fable limit." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/claude-usage-limits" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
@@ -34,8 +34,8 @@
   "@graph": [
     {
       "@type": "TechArticle",
-      "headline": "How do Claude's 5-hour and 7-day limits work?",
-      "description": "The 5-hour window is the rolling cap most people hit first; the 7-day window is the weekly ceiling. Chats and Claude Code share both.",
+      "headline": "How do Claude's usage limits work?",
+      "description": "Claude has a 5-hour session limit and a weekly limit, shared across chats, Claude Code and the desktop app. Max and Ultra also have a separate weekly Fable limit.",
       "url": "https://trytokenomics.com/help/claude-usage-limits",
       "dateModified": "2026-11-25",
       "author": {
@@ -72,13 +72,13 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Your numbers",
-          "item": "https://trytokenomics.com/help/#reading-numbers"
+          "name": "How AI limits work",
+          "item": "https://trytokenomics.com/help/#limits"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "How do Claude's 5-hour and 7-day limits work?",
+          "name": "How do Claude's usage limits work?",
           "item": "https://trytokenomics.com/help/claude-usage-limits"
         }
       ]
@@ -122,7 +122,7 @@
       <nav class="help-crumbs" aria-label="Breadcrumb">
         <a href="/help/">Help</a>
         <span aria-hidden="true">/</span>
-        <a href="/help/#reading-numbers">Your numbers</a>
+        <a href="/help/#limits">How AI limits work</a>
       </nav>
       <form class="help-mini-search" role="search" action="/help/" method="get">
         <label for="help-q" class="sr-only">Search help</label>
@@ -131,27 +131,53 @@
       </form>
     </div>
 
-    <h1 class="help-title">How do Claude&#x27;s 5-hour and 7-day limits work?</h1>
-    <p class="help-summary">The 5-hour window is the rolling cap most people hit first; the 7-day window is the weekly ceiling. Chats and Claude Code share both.</p>
+    <h1 class="help-title">How do Claude&#x27;s usage limits work?</h1>
+    <p class="help-summary">Claude has a 5-hour session limit and a weekly limit, shared across chats, Claude Code and the desktop app. Max and Ultra also have a separate weekly Fable limit.</p>
 
     <div class="doc-body help-body">
-<p>These are Anthropic's own limits, not something Tokenomics invented.</p>
-<h2>The 5-hour window</h2>
-<p>The rolling cap most people hit first. It resets about five hours after your first message in the current block. If Tokenomics shows 80% with two hours left, you're close to a rate limit, so pace your prompts or switch tasks.</p>
-<h2>The 7-day window</h2>
-<p>The longer ceiling, resetting weekly from your first message of the cycle.</p>
-<p>If your plan has extra usage turned on, the Claude tab also shows how much of your monthly extra-usage limit you've spent. See <a href="/help/extra-usage-and-credits">Extra Usage</a>.</p>
-<h2>Why Claude has one set of limits</h2>
-<p>Claude on the web, the Claude desktop app and Claude Code all draw down the <strong>same 5-hour and 7-day windows</strong> on your subscription. One set of limits covers every surface, so Claude gets one meter with two bars. OpenAI and Google do it the other way, with a separate meter per product. See <a href="/help/two-meters">why ChatGPT and Gemini show two meters</a>.</p>
+<h2>The limits</h2>
+<ul>
+<li><strong>5-hour session.</strong> Starts with your first message and resets in full five hours later.</li>
+<li><strong>Weekly limit, all models.</strong> Resets at a fixed day and time assigned to your account. It doesn't depend on when you started chatting or when you subscribed.</li>
+<li><strong>Weekly Fable limit</strong> (Max and Ultra). Fable uses your limits faster than other models, and has its own weekly cap of up to half your weekly limit. On Pro, Fable runs on usage credits.</li>
+</ul>
+<p>Anthropic doesn't publish message counts. How far a limit goes depends on the model, how long the conversation is, the features you use and the effort level.</p>
+
+<h2>By plan</h2>
+<ul>
+<li><strong>Free:</strong> limited usage every 5 hours and every week. No Claude Code.</li>
+<li><strong>Pro ($20/month):</strong> more than Free. Includes Claude Code.</li>
+<li><strong>Max ($100/month):</strong> 5× Pro, every 5 hours and every week.</li>
+<li><strong>Ultra ($200/month):</strong> 10× Pro every week, and <strong>no 5-hour limit</strong> once your account is verified (it happens automatically). If Settings → Usage shows no “Current session” bar, you're verified.</li>
+</ul>
+<p>Plan names changed in late 2026: the old <strong>Max 20x</strong> is now <strong>Ultra</strong>, and <strong>Max 5x</strong> is now just <strong>Max</strong>.</p>
+
+<h2>What shares a limit</h2>
+<p>Chats on claude.ai, the desktop app, Claude Code and Claude Code in your editor all draw from the same limits. A long coding session can leave less room for chat, and the other way round.</p>
+
+<h2>When you hit a limit</h2>
+<ul>
+<li>Wait for the reset, or upgrade (new limits apply right away).</li>
+<li>Turn on <strong>usage credits</strong> (formerly “extra usage”) in Settings → Usage, and your work continues at API rates instead of stopping. You can set a monthly spending cap. <a href="/help/extra-usage-and-credits">More on usage credits</a>.</li>
+<li>Claude Code gets a small wrap-up allowance so it can finish what it's doing.</li>
+</ul>
+<p>The monthly API credits included with Max and Ultra can't be used in the Claude apps or Claude Code.</p>
+
+<h2>Where to check</h2>
+<p>Settings → Usage on claude.ai, or <code>/usage</code> in Claude Code. <a href="/help/check-claude-usage">How to check your Claude usage</a>.</p>
+
+<h2>In Tokenomics</h2>
+<p>The 5-hour window is the inner ring and the weekly window the outer ring, each with a <a href="/help/pace-dot">pace dot</a>. On Ultra, you'll see only the weekly window, because there's no 5-hour limit to show.</p>
+<p class="help-note">Checked against each provider's own pages in November 2026. Providers change limits often, so their usage page is the final word.</p>
     </div>
 
     <aside class="help-related" aria-labelledby="related-heading">
       <h2 class="faq-label" id="related-heading">Related questions</h2>
       <ul>
           <li><a href="/help/extra-usage-and-credits">What are Extra Usage and Credits Balance?</a></li>
-          <li><a href="/help/two-meters">Why do ChatGPT and Gemini show two meters?</a></li>
-          <li><a href="/help/are-numbers-exact">Are the numbers exact?</a></li>
-          <li><a href="/help/midjourney-fast-hours">What are Midjourney&#x27;s Fast Hours?</a></li>
+          <li><a href="/help/check-claude-usage">How do I check my Claude usage?</a></li>
+          <li><a href="/help/pace-dot">What does the pace dot mean?</a></li>
+          <li><a href="/help/chatgpt-limits">How do ChatGPT&#x27;s usage limits work?</a></li>
       </ul>
     </aside>
 

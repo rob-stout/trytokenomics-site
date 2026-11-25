@@ -135,6 +135,9 @@
     <p class="help-summary">Google doesn&#x27;t report Gemini CLI usage, so Tokenomics counts today&#x27;s requests from Gemini CLI&#x27;s own files on your Mac, against the daily limits of the plan you choose.</p>
 
     <div class="doc-body help-body">
+<div class="doc-callout">
+<p><strong>Changed in June 2026:</strong> Google stopped serving Gemini CLI for personal Google logins (free Code Assist for individuals, Google AI Pro and AI Ultra) on June 18, 2026, and moved those users to Antigravity CLI. Gemini CLI still works with a <strong>Gemini Code Assist Standard or Enterprise</strong> license and with <strong>paid Gemini API keys</strong>.</p>
+</div>
 <p>Google doesn't offer a way to look up Gemini CLI usage. So Tokenomics counts it itself, from the session files Gemini CLI saves on your Mac, and compares that with the daily limits of your plan. That makes it an estimate, and the popover says “Estimated from your local Gemini CLI sessions”.</p>
 <p>You'll see two bars: <strong>Requests Today</strong> and <strong>Tokens Today</strong>. Both reset at midnight Pacific time, when Google's daily limits do.</p>
 <h2>Choosing your plan</h2>
@@ -143,23 +146,24 @@
 <table class="doc-table">
 <thead><tr><th scope="col">Plan</th><th scope="col">Requests per day</th></tr></thead>
 <tbody>
-<tr><td>Free</td><td>1,000</td></tr>
-<tr><td>Standard</td><td>1,500</td></tr>
-<tr><td>Enterprise</td><td>2,000</td></tr>
+<tr><td>Free (Code Assist for individuals, ended June 18, 2026)</td><td>1,000</td></tr>
+<tr><td>Code Assist Standard</td><td>1,500</td></tr>
+<tr><td>Code Assist Enterprise</td><td>2,000</td></tr>
 </tbody>
 </table>
 </div>
 <p>Tokenomics asks the first time you open the Gemini CLI tab (“Choose your Gemini plan”). To change it later, click the plan badge on the tab, or use the plan control on the Gemini CLI row in Settings → AI Connections.</p>
-<p>The Gemini app at gemini.google.com is separate; the browser extension reads its own limits. See <a href="/help/two-meters">why Gemini shows two meters</a>.</p>
+<p>With a paid API key, Google's limits depend on your API tier rather than a daily request count, so these bars are a rough guide.</p>
+<p>The Gemini app at gemini.google.com is separate; the browser extension reads its own limits. See <a href="/help/gemini-limits">how the Gemini app's limits work</a>.</p>
     </div>
 
     <aside class="help-related" aria-labelledby="related-heading">
       <h2 class="faq-label" id="related-heading">Related questions</h2>
       <ul>
+          <li><a href="/help/gemini-limits">How do the Gemini app&#x27;s usage limits work?</a></li>
           <li><a href="/help/two-meters">Why do ChatGPT and Gemini show two meters?</a></li>
-          <li><a href="/help/claude-usage-limits">How do Claude&#x27;s 5-hour and 7-day limits work?</a></li>
           <li><a href="/help/are-numbers-exact">Are the numbers exact?</a></li>
-          <li><a href="/help/midjourney-fast-hours">What are Midjourney&#x27;s Fast Hours?</a></li>
+          <li><a href="/help/extra-usage-and-credits">What are Extra Usage and Credits Balance?</a></li>
       </ul>
     </aside>
 
