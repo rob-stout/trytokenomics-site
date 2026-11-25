@@ -1,7 +1,7 @@
 {
   "add-hide-reorder": {
     "date": "2026-11-25",
-    "hash": "d28aa84c81f3c497"
+    "hash": "cb4b057c769ce038"
   },
   "affiliation": {
     "date": "2026-11-25",
@@ -25,7 +25,7 @@
   },
   "check-copilot-usage": {
     "date": "2026-11-25",
-    "hash": "aba2e778435dc0d1"
+    "hash": "256cef888e325ccf"
   },
   "claude-usage-limits": {
     "date": "2026-11-25",
@@ -37,7 +37,7 @@
   },
   "copilot-meters": {
     "date": "2026-11-25",
-    "hash": "79064670f386fed9"
+    "hash": "b9c69a62874849ae"
   },
   "elevenlabs-setup": {
     "date": "2026-11-25",
@@ -85,7 +85,7 @@
   },
   "mac-app-and-extension": {
     "date": "2026-11-25",
-    "hash": "26b62509bb6f6942"
+    "hash": "b9b65e8f9d5e5315"
   },
   "menu-bar": {
     "date": "2026-11-25",
@@ -93,7 +93,7 @@
   },
   "menu-bar-not-updating": {
     "date": "2026-11-25",
-    "hash": "9725270d86518959"
+    "hash": "625bec819a85a96d"
   },
   "midjourney-fast-hours": {
     "date": "2026-11-25",
@@ -177,7 +177,7 @@
   },
   "widgets": {
     "date": "2026-11-25",
-    "hash": "b7144c9eee3e4f8f"
+    "hash": "e455aef5490aafe0"
   },
   "windows-and-linux": {
     "date": "2026-11-25",

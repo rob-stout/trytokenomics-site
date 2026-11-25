@@ -94,7 +94,7 @@ APP_ARTICLES = [
 <li><strong>Large:</strong> up to 7.</li>
 <li><strong>Extra large</strong> (macOS 27 and later): up to 14.</li>
 </ul>
-<p>If you have more tools than fit, the widget says “+3 in app” (or however many). Widgets follow the tab order you set in the popover. On the small widget, the inner ring is the short window and the outer ring is the long one, the same as the menu bar.</p>
+<p>If you have more tools than fit, the widget says “+3 in app” (or however many). Widgets follow the tab order you set in the popover. On the small widget, the inner ring is the short window and the outer ring is the long one, the same as the menu bar. (Before the next update, 2.10.5, the small widget has them the other way round.)</p>
 <p>Widgets show what the Mac app last read. If they look out of date, see <a href="/help/widget-not-updating">why a widget shows old numbers</a>.</p>
 """,
     },
@@ -110,7 +110,7 @@ APP_ARTICLES = [
 <p>Open Settings (the gear in the popover) → <strong>Setup providers…</strong> to run guided setup for any tool. You can also go to <strong>AI Connections</strong> and click <strong>Connect</strong> next to a tool.</p>
 <p>If Tokenomics notices a tool on your Mac that you haven't added, the popover shows a banner like “Found Cursor — not tracked yet.” Click <strong>Add</strong> to set it up.</p>
 <h2>Hide a tool</h2>
-<p>In <strong>AI Connections</strong>, switch a tool off to hide it from the menu bar, popover and widgets. With the browser extension and Mac app 2.10.5 or later, this also hides it in the extension (<a href="/help/mac-app-and-extension">how they sync</a>).</p>
+<p>In <strong>AI Connections</strong>, switch a tool off to hide it from the menu bar, popover and widgets. From the Mac app's next update (2.10.5), this also hides it in the browser extension (<a href="/help/mac-app-and-extension">how they sync</a>).</p>
 <h2>Reorder tabs</h2>
 <p>Hold <strong>⌘</strong> and drag a tab in the popover. Widgets and the browser extension follow the same order.</p>
 <h2>Remove a tool completely</h2>
@@ -265,17 +265,16 @@ APP_ARTICLES = [
         "slug": "menu-bar-not-updating",
         "topic": "fixing-problems",
         "title": "Why did my menu bar numbers stop updating?",
-        "summary": "Tokenomics checks less often when you're not actively coding, and catches up when you open the popover. Older versions could stop checking entirely; update to 2.10.5.",
+        "summary": "When you haven't used Claude Code for a while, Tokenomics pauses checking until you're active again or click refresh. The next update (2.10.5) keeps checking in the background instead.",
         "keywords": "stale old not updating stopped frozen menu bar numbers updated ago refresh polling idle every minutes how often",
         "legacy": [],
         "body": """
-<p>Tokenomics checks each tool on its own schedule, from every minute (Codex CLI and Gemini CLI, which it reads from files on your Mac) to every 10 minutes (Stability AI). To go easy on each service, it checks less often when you haven't used Claude Code for about 9 minutes, at most every 15 minutes, and speeds back up as soon as you're active again.</p>
+<p>Tokenomics checks each tool on its own schedule, from every minute (Codex CLI and Gemini CLI, which it reads from files on your Mac) to every 10 minutes (Stability AI). To go easy on each service, it pauses checking when you haven't used Claude Code for about 9 minutes, and picks back up as soon as you're active again.</p>
 <ul>
-<li><strong>Opening the popover</strong> refreshes anything older than its usual schedule, so what you see there is current.</li>
 <li><strong>The refresh button</strong> (or <strong>⌘R</strong>) checks every tool right away.</li>
 <li><strong>The line at the bottom of the popover</strong> says when the numbers were last updated, like “Updated 2m ago”.</li>
 </ul>
-<p>In versions before 2.10.5, Tokenomics stopped checking altogether after 9 minutes without Claude Code activity, until you clicked refresh. If you're on an older version, <a href="/help/updates">update</a> to fix that.</p>
+<p><strong>Coming in the next update (2.10.5):</strong> instead of pausing, Tokenomics keeps checking at least every 15 minutes while you're idle, and opening the popover refreshes anything that's out of date. Tokenomics will offer it when it's out (<a href="/help/updates">how updates work</a>).</p>
 <p>Still stuck on old numbers? A service may be rate-limiting Tokenomics (<a href="/help/rate-limited">what that looks like</a>), or a sign-in may have expired (<a href="/help/sign-in-expired">how to fix it</a>). Web tools also need your browser open; see <a href="/help/mac-app-and-extension">how the Mac app and extension work together</a>.</p>
 """,
     },
@@ -319,7 +318,7 @@ APP_ARTICLES = [
 <li><strong>Paid plans</strong> (Pro, Pro+, Business, Enterprise): one bar, <strong>Premium Requests</strong>, with how many you've used of your monthly allowance, like “75 / 300 used”, and when it resets. Chat and code completions are unlimited on these plans, so they don't need a meter. If your premium requests are unlimited, the bar says “Unlimited”.</li>
 <li><strong>Free plan:</strong> two bars, <strong>Chat</strong> and <strong>Completions</strong>, showing how much of each monthly allowance you've used.</li>
 </ul>
-<p>Paid plans showed 0% or nothing in versions before 2.10.5. <a href="/help/updates">Update</a> if that's what you see.</p>
+<p>In the current version (2.10.4), paid plans can show 0% or nothing. The Premium Requests bar described here arrives in the next update (2.10.5).</p>
 <p>Tokenomics reads these through the GitHub CLI's sign-in. If Copilot isn't connected yet, see the <a href="/setup#copilot">setup guide</a>.</p>
 """,
     },
@@ -517,7 +516,7 @@ APP_ARTICLES = [
 <ul>
 <li><strong>On GitHub:</strong> your Copilot settings page on github.com shows premium requests used this month. The billing pages break it down further.</li>
 <li><strong>In your editor:</strong> Copilot's status menu in supported editors shows your usage too.</li>
-<li><strong>In your menu bar, with Tokenomics:</strong> paid plans get a <strong>Premium Requests</strong> bar, like “75 / 300 used”, with a <a href="/help/pace-dot">pace dot</a> so you can tell if you'll run out before the month ends. Free plans get Chat and Completions bars instead. <a href="/help/copilot-meters">What the Copilot meters show</a>.</li>
+<li><strong>In your menu bar, with Tokenomics:</strong> from the next update (2.10.5), paid plans get a <strong>Premium Requests</strong> bar, like “75 / 300 used”, with a <a href="/help/pace-dot">pace dot</a> so you can tell if you'll run out before the month ends. Free plans get Chat and Completions bars instead. <a href="/help/copilot-meters">What the Copilot meters show</a>.</li>
 </ul>
 <p>Premium request allowances reset on the 1st of each month at midnight UTC.</p>
 <p>Tokenomics reads Copilot through the GitHub CLI's sign-in. If it isn't connected yet, see the <a href="/setup#copilot">setup guide</a>.</p>

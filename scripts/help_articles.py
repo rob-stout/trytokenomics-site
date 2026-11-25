@@ -129,11 +129,11 @@ ARTICLES = [
 <li><strong>ElevenLabs:</strong> the Mac app uses the extension's reading. If you added an ElevenLabs API key in an earlier version of the Mac app, it keeps using that key instead.</li>
 </ul>
 <h2>What the extension gets from the Mac app</h2>
-<p>The extension's popup also shows Codex CLI, Gemini CLI, GitHub Copilot and Cursor from the Mac app, so you can check them from your browser. For Claude, the popup shows whichever reading is newer. ChatGPT and Codex CLI always appear as separate tabs, since they have separate limits (extension 1.1.2 and later).</p>
+<p>The extension's popup also shows Codex CLI, Gemini CLI, GitHub Copilot and Cursor from the Mac app, so you can check them from your browser. For Claude, the popup shows whichever reading is newer. ChatGPT and Codex CLI appear as separate tabs, since they have separate limits (extension 1.1.2, rolling out now).</p>
 <h2>Settings that sync</h2>
 <ul>
 <li><strong>Tab order</strong> syncs both ways. Rearrange tabs in either one and the other follows; the most recent change wins.</li>
-<li><strong>Turning a tool on or off</strong> syncs both ways: switch it off in the Mac app's settings or the extension's, and it's hidden in both. The most recent change wins. (Needs Mac app 2.10.5 or later.)</li>
+<li><strong>Turning a tool on or off</strong> syncs both ways: switch it off in the Mac app's settings or the extension's, and it's hidden in both. The most recent change wins. (Coming in the Mac app's next update, 2.10.5. Until then, switch it off in both.)</li>
 <li><strong>Refresh</strong> works across both: refreshing in the Mac app asks the extension to re-read its sites within a minute, and refreshing in the extension makes the Mac app re-check its tools.</li>
 </ul>
 <h2>What never crosses over</h2>

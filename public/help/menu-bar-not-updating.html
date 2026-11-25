@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Why did my menu bar numbers stop updating? | Tokenomics Help</title>
-  <meta name="description" content="Tokenomics checks less often when you&#x27;re not actively coding, and catches up when you open the popover. Older versions could stop checking entirely; update to 2.10.5." />
+  <meta name="description" content="When you haven&#x27;t used Claude Code for a while, Tokenomics pauses checking until you&#x27;re active again or click refresh. The next update (2.10.5) keeps checking in the background instead." />
   <meta property="og:title" content="Why did my menu bar numbers stop updating? | Tokenomics Help" />
-  <meta property="og:description" content="Tokenomics checks less often when you&#x27;re not actively coding, and catches up when you open the popover. Older versions could stop checking entirely; update to 2.10.5." />
+  <meta property="og:description" content="When you haven&#x27;t used Claude Code for a while, Tokenomics pauses checking until you&#x27;re active again or click refresh. The next update (2.10.5) keeps checking in the background instead." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://trytokenomics.com/help/menu-bar-not-updating" />
   <meta property="og:image" content="https://trytokenomics.com/assets/sharing/OG-Image.png" />
@@ -35,7 +35,7 @@
     {
       "@type": "TechArticle",
       "headline": "Why did my menu bar numbers stop updating?",
-      "description": "Tokenomics checks less often when you're not actively coding, and catches up when you open the popover. Older versions could stop checking entirely; update to 2.10.5.",
+      "description": "When you haven't used Claude Code for a while, Tokenomics pauses checking until you're active again or click refresh. The next update (2.10.5) keeps checking in the background instead.",
       "url": "https://trytokenomics.com/help/menu-bar-not-updating",
       "dateModified": "2026-11-25",
       "author": {
@@ -132,16 +132,15 @@
     </div>
 
     <h1 class="help-title">Why did my menu bar numbers stop updating?</h1>
-    <p class="help-summary">Tokenomics checks less often when you&#x27;re not actively coding, and catches up when you open the popover. Older versions could stop checking entirely; update to 2.10.5.</p>
+    <p class="help-summary">When you haven&#x27;t used Claude Code for a while, Tokenomics pauses checking until you&#x27;re active again or click refresh. The next update (2.10.5) keeps checking in the background instead.</p>
 
     <div class="doc-body help-body">
-<p>Tokenomics checks each tool on its own schedule, from every minute (Codex CLI and Gemini CLI, which it reads from files on your Mac) to every 10 minutes (Stability AI). To go easy on each service, it checks less often when you haven't used Claude Code for about 9 minutes, at most every 15 minutes, and speeds back up as soon as you're active again.</p>
+<p>Tokenomics checks each tool on its own schedule, from every minute (Codex CLI and Gemini CLI, which it reads from files on your Mac) to every 10 minutes (Stability AI). To go easy on each service, it pauses checking when you haven't used Claude Code for about 9 minutes, and picks back up as soon as you're active again.</p>
 <ul>
-<li><strong>Opening the popover</strong> refreshes anything older than its usual schedule, so what you see there is current.</li>
 <li><strong>The refresh button</strong> (or <strong>⌘R</strong>) checks every tool right away.</li>
 <li><strong>The line at the bottom of the popover</strong> says when the numbers were last updated, like “Updated 2m ago”.</li>
 </ul>
-<p>In versions before 2.10.5, Tokenomics stopped checking altogether after 9 minutes without Claude Code activity, until you clicked refresh. If you're on an older version, <a href="/help/updates">update</a> to fix that.</p>
+<p><strong>Coming in the next update (2.10.5):</strong> instead of pausing, Tokenomics keeps checking at least every 15 minutes while you're idle, and opening the popover refreshes anything that's out of date. Tokenomics will offer it when it's out (<a href="/help/updates">how updates work</a>).</p>
 <p>Still stuck on old numbers? A service may be rate-limiting Tokenomics (<a href="/help/rate-limited">what that looks like</a>), or a sign-in may have expired (<a href="/help/sign-in-expired">how to fix it</a>). Web tools also need your browser open; see <a href="/help/mac-app-and-extension">how the Mac app and extension work together</a>.</p>
     </div>
 
