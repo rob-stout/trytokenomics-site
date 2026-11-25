@@ -108,7 +108,7 @@ ARTICLES = [
 <table class="doc-table">
 <thead><tr><th scope="col">Read by</th><th scope="col">Tools</th></tr></thead>
 <tbody>
-<tr><td>Mac app</td><td>Claude (through Claude Code's sign-in), Codex CLI, Gemini CLI, GitHub Copilot, Cursor, and Stability AI, Runway and ElevenLabs with an API key</td></tr>
+<tr><td>Mac app</td><td>Claude (through Claude Code's sign-in), Codex CLI, Gemini CLI, GitHub Copilot, Cursor, and Stability AI and Runway with an API key</td></tr>
 <tr><td>Browser extension</td><td>ChatGPT, Gemini, Midjourney, Leonardo, Grok, Perplexity, Suno and Udio, plus Claude and ElevenLabs from their websites</td></tr>
 </tbody>
 </table>
@@ -119,14 +119,14 @@ ARTICLES = [
 <p>Two tools can come from either side, and the Mac app picks one:</p>
 <ul>
 <li><strong>Claude:</strong> the Mac app always uses Claude Code's sign-in. Chats and Claude Code share the same limits, so the website reading would show the same numbers. If you only use claude.ai and don't have Claude Code, Claude shows in the extension but not in the Mac app.</li>
-<li><strong>ElevenLabs:</strong> if you've pasted an API key into the Mac app, it uses that. If not, it uses the extension's reading. See <a href="/help/elevenlabs-setup">setting up ElevenLabs</a>.</li>
+<li><strong>ElevenLabs:</strong> the Mac app uses the extension's reading. If you added an ElevenLabs API key in an earlier version of the Mac app, it keeps using that key instead.</li>
 </ul>
 <h2>What the extension gets from the Mac app</h2>
 <p>The extension's popup also shows GitHub Copilot, Cursor and Gemini CLI from the Mac app, so you can check them from your browser. For Claude, the popup shows whichever reading is newer.</p>
 <h2>Settings that sync</h2>
 <ul>
 <li><strong>Tab order</strong> syncs both ways. Rearrange tabs in either one and the other follows; the most recent change wins.</li>
-<li><strong>Turning a tool off in the Mac app</strong> hides it in the extension's popup too. Turning a site off in the extension only affects the extension.</li>
+<li><strong>Turning a tool on or off</strong> syncs both ways: switch it off in the Mac app's settings or the extension's, and it's hidden in both. The most recent change wins. (Needs Mac app 2.10.5 or later.)</li>
 <li><strong>Refresh</strong> works across both: refreshing in the Mac app asks the extension to re-read its sites within a minute, and refreshing in the extension makes the Mac app re-check its tools.</li>
 </ul>
 <h2>What never crosses over</h2>
