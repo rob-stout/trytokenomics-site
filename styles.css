@@ -1741,6 +1741,14 @@ svg tspan[font-style="italic"] { font-style: normal; }
 }
 
 /* ---------- BROWSER EXTENSION ---------- */
+/* Sign-in cards carry their own titles, so they don't compete with the section's eyebrow. */
+.signin-card-title {
+  margin: 0 0 var(--s-1);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--text);
+}
 /* Sign-in section: Mac tools share one card, one row per tool, spaced like the browser card. */
 .mac-tools { display: flex; flex-direction: column; gap: var(--s-4); }
 .mac-tool { display: flex; align-items: center; gap: var(--s-4); }
