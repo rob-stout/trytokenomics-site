@@ -94,7 +94,7 @@ APP_ARTICLES = [
 <li><strong>Large:</strong> up to 7.</li>
 <li><strong>Extra large</strong> (macOS 27 and later): up to 14.</li>
 </ul>
-<p>If you have more tools than fit, the widget says “+3 in app” (or however many). Widgets follow the tab order you set in the popover. On the small widget, the outer ring is the short window and the inner ring is the long one.</p>
+<p>If you have more tools than fit, the widget says “+3 in app” (or however many). Widgets follow the tab order you set in the popover. On the small widget, the inner ring is the short window and the outer ring is the long one, the same as the menu bar.</p>
 <p>Widgets show what the Mac app last read. If they look out of date, see <a href="/help/widget-not-updating">why a widget shows old numbers</a>.</p>
 """,
     },

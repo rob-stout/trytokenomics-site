@@ -51,8 +51,7 @@
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#widgets">Widgets</a>
-      <a href="#extension">Extension</a>
-      <a href="#install">Install</a>
+      <a href="#install">Download</a>
       <a href="/help/">Help</a>
       <a href="https://github.com/rob-stout/Tokenomics" target="_blank" rel="noopener">GitHub</a>
     </div>
@@ -102,7 +101,7 @@
   </div>
 
   <!-- Product shot: menu bar above two medium widgets -->
-  <div class="hero-visual reveal" data-delay="100">
+  <div class="hero-visual reveal">
 
     <!-- Menu bar: light/dark theme variants, each with a shorter mobile asset -->
     <div class="hero-menubar" aria-hidden="true">
@@ -340,18 +339,18 @@
     <!-- Annotated diagram -->
     <div class="pace-diagram-wrap">
       <div class="pace-diagram" role="img"
-           aria-label="Ring diagram: outer ring shows 60% of the 5-hour window used; inner ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption.">
+           aria-label="Ring diagram: inner ring shows 60% of the 5-hour window used; outer ring shows 38% of the 7-day window used; a pace mark at 45% on each ring shows where usage would sit at even consumption.">
 
         <svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
              font-family="'DM Sans', system-ui, sans-serif">
 
           <!-- ── Key / legend ─────────────────────────────── -->
           <g transform="translate(30 22)">
-            <circle cx="8" cy="10" r="7" fill="var(--ring-outer)"/>
+            <circle cx="8" cy="10" r="7" fill="var(--ring-short)"/>
             <text x="24" y="15" font-size="16" fill="currentColor" opacity="0.82">5-Hour Window</text>
           </g>
           <g transform="translate(240 22)">
-            <circle cx="8" cy="10" r="7" fill="var(--ring-inner)"/>
+            <circle cx="8" cy="10" r="7" fill="var(--ring-long)"/>
             <text x="24" y="15" font-size="16" fill="currentColor" opacity="0.82">7-Day Window</text>
           </g>
 
@@ -362,18 +361,18 @@
           <!-- Outer track -->
           <circle cx="200" cy="230" r="100" fill="none"
                   stroke="var(--ring-track)" stroke-width="20"/>
-          <!-- Outer fill 60% (circumference 628.32, offset 251.33) -->
+          <!-- Outer = 7-day (long) window, 38% (circumference 628.32, offset 389.56) -->
           <circle cx="200" cy="230" r="100" fill="none"
-                  stroke="var(--ring-outer)" stroke-width="20" stroke-linecap="round"
-                  stroke-dasharray="628.32" stroke-dashoffset="251.33"
+                  stroke="var(--ring-long)" stroke-width="20" stroke-linecap="round"
+                  stroke-dasharray="628.32" stroke-dashoffset="389.56"
                   transform="rotate(-90 200 230)"/>
           <!-- Inner track -->
           <circle cx="200" cy="230" r="75" fill="none"
                   stroke="var(--ring-track)" stroke-width="20"/>
-          <!-- Inner fill 38% (circumference 471.24, offset 292.17) -->
+          <!-- Inner = 5-hour (short) window, 60% (circumference 471.24, offset 188.50) -->
           <circle cx="200" cy="230" r="75" fill="none"
-                  stroke="var(--ring-inner)" stroke-width="20" stroke-linecap="round"
-                  stroke-dasharray="471.24" stroke-dashoffset="292.17"
+                  stroke="var(--ring-short)" stroke-width="20" stroke-linecap="round"
+                  stroke-dasharray="471.24" stroke-dashoffset="188.50"
                   transform="rotate(-90 200 230)"/>
 
           <!-- ── Pace dots at 45% of circumference ──────────
@@ -385,11 +384,11 @@
           <circle class="pace-dot" r="8" fill="var(--pace-dot)" transform="rotate(162 200 230) translate(200 155)"/>
 
           <!-- ── Center label ──────────────────────────────
-               Percentage uses the inner ring color per brand direction. -->
+               Shows the short window, in its color, like the small widget. -->
           <text x="200" y="244" text-anchor="middle"
                 font-family="-apple-system,'SF Pro Text',system-ui,sans-serif"
                 font-size="46" font-weight="700"
-                fill="var(--ring-inner)"
+                fill="var(--ring-short)"
                 style="font-variant-numeric: tabular-nums;">60%</text>
 
           <!-- ── Connector lines + labels ──────────────────
@@ -408,11 +407,12 @@
           <line class="callout-line" data-step="2" x1="340" y1="325" x2="372" y2="325"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
 
-          <!-- "Burning ahead of pace" — touches outer edge of outer arc at θ=189° (52.5% of circumference).
-               (200+110·sin189°, 230−110·cos189°) = (182.8, 338.6) -->
-          <line class="callout-line" data-step="3" x1="182.8" y1="338.6" x2="182.8" y2="395"
+          <!-- "Burning ahead of pace" — touches the outer edge of the inner (5-hour) arc at θ=189°
+               (52.5% of the way round, past the 45% pace mark).
+               (200+85·sin189°, 230−85·cos189°) = (186.7, 314.0) -->
+          <line class="callout-line" data-step="3" x1="186.7" y1="314.0" x2="186.7" y2="395"
                 stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <text class="callout-label" data-step="3" x="182.8" y="416" text-anchor="middle" font-size="16" font-weight="600"
+          <text class="callout-label" data-step="3" x="186.7" y="416" text-anchor="middle" font-size="16" font-weight="600"
                 fill="currentColor">Burning <tspan fill="var(--accent)">ahead</tspan> of pace</text>
         </svg>
 
@@ -429,7 +429,7 @@
     </div>
 
     <!-- Copy -->
-    <div class="pace-text reveal">
+    <div class="pace-text" data-build="children">
       <p class="feature-kicker">SIGNAL</p>
       <h2 id="pace-heading">The <em>dot</em> that tells you if you're on track.</h2>
       <div class="feature-body">
@@ -450,7 +450,7 @@
 <section class="feature-section" id="providers-detail" aria-labelledby="providers-heading">
   <div class="section-wrap">
     <div class="feature-layout">
-      <div class="reveal">
+      <div data-build="children">
         <p class="feature-kicker">BREADTH</p>
         <h2 id="providers-heading">Every tool you run, in <em>one</em> place.</h2>
         <div class="feature-body">
@@ -458,7 +458,7 @@
           <p>Drag to reorder. Hide the ones you're not using today. The menu bar shows the one you're closest to hitting.</p>
         </div>
       </div>
-      <div class="reveal menubar-scene" data-delay="80" aria-label="Tokenomics menu bar with popover open">
+      <div class="reveal menubar-scene" aria-label="Tokenomics menu bar with popover open">
         <!-- Desktop scene: menu bar anchored to the right (rest of screen is empty). -->
         <div class="menubar-bar" aria-hidden="true">
           <img src="assets/menu-bar-items.svg" alt="" class="menubar-svg-img"/>
@@ -588,7 +588,7 @@
 <section class="feature-section" aria-labelledby="auth-heading">
   <div class="section-wrap">
     <div class="feature-layout reverse">
-      <div class="reveal">
+      <div data-build="children">
         <p class="feature-kicker">Zero-friction authentication</p>
         <h2 id="auth-heading">No token pasting. No <em>cookie</em> hunting.</h2>
         <div class="feature-body">
@@ -597,7 +597,7 @@
           <p>Claude Code's sign-in lives in your Mac's Keychain, so macOS asks once before Tokenomics can read it. Choose Always Allow and you won't be asked again. When Claude Code refreshes its sign-in, Tokenomics picks up the new one on its own.</p>
         </div>
       </div>
-      <div class="reveal" data-delay="80" style="display:flex; flex-direction:column; gap: var(--s-4);">
+      <div data-build="children" style="display:flex; flex-direction:column; gap: var(--s-4);">
         <!-- Auth credential path cards -->
         <p class="feature-kicker" style="margin: 0;">On your Mac</p>
         <div class="card" style="display:flex; align-items:center; gap: var(--s-4);">
@@ -740,15 +740,15 @@
               <image href="assets/icons/Claude-white.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
               <g transform="translate(50 47.4)">
                 <circle r="30.5" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
-                <circle r="30.5" fill="none" stroke="#75CBF5" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                <circle r="30.5" fill="none" stroke="#3389C7" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="128.40"
                   transform="rotate(-90)"/>
                 <circle r="23" fill="none" stroke="rgba(75,166,210,0.25)" stroke-width="7"/>
-                <circle r="23" fill="none" stroke="#3389C7" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                <circle r="23" fill="none" stroke="#75CBF5" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="65.03"
                   transform="rotate(-90)"/>
-                <circle r="3.5" fill="#FFFFFF" transform="rotate(198) translate(0 -30.5)"/>
-                <circle r="3.5" fill="#FFFFFF" transform="rotate(54)  translate(0 -23)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(54)  translate(0 -30.5)"/>
+                <circle r="3.5" fill="#FFFFFF" transform="rotate(198) translate(0 -23)"/>
                 <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
                   font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
                   font-size="12.5" font-weight="700" letter-spacing="-0.3"
@@ -767,15 +767,15 @@
               <image href="assets/icons/Claude-d.blue.svg" x="8.2" y="8.2" width="11.2" height="11.2"/>
               <g transform="translate(50 47.4)">
                 <circle r="30.5" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
-                <circle r="30.5" fill="none" stroke="#2F84BF" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="191.64" stroke-dashoffset="86.24"
+                <circle r="30.5" fill="none" stroke="#56A2D6" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="191.64" stroke-dashoffset="128.40"
                   transform="rotate(-90)"/>
                 <circle r="23" fill="none" stroke="rgba(40,97,149,0.12)" stroke-width="7"/>
-                <circle r="23" fill="none" stroke="#56A2D6" stroke-width="7" stroke-linecap="round"
-                  stroke-dasharray="144.51" stroke-dashoffset="96.82"
+                <circle r="23" fill="none" stroke="#2F84BF" stroke-width="7" stroke-linecap="round"
+                  stroke-dasharray="144.51" stroke-dashoffset="65.03"
                   transform="rotate(-90)"/>
-                <circle r="3.5" fill="#0E334D" transform="rotate(198) translate(0 -30.5)"/>
-                <circle r="3.5" fill="#0E334D" transform="rotate(54)  translate(0 -23)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(54)  translate(0 -30.5)"/>
+                <circle r="3.5" fill="#0E334D" transform="rotate(198) translate(0 -23)"/>
                 <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
                   font-family="-apple-system, 'SF Pro Text', system-ui, sans-serif"
                   font-size="12.5" font-weight="700" letter-spacing="-0.3"
@@ -987,111 +987,6 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════
-     BROWSER EXTENSION
-     ══════════════════════════════════════════════════════════ -->
-<section class="extension-section" id="extension" aria-labelledby="extension-heading">
-  <div class="section-wrap">
-    <div class="extension-layout">
-      <div class="reveal">
-        <p class="feature-kicker">Browser extension</p>
-        <h2 id="extension-heading">Your web AI, <em>too</em>.</h2>
-        <div class="feature-body">
-          <p>ChatGPT, Gemini, Midjourney, Suno and the rest live in a browser tab, so the extension reads them there. Sign in to a site the way you normally do, and its meter shows up in your toolbar.</p>
-          <p>It works on its own, on Mac or Windows. Running the Mac app too? The same numbers land in your menu bar and widgets. <a href="/help/mac-app-and-extension">How they work together</a>.</p>
-        </div>
-        <div class="store-badges">
-          <a class="store-badge" href="https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl" target="_blank" rel="noopener">
-            <img src="assets/badges/chrome-web-store-border.png" alt="Available in the Chrome Web Store" width="206" height="62" />
-          </a>
-        </div>
-        <p class="store-note">Free. Versions for Microsoft Edge and Safari are on the way. Brave, Arc, Vivaldi and Opera can install it from the Chrome Web Store.</p>
-      </div>
-      <ul class="extension-sites reveal" data-delay="80" role="list" aria-label="Sites the extension works with">
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Claude-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Claude</span>
-          <span class="extension-site-desc">Chats on claude.ai</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Codex-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">ChatGPT</span>
-          <span class="extension-site-desc">Chats on chatgpt.com</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/Gemini-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Gemini</span>
-          <span class="extension-site-desc">Chats on gemini.google.com</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/midjourney-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/midjourney-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Midjourney</span>
-          <span class="extension-site-desc">Fast hours</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/leonardo-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/leonardo-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Leonardo</span>
-          <span class="extension-site-desc">Image credits</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/elevenlabs-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/elevenlabs-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">ElevenLabs</span>
-          <span class="extension-site-desc">Voice credits</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/suno-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/suno-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Suno</span>
-          <span class="extension-site-desc">Music credits</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/udio-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/udio-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Udio</span>
-          <span class="extension-site-desc">Music credits</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/grok-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/grok-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Grok</span>
-          <span class="extension-site-desc">Chats on grok.com</span>
-        </li>
-        <li>
-          <span class="extension-site-icon">
-            <img src="assets/icons/perplexity-d.blue.svg" alt="" class="icon-light-only" width="20" height="20"/>
-            <img src="assets/icons/perplexity-white.svg"  alt="" class="icon-dark-only"  width="20" height="20"/>
-          </span>
-          <span class="extension-site-name">Perplexity</span>
-          <span class="extension-site-desc">Pro searches</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
 
 
 <!-- ══════════════════════════════════════════════════════════
@@ -1138,28 +1033,56 @@
 
 
 <!-- ══════════════════════════════════════════════════════════
-     INSTALL
+     DOWNLOAD: browser extension (left) + Mac app (right)
      ══════════════════════════════════════════════════════════ -->
-<section class="install-section" id="install" aria-labelledby="install-heading">
+<section class="download-section" id="install" aria-labelledby="download-heading">
   <div class="section-wrap">
-    <div class="install-layout">
-      <div class="install-block">
-        <p class="feature-kicker">Install</p>
-        <h2 id="install-heading">Install once. Stay <em>current</em>.</h2>
-        <p style="color: var(--text-muted); margin-bottom: var(--s-6); max-width: 48ch;">
-          Tokenomics checks for updates itself and installs them when you say so. No re-downloading from GitHub every time there's a new version.
-        </p>
+    <div class="download-intro" data-build="children">
+      <p class="feature-kicker">Download</p>
+      <h2 id="download-heading">Two ways <em>in</em>.</h2>
+      <p class="download-lede">Start with whichever fits. The browser extension reads the AI sites you use in a browser. The Mac app reads the coding tools signed in on your Mac. Run both and they share one set of numbers. <a href="/help/mac-app-and-extension">How they work together</a>.</p>
+    </div>
 
+    <div class="download-grid">
+
+      <!-- Browser extension -->
+      <article class="download-card" id="extension" aria-labelledby="extension-heading">
+        <p class="feature-kicker">Browser extension</p>
+        <h3 id="extension-heading">Your web AI, <em>too</em>.</h3>
+        <p class="download-body">Sign in to a site the way you normally do, and its meter shows up in your toolbar. Works on its own, on Mac or Windows.</p>
+        <div class="store-badges">
+          <a class="store-badge" href="https://chromewebstore.google.com/detail/tokenomics-ai-usage-limit/nolficmmhjkgmoclepbclpmefilhlejl" target="_blank" rel="noopener">
+            <img src="assets/badges/chrome-web-store-border.png" alt="Available in the Chrome Web Store" width="206" height="62" />
+          </a>
+          <span class="store-soon"><span class="store-soon-name">Microsoft Edge</span><span class="store-soon-tag">Coming soon</span></span>
+          <span class="store-soon"><span class="store-soon-name">Safari</span><span class="store-soon-tag">Coming soon</span></span>
+        </div>
+        <p class="store-note">Free. Brave, Arc, Vivaldi and Opera can install it from the Chrome Web Store.</p>
+        <p class="download-sites-label">Works with</p>
+        <ul class="download-sites" role="list" aria-label="Sites the extension works with">
+            <li><img src="assets/icons/Claude-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/Claude-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Claude</li>
+            <li><img src="assets/icons/Codex-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/Codex-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>ChatGPT</li>
+            <li><img src="assets/icons/Gemini-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/Gemini-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Gemini</li>
+            <li><img src="assets/icons/midjourney-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/midjourney-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Midjourney</li>
+            <li><img src="assets/icons/leonardo-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/leonardo-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Leonardo</li>
+            <li><img src="assets/icons/elevenlabs-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/elevenlabs-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>ElevenLabs</li>
+            <li><img src="assets/icons/suno-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/suno-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Suno</li>
+            <li><img src="assets/icons/udio-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/udio-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Udio</li>
+            <li><img src="assets/icons/grok-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/grok-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Grok</li>
+            <li><img src="assets/icons/perplexity-d.blue.svg" alt="" class="icon-light-only" width="16" height="16"/><img src="assets/icons/perplexity-white.svg" alt="" class="icon-dark-only" width="16" height="16"/>Perplexity</li>
+        </ul>
+      </article>
+
+      <!-- Mac app -->
+      <article class="download-card" aria-labelledby="mac-heading">
+        <p class="feature-kicker">Mac app</p>
+        <h3 id="mac-heading">Install once. Stay <em>current</em>.</h3>
+        <p class="download-body">Menu bar rings and desktop widgets for Claude Code, Codex CLI, Gemini CLI, GitHub Copilot and Cursor, plus anything the extension reads. It checks for updates itself and installs them when you say so.</p>
         <div class="install-tabs" role="tablist">
           <button class="install-tab active" data-tab="download" role="tab" aria-selected="true" aria-controls="panel-download">Download</button>
           <button class="install-tab" data-tab="homebrew" role="tab" aria-selected="false" aria-controls="panel-homebrew">Homebrew</button>
         </div>
-
-        <p class="install-support" id="install-support-line">macOS 14 Sonoma or later · Developer ID signed &amp; notarized</p>
-      </div>
-
-      <!-- Right column: swaps between download flow and brew command -->
-      <div class="install-right">
+        <div class="install-right">
         <div id="panel-download" class="install-panel active" role="tabpanel">
           <a href="/download/dmg/latest"
              class="install-flow"
@@ -1198,7 +1121,10 @@
           </div>
           <p class="install-support">Install <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a> first, then run this command.</p>
         </div>
-      </div>
+        </div>
+        <p class="install-support" id="install-support-line">macOS 14 Sonoma or later · Developer ID signed &amp; notarized</p>
+      </article>
+
     </div>
   </div>
 </section>

@@ -12,6 +12,10 @@
  * The hero widgets are already on screen when the page opens, so they play
  * once on load, the way the app animates when you open the popover.
  *
+ * Everything else builds in: headings, copy and cards fade up as they enter,
+ * staggered when several arrive together, and reset once they drop back below
+ * the screen so scrolling up and down again replays them.
+ *
  * Without JS, or with Reduce Motion on, everything shows in its final state:
  * this script only sets a starting state when it's about to drive it.
  */
@@ -38,10 +42,14 @@
       return at(t, y1, y2);
     };
   }
-  var ease = bezier(0.25, 0.46, 0.45, 0.94);
+  var appEase = bezier(0.25, 0.46, 0.45, 0.94);
+  // When scroll drives the motion, an ease-out would front-load it (most of the
+  // growth in the first third of the scroll), so scrubbed pieces use an even
+  // ease-in-out. Time-based playback (the hero) keeps the app's curve.
+  var scrollEase = bezier(0.42, 0, 0.58, 1);
   function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
   // Progress through a slice [from, to] of the overall 0→1, eased.
-  function seg(p, from, to) { return ease(clamp((p - from) / (to - from))); }
+  function seg(p, from, to, curve) { return curve(clamp((p - from) / (to - from))); }
 
   // ── Pieces: each returns render(k) where k is 0 (start) … 1 (final) ──
 
@@ -98,39 +106,41 @@
   }
 
   // ── Widgets: rows fill one after another, pace dots trail ───────────
-  function widgetRenderer(w) {
+  function widgetRenderer(w, curve) {
+    function seg2(p, a, b) { return seg(p, a, b, curve); }
     var rows = Array.prototype.slice.call(w.querySelectorAll('.bar-row, .row-compact, .row-large .metrics > *'));
     function rowOf(el) {
       for (var i = 0; i < rows.length; i++) if (rows[i].contains(el)) return Math.min(i, 6);
       return 0;
     }
     var fills = [], paces = [];
-    // Fill runs over the first ~60% of the widget's progress, offset a little per row;
-    // the pace dot uses the whole range, so it trails and lands last (500ms vs 800ms in the app).
-    function addFill(render, el) { var o = rowOf(el) * 0.05; fills.push(function (p) { render(seg(p, o, o + 0.62)); }); }
-    function addPace(render, el) { var o = rowOf(el) * 0.05; paces.push(function (p) { render(seg(p, o, Math.min(1, o + 1))); }); }
+    // Fill runs over ~90% of the widget's progress, offset a little per row; the
+    // pace dot uses the whole range, so it trails and lands last (500ms vs 800ms in the app).
+    function addFill(render, el) { var o = rowOf(el) * 0.05; fills.push(function (p) { render(seg2(p, o, Math.min(1, o + 0.9))); }); }
+    function addPace(render, el) { var o = rowOf(el) * 0.05; paces.push(function (p) { render(seg2(p, o, Math.min(1, o + 1))); }); }
 
     w.querySelectorAll('.pbar .fill').forEach(function (f) { addFill(barPiece(f), f); });
     w.querySelectorAll('.pbar .pace').forEach(function (d) { addPace(pacePiece(d), d); });
     w.querySelectorAll('.pct').forEach(function (el) { var r = countPiece(el); if (r) addFill(r, el); });
-    collect(w, 'svg circle[stroke-dasharray]', ringPiece).forEach(function (r) { fills.push(function (p) { r(seg(p, 0, 0.62)); }); });
-    collect(w, 'svg text', countPiece).forEach(function (r) { fills.push(function (p) { r(seg(p, 0, 0.62)); }); });
-    collect(w, 'svg circle[transform*="rotate"]:not([stroke-dasharray])', ringDotPiece).forEach(function (r) { paces.push(function (p) { r(seg(p, 0, 1)); }); });
+    collect(w, 'svg circle[stroke-dasharray]', ringPiece).forEach(function (r) { fills.push(function (p) { r(seg2(p, 0, 0.9)); }); });
+    collect(w, 'svg text', countPiece).forEach(function (r) { fills.push(function (p) { r(seg2(p, 0, 0.9)); }); });
+    collect(w, 'svg circle[transform*="rotate"]:not([stroke-dasharray])', ringDotPiece).forEach(function (r) { paces.push(function (p) { r(seg2(p, 0, 1)); }); });
     var all = fills.concat(paces);
     if (!all.length) return null;
     return function (p) { all.forEach(function (f) { f(p); }); };
   }
 
   // ── Pace diagram: rings → dots → each callout line, then its label ───
-  function diagramRenderer(d) {
+  function diagramRenderer(d, curve) {
+    function seg2(p, a, b) { return seg(p, a, b, curve); }
     var parts = [];
-    collect(d, 'circle[stroke-dasharray]', ringPiece).forEach(function (r) { parts.push(function (p) { r(seg(p, 0, 0.32)); }); });
-    collect(d, 'svg text', countPiece).forEach(function (r) { parts.push(function (p) { r(seg(p, 0, 0.32)); }); });
-    collect(d, '.pace-dot', ringDotPiece).forEach(function (r) { parts.push(function (p) { r(seg(p, 0, 0.46)); }); });
+    collect(d, 'circle[stroke-dasharray]', ringPiece).forEach(function (r) { parts.push(function (p) { r(seg2(p, 0, 0.4)); }); });
+    collect(d, 'svg text', countPiece).forEach(function (r) { parts.push(function (p) { r(seg2(p, 0, 0.4)); }); });
+    collect(d, '.pace-dot', ringDotPiece).forEach(function (r) { parts.push(function (p) { r(seg2(p, 0, 0.5)); }); });
 
     // Three callouts share the rest of the range. Each line draws from the ring
     // outward (segments in document order), then its label fades in.
-    var start = 0.46, slot = 0.18;
+    var start = 0.5, slot = 0.16;
     [1, 2, 3].forEach(function (step, i) {
       var s0 = start + i * slot;
       var lines = d.querySelectorAll('.callout-line[data-step="' + step + '"]');
@@ -141,7 +151,7 @@
       });
       collect(d, '.callout-label[data-step="' + step + '"]', labelPiece).forEach(function (r) {
         var a = s0 + lineSpan * 0.9, b = s0 + slot;
-        parts.push(function (p) { r(seg(p, a, b)); });
+        parts.push(function (p) { r(seg2(p, a, b)); });
       });
     });
     return function (p) { parts.forEach(function (f) { f(p); }); };
@@ -183,18 +193,64 @@
     setTimeout(function () { requestAnimationFrame(frame); }, 250);
   }
 
+  // ── Build-in: fade up as pieces enter, replay after they leave below ──
+  var BUILD = [
+    '.reveal',
+    '[data-build="children"] > *',
+    '.section-wrap > .feature-kicker', '.section-wrap > h2',
+    '.widgets-section-inner > .feature-kicker', '.widgets-section-inner > h2', '.widgets-section-inner > p',
+    '.provider-strip > *', '.provider-coming',
+    '.craft-card',
+    '.support-intro > *', '.support-card',
+    '.download-card',
+    '.faq-item', '.faq-more'
+  ].join(',');
+
+  function initBuild() {
+    if (!('IntersectionObserver' in window)) return;
+    var items = Array.prototype.slice.call(document.querySelectorAll(BUILD));
+    if (!items.length) return;
+    items.forEach(function (el) { el.classList.add('build'); });
+
+    function show(el, delay) {
+      el.style.setProperty('--build-delay', delay + 'ms');
+      el.classList.add('in');
+    }
+    // Enter: once a piece is 12% up from the bottom edge. Pieces that arrive in
+    // the same frame stagger in document order, ~90ms apart, capped at 600ms total.
+    var enter = new IntersectionObserver(function (entries) {
+      var arriving = entries.filter(function (e) { return e.isIntersecting && !e.target.classList.contains('in'); })
+        .map(function (e) { return e.target; })
+        .sort(function (a, b) { return a.compareDocumentPosition(b) & 4 ? -1 : 1; });
+      var step = arriving.length > 1 ? Math.min(90, 600 / (arriving.length - 1)) : 0;
+      arriving.forEach(function (el, i) { show(el, Math.round(i * step)); });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    // Leave: reset only when fully below the screen, so scrolling back down replays.
+    // Pieces already above the screen (page opened mid-way) show straight away.
+    var leave = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) return;
+        if (e.boundingClientRect.top > 0) e.target.classList.remove('in');
+        else if (!e.target.classList.contains('in')) show(e.target, 0);
+      });
+    });
+    items.forEach(function (el) { enter.observe(el); leave.observe(el); });
+  }
+
   function init() {
+    initBuild();
     document.querySelectorAll('.widget').forEach(function (w) {
-      var render = widgetRenderer(w);
+      var hero = !!w.closest('.hero');
+      var render = widgetRenderer(w, hero ? appEase : scrollEase);
       if (!render) return;
-      if (w.closest('.hero')) playOnce(render, 900);
-      // Widgets fill as they rise from the bottom edge to about 45% up the screen.
-      else addScrubber(w, render, 1.0, 0.45);
+      if (hero) playOnce(render, 900);
+      // Widgets start once they're fully up on screen (top 85% down) and finish as
+      // they near the top (top 20% down), so the growth plays across the whole screen.
+      else addScrubber(w, render, 0.85, 0.2);
     });
     var diagram = document.querySelector('.pace-diagram');
-    // The diagram gets a longer stretch of scroll: it starts as it enters and
-    // finishes when its top is near the top of the screen.
-    if (diagram) addScrubber(diagram, diagramRenderer(diagram), 0.95, 0.12);
+    // Same idea for the diagram: start once it's up on screen, finish near the top.
+    if (diagram) addScrubber(diagram, diagramRenderer(diagram, scrollEase), 0.85, 0.15);
 
     if (!scrubbers.length) return;
     update();
