@@ -3,3 +3,23 @@
 /faq.html     /help/   301
 # Store listings (Chrome, Edge, Safari) use this as the extension's website.
 /extension /#extension 301
+
+# Internal notes that used to be published from the repo root. They're no longer
+# deployed, but stale copies kept being served at these paths, so send them home.
+/marketer-notes.md / 301
+/marketer-notes-r2.md / 301
+/positioning.md / 301
+/launch-plan.md / 301
+/schema.sql / 301
+/copy-v2.md / 301
+/designer-notes.md / 301
+/designer-notes-r2.md / 301
+/faq-and-support-notes.md / 301
+/senior-review.md / 301
+/ROUND3-CHANGES.md / 301
+/design-system.md / 301
+/wrangler.toml / 301
+/CLAUDE.md / 301
+/scripts/* / 301
+/tests/* / 301
+/oauth/* / 301
