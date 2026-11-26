@@ -303,7 +303,7 @@ LIMIT_ARTICLES = [
 <p>perplexity.ai/account/usage shows credits and Pro's weekly Computer meter.</p>
 
 <h2>In Tokenomics</h2>
-<p>The browser extension shows Pro Searches and Deep Research remaining. On Free, Pro Searches reset daily and Tokenomics counts down to it. Perplexity doesn't report reset times for Pro and Max, so from the extension's next update (1.1.3) those show what's left with no countdown, rather than a guess.</p>
+<p>The browser extension shows Pro Searches and Deep Research remaining. On Free, Pro Searches reset daily and Tokenomics counts down to it. Perplexity doesn't report limits or reset times for Pro and Max, so from the extension's next update (1.1.3) those show what's left, with an <strong>estimated</strong> percentage based on the most you've had available, and no countdown rather than a guessed one.</p>
 """ + _foot(),
     },
     # ── Midjourney ────────────────────────────────────────────────────
