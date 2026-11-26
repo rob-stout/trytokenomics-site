@@ -17,7 +17,7 @@
   },
   "chatgpt-limits": {
     "date": "2026-11-25",
-    "hash": "6aa9374a8bd89028"
+    "hash": "495b4f0fd9c1f070"
   },
   "chatgpt-plan": {
     "date": "2026-11-25",
@@ -33,11 +33,11 @@
   },
   "claude-usage-limits": {
     "date": "2026-11-25",
-    "hash": "c1d1f75a6ce5a834"
+    "hash": "70358a585ee939a1"
   },
   "codex-limits": {
     "date": "2026-11-25",
-    "hash": "2ac6047537114ffb"
+    "hash": "7d237cac614296a0"
   },
   "codex-numbers": {
     "date": "2026-11-25",
@@ -45,19 +45,19 @@
   },
   "copilot-limits": {
     "date": "2026-11-25",
-    "hash": "ea95fc50d38bc0ac"
+    "hash": "b65d7f385b82eb98"
   },
   "copilot-meters": {
     "date": "2026-11-25",
-    "hash": "06d8d7bdd6688ebb"
+    "hash": "9ab9cc93b5d6fa5d"
   },
   "cursor-limits": {
     "date": "2026-11-25",
-    "hash": "1d2552948ab76b3f"
+    "hash": "a599276b28f6de91"
   },
   "elevenlabs-limits": {
     "date": "2026-11-25",
-    "hash": "775bf66db51d0720"
+    "hash": "9b0c277a00b548b8"
   },
   "elevenlabs-setup": {
     "date": "2026-11-25",
@@ -89,7 +89,7 @@
   },
   "grok-limits": {
     "date": "2026-11-25",
-    "hash": "bb0920a30181ff23"
+    "hash": "0f4b5b48244d3791"
   },
   "group-by-company": {
     "date": "2026-11-25",
@@ -137,7 +137,7 @@
   },
   "perplexity-limits": {
     "date": "2026-11-25",
-    "hash": "7b9329994f51153f"
+    "hash": "b87981fdbb4e00df"
   },
   "privacy": {
     "date": "2026-11-25",
@@ -157,7 +157,7 @@
   },
   "runway-limits": {
     "date": "2026-11-25",
-    "hash": "c4327b3d79882968"
+    "hash": "fe6954ca0ae3cfb0"
   },
   "safari": {
     "date": "2026-11-25",

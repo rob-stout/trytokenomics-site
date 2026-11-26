@@ -56,7 +56,7 @@
     ] },
     copilot: { pools: [
       { plan: 'Pro', windows: [
-        { title: 'Premium Requests', pct: 64, pace: 55, resets: 'Resets Dec 1' }
+        { title: 'AI Credits', pct: 64, pace: 55, resets: 'Resets Dec 1' }
       ] }
     ] },
     cursor: { pools: [

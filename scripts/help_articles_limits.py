@@ -57,7 +57,7 @@ LIMIT_ARTICLES = [
 <p>Settings → Usage on claude.ai, or <code>/usage</code> in Claude Code. <a href="/help/check-claude-usage">How to check your Claude usage</a>.</p>
 
 <h2>In Tokenomics</h2>
-<p>The 5-hour window is the inner ring and the weekly window the outer ring, each with a <a href="/help/pace-dot">pace dot</a>. On Ultra, you'll see only the weekly window, because there's no 5-hour limit to show.</p>
+<p>The 5-hour window is the inner ring and the weekly window the outer ring, each with a <a href="/help/pace-dot">pace dot</a>. On Ultra, you'll see only the weekly window, because there's no 5-hour limit to show. From the browser extension's next update (1.1.3), it also shows your separate Fable weekly limit, your plan (Pro, Max or Ultra), and your usage credits when they're on.</p>
 """ + _foot(),
     },
     # ── ChatGPT ───────────────────────────────────────────────────────
@@ -97,7 +97,7 @@ LIMIT_ARTICLES = [
 <p>Settings → Usage in ChatGPT shows remaining usage and reset times where OpenAI provides them.</p>
 
 <h2>In Tokenomics</h2>
-<p>The browser extension shows the usage chatgpt.com reports for your account. We're updating it for the new plans and the December change, so if your plan or limits look wrong, see <a href="/help/chatgpt-plan">fixing the ChatGPT plan</a>.</p>
+<p>ChatGPT doesn't report chat limits anywhere Tokenomics can read them. What chatgpt.com does report is your plan's <strong>Codex allowance</strong>, so from the browser extension's next update (1.1.3) that's what the ChatGPT meters show, labelled “Codex allowance”, with windows named by their real length. From December, that's the same allowance your ChatGPT use draws from on Plus, Pro and Business. If your plan looks wrong, see <a href="/help/chatgpt-plan">fixing the ChatGPT plan</a>.</p>
 """ + _foot(),
     },
     # ── Codex ─────────────────────────────────────────────────────────
@@ -138,7 +138,7 @@ LIMIT_ARTICLES = [
 <p>Type <code>/status</code> in a Codex CLI session, or open chatgpt.com/codex/settings/usage.</p>
 
 <h2>In Tokenomics</h2>
-<p>The Mac app reads the limits Codex CLI writes to your Mac after each run, so the numbers update when you use Codex locally. Cloud tasks show up after your next local run. <a href="/help/codex-numbers">Why Codex numbers sometimes don't change</a>.</p>
+<p>The Mac app reads the limits Codex CLI writes to your Mac after each run, so the numbers update when you use Codex locally. Cloud tasks show up after your next local run. From the next update (2.10.5), windows are named by their real length, so Pro plans show a single Weekly window. <a href="/help/codex-numbers">Why Codex numbers sometimes don't change</a>.</p>
 """ + _foot(),
     },
     # ── Gemini app ────────────────────────────────────────────────────
@@ -216,7 +216,7 @@ LIMIT_ARTICLES = [
 <p>github.com/settings/billing → AI usage, or your Copilot settings → Usage. In VS Code, click the Copilot icon in the status bar. <a href="/help/check-copilot-usage">More ways to check</a>.</p>
 
 <h2>In Tokenomics</h2>
-<p>Tokenomics reads Copilot through the GitHub CLI's sign-in. Free plans show Chat and Completions bars. For paid plans we're updating the meter to show AI credits; until then it may not match GitHub's own number. <a href="/help/copilot-meters">What the Copilot meters show</a>.</p>
+<p>Tokenomics reads Copilot through the GitHub CLI's sign-in. Free plans show Chat and Completions bars. From the next update (2.10.5), paid plans show an <strong>AI Credits</strong> bar with how much of your monthly allowance you've used; seats without a set allowance (common on Business and Enterprise) show credits used; annual plans keep Premium Requests. <a href="/help/copilot-meters">What the Copilot meters show</a>.</p>
 """ + _foot(),
     },
     # ── Cursor ────────────────────────────────────────────────────────
@@ -243,7 +243,7 @@ LIMIT_ARTICLES = [
 <p>These continue unless you switch. They have two <strong>monthly</strong> pools that reset with your billing date: “Cursor Models” and “Other Models” (third-party models at API price). Pro and up include unlimited Tab completions. On-demand usage past the pools is off by default for individuals and on by default for Teams. Check usage at cursor.com/dashboard.</p>
 
 <h2>In Tokenomics</h2>
-<p>The Mac app reads Cursor's local sign-in and shows your usage for the billing cycle, which matches the older monthly plans. For The X Subscription's weekly pool, Tokenomics' meter may not match yet; we're working on it.</p>
+<p>The Mac app reads Cursor's local sign-in. Older plans show your usage for the billing cycle. From the next update (2.10.5), The X Subscription shows one <strong>Weekly Usage</strong> bar with its reset time.</p>
 """ + _foot(),
     },
     # ── Grok ──────────────────────────────────────────────────────────
@@ -273,7 +273,7 @@ LIMIT_ARTICLES = [
 <p>Settings → Usage on grok.com or in the app. It shows the percentage used by product and when it resets.</p>
 
 <h2>In Tokenomics</h2>
-<p>The browser extension reads grok.com's query allowance, which matches the free tier. For paid plans' weekly pool, Tokenomics' meter may not match Grok's own percentage yet; we're working on it.</p>
+<p>On the free tier, the browser extension shows grok.com's query allowance. From the extension's next update (1.1.3), paid plans show the <strong>weekly pool</strong> percentage and when it resets, the same number as Settings → Usage.</p>
 """ + _foot(),
     },
     # ── Perplexity ────────────────────────────────────────────────────
@@ -303,7 +303,7 @@ LIMIT_ARTICLES = [
 <p>perplexity.ai/account/usage shows credits and Pro's weekly Computer meter.</p>
 
 <h2>In Tokenomics</h2>
-<p>The browser extension shows Pro Searches and Deep Research remaining. Its reset countdown is right for Free (daily); for Pro and Max, whose searches reset weekly and research monthly, we're updating it to match.</p>
+<p>The browser extension shows Pro Searches and Deep Research remaining. On Free, Pro Searches reset daily and Tokenomics counts down to it. Perplexity doesn't report reset times for Pro and Max, so from the extension's next update (1.1.3) those show what's left with no countdown, rather than a guess.</p>
 """ + _foot(),
     },
     # ── Midjourney ────────────────────────────────────────────────────
@@ -452,7 +452,7 @@ LIMIT_ARTICLES = [
 <p>Plans &amp; Billing in Runway.</p>
 
 <h2>In Tokenomics</h2>
-<p>Tokenomics connects to Runway with an API key, so it can only see API credits, not the credits in your Runway app plan. We're reviewing the Runway connection against Runway's current API.</p>
+<p>Tokenomics connects to Runway with an API key, so it sees API credits, not the credits in your Runway app plan. From the next update (2.10.5), it reads your balance from Runway's current API and shows how much you've used since your last top-up, with an estimate of when you'll run out.</p>
 """ + _foot(),
     },
     # ── ElevenLabs ────────────────────────────────────────────────────
@@ -488,7 +488,7 @@ LIMIT_ARTICLES = [
 <p>Your profile → Subscription on elevenlabs.io.</p>
 
 <h2>In Tokenomics</h2>
-<p>The browser extension shows credits used this cycle against your plan (labelled “Characters” for now), with the reset date ElevenLabs reports. <a href="/help/elevenlabs-setup">Setting up ElevenLabs</a>.</p>
+<p>The browser extension shows credits used this cycle against your plan, with the reset date ElevenLabs reports. (Versions before 1.1.3 label them “Characters”.) <a href="/help/elevenlabs-setup">Setting up ElevenLabs</a>.</p>
 """ + _foot(),
     },
     # ── Suno ──────────────────────────────────────────────────────────

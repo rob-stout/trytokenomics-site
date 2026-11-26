@@ -314,15 +314,17 @@ APP_ARTICLES = [
         "topic": "reading-numbers",
         "title": "What do the GitHub Copilot meters show?",
         "seo_title": "GitHub Copilot Premium Requests in Tokenomics, Explained",
-        "summary": "Free plans show your monthly chat and code-completion allowances. Paid plans show your monthly allowance; GitHub moved most paid plans from premium requests to AI credits in June 2026, and Tokenomics is catching up.",
+        "summary": "Free plans show your monthly chat and code-completion allowances. Paid plans show AI Credits used of your monthly allowance (annual plans: premium requests).",
         "keywords": "copilot github premium requests chat completions free pro business enterprise plan monthly reset unlimited zero 0",
         "legacy": [],
         "body": """
 <ul>
 <li><strong>Free plan:</strong> two bars, <strong>Chat</strong> and <strong>Completions</strong>, showing how much of each monthly allowance you've used.</li>
-<li><strong>Paid plans:</strong> one bar for your monthly allowance. Code completions are unlimited on paid plans, so they don't need a meter.</li>
+<li><strong>Paid plans</strong> (from Mac app 2.10.5): one bar, <strong>AI Credits</strong>, with how much of your monthly allowance you've used, like “1,500 / 3,900 credits used”, and when it resets. Code completions are unlimited on paid plans, so they don't need a meter.</li>
+<li><strong>Seats without a set allowance</strong> (common on Business and Enterprise, where credits are pooled): the bar shows credits used, like “31 credits used”.</li>
+<li><strong>Annual Pro and Pro+ plans</strong> still on premium requests: a <strong>Premium Requests</strong> bar, like “75 / 300 used”.</li>
 </ul>
-<p>In June 2026 GitHub replaced <strong>premium requests</strong> with <strong>AI credits</strong> on monthly plans (annual Pro and Pro+ keep premium requests until they renew). Tokenomics' paid-plan meter is being updated for AI credits; until then it may show 0%, nothing, or a number that doesn't match GitHub's. <a href="/help/copilot-limits">How Copilot's limits work now</a>.</p>
+<p>GitHub replaced premium requests with AI credits on monthly plans in June 2026. In versions before 2.10.5, paid plans can show 0% or nothing. <a href="/help/copilot-limits">How Copilot's limits work</a>.</p>
 <p>Tokenomics reads these through the GitHub CLI's sign-in. If Copilot isn't connected yet, see the <a href="/setup#copilot">setup guide</a>.</p>
 """,
     },
