@@ -8,3 +8,18 @@ node_modules/
 # Local working notes / planning docs — not for the public repo
 docs/
 __pycache__/
+
+# Private notes — local only (this repo is public)
+notes/
+private/
+*.private.md
+CLAUDE.md
+positioning.md
+launch-plan.md
+marketer-notes*.md
+designer-notes*.md
+senior-review.md
+copy.md
+copy-v2.md
+faq-and-support-notes.md
+ROUND3-CHANGES.md
